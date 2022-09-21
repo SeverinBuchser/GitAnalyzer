@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Inital Commit">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/FindConflicts.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/autoclone/AutoCloneProjects.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/conflict/Conflict.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/conflict/ConflictFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/conflict/ConflictingFiles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/conflict/Merge.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/project/Project.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/project/ProjectInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/project/ProjectsInfoListReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/resolution/ResolutionConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/resolution/ResolutionFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/projects.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/severin/ba/conflict/ConflictFileTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/severin/ba/project/ProjectTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/conflicting-files/file1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/conflicting-files/file2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/resolutions/file2.resolution-0.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/resolutions/file2.resolution-1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/resolutions/file2.resolution-2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/resolutions/file2.resolution-3.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2ERSWyct7ErN3xHD19mejjpPXp3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/severin/gitrepo/Severin/UniBe/MergeConflictResolution/src/test/resources/resolutions&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test/resources/resolutions" />
+      <recent name="$PROJECT_DIR$/src/main/java/org/severin/ba" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+      <recent name="org.severin.ba.conflict.ConflictFile" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="org.severin.ba.project" />
+      <recent name="org.severin.ba.conflict" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.severin.ba" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="ConflictFileTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MergeConflictResolution" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.severin.ba.conflict.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.severin.ba.conflict" />
+      <option name="MAIN_CLASS_NAME" value="org.severin.ba.conflict.ConflictFileTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MergeConflictResolution" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.severin.ba.project.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.severin.ba.project" />
+      <option name="MAIN_CLASS_NAME" value="org.severin.ba.project.ProjectTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ProjectTest" />
+        <item itemvalue="JUnit.ConflictFileTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="" />
+      <created>1662556941839</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1662556941839</updated>
+      <workItem from="1662556943947" duration="719000" />
+      <workItem from="1663081332566" duration="2593000" />
+      <workItem from="1663113214865" duration="4045000" />
+      <workItem from="1663155336334" duration="1992000" />
+      <workItem from="1663322380961" duration="8151000" />
+      <workItem from="1663410038486" duration="5277000" />
+      <workItem from="1663684318686" duration="7138000" />
+      <workItem from="1663761888600" duration="6651000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Inital Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inital Commit" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/MergeConflictResolution$ConflictFileTest.ic" NAME="ConflictFileTest Coverage Results" MODIFIED="1663156500580" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.severin.ba.conflict.*</FILTER>
+    </SUITE>
+  </component>
+</project>

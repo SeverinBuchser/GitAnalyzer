@@ -1,0 +1,40 @@
+package ConflictProject.nested;
+
+class File2 {
+  public static void main(String[] args) {
+<<<<<<< HEAD
+  /**
+   * Top Half File 2 Conflict 1
+   *
+   * End Top Half File 2 Conflict 1
+   */
+=======
+  /**
+   * Bottom Half File 2 Conflict 1
+   *
+   * End Bottom Half File 2 Conflict 1
+   */
+>>>>>>> merge-conflict-branch-2
+<<<<<<< HEAD
+  /**
+   * Top Half File 2 Conflict 2
+   *
+   * End Top Half File 2 Conflict 2
+   */
+=======
+  /**
+   * Bottom Half File 2 Conflict 2
+   *
+   * End Bottom Half File 2 Conflict 2
+   */
+>>>>>>> merge-conflict-branch-2
+  }
+}
+
+package ConflictProject.nested;
+
+class File2 {
+  public static void main(String[] args) {
+
+  }
+}

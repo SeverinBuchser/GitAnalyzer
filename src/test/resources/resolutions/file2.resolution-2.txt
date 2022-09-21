@@ -1,0 +1,26 @@
+package ConflictProject.nested;
+
+class File2 {
+  public static void main(String[] args) {
+  /**
+   * Bottom Half File 2 Conflict 1
+   *
+   * End Bottom Half File 2 Conflict 1
+   */
+
+  /**
+   * Top Half File 2 Conflict 2
+   *
+   * End Top Half File 2 Conflict 2
+   */
+
+  }
+}
+
+package ConflictProject.nested;
+
+class File2 {
+  public static void main(String[] args) {
+
+  }
+}
