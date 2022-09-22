@@ -1,32 +1,32 @@
 package org.severin.ba;
 
-import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.diff.RawText;
-import org.eclipse.jgit.diff.Sequence;
-import org.eclipse.jgit.merge.MergeResult;
-import org.severin.ba.conflict.Merge;
-import org.severin.ba.project.Project;
+import org.severin.ba.api.Project;
+import org.severin.ba.merge.ConflictingMerge;
+import org.severin.ba.merge.ConflictingMergeResolution;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class Test {
-    public static void main(String[] args) throws IOException, GitAPIException {
-        Project project = Project.buildFromPath("test", "/home/severin/gitrepo/Severin/UniBe");
-        Iterable<Merge> conflicts = project.getConflicts();
-        for (Merge conflict: conflicts) {
-            Map<String, MergeResult<? extends Sequence>> results = conflict.getMerger().getMergeResults();
-            for (Map.Entry<String, MergeResult<? extends Sequence>> result: results.entrySet()) {
-                System.out.println(result.getKey());
-                File file = new File(project.getRepository().getWorkTree(), result.getKey());
-                RawText text = new RawText(file);
-
-                System.out.println(text.getString(0));
-
-                System.out.println(((RawText) result.getValue().getSequences().get(1)).getString(0));
-            }
+    public static void main(String[] args) throws Exception {
+        Project project = Project.buildFromPath(
+                "4pr0n/ripme",
+                "/home/severin/ba_projects"
+        );
+        Iterable<ConflictingMerge> conflicts = project.getConflictingMerges();
+        for (ConflictingMerge conflict: conflicts) {
+            ArrayList<ConflictingMergeResolution> mergeResolutions = conflict.getMergeResolutions();
         }
+
+//            if (fileResolutions.size() >= 2) {
+//                System.out.println("---------------------------------");
+//                System.out.println(entry.getKey());
+//                System.out.format("Paths: %d\n", fileResolutions.size());
+//                System.out.println("---------------------------------");
+//                ConflictingMergeFileResolution.diffFormat(System.out, fileResolutions.get(0), fileResolutions.get(1));
+//                System.out.println();
+//                System.out.println();
+//                System.out.println();
+//            }
 
         project.close();
     }

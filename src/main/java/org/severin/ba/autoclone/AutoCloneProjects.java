@@ -1,8 +1,8 @@
 package org.severin.ba.autoclone;
 
-import org.severin.ba.project.Project;
-import org.severin.ba.project.ProjectInfo;
-import org.severin.ba.project.ProjectsInfoListReader;
+import org.severin.ba.api.Project;
+import org.severin.ba.api.ProjectInfo;
+import org.severin.ba.api.ProjectsInfoListReader;
 
 import java.util.ArrayList;
 

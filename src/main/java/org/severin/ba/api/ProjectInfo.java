@@ -1,4 +1,4 @@
-package org.severin.ba.project;
+package org.severin.ba.api;
 
 public class ProjectInfo {
     public String name;
