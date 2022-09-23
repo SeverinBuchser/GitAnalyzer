@@ -4,7 +4,6 @@ import org.eclipse.jgit.diff.RawText;
 import org.eclipse.jgit.diff.Sequence;
 import org.eclipse.jgit.merge.MergeChunk;
 import org.eclipse.jgit.merge.MergeResult;
-import org.eclipse.jgit.revwalk.RevCommit;
 import org.severin.ba.util.Node;
 import org.severin.ba.util.Tree;
 

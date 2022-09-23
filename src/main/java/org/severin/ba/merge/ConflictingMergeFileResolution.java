@@ -7,7 +7,6 @@ import org.severin.ba.util.Node;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.Stack;
 
 public class ConflictingMergeFileResolution extends RawText implements Comparable<ConflictingMergeFileResolution> {

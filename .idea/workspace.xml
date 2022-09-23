@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Rebuild merge conflict detection and resolution building">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/Formatting.java" afterDir="false" />
+    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Add comparing methods for merge resolutions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/Test.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/api/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/api/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMerge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMerge.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFileResolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFileResolution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeResolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeResolution.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +29,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2ERSWyct7ErN3xHD19mejjpPXp3" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -129,7 +127,7 @@
       <workItem from="1663684318686" duration="7138000" />
       <workItem from="1663761888600" duration="25399000" />
       <workItem from="1663849753803" duration="20556000" />
-      <workItem from="1663930079219" duration="10172000" />
+      <workItem from="1663930079219" duration="10386000" />
     </task>
     <task id="LOCAL-00001" summary="Inital Commit">
       <created>1663769460948</created>
@@ -145,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663887534666</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add comparing methods for merge resolutions">
+      <created>1663941365603</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1663941365603</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,7 +182,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Inital Commit" />
     <MESSAGE value="Rebuild merge conflict detection and resolution building" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rebuild merge conflict detection and resolution building" />
+    <MESSAGE value="Add comparing methods for merge resolutions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add comparing methods for merge resolutions" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

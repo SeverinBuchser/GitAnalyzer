@@ -3,9 +3,7 @@ package org.severin.ba;
 import org.severin.ba.api.Project;
 import org.severin.ba.merge.ConflictingMerge;
 import org.severin.ba.merge.ConflictingMergeResolution;
-import org.severin.ba.util.Formatting;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class Main {
