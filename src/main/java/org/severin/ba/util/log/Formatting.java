@@ -1,4 +1,4 @@
-package org.severin.ba.util;
+package org.severin.ba.util.log;
 
 import java.nio.charset.Charset;
 
@@ -9,7 +9,7 @@ public enum Formatting {
 
     private final byte[] bytes;
 
-    private Formatting(String string) {
+    Formatting(String string) {
         this.bytes = string.getBytes(Charset.defaultCharset());
     }
 

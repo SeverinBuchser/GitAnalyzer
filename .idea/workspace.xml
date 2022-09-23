@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Add comparing methods for merge resolutions">
+    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Introduce Logger for Conflict Resolution Comparison">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/log/ConflictResolutionLogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/api/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/api/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFileResolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFileResolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeResolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeResolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/Formatting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/log/Formatting.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +21,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -66,6 +68,9 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
       <recent name="org.severin.ba.conflict.ConflictFile" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.severin.ba.util.log" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="org.severin.ba.util" />
@@ -127,7 +132,7 @@
       <workItem from="1663684318686" duration="7138000" />
       <workItem from="1663761888600" duration="25399000" />
       <workItem from="1663849753803" duration="20556000" />
-      <workItem from="1663930079219" duration="10386000" />
+      <workItem from="1663930079219" duration="11511000" />
     </task>
     <task id="LOCAL-00001" summary="Inital Commit">
       <created>1663769460948</created>
@@ -150,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663941365603</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Optimize Imports">
+      <created>1663941508125</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1663941508125</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,7 +195,9 @@
     <MESSAGE value="Inital Commit" />
     <MESSAGE value="Rebuild merge conflict detection and resolution building" />
     <MESSAGE value="Add comparing methods for merge resolutions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add comparing methods for merge resolutions" />
+    <MESSAGE value="Optimize Imports" />
+    <MESSAGE value="Introduce Logger for Conflict Resolution Comparison" />
+    <option name="LAST_COMMIT_MESSAGE" value="Introduce Logger for Conflict Resolution Comparison" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

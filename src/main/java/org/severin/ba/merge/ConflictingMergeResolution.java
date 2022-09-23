@@ -1,10 +1,9 @@
 package org.severin.ba.merge;
 
 import org.eclipse.jgit.diff.EditList;
-import org.severin.ba.util.Formatting;
 import org.severin.ba.util.Node;
+import org.severin.ba.util.log.Formatting;
 
-import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -53,34 +52,13 @@ public class ConflictingMergeResolution extends ArrayList<ConflictingMergeFileRe
             ConflictingMergeResolution resolution1,
             ConflictingMergeResolution resolution2
     ) throws Exception {
-        ConflictingMergeResolution.diffFormat(out, resolution1, resolution2, false);
-    }
-
-    public static void diffFormat(
-            OutputStream out,
-            ConflictingMergeResolution resolution1,
-            ConflictingMergeResolution resolution2,
-            boolean formatDifferences
-    ) throws Exception {
         if (resolution1.doesNotHaveSameFiles(resolution2)) {
             throw new Exception("The two resolutions are not comparable. They are not for the same merge!");
         }
 
-        ConflictingMergeResolution.formatHead(out, resolution1, resolution2, formatDifferences);
-
         for (ConflictingMergeFileResolution fileResolution1: resolution1) {
             ConflictingMergeFileResolution fileResolution2 = resolution2.getByFileName(fileResolution1.getFileName());
             ConflictingMergeFileResolution.diffFormat(out, fileResolution1, fileResolution2);
-        }
-    }
-
-    private static void formatHead(
-            OutputStream out,
-            ConflictingMergeResolution resolution1,
-            ConflictingMergeResolution resolution2,
-            boolean formatDifferences
-    ) throws IOException {
-        if (formatDifferences) {
         }
     }
 
