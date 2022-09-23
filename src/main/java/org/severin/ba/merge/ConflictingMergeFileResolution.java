@@ -1,13 +1,16 @@
 package org.severin.ba.merge;
 
 import org.eclipse.jgit.diff.*;
+import org.severin.ba.util.Formatting;
 import org.severin.ba.util.Node;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Stack;
 
-public class ConflictingMergeFileResolution extends RawText {
+public class ConflictingMergeFileResolution extends RawText implements Comparable<ConflictingMergeFileResolution> {
 
 
     private final String fileName;
@@ -39,6 +42,27 @@ public class ConflictingMergeFileResolution extends RawText {
         EditList el = ConflictingMergeFileResolution.diff(resolution1, resolution2);
 
         DiffFormatter df = new DiffFormatter(out);
-        df.format(el, resolution1, resolution2);
+
+        out.write(Formatting.DELIMITER.getBytes());
+        out.write(("File: " + resolution1.getFileName()).getBytes(Charset.defaultCharset()));
+        out.write(Formatting.NEW_LINE.getBytes());
+
+        if (resolution1.compareTo(resolution2) == 0) {
+            out.write(("No differences").getBytes(Charset.defaultCharset()));
+            out.write(Formatting.NEW_LINE.getBytes());
+        } else {
+            df.format(el, resolution1, resolution2);
+        }
+
+        out.write(Formatting.DELIMITER.getBytes());
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    @Override
+    public int compareTo(ConflictingMergeFileResolution otherResolution) {
+        return ConflictingMergeFileResolution.diff(this, otherResolution).size();
     }
 }

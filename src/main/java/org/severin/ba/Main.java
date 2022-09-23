@@ -1,30 +1,56 @@
 package org.severin.ba;
 
-import org.eclipse.jgit.api.errors.GitAPIException;
+import org.severin.ba.api.Project;
+import org.severin.ba.merge.ConflictingMerge;
+import org.severin.ba.merge.ConflictingMergeResolution;
+import org.severin.ba.util.Formatting;
 
-import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) throws IOException, GitAPIException {
-//        Project project = Project.buildFromPath(
-//                "4pr0n/ripme",
-//                "/home/severin/ba_projects"
-//        );
-//        ConflictingFiles conflicts = project.getCurrentConflicts();
-//        ArrayList<ArrayList<ResolutionFile>> allResolutions = conflicts.buildAllResolutions();
-//
-//        // ArrayList<ResolutionFile> versions = this.get(0).buildVersions();
-//        // JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-//        // StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
-//        // ArrayList<ResolutionFile> vs = new ArrayList<ResolutionFile>();
-//        // vs.add(versions.get(0));
-//        // System.out.println(compiler.getTask(null, fileManager, null, null, null, vs).call());
-//
-//        Iterable<RevCommit> merges = project.log().setRevFilter(RevFilter.ONLY_MERGES).call();
-//        for (RevCommit merge: merges) {
-//            RevCommit[] parents = merge.getParents(); // the two commits which are merged
-//        }
-//
-//        project.close();
+    public static void main(String[] args) throws Exception {
+        Project project = Project.buildFromPath(
+                "4pr0n/ripme",
+                "/home/severin/ba_projects"
+        );
+        ArrayList<ConflictingMerge> conflicts = project.getConflictingMerges();
+
+        int conflictCount = 1;
+        for (ConflictingMerge conflict: conflicts) {
+
+            System.out.println("---------------------------------------------------------");
+            System.out.format("Conflict: %d/%d\n", conflictCount, conflicts.size());
+            System.out.format("Commit: %s\n", conflict.getCommitName());
+            System.out.println("---------------------------------------------------------");
+
+            ArrayList<ConflictingMergeResolution> mergeResolutions = conflict.getResolutions();
+            ConflictingMergeResolution actualResolution = conflict.getActualResolution();
+
+            int resolutionCount = 1;
+            for (ConflictingMergeResolution mergeResolution: mergeResolutions) {
+
+                System.out.println("---------------------------------------------------------");
+
+                System.out.format("Resolution: %d/%d\n", resolutionCount, mergeResolutions.size());
+                System.out.println("Differences: " + mergeResolution.compareTo(actualResolution));
+                System.out.println("---------------------------------------------------------");
+                ConflictingMergeResolution.diffFormat(
+                        System.out,
+                        //Integer.toString(resolutionCount),
+                        mergeResolution,
+                        actualResolution,
+                        true
+                );
+                resolutionCount++;
+            }
+            System.out.println();
+            System.out.println();
+            conflictCount++;
+        }
+
+
+
+        project.close();
     }
 }

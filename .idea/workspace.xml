@@ -5,32 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Rebuild merge conflict detection and resolution building">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/api/Project.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMerge.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFileResolution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeResolution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ResolutionChunk.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/ANode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/Node.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/Tree.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/severin/ba/util/TreeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/Formatting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/FindConflicts.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/autoclone/AutoCloneProjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/autoclone/AutoCloneProjects.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/conflict/Conflict.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/conflict/ConflictFile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/conflict/ConflictingFiles.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/conflict/Merge.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/project/Project.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/project/ProjectInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/api/ProjectInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/project/ProjectsInfoListReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/api/ProjectsInfoListReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/resolution/ResolutionConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/resolution/ResolutionFile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/severin/ba/conflict/ConflictFileTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/severin/ba/project/ProjectTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/api/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/api/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMerge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMerge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFileResolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFileResolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeResolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeResolution.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +25,7 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -144,7 +128,8 @@
       <workItem from="1663410038486" duration="5277000" />
       <workItem from="1663684318686" duration="7138000" />
       <workItem from="1663761888600" duration="25399000" />
-      <workItem from="1663849753803" duration="20250000" />
+      <workItem from="1663849753803" duration="20556000" />
+      <workItem from="1663930079219" duration="10172000" />
     </task>
     <task id="LOCAL-00001" summary="Inital Commit">
       <created>1663769460948</created>
@@ -153,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663769460948</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Rebuild merge conflict detection and resolution building">
+      <created>1663887534666</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1663887534666</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

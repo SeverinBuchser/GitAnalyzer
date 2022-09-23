@@ -2,6 +2,8 @@ package org.severin.ba.api;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.merge.MergeStrategy;
 import org.eclipse.jgit.merge.RecursiveMerger;
@@ -13,6 +15,8 @@ import org.severin.ba.merge.ConflictingMerge;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class Project extends Git {
 
@@ -36,7 +40,7 @@ public class Project extends Git {
         return new Project(repo);
     }
 
-    public Iterable<ConflictingMerge> getConflictingMerges() throws Exception {
+    public ArrayList<ConflictingMerge> getConflictingMerges() throws Exception {
         Iterable<RevCommit> commits = this.log().setRevFilter(RevFilter.ONLY_MERGES).call();
         ArrayList<ConflictingMerge> merges = new ArrayList<>();
 
