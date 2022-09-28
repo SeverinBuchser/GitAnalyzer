@@ -26,7 +26,6 @@ public class Project extends Git {
                 .setDirectory(new File(cloneDestination + "/" + name))
                 .call();
         return new Project(git.getRepository());
-
     }
 
     public static Project buildFromPath(String name, String pathToProjects) throws IOException {

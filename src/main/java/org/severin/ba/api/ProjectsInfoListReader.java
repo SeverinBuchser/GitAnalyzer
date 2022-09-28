@@ -20,7 +20,7 @@ public class ProjectsInfoListReader extends BufferedReader {
         return projectInfoList;
     }
 
-    public static ArrayList<ProjectInfo> readList(String pathToInfoList) throws Exception {
+    public static ArrayList<ProjectInfo> readListFile(String pathToInfoList) throws Exception {
         if (pathToInfoList == null) {
             pathToInfoList = "projects.csv";
         }
