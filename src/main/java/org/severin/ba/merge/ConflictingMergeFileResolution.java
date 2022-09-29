@@ -2,7 +2,7 @@ package org.severin.ba.merge;
 
 import org.eclipse.jgit.diff.*;
 import org.severin.ba.util.log.Formatting;
-import org.severin.ba.util.Node;
+import org.severin.ba.util.tree.Node;
 
 import java.io.IOException;
 import java.io.OutputStream;

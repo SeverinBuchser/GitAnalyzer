@@ -1,4 +1,4 @@
-package org.severin.ba.util;
+package org.severin.ba.util.tree;
 
 import java.util.ArrayList;
 import java.util.List;

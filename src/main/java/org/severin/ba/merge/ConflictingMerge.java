@@ -8,8 +8,8 @@ import org.eclipse.jgit.merge.MergeResult;
 import org.eclipse.jgit.merge.RecursiveMerger;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.treewalk.TreeWalk;
-import org.severin.ba.util.Node;
-import org.severin.ba.util.Tree;
+import org.severin.ba.util.tree.Node;
+import org.severin.ba.util.tree.Tree;
 
 import java.io.IOException;
 import java.util.ArrayList;

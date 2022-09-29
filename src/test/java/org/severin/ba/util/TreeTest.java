@@ -1,6 +1,8 @@
 package org.severin.ba.util;
 
 import org.junit.jupiter.api.Test;
+import org.severin.ba.util.tree.Node;
+import org.severin.ba.util.tree.Tree;
 
 import java.util.ArrayList;
 import java.util.Stack;

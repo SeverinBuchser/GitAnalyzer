@@ -1,7 +1,7 @@
 package org.severin.ba.merge;
 
 import org.eclipse.jgit.diff.EditList;
-import org.severin.ba.util.Node;
+import org.severin.ba.util.tree.Node;
 import org.severin.ba.util.log.Formatting;
 
 import java.io.OutputStream;
