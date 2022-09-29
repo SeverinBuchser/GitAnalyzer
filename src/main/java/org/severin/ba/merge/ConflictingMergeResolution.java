@@ -21,7 +21,7 @@ public class ConflictingMergeResolution extends ArrayList<ConflictingMergeFileRe
         return this.stream().filter(fileResolution -> fileResolution.getFileName().equals(fileName)).findAny();
     }
 
-    public ConflictingMergeFileResolution getByFileName(String fileName) {
+    private ConflictingMergeFileResolution getByFileName(String fileName) {
         Optional<ConflictingMergeFileResolution> optionalFileResolution = this.findOptionalByFileName(fileName);
         return optionalFileResolution.orElse(null);
     }
@@ -75,7 +75,7 @@ public class ConflictingMergeResolution extends ArrayList<ConflictingMergeFileRe
         out.write(Formatting.NEW_LINE.getBytes());
     }
 
-    public boolean doesNotHaveSameFiles(ConflictingMergeResolution resolution) {
+    private boolean doesNotHaveSameFiles(ConflictingMergeResolution resolution) {
         if (this.size() != resolution.size()) return true;
         for (ConflictingMergeFileResolution fileResolution: this) {
             if (resolution.findOptionalByFileName(fileResolution.getFileName()).isEmpty()) return true;

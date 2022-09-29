@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
-public class ConflictingMerge extends Tree<ConflictingMergeFileResolution> {
+public class ConflictingMerge {
     protected final RecursiveMerger merger;
 
     protected final RevCommit commit;
@@ -25,10 +25,11 @@ public class ConflictingMerge extends Tree<ConflictingMergeFileResolution> {
     public ConflictingMerge(RevCommit commit, RecursiveMerger merger) {
         this.commit = commit;
         this.merger = merger;
-        this.buildResolutionTree();
     }
 
-    private void buildResolutionTree() {
+    private Tree<ConflictingMergeFileResolution> buildResolutionTree() {
+        Tree<ConflictingMergeFileResolution> tree = new Tree<>();
+
         for (Map.Entry<String, MergeResult<? extends Sequence>> entry: this.merger.getMergeResults().entrySet()) {
 
             ConflictingMergeFile conflictingFile = new ConflictingMergeFile(
@@ -41,14 +42,15 @@ public class ConflictingMerge extends Tree<ConflictingMergeFileResolution> {
             for (ConflictingMergeFileResolution fileResolution: fileResolutions) {
                 fileResolutionsNodes.add(new Node<>(fileResolution));
             }
-
-            this.addList(fileResolutionsNodes);
+            tree.addList(fileResolutionsNodes);
         }
+
+        return tree;
     }
 
     public ArrayList<ConflictingMergeResolution> getResolutions() {
         ArrayList<ConflictingMergeResolution> mergeResolutions = new ArrayList<>();
-        for (Stack<Node<ConflictingMergeFileResolution>> path : this.getPaths()) {
+        for (Stack<Node<ConflictingMergeFileResolution>> path : this.buildResolutionTree().getPaths()) {
             mergeResolutions.add(ConflictingMergeResolution.fromTreePath(path));
         }
         return mergeResolutions;

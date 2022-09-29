@@ -1,4 +1,4 @@
-package org.severin.ba.util;
+package org.severin.ba.util.tree;
 
 import org.junit.jupiter.api.Test;
 import org.severin.ba.util.tree.Node;
