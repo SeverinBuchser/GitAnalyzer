@@ -18,7 +18,7 @@ class Clone implements Callable<Integer> {
     public Integer call() {
         try {
             System.out.format("Cloning project %s into %s\n", this.uri, this.destination);
-            Project.cloneFromUri(this.name, this.uri, this.destination).close();
+            Project.cloneFromUri(this.uri, this.destination + "/" + this.name).close();
             System.out.format("Project %s cloned\n", this.name);
         } catch (Exception e) {
             System.out.println("Project " + this.name + " could not be cloned! " + e.getMessage());

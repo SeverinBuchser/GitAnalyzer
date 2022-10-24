@@ -5,42 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Cleanup Project">
-      <change afterPath="$PROJECT_DIR$/projects-2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/mergeconflict/resolution/DynamicFileResolution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/mergeconflict/resolution/StaticFileResolution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/log/CSVFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/path/Node.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/path/Path.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/path/PathBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/path/PathIterator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/severin/ba/util/path/PathIteratorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/severin/ba/api/ProjectInfoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/severin/ba/api/ProjectTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/severin/ba/api/ProjectsInfoListReaderTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/project/sample-project-list.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/api/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/api/Project.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/api/ProjectsInfoListReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/api/ProjectsInfoListReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/clone/Clone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/clone/Clone.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/clone/CloneList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/clone/CloneList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/log/ConflictResolutionLogger.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/CombinedResolutionChunk.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictStudy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/mergeconflict/ConflictStudy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMerge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/mergeconflict/Conflict.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/mergeconflict/ConflictFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeFileResolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/mergeconflict/resolution/FileResolution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ConflictingMergeResolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/mergeconflict/resolution/Resolution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/RawResolutionChunk.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/merge/ResolutionChunk.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/log/Formatting.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/tree/ANode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/path/ANode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/tree/Node.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/tree/Tree.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/projects.csv" beforeDir="false" afterPath="$PROJECT_DIR$/projects-1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/severin/ba/merge/ResolutionChunkTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/severin/ba/util/log/FormattingTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/severin/ba/util/tree/ANodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/severin/ba/util/path/ANodeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/severin/ba/util/tree/NodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/severin/ba/util/path/NodeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/severin/ba/util/tree/TreeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/severin/ba/util/path/PathBuilderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/mergeconflict/Conflict.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/mergeconflict/Conflict.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/mergeconflict/ConflictStudy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/mergeconflict/ConflictStudy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/log/CSVFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/severin/ba/util/log/CSVFile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,8 +30,8 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -108,18 +86,18 @@
       <recent name="org.severin.ba.util.tree" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="org.severin.ba.api" />
       <recent name="org.severin.ba.util.tree" />
       <recent name="org.severin.ba.merge" />
       <recent name="org.severin.ba.util.log" />
       <recent name="org.severin.ba.util" />
-      <recent name="org.severin.ba.project" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.severin.ba.merge" />
       <recent name="org.severin.ba" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ConflictStudy List 1">
+  <component name="RunManager" selected="JUnit.Tests">
     <configuration name="Clone" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.severin.ba.clone.Clone" />
       <module name="MergeConflictResolution" />
@@ -296,7 +274,7 @@
       <workItem from="1665076637951" duration="9530000" />
       <workItem from="1665150933625" duration="12742000" />
       <workItem from="1666615736776" duration="94000" />
-      <workItem from="1666615836208" duration="1289000" />
+      <workItem from="1666615836208" duration="7369000" />
     </task>
     <task id="LOCAL-00001" summary="Inital Commit">
       <created>1663769460948</created>
@@ -347,7 +325,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664489583639</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Cleanup Project">
+      <created>1666617140517</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1666617140518</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

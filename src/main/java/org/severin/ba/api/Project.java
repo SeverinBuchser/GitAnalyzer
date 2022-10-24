@@ -20,23 +20,22 @@ public class Project extends Git {
         super(repo);
     }
 
-    public static Project cloneFromUri(String name, String uri, String cloneDestination) throws GitAPIException {
+    public static Project cloneFromUri(String uri, String path) throws GitAPIException {
         Git git = Git.cloneRepository()
                 .setURI(uri)
-                .setDirectory(new File(cloneDestination + "/" + name))
+                .setDirectory(new File(path))
                 .call();
         return new Project(git.getRepository());
     }
 
-    public static Project buildFromPath(String name, String pathToProjects) throws IOException {
+    public static Project buildFromPath(String path) throws IOException {
         Repository repo = new FileRepositoryBuilder()
-                .setGitDir(new File(pathToProjects + "/" + name + "/.git"))
+                .setGitDir(new File(path + "/.git"))
                 .build();
         return new Project(repo);
     }
 
     public ArrayList<Conflict> getConflictingMerges() throws Exception {
-        // create new iterator for conflicts with iterable<revcommit> inside --> performance
         Iterable<RevCommit> merges = this.log().setRevFilter(RevFilter.ONLY_MERGES).call();
         ArrayList<Conflict> conflicts = new ArrayList<>();
 

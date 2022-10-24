@@ -8,8 +8,7 @@ description = "")
 public class Main {
     public static void main(String[] args) throws Exception {
         Project project = Project.buildFromPath(
-                "Activiti/Activiti",
-                "/home/severin/ba_projects"
+            "/home/severin/ba_projects/Activiti/Activiti"
         );
 
         project.close();

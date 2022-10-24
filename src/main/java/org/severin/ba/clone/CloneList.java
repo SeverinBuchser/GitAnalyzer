@@ -7,6 +7,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
+import java.io.File;
 import java.util.concurrent.Callable;
 
 @Command(name = "clonelist", mixinStandardHelpOptions = true)
@@ -17,7 +18,7 @@ public class CloneList implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        ProjectsInfoListReader reader = new ProjectsInfoListReader(this.listPath);
+        ProjectsInfoListReader reader = new ProjectsInfoListReader(new File(this.listPath));
 
         for (ProjectInfo projectInfo: reader) {
             Clone.withArgs(projectInfo.name, projectInfo.uri, this.destination);

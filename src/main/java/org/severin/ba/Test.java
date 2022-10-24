@@ -3,12 +3,13 @@ package org.severin.ba;
 import org.apache.commons.csv.CSVRecord;
 import org.severin.ba.util.log.CSVFile;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Test {
     public static void main(String[] args) throws IOException {
         CSVFile updater = new CSVFile(
-                "/home/severin/gitrepo/Severin/UniBe/MergeConflictResolution/study-2.csv",
+                new File("/home/severin/gitrepo/Severin/UniBe/MergeConflictResolution/study-2.csv"),
                 new String[]{"projectName", "correct", "conflicts"}
         );
 

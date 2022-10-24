@@ -31,6 +31,7 @@ public class Conflict {
     public PathBuilder<FileResolution> buildResolutions() {
         PathBuilder<FileResolution> paths = new PathBuilder<>();
         Map<String, MergeResult<? extends  Sequence>> mergeResults = this.merger.getMergeResults();
+        System.out.println(this.merger.getBaseCommitId());
         if (mergeResults.keySet().size() > 5) return null;
         for (String fileName: mergeResults.keySet()) {
             ConflictFile conflictingFile = new ConflictFile(

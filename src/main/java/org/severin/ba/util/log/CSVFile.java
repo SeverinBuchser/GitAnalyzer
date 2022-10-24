@@ -4,6 +4,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.util.stream.StreamSupport;
 
 public class CSVFile {
 
-    private final String path;
+    private final File file;
     private FileWriter out;
 
     private CSVPrinter printer;
@@ -23,8 +24,8 @@ public class CSVFile {
     private final CSVFormat writeFormat;
     private final CSVFormat readFormat;
 
-    public CSVFile(String path, String[] headers, boolean eraseOld) throws IOException {
-        this(path, headers);
+    public CSVFile(File file, String[] headers, boolean eraseOld) throws IOException {
+        this(file, headers);
         if (eraseOld) {
             this.open();
             this.out.write("");
@@ -32,8 +33,8 @@ public class CSVFile {
         }
     }
 
-    public CSVFile(String path, String[] headers) {
-        this.path = path;
+    public CSVFile(File file, String[] headers) {
+        this.file = file;
         this.writeFormat = CSVFormat.DEFAULT
                 .builder()
                 .setHeader(headers)
@@ -47,7 +48,7 @@ public class CSVFile {
 
     private void parse() {
         try {
-            FileReader in = new FileReader(this.path);
+            FileReader in = new FileReader(this.file);
             this.records = new ArrayList<>(this.readFormat.parse(in).stream().toList());
             in.close();
         } catch (IOException e) {
@@ -56,7 +57,7 @@ public class CSVFile {
     }
 
     private void open() throws IOException {
-        this.out = new FileWriter(this.path);
+        this.out = new FileWriter(this.file);
         this.printer = new CSVPrinter(this.out, this.writeFormat);
     }
 

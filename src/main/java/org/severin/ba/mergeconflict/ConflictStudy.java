@@ -13,6 +13,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
@@ -25,10 +26,10 @@ public class ConflictStudy implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        ProjectsInfoListReader reader = new ProjectsInfoListReader(this.listPath);
+        ProjectsInfoListReader reader = new ProjectsInfoListReader(new File(this.listPath));
 
         CSVFile updater = new CSVFile(
-                logPath,
+                new File(logPath),
                 new String[]{"projectName", "correct", "conflicts"},
                 true
         );
@@ -36,7 +37,7 @@ public class ConflictStudy implements Callable<Integer> {
         for (ProjectInfo projectInfo: reader) {
             try {
                 System.out.format("Checking project %s\n", projectInfo.name);
-                Project project = Project.buildFromPath(projectInfo.name, this.dir);
+                Project project = Project.buildFromPath(this.dir + "/" + projectInfo.name);
 
                 ArrayList<Conflict> conflicts = project.getConflictingMerges();
                 int conflictsSize = conflicts.size();
@@ -61,7 +62,7 @@ public class ConflictStudy implements Callable<Integer> {
                         }
                     } catch (NullPointerException e) {
                         conflictsSize--;
-                        //System.out.println("Renames in:" + conflict.getCommitName());
+                        System.out.println("Renames in:" + conflict.getCommitName());
                     }
                 }
                 updater.appendRecord(projectInfo.name, correctCount, conflictsSize);
