@@ -3,13 +3,12 @@ package org.severin.ba.api;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.merge.MergeFormatter;
 import org.eclipse.jgit.merge.MergeStrategy;
 import org.eclipse.jgit.merge.RecursiveMerger;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.filter.RevFilter;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
-import org.severin.ba.merge.ConflictingMerge;
+import org.severin.ba.mergeconflict.Conflict;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,12 +35,13 @@ public class Project extends Git {
         return new Project(repo);
     }
 
-    public ArrayList<ConflictingMerge> getConflictingMerges() throws Exception {
-        Iterable<RevCommit> commits = this.log().setRevFilter(RevFilter.ONLY_MERGES).call();
-        ArrayList<ConflictingMerge> merges = new ArrayList<>();
+    public ArrayList<Conflict> getConflictingMerges() throws Exception {
+        // create new iterator for conflicts with iterable<revcommit> inside --> performance
+        Iterable<RevCommit> merges = this.log().setRevFilter(RevFilter.ONLY_MERGES).call();
+        ArrayList<Conflict> conflicts = new ArrayList<>();
 
-        for (RevCommit commit: commits) {
-            RevCommit[] parents = commit.getParents();
+        for (RevCommit merge: merges) {
+            RevCommit[] parents = merge.getParents();
             RecursiveMerger merger = this.createMerger();
 
             boolean canMerge = merger.merge(
@@ -50,12 +50,12 @@ public class Project extends Git {
             );
 
             if (!canMerge) {
-                merges.add(new ConflictingMerge(commit, merger));
+                conflicts.add(new Conflict(merge, merger));
             }
 
         }
 
-        return merges;
+        return conflicts;
     }
 
     private RecursiveMerger createMerger() {

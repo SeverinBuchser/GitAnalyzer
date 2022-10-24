@@ -17,10 +17,11 @@ class Clone implements Callable<Integer> {
     @Override
     public Integer call() {
         try {
+            System.out.format("Cloning project %s into %s\n", this.uri, this.destination);
             Project.cloneFromUri(this.name, this.uri, this.destination).close();
-            System.out.format("Project %s cloned from %s to '%s'", this.name, this.uri, this.destination);
+            System.out.format("Project %s cloned\n", this.name);
         } catch (Exception e) {
-            System.out.print(e.getMessage());
+            System.out.println("Project " + this.name + " could not be cloned! " + e.getMessage());
         }
         return 0;
     }
@@ -28,5 +29,9 @@ class Clone implements Callable<Integer> {
     public static void main(String[] args) {
         int exitCode = new CommandLine(new Clone()).execute(args);
         System.exit(exitCode);
+    }
+
+    public static void withArgs(String name, String uri, String destination) {
+        new CommandLine(new Clone()).execute(name, uri, destination);
     }
 }

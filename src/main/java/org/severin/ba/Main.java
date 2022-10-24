@@ -1,7 +1,6 @@
 package org.severin.ba;
 
 import org.severin.ba.api.Project;
-import org.severin.ba.log.ConflictResolutionLogger;
 import picocli.CommandLine.Command;
 
 @Command(name = "mcr", mixinStandardHelpOptions = true, version = "MergeConflictResolution 0.1",
@@ -9,12 +8,9 @@ description = "")
 public class Main {
     public static void main(String[] args) throws Exception {
         Project project = Project.buildFromPath(
-                "4pr0n/ripme",
+                "Activiti/Activiti",
                 "/home/severin/ba_projects"
         );
-
-        ConflictResolutionLogger logger = new ConflictResolutionLogger(System.out);
-        logger.logConflictsOfProject(project);
 
         project.close();
     }
