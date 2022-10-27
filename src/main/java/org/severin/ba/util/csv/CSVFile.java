@@ -1,4 +1,4 @@
-package org.severin.ba.util.log;
+package org.severin.ba.util.csv;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;

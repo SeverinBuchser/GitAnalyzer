@@ -39,8 +39,6 @@ atermenji/IconicDroid,https://github.com/atermenji/IconicDroid
 Athou/commafeed,https://github.com/Athou/commafeed
 Atmosphere/atmosphere,https://github.com/Atmosphere/atmosphere
 aws/aws-sdk-java,https://github.com/aws/aws-sdk-java
-b3log/solo,https://github.com/b3log/solo
-b3log/symphony,https://github.com/b3log/symphony
 basho/riak-java-client,https://github.com/basho/riak-java-client
 bbeck/token-bucket,https://github.com/bbeck/token-bucket
 before/uadetector,https://github.com/before/uadetector
@@ -381,7 +379,6 @@ scribejava/scribejava,https://github.com/scribejava/scribejava
 sculptor/sculptor,https://github.com/sculptor/sculptor
 sd4324530/fastweixin,https://github.com/sd4324530/fastweixin
 searls/jasmine-maven-plugin,https://github.com/searls/jasmine-maven-plugin
-sematext/HBaseHUT,https://github.com/sematext/HBaseHUT
 serso/android-common,https://github.com/serso/android-common
 shilad/wikibrain,https://github.com/shilad/wikibrain
 shyiko/mysql-binlog-connector-java,https://github.com/shyiko/mysql-binlog-connector-java
@@ -396,7 +393,6 @@ smooks/smooks,https://github.com/smooks/smooks
 sockeqwe/fragmentargs,https://github.com/sockeqwe/fragmentargs
 socketio/socket.io-client-java,https://github.com/socketio/socket.io-client-java
 SomMeri/less4j,https://github.com/SomMeri/less4j
-SonarSource/sonarqube,https://github.com/SonarSource/sonarqube
 SpigotMC/BungeeCord,https://github.com/SpigotMC/BungeeCord
 spotify/cassandra-reaper,https://github.com/spotify/cassandra-reaper
 spotify/docker-client,https://github.com/spotify/docker-client

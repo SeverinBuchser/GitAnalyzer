@@ -15,6 +15,7 @@ import org.severin.ba.util.path.PathBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,6 @@ public class Conflict {
     public PathBuilder<FileResolution> buildResolutions() {
         PathBuilder<FileResolution> paths = new PathBuilder<>();
         Map<String, MergeResult<? extends  Sequence>> mergeResults = this.merger.getMergeResults();
-        System.out.println(this.merger.getBaseCommitId());
         if (mergeResults.keySet().size() > 5) return null;
         for (String fileName: mergeResults.keySet()) {
             ConflictFile conflictingFile = new ConflictFile(
@@ -45,6 +45,22 @@ public class Conflict {
         return paths;
     }
 
+    public Map<String, ArrayList<FileResolution>> buildFileResolutions() {
+        Map<String, ArrayList<FileResolution>> fileResolutions = new HashMap<>();
+        Map<String, MergeResult<? extends  Sequence>> mergeResults = this.merger.getMergeResults();
+        if (mergeResults.keySet().size() > 5) return null;
+        for (String fileName: mergeResults.keySet()) {
+            ConflictFile conflictingFile = new ConflictFile(
+                    fileName,
+                    mergeResults.get(fileName)
+            );
+            ArrayList<FileResolution> conflictingFiles = conflictingFile.getResolutions();
+            if (conflictingFiles == null) return null;
+            fileResolutions.put(fileName, conflictingFiles);
+        }
+        return fileResolutions;
+    }
+
     public Resolution getActualResolution() throws IOException {
         ArrayList<FileResolution> fileResolutions = new ArrayList<>();
 
@@ -56,6 +72,17 @@ public class Conflict {
         return new Resolution(fileResolutions);
     }
 
+    public Map<String, FileResolution> getActualFileResolutions() throws IOException {
+        Map<String, FileResolution> fileResolutions = new HashMap<>();
+
+        for (String fileName: this.getConflictingFileNames()) {
+            byte[] fileContent = this.getFileContent(fileName);
+            fileResolutions.put(fileName, new StaticFileResolution(fileName, fileContent));
+        }
+
+        return fileResolutions;
+    }
+
     private byte[] getFileContent(String fileName) throws IOException {
         try (TreeWalk treeWalk = TreeWalk.forPath(
                 this.merger.getRepository(),
@@ -63,6 +90,7 @@ public class Conflict {
                 this.commit.getTree()
             )
         ) {
+            if (treeWalk == null) return new byte[0];
             ObjectId blobId = treeWalk.getObjectId(0);
             try (ObjectReader objectReader = this.merger.getRepository().newObjectReader()) {
                 ObjectLoader objectLoader = objectReader.open(blobId);

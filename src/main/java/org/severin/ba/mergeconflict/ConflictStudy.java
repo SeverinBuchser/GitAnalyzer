@@ -5,7 +5,7 @@ import org.severin.ba.api.ProjectInfo;
 import org.severin.ba.api.ProjectsInfoListReader;
 import org.severin.ba.mergeconflict.resolution.FileResolution;
 import org.severin.ba.mergeconflict.resolution.Resolution;
-import org.severin.ba.util.log.CSVFile;
+import org.severin.ba.util.csv.CSVFile;
 import org.severin.ba.util.path.Path;
 import org.severin.ba.util.path.PathBuilder;
 import picocli.CommandLine;
@@ -30,51 +30,46 @@ public class ConflictStudy implements Callable<Integer> {
 
         CSVFile updater = new CSVFile(
                 new File(logPath),
-                new String[]{"projectName", "correct", "conflicts"},
+                new String[]{"projectName", "correctCount", "conflictCount"},
                 true
         );
 
         for (ProjectInfo projectInfo: reader) {
-            try {
-                System.out.format("Checking project %s\n", projectInfo.name);
-                Project project = Project.buildFromPath(this.dir + "/" + projectInfo.name);
+            System.out.format("Checking project %s\n", projectInfo.name);
+            Project project = Project.buildFromPath(this.dir + "/" + projectInfo.name);
 
+            try {
                 ArrayList<Conflict> conflicts = project.getConflictingMerges();
-                int conflictsSize = conflicts.size();
-                if (conflictsSize > 500) {
-                    project.close();
+                int conflictCount = conflicts.size();
+                if (conflictCount > 500) {
+                    System.out.println("FAIL:\tToo many Conflicts.\n");
                     continue;
                 }
-                System.out.format("Conflictcount: %d\n", conflictsSize);
+
+                System.out.format("Conflictcount: %d\n", conflictCount);
                 int correctCount = 0;
                 for (Conflict conflict: conflicts) {
-                    try {
-                        PathBuilder<FileResolution> resolutionTree = conflict.buildResolutions();
-                        Resolution actualResolution = conflict.getActualResolution();
-                        for (Path<FileResolution> resolutionPath: resolutionTree) {
-                            Resolution resolution = new Resolution(resolutionPath.build());
-                            try {
-                                if (actualResolution.compareTo(resolution) == 0) {
-                                    correctCount++;
-                                    break;
-                                }
-                            } catch (Exception e) {}
+                    PathBuilder<FileResolution> resolutionTree = conflict.buildResolutions();
+                    if (resolutionTree == null) {
+                        conflictCount--;
+                        continue;
+                    }
+                    Resolution actualResolution = conflict.getActualResolution();
+                    for (Path<FileResolution> resolutionPath: resolutionTree) {
+                        Resolution resolution = new Resolution(resolutionPath.build());
+                        if (actualResolution.compareTo(resolution) == 0) {
+                            correctCount++;
+                            break;
                         }
-                    } catch (NullPointerException e) {
-                        conflictsSize--;
-                        System.out.println("Renames in:" + conflict.getCommitName());
                     }
                 }
-                updater.appendRecord(projectInfo.name, correctCount, conflictsSize);
-                System.out.format("OK:\tProject %s checked. %d/%d have correct solutions.\n\n", projectInfo.name, correctCount, conflictsSize);
-                project.close();
+                updater.appendRecord(projectInfo.name, correctCount, conflictCount);
+                System.out.format("OK:\t%d/%d conflicts have correct solutions.\n\n", correctCount, conflictCount);
             } catch (Exception e) {
-                System.out.println("FAIL:\t Project " + projectInfo.name + " could not be checked! " + e.getMessage());
-                System.out.println();
+                System.out.println("FAIL:\tProject could not be checked! " + e.getMessage() + "\n");
             }
+            project.close();
         }
-
-
         return 0;
     }
 

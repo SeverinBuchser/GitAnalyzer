@@ -1,6 +1,6 @@
 package org.severin.ba.api;
 
-import org.severin.ba.util.log.CSVFile;
+import org.severin.ba.util.csv.CSVFile;
 
 import java.io.File;
 import java.util.Iterator;
