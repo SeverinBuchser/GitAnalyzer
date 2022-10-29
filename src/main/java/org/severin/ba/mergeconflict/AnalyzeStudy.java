@@ -16,14 +16,14 @@ public class AnalyzeStudy implements Callable<Integer> {
     public Integer call() {
         CSVFile updater = new CSVFile(
                 new File(this.studyPath),
-                new String[]{"projectName", "conflictCount", "conflictCount"}
+                new String[]{"projectName", "correctCount", "conflictCount"}
         );
 
         int correctCount = 0;
         int conflictCount = 0;
 
         for (CSVRecord record: updater.getRecords()) {
-            correctCount += Integer.parseInt(record.get("conflictCount"));
+            correctCount += Integer.parseInt(record.get("correctCount"));
             conflictCount += Integer.parseInt(record.get("conflictCount"));
         }
 
