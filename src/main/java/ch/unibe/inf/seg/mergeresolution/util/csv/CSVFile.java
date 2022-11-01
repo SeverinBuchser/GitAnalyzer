@@ -1,0 +1,91 @@
+package ch.unibe.inf.seg.mergeresolution.util.csv;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.csv.CSVRecord;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+
+public class CSVFile {
+
+    private final File file;
+    private FileWriter out;
+
+    private CSVPrinter printer;
+
+    private Iterable<CSVRecord> records;
+
+    private final CSVFormat writeFormat;
+    private final CSVFormat readFormat;
+
+    public CSVFile(File file, String[] headers, boolean eraseOld) throws IOException {
+        this(file, headers);
+        if (eraseOld) {
+            this.open();
+            this.out.write("");
+            this.close();
+        }
+    }
+
+    public CSVFile(File file, String[] headers) {
+        this.file = file;
+        this.writeFormat = CSVFormat.DEFAULT
+                .builder()
+                .setHeader(headers)
+                .build();
+        this.readFormat = CSVFormat.DEFAULT
+                .builder()
+                .setHeader(headers)
+                .setSkipHeaderRecord(true)
+                .build();
+    }
+
+    private void parse() {
+        try {
+            FileReader in = new FileReader(this.file);
+            this.records = new ArrayList<>(this.readFormat.parse(in).stream().toList());
+            in.close();
+        } catch (IOException e) {
+            this.records = new ArrayList<>();
+        }
+    }
+
+    private void open() throws IOException {
+        this.out = new FileWriter(this.file);
+        this.printer = new CSVPrinter(this.out, this.writeFormat);
+    }
+
+    private void close() throws IOException {
+        assert this.out != null;
+        this.out.close();
+        this.printer.close();
+    }
+
+    private void writeExistingRecords() throws IOException {
+        this.printer.printRecords(this.records);
+    }
+
+    public void appendRecord(Object... values) throws IOException {
+        this.parse();
+        this.open();
+        this.writeExistingRecords();
+        this.printer.printRecord(values);
+        this.close();
+    }
+
+    public Iterable<CSVRecord> getRecords() {
+        this.parse();
+        return this.records;
+    }
+
+    public Stream<CSVRecord> getStream() {
+        return StreamSupport.stream(this.getRecords().spliterator(), false);
+    }
+
+}
