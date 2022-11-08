@@ -105,7 +105,7 @@
       <recent name="org.severin.ba" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Analyze Resolutions 1">
+  <component name="RunManager" selected="JUnit.Tests">
     <configuration name="Analyze Resolutions 1" type="Application" factoryName="Application" folderName="projects 1">
       <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
       <module name="MergeConflictResolution" />
