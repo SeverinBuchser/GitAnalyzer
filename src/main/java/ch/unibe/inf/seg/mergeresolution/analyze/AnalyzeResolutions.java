@@ -1,7 +1,7 @@
 package ch.unibe.inf.seg.mergeresolution.analyze;
 
 import ch.unibe.inf.seg.mergeresolution.conflict.Conflict;
-import ch.unibe.inf.seg.mergeresolution.resolution.FileResolution;
+import ch.unibe.inf.seg.mergeresolution.resolution.ResolutionFile;
 import ch.unibe.inf.seg.mergeresolution.resolution.Resolution;
 import ch.unibe.inf.seg.mergeresolution.project.Project;
 import ch.unibe.inf.seg.mergeresolution.project.ProjectInfo;
@@ -75,13 +75,13 @@ public class AnalyzeResolutions implements Callable<Integer> {
         Result result = new Result(conflicts.size());
         
         for (Conflict conflict: conflicts) {
-            PathBuilder<FileResolution> resolutionTree = conflict.buildResolutions();
+            PathBuilder<ResolutionFile> resolutionTree = conflict.buildResolutions();
             if (resolutionTree == null) {
                 result.removeTotal();
                 continue;
             }
             Resolution actualResolution = conflict.getActualResolution();
-            for (Path<FileResolution> resolutionPath: resolutionTree) {
+            for (Path<ResolutionFile> resolutionPath: resolutionTree) {
                 Resolution resolution = new Resolution(resolutionPath.build());
                 if (actualResolution.compareTo(resolution) == 0) {
                     result.addCorrect();
@@ -96,17 +96,17 @@ public class AnalyzeResolutions implements Callable<Integer> {
         Result result = new Result(0);
 
         for (Conflict conflict: conflicts) {
-            Map<String, ArrayList<FileResolution>> fileResolutions = conflict.buildFileResolutions();
-            Map<String, FileResolution> actualResolution = conflict.getActualFileResolutions();
+            Map<String, ArrayList<ResolutionFile>> fileResolutions = conflict.buildFileResolutions();
+            Map<String, ResolutionFile> actualResolution = conflict.getActualFileResolutions();
 
             if (AnalyzeResolutions.mapsContainSameKeys(fileResolutions, actualResolution)) {
                 result.addTotal(actualResolution.size());
                 for (String fileName: actualResolution.keySet()) {
-                    ArrayList<FileResolution> fileResolutionList = fileResolutions.get(fileName);
-                    FileResolution actualFileResolution = actualResolution.get(fileName);
+                    ArrayList<ResolutionFile> resolutionFileList = fileResolutions.get(fileName);
+                    ResolutionFile actualResolutionFile = actualResolution.get(fileName);
 
-                    for (FileResolution fileResolution: fileResolutionList) {
-                        if (actualFileResolution.compareTo(fileResolution) == 0) {
+                    for (ResolutionFile resolutionFile : resolutionFileList) {
+                        if (actualResolutionFile.compareTo(resolutionFile) == 0) {
                             result.addCorrect();
                             break;
                         }

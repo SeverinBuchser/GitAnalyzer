@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Resolution extends ArrayList<FileResolution> implements Comparable<Resolution> {
+public class Resolution extends ArrayList<ResolutionFile> implements Comparable<Resolution> {
 
-    public Resolution(List<FileResolution> mergeResolution) {
+    public Resolution(List<ResolutionFile> mergeResolution) {
         super(mergeResolution);
     }
 
-    private Optional<FileResolution> findOptionalByFileName(String fileName) {
+    private Optional<ResolutionFile> findOptionalByFileName(String fileName) {
         return this.stream().filter(fileResolution -> fileResolution.getFileName().equals(fileName)).findAny();
     }
 
-    private FileResolution getByFileName(String fileName) {
-        Optional<FileResolution> optionalFileResolution = this.findOptionalByFileName(fileName);
+    private ResolutionFile getByFileName(String fileName) {
+        Optional<ResolutionFile> optionalFileResolution = this.findOptionalByFileName(fileName);
         return optionalFileResolution.orElse(null);
     }
 
@@ -29,9 +29,9 @@ public class Resolution extends ArrayList<FileResolution> implements Comparable<
         }
         ArrayList<EditList> edits = new ArrayList<>();
 
-        for (FileResolution fileResolution1: resolution1) {
-            FileResolution fileResolution2 = resolution2.getByFileName(fileResolution1.getFileName());
-            edits.add(FileResolution.diff(fileResolution1, fileResolution2));
+        for (ResolutionFile resolutionFile1 : resolution1) {
+            ResolutionFile resolutionFile2 = resolution2.getByFileName(resolutionFile1.getFileName());
+            edits.add(ResolutionFile.diff(resolutionFile1, resolutionFile2));
         }
 
         return edits;
@@ -39,8 +39,8 @@ public class Resolution extends ArrayList<FileResolution> implements Comparable<
 
     private boolean doesNotHaveSameFiles(Resolution resolution) {
         if (this.size() != resolution.size()) return true;
-        for (FileResolution fileResolution: this) {
-            if (resolution.findOptionalByFileName(fileResolution.getFileName()).isEmpty()) return true;
+        for (ResolutionFile resolutionFile : this) {
+            if (resolution.findOptionalByFileName(resolutionFile.getFileName()).isEmpty()) return true;
         }
         return false;
     }

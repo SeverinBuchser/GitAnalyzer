@@ -2,11 +2,11 @@ package ch.unibe.inf.seg.mergeresolution.resolution;
 
 import org.eclipse.jgit.diff.RawText;
 
-public class StaticFileResolution extends FileResolution {
+public class StaticResolutionFile extends ResolutionFile {
 
     private final byte[] content;
 
-    public StaticFileResolution(String fileName, byte[] input) {
+    public StaticResolutionFile(String fileName, byte[] input) {
         super(fileName);
         this.content = input;
     }

@@ -1,7 +1,7 @@
 package ch.unibe.inf.seg.mergeresolution.conflict;
 
-import ch.unibe.inf.seg.mergeresolution.resolution.DynamicFileResolution;
-import ch.unibe.inf.seg.mergeresolution.resolution.FileResolution;
+import ch.unibe.inf.seg.mergeresolution.resolution.DynamicResolutionFile;
+import ch.unibe.inf.seg.mergeresolution.resolution.ResolutionFile;
 import ch.unibe.inf.seg.mergeresolution.util.path.PathBuilder;
 import org.eclipse.jgit.diff.RawText;
 import org.eclipse.jgit.diff.Sequence;
@@ -65,13 +65,13 @@ public class ConflictFile {
     }
 
 
-    public ArrayList<FileResolution> getResolutions() {
-        ArrayList<FileResolution> fileResolutions = new ArrayList<>();
+    public ArrayList<ResolutionFile> getResolutions() {
+        ArrayList<ResolutionFile> resolutionFiles = new ArrayList<>();
         PathBuilder<String> paths = this.buildResolutions();
         if (paths.getPathCount() > 256) return null;
         for (int i = 0 ; i < paths.getPathCount() ; i++) {
-            fileResolutions.add(new DynamicFileResolution(this.fileName, new Path<>(i, paths)));
+            resolutionFiles.add(new DynamicResolutionFile(this.fileName, new Path<>(i, paths)));
         }
-        return fileResolutions;
+        return resolutionFiles;
     }
 }

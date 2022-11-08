@@ -3,10 +3,10 @@ package ch.unibe.inf.seg.mergeresolution.resolution;
 import ch.unibe.inf.seg.mergeresolution.util.path.Path;
 import org.eclipse.jgit.diff.RawText;
 
-public class DynamicFileResolution extends FileResolution {
+public class DynamicResolutionFile extends ResolutionFile {
     private final Path<String> path;
 
-    public DynamicFileResolution(String fileName, Path<String> path) {
+    public DynamicResolutionFile(String fileName, Path<String> path) {
         super(fileName);
         this.path = path;
     }
