@@ -39,3 +39,5 @@ build/
 
 ### Output ###
 *study-*.csv
+projects/projects-*/
+out/

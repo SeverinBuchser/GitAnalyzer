@@ -1,0 +1,10 @@
+{
+  "cloneProjects": true,
+  "projectListInfos": [
+    {
+      "projectList": "../analyze/project-list.csv",
+      "projectDir": "../../../../.."
+    }
+  ],
+  "outDir": "./out"
+}

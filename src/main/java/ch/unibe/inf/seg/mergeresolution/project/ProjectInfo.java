@@ -2,10 +2,10 @@ package ch.unibe.inf.seg.mergeresolution.project;
 
 public class ProjectInfo {
     public String name;
-    public String uri;
+    public String url;
 
-    public ProjectInfo(String name, String uri) {
+    public ProjectInfo(String name, String url) {
         this.name = name;
-        this.uri = uri;
+        this.url = url;
     }
 }

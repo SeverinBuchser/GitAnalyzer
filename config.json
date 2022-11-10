@@ -1,0 +1,34 @@
+{
+  "cloneProjects": true,
+  "analyzeConflicts": {
+    "modes": ["merges", "files", "chunks"],
+    "run": true
+  },
+  "analyzeResults": {
+    "modes": ["merges", "files", "chunks"],
+    "run": true
+  },
+  "projectListInfos": [
+    {
+      "outSuffix": "",
+      "projectList": "./projects/projects-1.csv",
+      "projectDir": "./projects/projects-1"
+    },
+    {
+      "outSuffix": "",
+      "projectList": "./projects/projects-2.csv",
+      "projectDir": "./projects/projects-2"
+    },
+    {
+      "outSuffix": "",
+      "projectList": "./projects/projects-3.csv",
+      "projectDir": "./projects/projects-3"
+    },
+    {
+      "outSuffix": "",
+      "projectList": "./projects/projects-4.csv",
+      "projectDir": "./projects/projects-4"
+    }
+  ],
+  "outDir": "./out"
+}

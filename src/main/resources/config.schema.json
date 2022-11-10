@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "MergeConflictResolutionSchema",
+  "title": "Config",
+  "description": "A config for the MergeConflictResolution project.",
+  "type": "object",
+  "properties": {
+    "analyzeConflicts": {
+      "description": "This defines if and how the 'analyze-conflicts' subcommand will be run.",
+      "type": "object",
+      "properties": {
+        "modes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["merges", "files", "chunks"]
+          },
+          "default": ["merges"]
+        },
+        "run": {
+          "description": "Flag which decides if the subcommand will be run at all.",
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "default": {
+        "modes": ["merges"],
+        "run": true
+      }
+    },
+    "analyzeResults": {
+      "description": "This defines if and how the 'analyze-results' subcommand will be run.",
+      "type": "object",
+      "properties": {
+        "modes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["merges", "files", "chunks"]
+          },
+          "default": ["merges"]
+        },
+        "run": {
+          "description": "Flag which decides if the subcommand will be run at all.",
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "default": {
+        "modes": ["merges"],
+        "run": true
+      }
+    },
+    "cloneProjects": {
+      "description": "This flag sets if the 'clone-projects' subcommand will be run.",
+      "type": "boolean",
+      "default": false
+    },
+    "projectListInfos": {
+      "description": "The list of information about project lists.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "outSuffix": {
+            "description": "The suffix of the output CSV file.",
+            "type": "string",
+            "default": ""
+          },
+          "projectList": {
+            "description": "The path to the project list CSV file.",
+            "type": "string"
+          },
+          "projectDir": {
+            "description": "The directory where all projects in the project list are located.",
+            "type": "string"
+          }
+        },
+        "required": ["projectList", "projectDir"]
+      }
+    },
+    "outDir": {
+      "description": "The directory to which the output CSV file will be written.",
+      "type": "string",
+      "default": "."
+    }
+  },
+  "required": ["projectListInfos"]
+}

@@ -12,7 +12,7 @@ public class StaticResolutionFile extends ResolutionFile {
     }
 
     @Override
-    protected RawText buildRawText() {
+    public RawText buildRawText() {
         return new RawText(this.content);
     }
 }

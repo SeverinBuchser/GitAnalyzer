@@ -2,24 +2,39 @@ package ch.unibe.inf.seg.mergeresolution.analyze;
 
 import ch.unibe.inf.seg.mergeresolution.util.csv.CSVFile;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.io.FilenameUtils;
 import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Parameters;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.concurrent.Callable;
 
-@CommandLine.Command(name = "analyze-results", mixinStandardHelpOptions = true)
+@Command(name = "analyze-results", mixinStandardHelpOptions = true)
 public class AnalyzeResults implements Callable<Integer> {
 
-    @CommandLine.Parameters(index = "0", description = "Path to the results file to analyze") String resultsFileName;
+    @Parameters(
+            index = "0",
+            description = "Path to the results file to analyze."
+    )
+    String resultsFilePath;
+
+    private void normalizePaths() {
+        this.resultsFilePath = FilenameUtils.separatorsToSystem(this.resultsFilePath);
+        this.resultsFilePath = Paths.get(this.resultsFilePath).normalize().toAbsolutePath().toString();
+    }
 
     @Override
     public Integer call() {
+        this.normalizePaths();
+
         CSVFile updater = new CSVFile(
-                new File(this.resultsFileName),
+                new File(this.resultsFilePath),
                 new String[]{"projectName", "correctCount", "totalCount"}
         );
 
-        System.out.format("Analyzing results file %s\n", this.resultsFileName);
+        System.out.format("Analyzing results file %s\n", this.resultsFilePath);
 
         int correctCount = 0;
         int totalCount = 0;

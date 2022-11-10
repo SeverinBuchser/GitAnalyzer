@@ -14,7 +14,7 @@ public abstract class ResolutionFile implements Comparable<ResolutionFile> {
         this.fileName = fileName;
     }
 
-    protected abstract RawText buildRawText();
+    public abstract RawText buildRawText();
 
     public static EditList diff(ResolutionFile resolution1, ResolutionFile resolution2) {
         DiffAlgorithm da = DiffAlgorithm.getAlgorithm(DiffAlgorithm.SupportedAlgorithm.MYERS);

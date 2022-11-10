@@ -9,6 +9,6 @@ class ProjectInfoTest {
     void simpleProjectInfoTest() {
         ProjectInfo info = new ProjectInfo("projectName", "projectUri");
         assertEquals("projectName", info.name);
-        assertEquals("projectUri", info.uri);
+        assertEquals("projectUri", info.url);
     }
 }

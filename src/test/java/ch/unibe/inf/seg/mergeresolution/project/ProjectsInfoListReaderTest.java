@@ -26,12 +26,12 @@ class ProjectsInfoListReaderTest {
 
         infos = reader.iterator();
 
-        assertEquals("linktoproject0", infos.next().uri);
-        assertEquals("linktoproject1", infos.next().uri);
-        assertEquals("linktoproject2", infos.next().uri);
-        assertEquals("linktoproject3", infos.next().uri);
-        assertEquals("linktoproject4", infos.next().uri);
-        assertEquals("linktoproject5", infos.next().uri);
+        assertEquals("linktoproject0", infos.next().url);
+        assertEquals("linktoproject1", infos.next().url);
+        assertEquals("linktoproject2", infos.next().url);
+        assertEquals("linktoproject3", infos.next().url);
+        assertEquals("linktoproject4", infos.next().url);
+        assertEquals("linktoproject5", infos.next().url);
         assertFalse(infos.hasNext());
     }
 }

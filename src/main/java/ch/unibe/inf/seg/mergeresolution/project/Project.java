@@ -1,6 +1,6 @@
 package ch.unibe.inf.seg.mergeresolution.project;
 
-import ch.unibe.inf.seg.mergeresolution.conflict.Conflict;
+import ch.unibe.inf.seg.mergeresolution.conflict.ConflictingMerge;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
@@ -12,6 +12,8 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Project extends Git {
@@ -20,24 +22,28 @@ public class Project extends Git {
         super(repo);
     }
 
-    public static Project cloneFromUri(String uri, String path) throws GitAPIException {
+    public static Project cloneFromUri(String url, String path) throws GitAPIException {
         Git git = Git.cloneRepository()
-                .setURI(uri)
+                .setURI(url)
                 .setDirectory(new File(path))
                 .call();
         return new Project(git.getRepository());
     }
 
-    public static Project buildFromPath(String path) throws IOException {
+    public static Project buildFromPath(Path path) throws IOException {
         Repository repo = new FileRepositoryBuilder()
-                .setGitDir(new File(path + "/.git"))
+                .setGitDir(Project.buildGitPath(path).toFile())
                 .build();
         return new Project(repo);
     }
 
-    public ArrayList<Conflict> getConflictingMerges() throws Exception {
+    private static Path buildGitPath(Path path) {
+        return Paths.get(path.toString(), ".git");
+    }
+
+    public ArrayList<ConflictingMerge> getConflictingMerges() throws Exception {
         Iterable<RevCommit> merges = this.log().setRevFilter(RevFilter.ONLY_MERGES).call();
-        ArrayList<Conflict> conflicts = new ArrayList<>();
+        ArrayList<ConflictingMerge> conflictingMerges = new ArrayList<>();
 
         for (RevCommit merge: merges) {
             RevCommit[] parents = merge.getParents();
@@ -49,12 +55,12 @@ public class Project extends Git {
             );
 
             if (!canMerge) {
-                conflicts.add(new Conflict(merge, merger));
+                conflictingMerges.add(new ConflictingMerge(merge, merger));
             }
 
         }
 
-        return conflicts;
+        return conflictingMerges;
     }
 
     private RecursiveMerger createMerger() {

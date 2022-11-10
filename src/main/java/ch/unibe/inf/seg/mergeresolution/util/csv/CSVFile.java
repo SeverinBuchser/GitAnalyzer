@@ -3,11 +3,14 @@ package ch.unibe.inf.seg.mergeresolution.util.csv;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -57,6 +60,7 @@ public class CSVFile {
     }
 
     private void open() throws IOException {
+        Files.createDirectories(Paths.get("/", FilenameUtils.getPath(this.file.toPath().toString())));
         this.out = new FileWriter(this.file);
         this.printer = new CSVPrinter(this.out, this.writeFormat);
     }
