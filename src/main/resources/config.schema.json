@@ -73,10 +73,11 @@
           },
           "projectDir": {
             "description": "The directory where all projects in the project list are located.",
-            "type": "string"
+            "type": "string",
+            "default": "."
           }
         },
-        "required": ["projectList", "projectDir"]
+        "required": ["projectList"]
       }
     },
     "outDir": {

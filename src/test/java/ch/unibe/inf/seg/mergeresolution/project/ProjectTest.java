@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ProjectTest {
     @Test
     void findConflictsTest() throws Exception {
-        Project project = Project.buildFromPath(Paths.get("/home/severin/gitrepo/Severin/UniBe/samplemergeconflictproject"));
+        Project project = Project.buildFromPath(Paths.get("src","test","resources", "samplemergeconflictproject").toAbsolutePath());
 
         ArrayList<ConflictingMerge> conflictingMerges = project.getConflictingMerges();
 

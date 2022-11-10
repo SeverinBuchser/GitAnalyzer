@@ -5,37 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Allow usage of config.json file for ease of use for multiple project lists">
-      <change afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingChunk.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/config.schema.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/MainTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflictsTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/helper/EmptyParameterExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/analyze/project-list.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/main/test.config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects-1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/projects/projects-1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects-2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/projects/projects-2.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects-3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/projects/projects-3.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects-4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/projects/projects-4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeResolutions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflicts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeResults.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/Clone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProjects.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/Conflict.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingMerge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/DynamicResolutionFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/DynamicResolutionFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/StaticResolutionFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/StaticResolutionFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/csv/CSVFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/csv/CSVFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectInfoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectInfoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.schema.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflictsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflictsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectsInfoListReaderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectsInfoListReaderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/analyze/project-list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/project-list.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/conflicting-files/file1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/conflicting-files/file2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/main/test.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/test.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/project/sample-project-list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/sample-project-list.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/resolutions/file2.resolution-0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/resolutions/file2.resolution-1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/resolutions/file2.resolution-2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/resolutions/file2.resolution-3.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +56,6 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
@@ -99,6 +83,7 @@
       <recent name="org.severin.ba.conflict.ConflictFile" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test/resources" />
       <recent name="$PROJECT_DIR$/projects" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -121,63 +106,7 @@
       <recent name="org.severin.ba" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="CloneList" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
-      <option name="PROGRAM_PARAMETERS" value="clone-projects $PROJECT_DIR$/projects-1.csv --destination=$USER_HOME$/ba_projects_1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.severin.ba.clone.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Conflict Chunks" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
-      <option name="PROGRAM_PARAMETERS" value="analyze-resolutions --mode=chunks --dir=$USER_HOME$/ba_projects_1 $PROJECT_DIR$/projects-1.csv $PROJECT_DIR$/chunks-1.csv" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.severin.ba.merge.conflict.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Conflict Files" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
-      <option name="PROGRAM_PARAMETERS" value="analyze-resolutions --mode=files --dir=$USER_HOME$/ba_projects_1 $PROJECT_DIR$/projects-1.csv $PROJECT_DIR$/files-1.csv" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.severin.ba.merge.conflict.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Conflict Merges" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
-      <option name="PROGRAM_PARAMETERS" value="analyze-resolutions --dir=$USER_HOME$/ba_projects_1 $PROJECT_DIR$/projects-1.csv $PROJECT_DIR$/merges-1.csv " />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.severin.ba.merge.conflict.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.Tests">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
       <module name="MergeConflictResolution" />
@@ -188,30 +117,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Results Chunks" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
-      <option name="PROGRAM_PARAMETERS" value="analyze-results $PROJECT_DIR$/chunks-1.csv" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Results Files" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
-      <option name="PROGRAM_PARAMETERS" value="analyze-results $PROJECT_DIR$/files-1.csv" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Results Merges" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
-      <option name="PROGRAM_PARAMETERS" value="analyze-results $PROJECT_DIR$/merges-1.csv" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -259,13 +164,6 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.CloneList" />
-      <item itemvalue="Application.Conflict Merges" />
-      <item itemvalue="Application.Conflict Files" />
-      <item itemvalue="Application.Conflict Chunks" />
-      <item itemvalue="Application.Results Merges" />
-      <item itemvalue="Application.Results Files" />
-      <item itemvalue="Application.Results Chunks" />
       <item itemvalue="Application.Main" />
       <item itemvalue="JUnit.Tests" />
       <item itemvalue="JUnit.MainTest" />
@@ -321,7 +219,7 @@
       <workItem from="1667320401008" duration="10337000" />
       <workItem from="1667492581413" duration="223000" />
       <workItem from="1667902980148" duration="16998000" />
-      <workItem from="1668002248724" duration="24348000" />
+      <workItem from="1668002248724" duration="25073000" />
     </task>
     <task id="LOCAL-00001" summary="Inital Commit">
       <created>1663769460948</created>
@@ -407,7 +305,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667334706170</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Allow usage of config.json file for ease of use for multiple project lists">
+      <created>1668061286808</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1668061286808</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

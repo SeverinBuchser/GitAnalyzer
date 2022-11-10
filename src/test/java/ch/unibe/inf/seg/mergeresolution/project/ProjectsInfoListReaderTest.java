@@ -12,7 +12,7 @@ class ProjectsInfoListReaderTest {
     @Test
     void infoListReaderTest() {
         File file = new File(Objects.requireNonNull(ProjectsInfoListReader.class.getClassLoader()
-                .getResource("project/sample-project-list.csv")).getFile());
+                .getResource("sample-project-list.csv")).getFile());
         ProjectsInfoListReader reader = new ProjectsInfoListReader(file);
         Iterator<ProjectInfo> infos = reader.iterator();
 

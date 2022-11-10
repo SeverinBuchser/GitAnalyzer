@@ -42,20 +42,20 @@ class AnalyzeConflictsTest {
     public void analyzeMergesTest() {
         CommandLine cmd = AnalyzeConflictsTest.getCmd();
 
-        Path resourceDirectory = Paths.get("src","test","resources", "analyze");
+        Path resourceDirectory = Paths.get("src","test","resources");
         String absolutePath = resourceDirectory.toFile().getAbsolutePath();
 
         System.out.println();
 
         int exitCode = cmd.execute(
-                "--project-dir=/home/severin/gitrepo/Severin/UniBe",
+                "--project-dir=" + absolutePath,
                 "--out-suffix=-test-output",
                 absolutePath + "/project-list.csv"
         );
 
         assertEquals(0, exitCode);
 
-        File outputFile = new File("./project-list-test-output.csv");
+        File outputFile = new File("./project-list-merges-test-output.csv");
         assertTrue(outputFile.exists());
         CSVFile output = new CSVFile(
                 outputFile,
@@ -73,13 +73,13 @@ class AnalyzeConflictsTest {
     public void analyzeFilesTest() {
         CommandLine cmd = AnalyzeConflictsTest.getCmd();
 
-        Path resourceDirectory = Paths.get("src","test","resources", "analyze");
+        Path resourceDirectory = Paths.get("src","test","resources");
         String absolutePath = resourceDirectory.toFile().getAbsolutePath();
 
         System.out.println();
 
         int exitCode = cmd.execute(
-                "--project-dir=/home/severin/gitrepo/Severin/UniBe",
+                "--project-dir=" + absolutePath,
                 "--mode=files",
                 "--out-suffix=-test-output",
                 absolutePath + "/project-list.csv"
@@ -87,7 +87,7 @@ class AnalyzeConflictsTest {
 
         assertEquals(0, exitCode);
 
-        File outputFile = new File("./project-list-test-output.csv");
+        File outputFile = new File("./project-list-files-test-output.csv");
         assertTrue(outputFile.exists());
         CSVFile output = new CSVFile(
                 outputFile,
@@ -105,13 +105,13 @@ class AnalyzeConflictsTest {
     public void analyzeConflictsTest() {
         CommandLine cmd = AnalyzeConflictsTest.getCmd();
 
-        Path resourceDirectory = Paths.get("src","test","resources", "analyze");
+        Path resourceDirectory = Paths.get("src","test","resources");
         String absolutePath = resourceDirectory.toFile().getAbsolutePath();
 
         System.out.println();
 
         int exitCode = cmd.execute(
-                "--project-dir=/home/severin/gitrepo/Severin/UniBe",
+                "--project-dir=" + absolutePath,
                 "--mode=chunks",
                 "--out-suffix=-test-output",
                 absolutePath + "/project-list.csv"
@@ -119,7 +119,7 @@ class AnalyzeConflictsTest {
 
         assertEquals(0, exitCode);
 
-        File outputFile = new File("./project-list-test-output.csv");
+        File outputFile = new File("./project-list-chunks-test-output.csv");
         assertTrue(outputFile.exists());
         CSVFile output = new CSVFile(
                 outputFile,
