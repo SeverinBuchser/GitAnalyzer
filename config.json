@@ -10,24 +10,36 @@
   },
   "projectListInfos": [
     {
-      "outSuffix": "",
-      "projectList": "./projects/projects-1.csv",
-      "projectDir": "./projects/projects-1"
+      "projectList": "./project-lists/projects_name_desc-stars-10.csv",
+      "projectDir": "../ba_project-dirs/projects_name_desc-stars-10"
     },
     {
-      "outSuffix": "",
-      "projectList": "./projects/projects-2.csv",
-      "projectDir": "./projects/projects-2"
+      "projectList": "./project-lists/projects_name_asc-stars-10.csv",
+      "projectDir": "../ba_project-dirs//projects_name_asc-stars-10"
     },
     {
-      "outSuffix": "",
-      "projectList": "./projects/projects-3.csv",
-      "projectDir": "./projects/projects-3"
+      "projectList": "./project-lists/projects_c_desc-stars-100.csv",
+      "projectDir": "../ba_project-dirs//projects_c_desc-stars-100"
     },
     {
-      "outSuffix": "",
-      "projectList": "./projects/projects-4.csv",
-      "projectDir": "./projects/projects-4"
+      "projectList": "./project-lists/projects_go_desc-stars-100.csv",
+      "projectDir": "../ba_project-dirs//projects_go_desc-stars-100"
+    },
+    {
+      "projectList": "./project-lists/projects_java_desc-stars-100.csv",
+      "projectDir": "../ba_project-dirs/projects_java_desc-stars-100"
+    },
+    {
+      "projectList": "./project-lists/projects_javascript_desc-stars-100.csv",
+      "projectDir": "../ba_project-dirs/projects_javascript_desc-stars-100"
+    },
+    {
+      "projectList": "./project-lists/projects_python_desc-stars-100.csv",
+      "projectDir": "../ba_project-dirs/projects_python_desc-stars-100"
+    },
+    {
+      "projectList": "./project-lists/projects_typescript_desc-stars-100.csv",
+      "projectDir": "../ba_project-dirs/projects_typescript_desc-stars-100"
     }
   ],
   "outDir": "./out"
