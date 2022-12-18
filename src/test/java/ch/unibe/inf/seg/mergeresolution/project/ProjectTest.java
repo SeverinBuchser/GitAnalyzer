@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 import java.nio.file.Paths;
 import java.util.Iterator;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class ProjectTest {
     @Test
     void findConflictsTest() throws Exception {
-        Project project = Project.buildFromPath(Paths.get("src","test","resources", "samplemergeconflictproject").toAbsolutePath());
+        Project project = Project.buildFromPath(Paths.get("src","test","resources", "samplemergeconflictproject").toAbsolutePath(), "samplemergeconflictproject");
 
         Iterator<ConflictingMerge> conflictingMerges = project.iterator();
 

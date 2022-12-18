@@ -3,6 +3,7 @@ package ch.unibe.inf.seg.mergeresolution.project;
 import ch.unibe.inf.seg.mergeresolution.util.csv.CSVFile;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
+import org.apache.commons.io.FilenameUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -14,8 +15,11 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ProjectsInfoListReader extends CSVFile implements Iterable<ProjectInfo> {
-    public ProjectsInfoListReader(CSVParser parser) throws IOException {
+    public final String name;
+
+    public ProjectsInfoListReader(CSVParser parser, String name) throws IOException {
         super(parser);
+        this.name = name;
     }
 
     public static ProjectsInfoListReader read(File file) throws IOException {
@@ -28,7 +32,8 @@ public class ProjectsInfoListReader extends CSVFile implements Iterable<ProjectI
         file.createNewFile();
         FileReader reader = new FileReader(file);
         CSVParser parser = format.parse(reader);
-        ProjectsInfoListReader projectsInfoListReader = new ProjectsInfoListReader(parser);
+        String projectListBaseName = FilenameUtils.getBaseName(file.getAbsolutePath());
+        ProjectsInfoListReader projectsInfoListReader = new ProjectsInfoListReader(parser, projectListBaseName);
         reader.close();
         return projectsInfoListReader;
     }
@@ -47,5 +52,9 @@ public class ProjectsInfoListReader extends CSVFile implements Iterable<ProjectI
         }
 
         return projectInfoList.iterator();
+    }
+
+    public ProjectIterable toProjects(String projectDir) {
+        return new ProjectIterable(this, projectDir);
     }
 }

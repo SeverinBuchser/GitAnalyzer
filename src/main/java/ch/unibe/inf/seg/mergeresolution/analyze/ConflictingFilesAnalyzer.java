@@ -7,20 +7,16 @@ import java.util.ArrayList;
 
 public class ConflictingFilesAnalyzer extends Analyzer<Iterable<ConflictingFile>, ArrayList<JSONObject>> {
 
-    private final ConflictingFileAnalyzer subAnalyzer;
-
-    ConflictingFilesAnalyzer() {
-        this.subAnalyzer = new ConflictingFileAnalyzer();
-    }
+    private final ConflictingFileAnalyzer subAnalyzer = new ConflictingFileAnalyzer();
 
     @Override
     public ArrayList<JSONObject> analyze(Iterable<ConflictingFile> conflictingFiles) {
-        ArrayList<JSONObject> files = new ArrayList<>();
+        ArrayList<JSONObject> results = new ArrayList<>();
 
         for (ConflictingFile conflictingFile: conflictingFiles) {
-            files.add(this.subAnalyzer.analyze(conflictingFile));
+            results.add(this.subAnalyzer.analyze(conflictingFile));
         }
 
-        return files;
+        return results;
     }
 }

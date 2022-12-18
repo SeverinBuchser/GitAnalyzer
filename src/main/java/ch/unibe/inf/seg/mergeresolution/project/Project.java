@@ -22,23 +22,26 @@ import java.util.List;
 
 public class Project extends Git implements Iterable<ConflictingMerge> {
 
-    public Project(Repository repo) {
+    public final String name;
+
+    public Project(Repository repo, String name) {
         super(repo);
+        this.name = name;
     }
 
-    public static Project cloneFromUri(String url, String path) throws GitAPIException {
+    public static Project cloneFromUri(String url, String path, String name) throws GitAPIException {
         Git git = Git.cloneRepository()
                 .setURI(url)
                 .setDirectory(new File(path))
                 .call();
-        return new Project(git.getRepository());
+        return new Project(git.getRepository(), name);
     }
 
-    public static Project buildFromPath(Path path) throws IOException {
+    public static Project buildFromPath(Path path, String name) throws IOException {
         Repository repo = new FileRepositoryBuilder()
                 .setGitDir(Project.buildGitPath(path).toFile())
                 .build();
-        return new Project(repo);
+        return new Project(repo, name);
     }
 
     private static Path buildGitPath(Path path) {

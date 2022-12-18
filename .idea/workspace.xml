@@ -7,86 +7,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Improve analyzation process by adding path algorithm and add documentation">
-      <change afterPath="$PROJECT_DIR$/LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configs/config.cpp.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configs/config.go.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configs/config.java-original.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configs/config.java.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configs/config.javascript.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configs/config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configs/config.python.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configs/config.random-asc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configs/config.random-desc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configs/config.typescript.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/make_executable.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project-lists/projects_cpp_desc-stars-100.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/Analyzer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingChunkAnalyzer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingChunksAnalyzer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingFileAnalyzer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingFilesAnalyzer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingMergeAnalyzer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ResultState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/error/NotComparableMergesException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/file/FileHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/ConnectableIntersection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/IConnectableIntersection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/IIntersection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/Intersection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/IntersectionChange.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/Intersections.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/IntersectionsIterator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/SizeableIterable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/IntersectionTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/IntersectionsTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/LinkablePointerClockTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/PathTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/project-list-2.csv" afterDir="false" />
+    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Add missing analyzers to spread out analysis and remove second sample project">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingMergesAnalyzer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ProjectAnalyzer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ProjectInfoListAnalyzer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ProjectsAnalyzer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectIterable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-lists/projects-1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/project-lists/projects_java_original.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-lists/projects-2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-lists/projects-3.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-lists/projects-4.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-lists/projects_c_desc-stars-100.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-lists/projects_name_asc-stars-10.csv" beforeDir="false" afterPath="$PROJECT_DIR$/project-lists/projects_name_asc-stars-10.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-lists/projects_name_desc-stars-10.csv" beforeDir="false" afterPath="$PROJECT_DIR$/project-lists/projects_name_desc-stars-10.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-lists/projects_python_desc-stars-100.csv" beforeDir="false" afterPath="$PROJECT_DIR$/project-lists/projects_python_desc-stars-100.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-lists/projects_typescript_desc-stars-100.csv" beforeDir="false" afterPath="$PROJECT_DIR$/project-lists/projects_typescript_desc-stars-100.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflicts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflicts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeResults.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingFilesAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingFilesAnalyzer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProjects.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingMerge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingMerge.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectsInfoListReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectsInfoListReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/DynamicResolutionFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/DynamicResolutionFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/Resolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionMerge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionChunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/csv/CSVFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/csv/CSVFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/ANode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/Node.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/Path.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/Path.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/PathBuilder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/PathIterator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.schema.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflictsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflictsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectsInfoListReaderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectsInfoListReaderTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/ANodeTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/NodeTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/PathBuilderTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/PathIteratorTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/samplemergeconflictproject/src/test/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/samplemergeconflictproject/src/test/MainTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/project-list-2.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,13 +34,14 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -188,7 +125,7 @@
       <recent name="org.severin.ba.merge" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TypeScript">
+  <component name="RunManager" selected="JUnit.Tests">
     <configuration name="C++" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
       <module name="MergeConflictResolution" />
@@ -408,7 +345,7 @@
       <workItem from="1670554377901" duration="903000" />
       <workItem from="1670593651422" duration="13845000" />
       <workItem from="1671207362410" duration="3157000" />
-      <workItem from="1671299906777" duration="7695000" />
+      <workItem from="1671299906777" duration="15323000" />
     </task>
     <task id="LOCAL-00001" summary="Inital Commit">
       <created>1663769460948</created>
@@ -515,7 +452,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668180249860</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Improve analyzation process by adding path algorithm and add documentation">
+      <created>1671323038404</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1671323038404</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -532,7 +476,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="HEAD" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -2847,7 +2791,8 @@
     <MESSAGE value="Restructure directories and update gitignore" />
     <MESSAGE value="Add new project lists" />
     <MESSAGE value="Improve analyzation process by adding path algorithm and add documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improve analyzation process by adding path algorithm and add documentation" />
+    <MESSAGE value="Add missing analyzers to spread out analysis and remove second sample project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add missing analyzers to spread out analysis and remove second sample project" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
