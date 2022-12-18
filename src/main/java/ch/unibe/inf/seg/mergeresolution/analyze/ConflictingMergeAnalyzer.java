@@ -8,10 +8,27 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Analyzer for a {@link ConflictingMerge}.
+ * The analyzer analyzes the conflicting merge by comparing its resolutions against the actual resolution. It also
+ * analyzes the conflicting files of the conflicting merge by running the {@link ConflictingFilesAnalyzer} on the
+ * conflicting files of the conflicting merge.
+ */
+
 public class ConflictingMergeAnalyzer extends Analyzer<ConflictingMerge, JSONObject> {
 
     private static final int CONFLICT_LIMIT = 12;
 
+    /**
+     * Analyzes a conflicting merge.
+     * Each resolution of the conflicting merge is compared to the actual merge resolution. If one of the resolutions is
+     * equal to the actual merge resolution, the result will be marked as correct. If none of the resolutions matches
+     * the actual one, the result will be marked as incorrect. Each conflicting file of the conflicting merge will also
+     * be analyzed by running the {@link ConflictingFilesAnalyzer} on the conflicting merge. The results of the files
+     * analyzer will be added to the result under the key "conflicting_files".
+     * @param conflictingMerge The conflicting merge to be analyzed.
+     * @return The result of the analysis.
+     */
     public JSONObject analyze(ConflictingMerge conflictingMerge) {
         JSONObject result = new JSONObject();
         result.put("commit_id", conflictingMerge.getCommitId());

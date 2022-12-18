@@ -1,11 +1,17 @@
 package ch.unibe.inf.seg.mergeresolution.analyze;
 
 import ch.unibe.inf.seg.mergeresolution.project.Project;
+import ch.unibe.inf.seg.mergeresolution.project.ProjectInfo;
 import ch.unibe.inf.seg.mergeresolution.project.ProjectsInfoListReader;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Analyzer for a {@link ProjectsInfoListReader}.
+ * Since the reader only parses the {@link ProjectInfo}, this analyzer will parse the project info into an iterable of
+ * projects, which will then be analyzed by a {@link ProjectsAnalyzer}.
+ */
 public class ProjectInfoListAnalyzer extends Analyzer<ProjectsInfoListReader, JSONObject> {
     private final String projectDir;
     private final ProjectsAnalyzer subAnalyzer = new ProjectsAnalyzer();
@@ -14,6 +20,13 @@ public class ProjectInfoListAnalyzer extends Analyzer<ProjectsInfoListReader, JS
         this.projectDir = projectDir;
     }
 
+    /**
+     * Analyzer for a {@link ProjectsInfoListReader}.
+     * Since the reader only parses the {@link ProjectInfo}, this analyzer will parse the project info into an iterable
+     * of projects, which will then be analyzed by a {@link ProjectsAnalyzer}.
+     * @param reader The project info list reader.
+     * @return The results of the analysis.
+     */
     @Override
     public JSONObject analyze(ProjectsInfoListReader reader) {
         JSONObject result = new JSONObject();

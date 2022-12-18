@@ -14,6 +14,14 @@ import java.io.FileWriter;
 import java.nio.file.Paths;
 import java.util.concurrent.Callable;
 
+/**
+ * Subcommand used to analyze a project list and the conflict of the projects in that project list.
+ * The subcommand takes one parameter, which is the {@link #projectListPath}. This path describes the path to the
+ * project list to analyze. The {@link #projectDir} option is the path to the directory where the projects of the
+ * project list are located. The second option is the {@link #outDir}, which is the path to the directory where the
+ * output file will be saved to. The last option is the {@link #outSuffix}, which is an optional suffix. If supplied, it
+ * will be attached to the end of the output file with a "-" as a separator.
+ */
 @Command(name = "analyze-conflicts")
 public class AnalyzeConflicts implements Callable<Integer> {
 
@@ -54,6 +62,12 @@ public class AnalyzeConflicts implements Callable<Integer> {
         ).toFile();
     }
 
+    /**
+     * Analyzes the project list supplied by the command line.
+     * @return 0, the exit code if successful.
+     * @throws Exception Thrown if the project list does not exist, the output file cannot be written or the result
+     * cannot be converted to a string.
+     */
     @Override
     public Integer call() throws Exception {
         this.normalizePaths();

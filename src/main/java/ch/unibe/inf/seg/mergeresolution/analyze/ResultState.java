@@ -1,5 +1,8 @@
 package ch.unibe.inf.seg.mergeresolution.analyze;
 
+/**
+ * Enumerator for the result state.
+ */
 public enum ResultState {
     OK("OK"),
     SKIP("SKIP"),

@@ -5,9 +5,22 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Analyzer for a {@link Project}.
+ * For each conflicting merge of the project, the {@link ConflictingMergesAnalyzer} is run. For each project some
+ * additional data will be stored and returned.
+ */
 public class ProjectAnalyzer extends Analyzer<Project, JSONObject> {
     private final ConflictingMergesAnalyzer subAnalyzer = new ConflictingMergesAnalyzer();
 
+    /**
+     * Analyzes a {@link Project}.
+     * For each conflicting merge of the project, the {@link ConflictingMergesAnalyzer} is run. Each result will be
+     * added to an array which will be returned under the key "conflicting_merges". For each project additional data is
+     * returned.
+     * @param project The project to be analyzed.
+     * @return The results of the analyzed project.
+     */
     @Override
     public JSONObject analyze(Project project) {
         JSONObject result = new JSONObject();
