@@ -1,7 +1,6 @@
 package ch.unibe.inf.seg.mergeresolution;
 
 import ch.unibe.inf.seg.mergeresolution.analyze.AnalyzeConflicts;
-import ch.unibe.inf.seg.mergeresolution.analyze.AnalyzeResults;
 import ch.unibe.inf.seg.mergeresolution.clone.CloneProject;
 import ch.unibe.inf.seg.mergeresolution.clone.CloneProjects;
 import org.apache.commons.io.FilenameUtils;
@@ -13,10 +12,10 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
-import picocli.CommandLine.Spec;
+import picocli.CommandLine.Model.CommandSpec;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.ParameterException;
-import picocli.CommandLine.Model.CommandSpec;
+import picocli.CommandLine.Spec;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,19 +24,24 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.concurrent.Callable;
 
-@Command(name = "mcr", subcommands = {
-        CloneProject.class,
-        CloneProjects.class,
-        AnalyzeConflicts.class,
-        AnalyzeResults.class
-}, description = "Study merge conflict resolution behaviour of Git projects.")
+@Command(
+        name = "mcr",
+        version = "1.0.0",
+        subcommands = {
+                CloneProject.class,
+                CloneProjects.class,
+                AnalyzeConflicts.class
+        },
+        description = "Study merge conflict resolution behaviour of Git projects.",
+        mixinStandardHelpOptions = true
+)
 public class Main implements Callable<Integer> {
     @Spec
     CommandSpec spec;
 
     @Option(
             names = {"-c", "--config"},
-            description = "Path to the config file."
+            description = "Use either this option or use a sub-command. Path to the config file."
     )
     String configPath;
 
@@ -49,11 +53,16 @@ public class Main implements Callable<Integer> {
                     .normalize()
                     .toAbsolutePath()
                     .toString();
-            String jsonString = Files.readString(Paths.get(this.configPath));
-            JSONObject config = new JSONObject(jsonString);
-            if (this.validate(config)) {
-                return this.runConfig(config);
+            if (new File(this.configPath).isFile()) {
+                String jsonString = Files.readString(Paths.get(this.configPath));
+                JSONObject config = new JSONObject(jsonString);
+                if (this.validate(config)) {
+                    return this.runConfig(config);
+                }
+            } else {
+                System.out.format("Could not find config at location '%s'", this.configPath);
             }
+
         } else {
             throw new ParameterException(spec.commandLine(), "Missing required subcommand or config file.");
         }
@@ -85,23 +94,12 @@ public class Main implements Callable<Integer> {
     private Integer runConfig(JSONObject config) {
         if (config.getBoolean("cloneProjects")) {
             int exitCode = this.runCloneProjects(config);
-            if (exitCode != 0) {
-                return exitCode;
-            }
+            if (exitCode != 0) return exitCode;
         }
 
-        if (config.getJSONObject("analyzeConflicts").getBoolean("run")) {
+        if (config.getBoolean("analyzeConflicts")) {
             int exitCode = this.runAnalyzeConflicts(config);
-            if (exitCode != 0) {
-                return exitCode;
-            }
-        }
-
-        if (config.getJSONObject("analyzeResults").getBoolean("run")) {
-            int exitCode = this.runAnalyzeResults(config);
-            if (exitCode != 0) {
-                return exitCode;
-            }
+            if (exitCode != 0) return exitCode;
         }
 
         return 0;
@@ -110,7 +108,7 @@ public class Main implements Callable<Integer> {
     private Integer runCloneProjects(JSONObject config) {
         JSONArray projectListInfos = config.getJSONArray("projectListInfos");
 
-        for (int i = 0 ; i < projectListInfos.length(); i++) {
+        for (int i = 0 ; i < projectListInfos.length() ; i++) {
             JSONObject projectListInfo = projectListInfos.getJSONObject(i);
             String projectList = projectListInfo.getString("projectList");
             String projectDir = projectListInfo.getString("projectDir");
@@ -122,9 +120,7 @@ public class Main implements Callable<Integer> {
                     "--project-dir=" + projectDir,
                     projectList
             );
-            if (exitCode != 0) {
-                return exitCode;
-            }
+            if (exitCode != 0) return exitCode;
         }
 
         return 0;
@@ -132,62 +128,21 @@ public class Main implements Callable<Integer> {
 
     private Integer runAnalyzeConflicts(JSONObject config) {
         JSONArray projectListInfos = config.getJSONArray("projectListInfos");
-        String outDir = config.getString("outDir");
-        outDir = relativizePathToConfigPath(outDir);
+        String outDir = relativizePathToConfigPath(config.getString("outDir"));
 
-        JSONArray modes = config.getJSONObject("analyzeConflicts").getJSONArray("modes");
-        for (int j = 0 ; j < modes.length(); j++) {
-            for (int i = 0 ; i < projectListInfos.length(); i++) {
-                JSONObject projectListInfo = projectListInfos.getJSONObject(i);
-                String outSuffix = projectListInfo.getString("outSuffix");
-                String projectList = projectListInfo.getString("projectList");
-                String projectDir = projectListInfo.getString("projectDir");
+        for (int i = 0 ; i < projectListInfos.length() ; i++) {
+            JSONObject projectListInfo = projectListInfos.getJSONObject(i);
+            String outSuffix = projectListInfo.getString("outSuffix");
+            String projectList = relativizePathToConfigPath(projectListInfo.getString("projectList"));
+            String projectDir = relativizePathToConfigPath(projectListInfo.getString("projectDir"));
 
-                projectList = relativizePathToConfigPath(projectList);
-                projectDir = relativizePathToConfigPath(projectDir);
-
-                int exitCode = new CommandLine(new AnalyzeConflicts()).execute(
-                        "--project-dir=" + projectDir,
-                        "--out-dir=" + outDir,
-                        "--mode=" + modes.getString(j),
-                        "--out-suffix=" + outSuffix,
-                        projectList
-                );
-                if (exitCode != 0) {
-                    return exitCode;
-                }
-            }
-        }
-        return 0;
-    }
-
-    private Integer runAnalyzeResults(JSONObject config) {
-        JSONArray projectListInfos = config.getJSONArray("projectListInfos");
-        String outDir = config.getString("outDir");
-        outDir = relativizePathToConfigPath(outDir);
-
-        JSONArray modes = config.getJSONObject("analyzeResults").getJSONArray("modes");
-        for (int j = 0 ; j < modes.length(); j++) {
-            for (int i = 0 ; i < projectListInfos.length(); i++) {
-                JSONObject projectListInfo = projectListInfos.getJSONObject(i);
-                String outSuffix = projectListInfo.getString("outSuffix");
-                String projectList = projectListInfo.getString("projectList");
-
-                projectList = relativizePathToConfigPath(projectList);
-
-                String projectListFileName = FilenameUtils.getBaseName(projectList);
-
-                int exitCode = new CommandLine(new AnalyzeResults()).execute(
-                        Paths.get(
-                                outDir,
-                                projectListFileName + "-" + modes.getString(j) + outSuffix + ".csv"
-                        ).toString()
-
-                );
-                if (exitCode != 0) {
-                    return exitCode;
-                }
-            }
+            int exitCode = new CommandLine(new AnalyzeConflicts()).execute(
+                    "--project-dir=" + projectDir,
+                    "--out-dir=" + outDir,
+                    "--out-suffix=" + outSuffix,
+                    projectList
+            );
+            if (exitCode != 0) return exitCode;
         }
         return 0;
     }

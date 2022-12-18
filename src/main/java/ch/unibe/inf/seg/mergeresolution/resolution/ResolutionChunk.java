@@ -3,8 +3,6 @@ package ch.unibe.inf.seg.mergeresolution.resolution;
 import org.eclipse.jgit.diff.RawText;
 import org.eclipse.jgit.merge.MergeChunk;
 
-import java.util.List;
-
 public class ResolutionChunk {
     private final MergeChunk mergeChunk;
     private final RawText sequence;
@@ -22,7 +20,7 @@ public class ResolutionChunk {
         );
     }
 
-    public static String concat(List<ResolutionChunk> chunks) {
+    public static String concat(Iterable<ResolutionChunk> chunks) {
         StringBuilder builder = new StringBuilder();
         for (ResolutionChunk resolutionChunk: chunks) {
             builder.append(resolutionChunk.getString());

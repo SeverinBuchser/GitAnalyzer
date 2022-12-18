@@ -1,174 +1,173 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
-<a name="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
+[![Stargazers][stars-shield]][stars-url][![Issues][issues-shield]][issues-url][![MIT License][license-shield]][license-url]
+
+# Merge Conflict Resolution
+
+This project is part of a bachelor-thesis in the [Software Engineering Group](https://seg.inf.unibe.ch/) at the [University of Bern](https://www.unibe.ch/). The project is used for the data-collection and data-analyzing process of the thesis. The thesis focuses on the human intervention in merge conflicts: How often are the used merge resolutions not reproducible by a computer?
+
+This tool collects information about merges of git-projects. The information one can collect is how many conflicting merges, conflicting files and conflicting chunks are in a project as well as how many of the previously stated abstractions can be reproduced by a computer.
 
 
 
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
-
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/SeverinBuchser/MergeConflictResolution">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
-<h3 align="center">MergeConflictResolution</h3>
-
-  <p align="center">
-    project_description
-    <br />
-    <a href="https://github.com/SeverinBuchser/MergeConflictResolution"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/SeverinBuchser/MergeConflictResolution">View Demo</a>
-    ·
-    <a href="https://github.com/SeverinBuchser/MergeConflictResolution/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/SeverinBuchser/MergeConflictResolution/issues">Request Feature</a>
-  </p>
-</div>
-
-
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
-
-
-<!-- ABOUT THE PROJECT -->
-## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-### Built With
-
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+You will need to install [Apache Maven](https://maven.apache.org/) to build the project.
+
+* [Apache Maven Download](https://maven.apache.org/download.cgi)
+* [Apache Maven Installation Guide](https://maven.apache.org/install.html)
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+1. Clone the repo
+   ```shell
+   git clone https://github.com/SeverinBuchser/MergeConflictResolution.git
    ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+2. Install Dependencies
+   ```shell
+   mvn clean validate
+   ```
+
+3. <a name="make-executable"></a>The intended way of creating an executable is by running the following command, which creates an executable script called "mcr":
+
+   ```shell
+   ./make_executable.sh
+   ```
+
+   There is also the option to obtain an executable jar (three ways):
+
+   1. Package to the "target" directory:
+
+       ```shell
+       mvn clean package
+       ```
+
+   2. Install to local maven repository:
+
+       ```shell
+       mvn clean install
+       ```
+   
+   3. Download the jar file [here]().
+
+# Usage
+
+## Execution
+
+The intended way to execute the tool is to run the "mcr" executable, see [above](#make-executable). If you would choose to create an executable jar yourself, or download the jar, usually with name "MergeConflictResolution-1.0-jar-with-dependencies.jar", the jar file can be executed:
+
+```shell
+java -jar path/to/jar/directory/MergeConflictResolution-1.0-jar-with-dependencies.jar [..options]
+```
+
+Here, the main command `mcr` must not be executed again but rather the [options](#basic-usage) must be supplied. The last way to execute the tool (only predefined executions, intended for development purposes) is described [here](#predefined-executions).
+
+### Basic Usage
+
+```shell
+Usage: mcr [-hV] [-c=<configPath>] [COMMAND]
+Study merge conflict resolution behaviour of Git projects.
+  -c, --config=<configPath>
+                  Use either this option or use a sub-command. Path to the
+                    config file.
+  -h, --help      Show this help message and exit.
+  -V, --version   Print version information and exit.
+Commands:
+  clone-project
+  clone-projects
+  analyze-conflicts
+```
+
+There is an option to use a JSON config file for the main application. The schema is located at [config.schema.json](https://github.com/SeverinBuchser/MergeConflictResolution/blob/master/src/main/resources/config.schema.json) and there are some example configurations [here](https://github.com/SeverinBuchser/MergeConflictResolution/tree/master/configs). The config file can be specified by using the option `-c=<configPath>` without any subcommands.
+
+#### Cloning Projects
+
+<a name="clone-project"></a>
+
+```shell
+Usage: mcr clone-project [-pd=<projectDir>] <name> <url>
+      <name>   The name of the project. The project will be cloned into a
+                 directory with this name.
+      <url>    The url from which the project can be cloned from.
+      -pd, --project-dir=<projectDir>
+               The directory where the project will be cloned to. Defaults to
+                 working directory.
+```
+
+To clone one project, use the `clone-project` subcommand, which takes the name and URL of the project. The name can be anything, just remember the name for later usage. The intended way of the name would be `user_name/repo_name`. The URL is for example: https://github.com/SeverinBuchser/MergeConflictResolution.
+
+<a name="clone-projects"></a>
+
+```shell
+Usage: mcr clone-projects [-pd=<projectDir>] <projectListPath>
+      <projectListPath>
+      -pd, --project-dir=<projectDir>
+                          The directory where the projects will be cloned to.
+                            Defaults to working directory.
+```
+
+To clone multiple projects, use the `clone-projects` subcommand, which takes a path to a CSV file, in which the projects to be cloned are located. This file is called a project list and it is used later as well, **so if you plan to use this tool, make sure to create such a project list**:
+
+```
+# example project list CSV file
+name,url
+name_one,url_one
+name_two,url_two
+...
+```
+
+The option `project-dir`, used in both clone-subcommands, defaults to the current working directory. It denotes the location, to which the projects will be cloned to.
+
+#### Analyze Conflicts
+
+```shell
+Usage: mcr analyze-conflicts [-od=<outDir>] [-os=<outSuffix>]
+                             [-pd=<projectDir>] <projectListPath>
+      <projectListPath>   The path to the project list CSV file.
+      -od, --out-dir=<outDir>
+                          The output directory, where the output JSON file
+                            goes. Defaults to working directory.
+      -os, --out-suffix=<outSuffix>
+                          The suffix for the output JSON file. Default is no
+                            suffix.
+      -pd, --project-dir=<projectDir>
+                          The directory where the cloned projects are located.
+                            Defaults to working directory.
+```
+
+This command analyzes projects of a project list. The parameter `projectListPath`, as well as the option `project-dir` are the same as in the [clone-projects subcommand](#clone-projects). The option `out-dir` defaults to the current working directory. It is the directory to where the output file will be written to. The output file is named as follows: Assume you have the following execution:
+
+- `projectListPath`: "path/to/project_list/project_list_name.csv"
+- `out-dir`: "path/to/output_directory"
+- `out-suffix`: "some-suffix"
+- `project-dir`: "path/to/project_directory"
+
+With these parameters and options, the output file will be created as: "path/to/output_directory/project_list_name-some-suffix.json".
+
+The `outDir` is the directory for the output files, default is `./`. The `outSuffix` is the part which is appended to the output files name. The output file will be a CSV file. The rest is the same as in the other commands. The only difference is the `projectDir` which is now the directory where the cloned projects are located.
+
+### Predefined Executions
+
+Predefined executables are already provided in the maven configuration, [pom.xml](https://github.com/SeverinBuchser/MergeConflictResolution/blob/master/pom.xml). Those executions use the [exec-maven-plugin](https://www.mojohaus.org/exec-maven-plugin/) to run Java executions. Each execution is based on a configuration file, located in the [configs directory of the repo](https://github.com/SeverinBuchser/MergeConflictResolution/tree/master/configs). Each config file, except one, is based on the schema mentioned above and concern one project list. To run these configurations do:
+
+```shell
+mvn exec:java@{execution_id}
+```
+where the `execution_id` is the name of the execution, which can be one of the following: "random-asc", "random-desc", "cpp", "go", "java", "java-original", "javascript", "python" or "typescript". There is also one configuration, [the default configuration](https://github.com/SeverinBuchser/MergeConflictResolution/blob/master/configs/config.json), which runs the analysis on every project list (in series). If you would like to run the default configuration with every project list, do
+
+```shell
+mvn exec:java
+```
 
 
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+You still need [Apache Maven](https://maven.apache.org/) to be able to manage the dependencies for the project (see section <a href="#prerequisites">Prerequisites</a>). If you have an IDE like [IntelliJ](https://www.jetbrains.com/idea/) installed, the process of running the application is made much easier while developing. Tests can also be run much more easily.
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!
@@ -179,69 +178,15 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
-<!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Severin Buchser - [@_sevvi_](https://twitter.com/_sevvi_)
-
-Project Link: [https://github.com/SeverinBuchser/MergeConflictResolution](https://github.com/SeverinBuchser/MergeConflictResolution)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/SeverinBuchser/MergeConflictResolution/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/SeverinBuchser/MergeConflictResolution/network/members
 [stars-shield]: https://img.shields.io/github/stars/SeverinBuchser/MergeConflictResolution.svg?style=for-the-badge
 [stars-url]: https://github.com/SeverinBuchser/MergeConflictResolution/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/SeverinBuchser/MergeConflictResolution.svg?style=for-the-badge
 [issues-url]: https://github.com/SeverinBuchser/MergeConflictResolution/issues
 [license-shield]: https://img.shields.io/github/license/SeverinBuchser/MergeConflictResolution.svg?style=for-the-badge
 [license-url]: https://github.com/SeverinBuchser/MergeConflictResolution/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 

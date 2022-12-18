@@ -1,28 +1,28 @@
 package ch.unibe.inf.seg.mergeresolution.util.path;
 
-import java.util.ArrayList;
+import java.util.*;
 
-public class Path<T> {
-    private final PathBuilder<T> pathBuilder;
-    private final int pathIndex;
+/**
+ * A collection of elements, which are ordered. A path can append another path, and it can also append an item. The
+ * append method will not add to the existing path, but it will generate a new path, and leave the old one untouched.
+ * @param <T> Type of elements of the path.
+ */
+public class Path<T> extends ArrayList<T> {
 
-    public Path(int pathIndex, PathBuilder<T> pathBuilder) {
-        this.pathIndex = pathIndex;
-        this.pathBuilder = pathBuilder;
+    public Path() {}
+    public Path(List<T> items) {
+        this.addAll(items);
     }
 
-    public ArrayList<T> build() {
-        ArrayList<ArrayList<Integer>> pathSignatures = this.pathBuilder.buildPathSignatures();
+    public Path<T> append(List<T> path) {
+        Path<T> newPath = new Path<>(this);
+        newPath.addAll(path);
+        return newPath;
+    }
 
-        if (pathIndex >= pathSignatures.size()) return new ArrayList<>();
-        ArrayList<Integer> pathSignature = pathSignatures.get(pathIndex);
-        ArrayList<T> path = new ArrayList<>();
-        ANode<Node<T>> lastNode = this.pathBuilder;
-        for (int childIndex: pathSignature) {
-            Node<T> currentNode = lastNode.getChildren().get(childIndex);
-            path.add(currentNode.getItem());
-            lastNode =  currentNode;
-        }
-        return path;
+    public Path<T> append(T item) {
+        Path<T> newPath = new Path<>(this);
+        newPath.add(item);
+        return newPath;
     }
 }

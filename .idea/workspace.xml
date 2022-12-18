@@ -1,17 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_TEST_SOURCES" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Restructure directories and update gitignore">
+    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Improve analyzation process by adding path algorithm and add documentation">
+      <change afterPath="$PROJECT_DIR$/LICENSE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/config.cpp.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/config.go.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/config.java-original.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/config.java.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/config.javascript.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/config.python.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/config.random-asc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/config.random-desc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/config.typescript.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/make_executable.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-lists/projects_cpp_desc-stars-100.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/Analyzer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingChunkAnalyzer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingChunksAnalyzer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingFileAnalyzer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingFilesAnalyzer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingMergeAnalyzer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ResultState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/error/NotComparableMergesException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/file/FileHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/ConnectableIntersection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/IConnectableIntersection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/IIntersection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/Intersection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/IntersectionChange.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/Intersections.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/IntersectionsIterator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/SizeableIterable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/IntersectionTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/IntersectionsTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/LinkablePointerClockTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/PathTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/project-list-2.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/projects-1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/projects-2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/projects-3.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/projects-4.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-lists/projects-1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/project-lists/projects_java_original.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-lists/projects-2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-lists/projects-3.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-lists/projects-4.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-lists/projects_c_desc-stars-100.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-lists/projects_name_asc-stars-10.csv" beforeDir="false" afterPath="$PROJECT_DIR$/project-lists/projects_name_asc-stars-10.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-lists/projects_name_desc-stars-10.csv" beforeDir="false" afterPath="$PROJECT_DIR$/project-lists/projects_name_desc-stars-10.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-lists/projects_python_desc-stars-100.csv" beforeDir="false" afterPath="$PROJECT_DIR$/project-lists/projects_python_desc-stars-100.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-lists/projects_typescript_desc-stars-100.csv" beforeDir="false" afterPath="$PROJECT_DIR$/project-lists/projects_typescript_desc-stars-100.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflicts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflicts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeResults.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProjects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingMerge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingMerge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectsInfoListReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectsInfoListReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/DynamicResolutionFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/DynamicResolutionFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/Resolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionMerge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionChunk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/csv/CSVFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/csv/CSVFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/ANode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/Node.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/Path.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/Path.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/PathBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/PathIterator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.schema.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflictsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflictsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectsInfoListReaderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectsInfoListReaderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/ANodeTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/NodeTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/PathBuilderTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/PathIteratorTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/samplemergeconflictproject/src/test/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/samplemergeconflictproject/src/test/MainTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,10 +96,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
-        <option value="Enum" />
         <option value="JUnit5 Test Class" />
+        <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -34,8 +109,15 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2ERSWyct7ErN3xHD19mejjpPXp3" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -43,38 +125,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "last_opened_file_path": "/home/severin/gitrepo/Severin/UniBe/MergeConflictResolution/projects",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "spring.configuration.checksum": "b36811f71372f717c7be8a36cfdd8aac"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/severin/gitrepo/Severin/UniBe/MergeConflictResolution&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;b36811f71372f717c7be8a36cfdd8aac&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="ch.unibe.inf.seg.mergeresolution.analyze" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/projects" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/src/test/resources/resolutions" />
-      <recent name="$PROJECT_DIR$/src/main/java/org/severin/ba" />
+      <recent name="$PROJECT_DIR$/configs" />
+      <recent name="$PROJECT_DIR$/out" />
+      <recent name="$PROJECT_DIR$/src/test/resources" />
+      <recent name="$PROJECT_DIR$/project-lists" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
       <recent name="org.severin.ba.conflict.ConflictFile" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/configs" />
       <recent name="$PROJECT_DIR$/src/test/resources" />
       <recent name="$PROJECT_DIR$/projects" />
       <recent name="$PROJECT_DIR$" />
@@ -85,24 +174,25 @@
       <recent name="org.severin.ba.util.tree" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="ch.unibe.inf.seg.mergeresolution.util.clockpath" />
       <recent name="ch.unibe.inf.seg.mergeresolution" />
       <recent name="ch.unibe.inf.seg.mergeresolution.analyze" />
       <recent name="ch.unibe.inf.seg.mergeresolution.util.switchpath" />
       <recent name="org.severin.ba.api" />
-      <recent name="org.severin.ba.util.tree" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ch.unibe.inf.seg.mergeresolution.analyze" />
+      <recent name="ch.unibe.inf.seg.mergeresolution.util.clockpath" />
       <recent name="ch.unibe.inf.seg.mergeresolution" />
       <recent name="org.severin.ba.mergeconflict" />
       <recent name="org.severin.ba.merge" />
-      <recent name="org.severin.ba" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application">
+  <component name="RunManager" selected="Application.TypeScript">
+    <configuration name="C++" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
       <module name="MergeConflictResolution" />
-      <option name="PROGRAM_PARAMETERS" value="--config=./config.json" />
+      <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.cpp.json" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="ch.unibe.inf.seg.result.*" />
@@ -113,34 +203,114 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Go" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
       <module name="MergeConflictResolution" />
+      <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.go.json" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ch.unibe.inf.seg.mergeresolution.*" />
+          <option name="PATTERN" value="ch.unibe.inf.seg.result.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="ch.unibe.inf.seg.mergeresolution" />
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.MainTest" />
-      <option name="METHOD_NAME" value="withConfigTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainTest.withConfigTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Java Original" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
       <module name="MergeConflictResolution" />
+      <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.java-original.json" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ch.unibe.inf.seg.mergeresolution.*" />
+          <option name="PATTERN" value="ch.unibe.inf.seg.result.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="ch.unibe.inf.seg.mergeresolution" />
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.MainTest" />
-      <option name="METHOD_NAME" value="withConfigTest" />
-      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Java" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
+      <module name="MergeConflictResolution" />
+      <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.java.json" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.unibe.inf.seg.result.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JavaScript" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
+      <module name="MergeConflictResolution" />
+      <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.javascript.json" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.unibe.inf.seg.result.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Python" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
+      <module name="MergeConflictResolution" />
+      <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.python.json" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.unibe.inf.seg.result.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Random  Desc" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
+      <module name="MergeConflictResolution" />
+      <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.random-desc.json" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.unibe.inf.seg.result.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Random Asc" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
+      <module name="MergeConflictResolution" />
+      <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.random-asc.json" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.unibe.inf.seg.result.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TypeScript" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
+      <module name="MergeConflictResolution" />
+      <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.typescript.json" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.unibe.inf.seg.result.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -156,17 +326,17 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Random Asc" />
+      <item itemvalue="Application.Random  Desc" />
+      <item itemvalue="Application.C++" />
+      <item itemvalue="Application.Go" />
+      <item itemvalue="Application.Java" />
+      <item itemvalue="Application.Java Original" />
+      <item itemvalue="Application.JavaScript" />
+      <item itemvalue="Application.Python" />
+      <item itemvalue="Application.TypeScript" />
       <item itemvalue="JUnit.Tests" />
-      <item itemvalue="JUnit.MainTest" />
-      <item itemvalue="JUnit.MainTest.withConfigTest" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JUnit.MainTest" />
-        <item itemvalue="JUnit.MainTest.withConfigTest" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -214,7 +384,31 @@
       <workItem from="1668002248724" duration="26119000" />
       <workItem from="1668095818469" duration="1517000" />
       <workItem from="1668132317234" duration="7688000" />
-      <workItem from="1668180083161" duration="119000" />
+      <workItem from="1668180083161" duration="40303000" />
+      <workItem from="1668262529563" duration="38794000" />
+      <workItem from="1668371550151" duration="52299000" />
+      <workItem from="1668538914731" duration="12695000" />
+      <workItem from="1668554199982" duration="24000" />
+      <workItem from="1668554237611" duration="79743000" />
+      <workItem from="1668748668323" duration="10000" />
+      <workItem from="1668748713329" duration="15256000" />
+      <workItem from="1668839234813" duration="2000" />
+      <workItem from="1668839650357" duration="14769000" />
+      <workItem from="1669034922820" duration="13000" />
+      <workItem from="1669037925010" duration="3000" />
+      <workItem from="1669092795106" duration="1212000" />
+      <workItem from="1669175087626" duration="9000" />
+      <workItem from="1669175507678" duration="23105000" />
+      <workItem from="1669283681209" duration="2581000" />
+      <workItem from="1669631752636" duration="599000" />
+      <workItem from="1669635740566" duration="1003000" />
+      <workItem from="1669651193052" duration="4000" />
+      <workItem from="1669807411511" duration="4000" />
+      <workItem from="1669914458841" duration="2000" />
+      <workItem from="1670554377901" duration="903000" />
+      <workItem from="1670593651422" duration="13845000" />
+      <workItem from="1671207362410" duration="3157000" />
+      <workItem from="1671299906777" duration="7695000" />
     </task>
     <task id="LOCAL-00001" summary="Inital Commit">
       <created>1663769460948</created>
@@ -314,7 +508,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668062211608</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Add new project lists">
+      <created>1668180249860</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1668180249860</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2644,7 +2845,9 @@
     <MESSAGE value="Add potential path builder and iterator" />
     <MESSAGE value="Allow usage of config.json file for ease of use for multiple project lists" />
     <MESSAGE value="Restructure directories and update gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Restructure directories and update gitignore" />
+    <MESSAGE value="Add new project lists" />
+    <MESSAGE value="Improve analyzation process by adding path algorithm and add documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improve analyzation process by adding path algorithm and add documentation" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
@@ -2653,6 +2856,10 @@
         <PinnedItemInfo parentTag="ch.unibe.inf.seg.mergeresolution.util.switchpath.ItemNode" memberName="children" />
       </pinned-members>
     </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MergeConflictResolution$Tests.ic" NAME="Tests Coverage Results" MODIFIED="1664468392974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

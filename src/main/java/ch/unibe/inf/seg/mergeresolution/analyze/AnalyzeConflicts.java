@@ -1,36 +1,26 @@
 package ch.unibe.inf.seg.mergeresolution.analyze;
 
-import ch.unibe.inf.seg.mergeresolution.conflict.ConflictingChunk;
 import ch.unibe.inf.seg.mergeresolution.conflict.ConflictingMerge;
-import ch.unibe.inf.seg.mergeresolution.conflict.ConflictingFile;
-import ch.unibe.inf.seg.mergeresolution.resolution.ResolutionFile;
-import ch.unibe.inf.seg.mergeresolution.resolution.Resolution;
 import ch.unibe.inf.seg.mergeresolution.project.Project;
 import ch.unibe.inf.seg.mergeresolution.project.ProjectInfo;
 import ch.unibe.inf.seg.mergeresolution.project.ProjectsInfoListReader;
-import ch.unibe.inf.seg.mergeresolution.resolution.StaticResolutionFile;
-import ch.unibe.inf.seg.mergeresolution.util.csv.CSVFile;
-import ch.unibe.inf.seg.mergeresolution.util.path.Path;
-import ch.unibe.inf.seg.mergeresolution.util.path.PathBuilder;
+import ch.unibe.inf.seg.mergeresolution.util.file.FileHelper;
 import org.apache.commons.io.FilenameUtils;
+import org.json.JSONObject;
 import picocli.CommandLine;
-import picocli.CommandLine.Model.CommandSpec;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
-import picocli.CommandLine.Spec;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Callable;
 
-@Command(name = "analyze-conflicts", mixinStandardHelpOptions = true)
-public class AnalyzeConflicts implements Callable<Integer> {
+@Command(name = "analyze-conflicts")
+public class AnalyzeConflicts extends Analyzer<Iterable<ConflictingMerge>, ArrayList<JSONObject>> implements Callable<Integer> {
 
     @Parameters(
             index = "0",
@@ -39,225 +29,135 @@ public class AnalyzeConflicts implements Callable<Integer> {
     String projectListPath;
     @Option(
             names = {"-pd", "--project-dir"},
-            description = "The directory where the cloned projects are located."
+            description = "The directory where the cloned projects are located. Defaults to working directory."
     )
     String projectDir = ".";
     @Option(
             names = {"-od", "--out-dir"},
-            description = "The output directory, where the output CSV file goes."
+            description = "The output directory, where the output JSON file goes. Defaults to working directory."
     )
     String outDir = ".";
     @Option(
-            names = {"-m", "--mode"},
-            description = "Analyze either 'merges', 'files' or 'chunks'."
-    )
-    String mode = "merges";
-    @Option(
             names = {"-os", "--out-suffix"},
-            description = "The suffix for the output CSV file."
+            description = "The suffix for the output JSON file. Default is no suffix."
     )
     String outSuffix = "";
+    private File resultFile;
+    private final ConflictingMergeAnalyzer subAnalyzer;
 
-    @Spec CommandSpec spec;
 
-    private void validate() {
-        switch (this.mode) {
-            case "merges":
-            case "files":
-            case "chunks":
-                break;
-            default:
-                throw new CommandLine.ParameterException(
-                        spec.commandLine(),
-                        "Invalid value for option 'mode': " + this.mode
-                );
-        }
+    public AnalyzeConflicts() {
+        this.subAnalyzer = new ConflictingMergeAnalyzer();
     }
 
     private void normalizePaths() {
-        this.projectListPath = FilenameUtils.separatorsToSystem(this.projectListPath);
-        this.projectDir = FilenameUtils.separatorsToSystem(this.projectDir);
-        this.outDir = FilenameUtils.separatorsToSystem(this.outDir);
-
-        this.projectListPath = Paths.get(this.projectListPath).normalize().toAbsolutePath().toString();
-        this.projectDir = Paths.get(this.projectDir).normalize().toAbsolutePath().toString();
-        this.outDir = Paths.get(this.outDir).normalize().toAbsolutePath().toString();
+        this.projectListPath = FileHelper.normalizePath(this.projectListPath);
+        this.projectDir = FileHelper.normalizePath(this.projectDir);
+        this.outDir = FileHelper.normalizePath(this.outDir);
     }
 
-    private CSVFile getUpdater() throws IOException {
+    private void createResultFile() {
         String projectListFileName = FilenameUtils.getBaseName(this.projectListPath);
-        return new CSVFile(
-                Paths.get(this.outDir, projectListFileName + "-" + this.mode + this.outSuffix + ".csv").toFile(),
-                new String[]{"projectName", "correctCount", "totalCount"},
-                true
-        );
+        this.resultFile = Paths.get(this.outDir,
+                projectListFileName
+                        + (this.outSuffix.equals("") ? "" : "-" + this.outSuffix)
+                        + ".json"
+        ).toFile();
     }
 
     private Project getProject(String projectName) throws IOException {
         return Project.buildFromPath(Paths.get(this.projectDir, FilenameUtils.separatorsToSystem(projectName)));
     }
 
-
-
     @Override
     public Integer call() throws Exception {
-        this.validate();
         this.normalizePaths();
+        this.createResultFile();
 
-        ProjectsInfoListReader reader = new ProjectsInfoListReader(new File(this.projectListPath));
-        CSVFile updater = this.getUpdater();
+        ProjectsInfoListReader reader = ProjectsInfoListReader.read(new File(this.projectListPath));
+        JSONObject result = new JSONObject();
+        result.put("project_list", FilenameUtils.getBaseName(this.projectListPath));
+
+        ArrayList<JSONObject> projects = new ArrayList<>();
 
         for (ProjectInfo projectInfo: reader) {
-            System.out.format("Checking project %s\n", projectInfo.name);
             Project project = this.getProject(projectInfo.name);
+            JSONObject project_result = new JSONObject();
+            project_result.put("project_name", projectInfo.name);
+            printAnalyzing(projectInfo);
+            boolean correct = false;
 
             try {
-                ArrayList<ConflictingMerge> conflictingMerges = project.getConflictingMerges();
-                Integer conflictCount = conflictingMerges.size();
-                if (conflictingMerges.size() > 500) {
-                    System.out.println("FAIL:\tToo many Conflicts.\n");
-                    continue;
-                }
+                ArrayList<JSONObject> merges = this.analyze(project);
+                project_result.put("state", ResultState.OK);
+                project_result.put("conflicting_merges", merges);
+                project_result.put("conflicting_merges_count", merges.size());
+                putCount(project_result, merges, "conflicting_merges_correct_count");
+                putSum(project_result, merges, "conflicting_files_count");
+                putSum(project_result, merges, "conflicting_files_correct_count");
+                putSum(project_result, merges, "conflicting_chunks_count");
+                putSum(project_result, merges, "conflicting_chunks_correct_count");
 
-                System.out.format("Conflictcount: %d\n", conflictCount);
+                correct = project_result.getInt("conflicting_merges_correct_count") == project_result.getInt("conflicting_merges_count")
+                        && project_result.getInt("conflicting_merges_correct_count") != 0;
+                project_result.put("correct", correct);
+                project_result.put("conflict_count", merges.stream().map(x -> x.getInt("conflict_count")).reduce(0, Integer::sum));
 
-                Result result = switch (this.mode) {
-                    case "files" -> this.analyzeConflictingFiles(conflictingMerges);
-                    case "chunks" -> this.analyzeConflictingChunks(conflictingMerges);
-                    default -> this.analyzeConflictingMerges(conflictingMerges);
-                };
+                project_result.put("commits_count", project.getCommitsCount());
+                project_result.put("merges_count", project.getMergesCount());
+                project_result.put("tags_count", project.getTagsCount());
+                project_result.put("contributors_count", project.getCommitsCount() > 0 ? project.getContributorsCount() : 0);
 
-                updater.appendRecord(projectInfo.name, result.correctCount, result.totalCount);
-                System.out.format("OK:\t%d/%d have correct solutions.\n\n", result.correctCount, result.totalCount);
             } catch (Exception e) {
-                System.out.println("FAIL:\tProject could not be checked! " + e.getMessage() + "\n");
+                project_result.put("state", ResultState.FAIL);
+                project_result.put("reason", e.getMessage());
             }
+            projects.add(project_result);
+            System.out.format("Project: %5s: %b\n", project_result.get("state"), correct);
             project.close();
         }
+        result.put("state", ResultState.OK);
+        result.put("projects", projects);
+        result.put("projects_count", projects.size());
+        putCount(result, projects, "projects_correct_count");
+        putSum(result, projects, "conflicting_merges_count");
+        putSum(result, projects, "conflicting_merges_correct_count");
+        putSum(result, projects, "conflicting_files_count");
+        putSum(result, projects, "conflicting_files_correct_count");
+        putSum(result, projects, "conflicting_chunks_count");
+        putSum(result, projects, "conflicting_chunks_correct_count");
+        putSum(result, projects, "conflict_count");
+        putSum(result, projects, "commits_count");
+        putSum(result, projects, "merges_count");
+        putSum(result, projects, "tags_count");
+        putSum(result, projects, "contributors_count");
+
+
+        FileWriter writer = new FileWriter(this.resultFile);
+        writer.write(result.toString(4));
+        System.out.println("\n");
+        writer.close();
         return 0;
-    }
-
-    private Result analyzeConflictingMerges(ArrayList<ConflictingMerge> conflictingMerges) throws IOException {
-        Result result = new Result(conflictingMerges.size());
-        
-        for (ConflictingMerge conflictingMerge : conflictingMerges) {
-            PathBuilder<ResolutionFile> resolutionTree = conflictingMerge.buildResolutions();
-            if (resolutionTree == null) {
-                result.removeTotal();
-                continue;
-            }
-            Resolution actualResolution = conflictingMerge.getActualResolution();
-            for (Path<ResolutionFile> resolutionPath: resolutionTree) {
-                Resolution resolution = new Resolution(resolutionPath.build());
-                if (actualResolution.compareTo(resolution) == 0) {
-                    result.addCorrect();
-                    break;
-                }
-            }
-        }
-        return result;
-    }
-
-    private Result analyzeConflictingFiles(ArrayList<ConflictingMerge> conflictingMerges) throws IOException {
-        Result result = new Result(0);
-
-        for (ConflictingMerge conflictingMerge : conflictingMerges) {
-            Map<String, ArrayList<ResolutionFile>> fileResolutions = conflictingMerge.buildFileResolutions();
-            Map<String, ResolutionFile> actualResolution = conflictingMerge.getActualFileResolutions();
-
-            if (AnalyzeConflicts.mapsContainSameKeys(fileResolutions, actualResolution)) {
-                result.addTotal(actualResolution.size());
-                for (String fileName: actualResolution.keySet()) {
-                    ArrayList<ResolutionFile> resolutionFileList = fileResolutions.get(fileName);
-                    ResolutionFile actualResolutionFile = actualResolution.get(fileName);
-
-                    for (ResolutionFile resolutionFile : resolutionFileList) {
-                        if (actualResolutionFile.compareTo(resolutionFile) == 0) {
-                            result.addCorrect();
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        return result;
-    }
-
-    private Result analyzeConflictingChunks(ArrayList<ConflictingMerge> conflictingMerges) throws IOException {
-        Result result = new Result(0);
-
-        for (ConflictingMerge conflictingMerge : conflictingMerges) {
-            Map<String, ConflictingFile> conflictingFiles = conflictingMerge.getConflictingFiles();
-
-            for (ConflictingFile conflictingFile: conflictingFiles.values()) {
-                ArrayList<ConflictingChunk> conflictingChunks = conflictingFile.getConflictingChunks();
-                StaticResolutionFile actualResolutionFile = conflictingFile.getActualResolutionFile();
-
-                ArrayList<Boolean> foundCorrectResolutions = new ArrayList<>(Collections.nCopies(
-                        conflictingFile.getConflictCount(),
-                        false
-                ));
-
-                int chunkIndex = 0;
-                for (ConflictingChunk conflictingChunk : conflictingChunks) {
-                    if (conflictingChunk.isFirstConflictingRangeInResolutionFile(actualResolutionFile)) {
-                        foundCorrectResolutions.set(chunkIndex, true);
-                        chunkIndex++;
-                        continue;
-                    }
-
-                    if (conflictingChunk.isNextConflictingRangeInResolutionFile(actualResolutionFile)) {
-                        foundCorrectResolutions.set(chunkIndex, true);
-                    }
-                    chunkIndex++;
-                }
-
-                result.addTotal(conflictingFile.getConflictCount());
-                result.addCorrect(Collections.frequency(foundCorrectResolutions, true));
-            }
-        }
-
-        return result;
-    }
-
-    private static boolean mapsContainSameKeys(Map<String, ?> map1, Map<String, ?> map2) {
-        if (map1 == null || map2 == null) return false;
-        List<String> map1Keys = new ArrayList<>(map1.keySet());
-        List<String> map2Keys = new ArrayList<>(map2.keySet());
-
-        Collections.sort(map1Keys);
-        Collections.sort(map2Keys);
-
-        return map1Keys.equals(map2Keys);
     }
 
     public static void main(String[] args) throws Exception {
         int exitCode = new CommandLine(new AnalyzeConflicts()).execute(args);
         System.exit(exitCode);
     }
-    
-    private static class Result {
-        public int totalCount;
-        public int correctCount = 0;
 
-        Result(int totalCount) {
-            this.totalCount = totalCount;
-        }
+    @Override
+    public ArrayList<JSONObject> analyze(Iterable<ConflictingMerge> conflictingMerges) {
+        ArrayList<JSONObject> merges = new ArrayList<>();
 
-        public void removeTotal() {
-            this.totalCount--;
+        for (ConflictingMerge conflictingMerge : conflictingMerges) {
+            if (conflictingMerge.getConflictCount() == 0) continue;
+            merges.add(this.subAnalyzer.analyze(conflictingMerge));
         }
 
-        public void addTotal(int toAdd) {
-            this.totalCount += toAdd;
-        }
+        return merges;
+    }
 
-        public void addCorrect(int toAdd) {
-            this.correctCount += toAdd;
-        }
-        public void addCorrect() {
-            this.correctCount++;
-        }
+    private static void printAnalyzing(ProjectInfo projectInfo) {
+        System.out.format("Analyzing %s:\n", projectInfo.name);
     }
 }

@@ -1,0 +1,43 @@
+{
+  "cloneProjects": true,
+  "analyzeConflicts": true,
+  "projectListInfos": [
+    {
+      "projectList": "../project-lists/projects_name_asc-stars-10.csv",
+      "projectDir": "../../ba_project-dirs/projects_name_asc-stars-10"
+    },
+    {
+      "projectList": "../project-lists/projects_name_desc-stars-10.csv",
+      "projectDir": "../../ba_project-dirs/projects_name_desc-stars-10"
+    },
+    {
+      "projectList": "../project-lists/projects_cpp_desc-stars-100.csv",
+      "projectDir": "../../ba_project-dirs/projects_cpp_desc-stars-100"
+    },
+    {
+      "projectList": "../project-lists/projects_go_desc-stars-100.csv",
+      "projectDir": "../../ba_project-dirs/projects_go_desc-stars-100"
+    },
+    {
+      "projectList": "../project-lists/projects_java_desc-stars-100.csv",
+      "projectDir": "../../ba_project-dirs/projects_java_desc-stars-100"
+    },
+    {
+      "projectList": "../project-lists/projects_java_original.csv",
+      "projectDir": "../../ba_project-dirs/projects_java_original"
+    },
+    {
+      "projectList": "../project-lists/projects_javascript_desc-stars-100.csv",
+      "projectDir": "../../ba_project-dirs/projects_javascript_desc-stars-100"
+    },
+    {
+      "projectList": "../project-lists/projects_python_desc-stars-100.csv",
+      "projectDir": "../../ba_project-dirs/projects_python_desc-stars-100"
+    },
+    {
+      "projectList": "../project-lists/projects_typescript_desc-stars-100.csv",
+      "projectDir": "../../ba_project-dirs/projects_typescript_desc-stars-100"
+    }
+  ],
+  "outDir": "../out"
+}

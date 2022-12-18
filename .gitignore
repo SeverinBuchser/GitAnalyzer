@@ -41,4 +41,6 @@ build/
 *study-*.csv
 projects/projects-*/
 out/
+doc/
 samplemergeconflictproject/
+mcr

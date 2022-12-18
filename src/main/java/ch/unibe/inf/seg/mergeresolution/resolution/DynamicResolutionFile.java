@@ -13,7 +13,7 @@ public class DynamicResolutionFile extends ResolutionFile {
 
     @Override
     public RawText buildRawText() {
-        return new RawText(ResolutionChunk.concat(this.path.build()).getBytes());
+        return new RawText(ResolutionChunk.concat(this.path).getBytes());
     }
 
 }

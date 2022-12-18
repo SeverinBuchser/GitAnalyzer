@@ -1,102 +1,123 @@
 package ch.unibe.inf.seg.mergeresolution.conflict;
 
-import ch.unibe.inf.seg.mergeresolution.resolution.Resolution;
 import ch.unibe.inf.seg.mergeresolution.resolution.ResolutionFile;
-import ch.unibe.inf.seg.mergeresolution.util.path.PathBuilder;
+import ch.unibe.inf.seg.mergeresolution.resolution.ResolutionMerge;
+import ch.unibe.inf.seg.mergeresolution.util.path.ConnectableIntersection;
+import ch.unibe.inf.seg.mergeresolution.util.path.Intersections;
+import ch.unibe.inf.seg.mergeresolution.util.path.IntersectionsIterator;
+import ch.unibe.inf.seg.mergeresolution.util.path.SizeableIterable;
 import org.eclipse.jgit.diff.Sequence;
+import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.merge.MergeResult;
-import org.eclipse.jgit.merge.RecursiveMerger;
 import org.eclipse.jgit.revwalk.RevCommit;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
-public class ConflictingMerge {
-    protected final RecursiveMerger merger;
+public class ConflictingMerge implements SizeableIterable<ResolutionMerge> {
+    private final Repository repository;
     protected final RevCommit commit;
+    private final Map<String, MergeResult<? extends Sequence>> mergeResults;
 
-    private final Map<String, ConflictingFile> conflictingFiles;
+    private final ArrayList<ConflictingFile> conflictingFiles;
 
-    public Map<String, ConflictingFile> getConflictingFiles() {
+    public ArrayList<ConflictingFile> getConflictingFiles() {
         return this.conflictingFiles;
     }
 
-    public ConflictingMerge(RevCommit commit, RecursiveMerger merger) {
+    public ConflictingMerge(
+            Repository repository,
+            RevCommit commit,
+            Map<String, MergeResult<? extends  Sequence>> mergeResults
+    ) {
+        this.repository = repository;
         this.commit = commit;
-        this.merger = merger;
+        this.mergeResults = mergeResults;
         this.conflictingFiles = this.findConflictingFiles();
     }
 
-    public Map<String, ConflictingFile> findConflictingFiles() {
-        Map<String, ConflictingFile> conflictingFiles = new HashMap<>();
-        Map<String, MergeResult<? extends  Sequence>> mergeResults = this.merger.getMergeResults();
+    private ArrayList<ConflictingFile> findConflictingFiles() {
+        ArrayList<ConflictingFile> conflictingFiles = new ArrayList<>();
 
-        if (mergeResults.keySet().size() > 5) return new HashMap<>();
-        for (String fileName: mergeResults.keySet()) {
+        for (String fileName: this.mergeResults.keySet()) {
+
+            if (this.mergeResults.get(fileName).getSequences().size() == 0) continue;
+
             ConflictingFile conflictingFile = new ConflictingFile(
+                    this.repository,
                     this.commit,
-                    this.merger,
-                    fileName,
-                    mergeResults.get(fileName)
+                    this.mergeResults.get(fileName),
+                    fileName
             );
 
-            conflictingFiles.put(fileName, conflictingFile);
+            if (conflictingFile.getConflictCount() > 0) {
+                conflictingFiles.add(conflictingFile);
+            }
         }
         return conflictingFiles;
     }
 
-    public PathBuilder<ResolutionFile> buildResolutions() {
-        PathBuilder<ResolutionFile> paths = new PathBuilder<>();
-        Map<String, MergeResult<? extends  Sequence>> mergeResults = this.merger.getMergeResults();
-        if (mergeResults.keySet().size() > 5) return null;
-        for (String fileName: mergeResults.keySet()) {
-            ConflictingFile conflictingFile = new ConflictingFile(
-                    this.commit,
-                    this.merger,
-                    fileName,
-                    mergeResults.get(fileName)
-            );
-            ArrayList<ResolutionFile> conflictingFiles = conflictingFile.getResolutionFiles();
-            if (conflictingFiles == null) return null;
-            paths.addItemLayer(conflictingFiles);
+    private Intersections<ResolutionFile> buildResolutions() {
+        Intersections<ResolutionFile> intersections = new Intersections<>();
+        for (ConflictingFile conflictingFile: this.conflictingFiles) {
+            intersections.connect(new ConnectableIntersection<>(conflictingFile));
         }
-        return paths;
+        return intersections;
     }
 
-    public Map<String, ArrayList<ResolutionFile>> buildFileResolutions() {
-        Map<String, ArrayList<ResolutionFile>> allFileResolutions = new HashMap<>();
-
-        for (String fileName: this.conflictingFiles.keySet()) {
-            ArrayList<ResolutionFile> resolutionFiles = this.conflictingFiles.get(fileName).getResolutionFiles();
-            if (resolutionFiles == null) return null;
-            allFileResolutions.put(fileName, resolutionFiles);
+    public ResolutionMerge getActualResolution() throws IOException {
+        ResolutionMerge resolutionMerge = new ResolutionMerge();
+        for (ConflictingFile conflictingFile: this.conflictingFiles) {
+            resolutionMerge.add(conflictingFile.getActualResolutionFile());
         }
-        return allFileResolutions;
+        return resolutionMerge;
     }
 
-    public Resolution getActualResolution() throws IOException {
-        ArrayList<ResolutionFile> resolutionFiles = new ArrayList<>();
-
-        for (ConflictingFile conflictingFile: this.conflictingFiles.values()) {
-            resolutionFiles.add(conflictingFile.getActualResolutionFile());
-        }
-
-        return new Resolution(resolutionFiles);
-    }
-
-    public Map<String, ResolutionFile> getActualFileResolutions() throws IOException {
-        Map<String, ResolutionFile> fileResolutions = new HashMap<>();
-
-        for (ConflictingFile conflictingFile: this.conflictingFiles.values()) {
-            fileResolutions.put(conflictingFile.getFileName(), conflictingFile.getActualResolutionFile());
-        }
-
-        return fileResolutions;
-    }
-
-    public String getCommitName() {
+    public String getCommitId() {
         return this.commit.getName();
+    }
+
+    public String getCommitIdShort() {
+        return this.getCommitId().substring(0, 7);
+    }
+
+    @Override
+    public Iterator<ResolutionMerge> iterator() {
+        return new Iterator<>() {
+            private final IntersectionsIterator<ResolutionFile> iterator = buildResolutions().iterator();
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext();
+            }
+
+            @Override
+            public ResolutionMerge next() {
+                if (this.hasNext()) return new ResolutionMerge(iterator.next());
+                else return null;
+            }
+        };
+    }
+
+    @Override
+    public double size() {
+        if (this.conflictingFiles.size() == 0) return 0;
+        double size = 1;
+
+        for (ConflictingFile conflictingFile : this.conflictingFiles) {
+            size *= conflictingFile.size();
+        }
+        return size;
+    }
+
+    public double getConflictCount() {
+        return this.conflictingFiles.stream().reduce((double) 0, (conflictCount, conflictingFile) -> {
+            return conflictCount + conflictingFile.getConflictCount();
+        }, Double::sum);
+    }
+
+    public int getParentCount() {
+        return this.commit.getParentCount();
     }
 }

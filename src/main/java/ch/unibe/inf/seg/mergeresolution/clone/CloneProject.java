@@ -3,12 +3,12 @@ package ch.unibe.inf.seg.mergeresolution.clone;
 import ch.unibe.inf.seg.mergeresolution.project.Project;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
-import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Option;
+import picocli.CommandLine.Parameters;
 
 import java.util.concurrent.Callable;
 
-@Command(name = "clone-project", mixinStandardHelpOptions = true)
+@Command(name = "clone-project")
 public class CloneProject implements Callable<Integer> {
 
     @Parameters(
@@ -23,7 +23,7 @@ public class CloneProject implements Callable<Integer> {
     String url;
     @Option(
             names = {"-pd", "--project-dir"},
-            description = "The directory where the project will be cloned to."
+            description = "The directory where the project will be cloned to. Defaults to working directory."
     )
     String projectDir = ".";
 

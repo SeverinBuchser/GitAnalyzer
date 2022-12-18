@@ -1,6 +1,5 @@
 name,url
 Azure/autorest,https://github.com/Azure/autorest
-BabylonJS/Babylon.js,https://github.com/BabylonJS/Babylon.js
 BishopFox/unredacter,https://github.com/BishopFox/unredacter
 BotsAppOfficial/BotsApp,https://github.com/BotsAppOfficial/BotsApp
 BrainJS/brain.js,https://github.com/BrainJS/brain.js
@@ -23,7 +22,6 @@ Hopding/pdf-lib,https://github.com/Hopding/pdf-lib
 HospitalRun/hospitalrun-frontend,https://github.com/HospitalRun/hospitalrun-frontend
 IvanGoncharov/graphql-voyager,https://github.com/IvanGoncharov/graphql-voyager
 James-Yu/LaTeX-Workshop,https://github.com/James-Yu/LaTeX-Workshop
-JetBrains/ring-ui,https://github.com/JetBrains/ring-ui
 Jigsaw-Code/outline-client,https://github.com/Jigsaw-Code/outline-client
 JordanKnott/taskcafe,https://github.com/JordanKnott/taskcafe
 Kaiyiwing/qwerty-learner,https://github.com/Kaiyiwing/qwerty-learner
@@ -79,6 +77,7 @@ angular/angular,https://github.com/angular/angular
 angular/angular-cli,https://github.com/angular/angular-cli
 angular/components,https://github.com/angular/components
 angular/flex-layout,https://github.com/angular/flex-layout
+ant-design/ant-design,https://github.com/ant-design/ant-design
 ant-design/ant-design-pro,https://github.com/ant-design/ant-design-pro
 antfu/vitesse,https://github.com/antfu/vitesse
 antvis/X6,https://github.com/antvis/X6
@@ -220,6 +219,7 @@ improbable-eng/grpc-web,https://github.com/improbable-eng/grpc-web
 infinitered/ignite,https://github.com/infinitered/ignite
 ionic-team/capacitor,https://github.com/ionic-team/capacitor
 ionic-team/ionic-conference-app,https://github.com/ionic-team/ionic-conference-app
+ionic-team/ionic-framework,https://github.com/ionic-team/ionic-framework
 ionic-team/ionicons,https://github.com/ionic-team/ionicons
 isaacs/node-lru-cache,https://github.com/isaacs/node-lru-cache
 jakearchibald/idb,https://github.com/jakearchibald/idb
@@ -330,7 +330,6 @@ peaceiris/actions-gh-pages,https://github.com/peaceiris/actions-gh-pages
 penrose/penrose,https://github.com/penrose/penrose
 piotrwitek/react-redux-typescript-guide,https://github.com/piotrwitek/react-redux-typescript-guide
 piotrwitek/utility-types,https://github.com/piotrwitek/utility-types
-pixijs/pixijs,https://github.com/pixijs/pixijs
 pmndrs/react-three-fiber,https://github.com/pmndrs/react-three-fiber
 pmndrs/use-gesture,https://github.com/pmndrs/use-gesture
 pmndrs/valtio,https://github.com/pmndrs/valtio
@@ -466,6 +465,7 @@ vuejs/petite-vue,https://github.com/vuejs/petite-vue
 vuejs/pinia,https://github.com/vuejs/pinia
 vuejs/vetur,https://github.com/vuejs/vetur
 vuejs/vitepress,https://github.com/vuejs/vitepress
+vuejs/vue,https://github.com/vuejs/vue
 vuejs/vue-class-component,https://github.com/vuejs/vue-class-component
 vuejs/vue-loader,https://github.com/vuejs/vue-loader
 vuetifyjs/vuetify,https://github.com/vuetifyjs/vuetify

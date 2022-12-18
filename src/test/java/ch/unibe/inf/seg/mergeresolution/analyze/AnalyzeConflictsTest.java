@@ -1,31 +1,20 @@
 package ch.unibe.inf.seg.mergeresolution.analyze;
 
 import ch.unibe.inf.seg.mergeresolution.helper.EmptyParameterExceptionHandler;
-import ch.unibe.inf.seg.mergeresolution.util.csv.CSVFile;
-import org.apache.commons.csv.CSVRecord;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AnalyzeConflictsTest {
-    @Test
-    public void invalidModeOptionTest() {
-        CommandLine cmd = AnalyzeConflictsTest.getCmd();
-
-        int exitCode = cmd.execute(
-                "--mode=invalid",
-                "--project-dir=somePath",
-                "--out-dir=somePath",
-                "somePath"
-        );
-
-        assertEquals(2, exitCode);
-    }
 
     @Test
     public void missingParameterTest() {
@@ -39,7 +28,7 @@ class AnalyzeConflictsTest {
     }
 
     @Test
-    public void analyzeMergesTest() {
+    public void analyzeProjectListTest() throws IOException {
         CommandLine cmd = AnalyzeConflictsTest.getCmd();
 
         Path resourceDirectory = Paths.get("src","test","resources");
@@ -49,87 +38,26 @@ class AnalyzeConflictsTest {
 
         int exitCode = cmd.execute(
                 "--project-dir=" + absolutePath,
-                "--out-suffix=-test-output",
+                "--out-suffix=test-output",
                 absolutePath + "/project-list.csv"
         );
 
         assertEquals(0, exitCode);
 
-        File outputFile = new File("./project-list-merges-test-output.csv");
+        File outputFile = new File("./project-list-test-output.json");
+
         assertTrue(outputFile.exists());
-        CSVFile output = new CSVFile(
-                outputFile,
-                new String[]{"projectName", "correctCount", "totalCount"}
-        );
-        assertEquals(1, output.getStream().toList().size());
-        CSVRecord record = output.getRecords().iterator().next();
-        assertEquals("samplemergeconflictproject", record.get("projectName"));
-        assertEquals("0", record.get("correctCount"));
-        assertEquals("4", record.get("totalCount"));
-        assertTrue(outputFile.delete());
-    }
+        String jsonString = Files.readString(outputFile.toPath());
+        JSONObject output = new JSONObject(jsonString);
+        assertEquals(1, output.getJSONArray("projects").length());
+        assertEquals("samplemergeconflictproject", output.getJSONArray("projects").getJSONObject(0).getString("project_name"));
 
-    @Test
-    public void analyzeFilesTest() {
-        CommandLine cmd = AnalyzeConflictsTest.getCmd();
-
-        Path resourceDirectory = Paths.get("src","test","resources");
-        String absolutePath = resourceDirectory.toFile().getAbsolutePath();
-
-        System.out.println();
-
-        int exitCode = cmd.execute(
-                "--project-dir=" + absolutePath,
-                "--mode=files",
-                "--out-suffix=-test-output",
-                absolutePath + "/project-list.csv"
-        );
-
-        assertEquals(0, exitCode);
-
-        File outputFile = new File("./project-list-files-test-output.csv");
-        assertTrue(outputFile.exists());
-        CSVFile output = new CSVFile(
-                outputFile,
-                new String[]{"projectName", "correctCount", "totalCount"}
-        );
-        assertEquals(1, output.getStream().toList().size());
-        CSVRecord record = output.getRecords().iterator().next();
-        assertEquals("samplemergeconflictproject", record.get("projectName"));
-        assertEquals("0", record.get("correctCount"));
-        assertEquals("5", record.get("totalCount"));
-        assertTrue(outputFile.delete());
-    }
-
-    @Test
-    public void analyzeConflictsTest() {
-        CommandLine cmd = AnalyzeConflictsTest.getCmd();
-
-        Path resourceDirectory = Paths.get("src","test","resources");
-        String absolutePath = resourceDirectory.toFile().getAbsolutePath();
-
-        System.out.println();
-
-        int exitCode = cmd.execute(
-                "--project-dir=" + absolutePath,
-                "--mode=chunks",
-                "--out-suffix=-test-output",
-                absolutePath + "/project-list.csv"
-        );
-
-        assertEquals(0, exitCode);
-
-        File outputFile = new File("./project-list-chunks-test-output.csv");
-        assertTrue(outputFile.exists());
-        CSVFile output = new CSVFile(
-                outputFile,
-                new String[]{"projectName", "correctCount", "totalCount"}
-        );
-        assertEquals(1, output.getStream().toList().size());
-        CSVRecord record = output.getRecords().iterator().next();
-        assertEquals("samplemergeconflictproject", record.get("projectName"));
-        assertEquals("5", record.get("correctCount"));
-        assertEquals("7", record.get("totalCount"));
+        assertEquals(0, output.getInt("conflicting_merges_correct_count"));
+        assertEquals(4, output.getInt("conflicting_merges_count"));
+        assertEquals(0, output.getInt("conflicting_files_correct_count"));
+        assertEquals(4, output.getInt("conflicting_files_count"));
+        assertEquals(5, output.getInt("conflicting_chunks_correct_count"));
+        assertEquals(7, output.getInt("conflicting_chunks_count"));
         assertTrue(outputFile.delete());
     }
 

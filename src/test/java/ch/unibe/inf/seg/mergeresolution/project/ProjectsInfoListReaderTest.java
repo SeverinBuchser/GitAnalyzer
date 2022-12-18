@@ -3,6 +3,7 @@ package ch.unibe.inf.seg.mergeresolution.project;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -10,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProjectsInfoListReaderTest {
     @Test
-    void infoListReaderTest() {
+    void infoListReaderTest() throws IOException {
         File file = new File(Objects.requireNonNull(ProjectsInfoListReader.class.getClassLoader()
                 .getResource("sample-project-list.csv")).getFile());
-        ProjectsInfoListReader reader = new ProjectsInfoListReader(file);
+        ProjectsInfoListReader reader = ProjectsInfoListReader.read(file);
         Iterator<ProjectInfo> infos = reader.iterator();
 
         assertEquals("project0", infos.next().name);
