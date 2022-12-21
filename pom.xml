@@ -6,7 +6,7 @@
 
     <groupId>ch.unibe.inf.seg.gitanalyzer</groupId>
     <artifactId>GitAnalyzer</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
 
     <repositories>
         <repository>

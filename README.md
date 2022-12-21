@@ -1,4 +1,4 @@
-[![Stargazers][stars-shield]][stars-url][![Issues][issues-shield]][issues-url][![MIT License][license-shield]][license-url]
+[![Stargazers][stars-shield]][stars-url][![Issues][issues-shield]][issues-url][![MIT License][license-shield]][license-url][![Latest release][latest-release-shield]][latest-release-url]
 
 # Git Analyzer
 
@@ -51,16 +51,16 @@ You will need to install [Apache Maven](https://maven.apache.org/) to build the 
        mvn clean install
        ```
    
-   3. Download the jar file [here]().
+   3. Download the jar file [here](https://github.com/SeverinBuchser/GitAnalyzer/releases/latest).
 
 # Usage
 
 ## Execution
 
-The intended way to execute the tool is to run the "git-analyzer" executable, see [above](#make-executable). If you would choose to create an executable jar yourself, or download the jar, usually with name "GitAnalyzer-1.0-jar-with-dependencies.jar", the jar file can be executed:
+The intended way to execute the tool is to run the "git-analyzer" executable, see [above](#make-executable). If you would choose to create an executable jar yourself, or download the jar, usually with name "GitAnalyzer-1.0.0-jar-with-dependencies.jar", the jar file can be executed:
 
 ```shell
-java -jar path/to/jar/directory/GitAnalyzer-1.0-jar-with-dependencies.jar [..options]
+java -jar path/to/jar/directory/GitAnalyzer-1.0.0-jar-with-dependencies.jar [..options]
 ```
 
 Here, the main command `git-analyzer` must not be executed again but rather the [options](#basic-usage) must be supplied. The last way to execute the tool (only predefined executions, intended for development purposes) is described [here](#predefined-executions).
@@ -190,3 +190,5 @@ Distributed under the MIT License. See [`LICENSE.txt`](https://github.com/Severi
 [issues-url]: https://github.com/SeverinBuchser/GitAnalyzer/issues
 [license-shield]: https://img.shields.io/github/license/SeverinBuchser/GitAnalyzer.svg?style=for-the-badge
 [license-url]: https://github.com/SeverinBuchser/GitAnalyzer/blob/master/LICENSE.txt
+[latest-release-shield]: https://img.shields.io/github/v/release/SeverinBuchser/GitAnalyzer.svg?display_name=tag&style=for-the-badge
+[latest-release-url]: https://github.com/SeverinBuchser/GitAnalyzer/releases/latest

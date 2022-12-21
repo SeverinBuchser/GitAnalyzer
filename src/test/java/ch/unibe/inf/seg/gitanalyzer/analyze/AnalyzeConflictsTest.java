@@ -2,6 +2,7 @@ package ch.unibe.inf.seg.gitanalyzer.analyze;
 
 import ch.unibe.inf.seg.gitanalyzer.clone.CloneProjects;
 import ch.unibe.inf.seg.gitanalyzer.helper.EmptyParameterExceptionHandler;
+import ch.unibe.inf.seg.gitanalyzer.helper.TestingPrintStream;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,7 @@ class AnalyzeConflictsTest {
 
     @BeforeAll
     public static void cloneSampleProject() {
+        System.setOut(new TestingPrintStream());
         CommandLine cmd = AnalyzeConflictsTest.getCloner();
 
         Path resourceDirectory = Paths.get("src","test","resources");

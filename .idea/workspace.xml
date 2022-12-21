@@ -7,9 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Rename groupId and artifactId">
+    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Update version to 1.0.0 and update README and executable generation to print usable output">
+      <change afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/helper/TestingPrintStream.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/make_executable.sh" beforeDir="false" afterPath="$PROJECT_DIR$/make_executable.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/analyze/AnalyzeConflictsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/analyze/AnalyzeConflictsTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -355,6 +359,7 @@
       <workItem from="1671605599832" duration="1700000" />
       <workItem from="1671614164617" duration="1235000" />
       <workItem from="1671620119313" duration="92000" />
+      <workItem from="1671652246192" duration="3311000" />
     </task>
     <task id="LOCAL-00001" summary="Inital Commit">
       <created>1663769460948</created>
@@ -2841,7 +2846,8 @@
     <MESSAGE value="Document analyzers" />
     <MESSAGE value="Documentation completed" />
     <MESSAGE value="Rename groupId and artifactId" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rename groupId and artifactId" />
+    <MESSAGE value="Update version to 1.0.0 and update README and executable generation to print usable output" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update version to 1.0.0 and update README and executable generation to print usable output" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
