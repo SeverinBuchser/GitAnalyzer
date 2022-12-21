@@ -5,7 +5,9 @@ import ch.unibe.inf.seg.mergeresolution.project.ProjectInfo;
 import ch.unibe.inf.seg.mergeresolution.project.ProjectsInfoListReader;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Analyzer for a {@link ProjectsInfoListReader}.
@@ -28,30 +30,37 @@ public class ProjectInfoListAnalyzer extends Analyzer<ProjectsInfoListReader, JS
      * @return The results of the analysis.
      */
     @Override
-    public JSONObject analyze(ProjectsInfoListReader reader) {
+    public JSONObject analyze(ProjectsInfoListReader reader) throws IOException {
         JSONObject result = new JSONObject();
         result.put("project_list", reader.name);
+        printAnalyzing(reader.name, 0, true);
 
-        Iterable<Project> projectIterable = reader.toProjects(this.projectDir);
+        List<Project> projectIterable = reader.toProjectList(this.projectDir);
         ArrayList<JSONObject> projects = this.subAnalyzer.analyze(projectIterable);
 
         result.put("state", ResultState.OK);
         result.put("projects", projects);
         result.put("projects_count", projects.size());
-
         putCount(result, projects, "projects_correct_count");
+
         putSum(result, projects, "conflicting_merges_count");
         putSum(result, projects, "conflicting_merges_correct_count");
+
         putSum(result, projects, "conflicting_files_count");
         putSum(result, projects, "conflicting_files_correct_count");
+
         putSum(result, projects, "conflicting_chunks_count");
+        putSum(result, projects, "all_conflicting_chunks_count"); // including skips
         putSum(result, projects, "conflicting_chunks_correct_count");
-        putSum(result, projects, "conflict_count");
+
+        // metadata
         putSum(result, projects, "commits_count");
         putSum(result, projects, "merges_count");
+        putSum(result, projects, "octopus_merges_count");
         putSum(result, projects, "tags_count");
         putSum(result, projects, "contributors_count");
 
+        printComplete("Project List", 0, result, true);
         return result;
     }
 }

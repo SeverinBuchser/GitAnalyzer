@@ -30,33 +30,39 @@ public class ConflictingFileAnalyzer extends Analyzer<ConflictingFile, JSONObjec
         result.put("file_name", conflictingFile.getFileName());
         result.put("conflict_count", conflictingFile.getConflictCount());
         boolean correct = false;
-        printAnalyzing(conflictingFile);
+        printAnalyzing(conflictingFile.getFileNameShort(), 3);
 
         try {
-            ResolutionFile actualResolutionFile = conflictingFile.getActualResolutionFile();
-            for (ResolutionFile resolutionFile: conflictingFile) {
-                if (actualResolutionFile.compareTo(resolutionFile) == 0) {
-                    correct = true;
-                    break;
-                }
-            }
-            result.put("state", ResultState.OK);
-            result.put("correct", correct);
 
-            ConflictingChunksAnalyzer conflictingChunksAnalyzer = new ConflictingChunksAnalyzer(actualResolutionFile);
-            ArrayList<Boolean> chunks = conflictingChunksAnalyzer.analyze(conflictingFile.getConflictingChunks());
-            result.put("conflicting_chunks", chunks);
-            result.put("conflicting_chunks_count", chunks.size());
-            result.put("conflicting_chunks_correct_count", chunks.stream().filter(c -> c!=null && c).count());
+            if (checkConflictCount(conflictingFile)) {
+                result.put("state", ResultState.SKIP);
+                result.put("reason", "Conflicting File may be a binary file.");
+            } else {
+                ResolutionFile actualResolutionFile = conflictingFile.getActualResolutionFile();
+                for (ResolutionFile resolutionFile : conflictingFile) {
+                    if (actualResolutionFile.compareTo(resolutionFile) == 0) {
+                        correct = true;
+                        break;
+                    }
+                }
+                result.put("state", ResultState.OK);
+                result.put("correct", correct);
+
+                ConflictingChunksAnalyzer conflictingChunksAnalyzer = new ConflictingChunksAnalyzer(actualResolutionFile);
+                ArrayList<Boolean> chunks = conflictingChunksAnalyzer.analyze(conflictingFile.getConflictingChunks());
+                result.put("conflicting_chunks", chunks);
+                result.put("conflicting_chunks_count", chunks.size());
+                result.put("conflicting_chunks_correct_count", chunks.stream().filter(c -> c != null && c).count());
+            }
         } catch (IOException e) {
             result.put("state", ResultState.FAIL);
             result.put("reason", e.getMessage());
         }
-        System.out.format("\t\tConflicting File: %5s: %b\n", result.get("state"), correct);
+        printComplete("Conflicting File", 3, result);
         return result;
     }
 
-    private static void printAnalyzing(ConflictingFile conflictingFile) {
-        System.out.format("\t\tAnalyzing %s:\n", conflictingFile.getFileNameShort());
+    private static boolean checkConflictCount(ConflictingFile conflictingFile) {
+        return conflictingFile.getConflictCount() == 0;
     }
 }

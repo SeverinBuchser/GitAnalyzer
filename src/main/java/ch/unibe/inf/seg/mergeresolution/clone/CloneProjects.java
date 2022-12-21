@@ -12,6 +12,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
+/**
+ * Subcommand to clone multiple projects.
+ * The projects are provided by a project list, which is specified by the parameter {@link #projectListPath}. The
+ * projects will be cloned to the specified option {@link #projectDir} into the directory specified by the name in the
+ * project list. The url of the project must also be specified in the project list.
+ */
 @Command(name = "clone-projects")
 public class CloneProjects implements Callable<Integer> {
 
@@ -22,14 +28,19 @@ public class CloneProjects implements Callable<Integer> {
     )
     String projectDir = ".";
 
-    /*
-    * Normalize paths to current OS and relativize paths to current working directory.
-    * */
+    /**
+     * Normalize paths to current OS and relativize paths to current working directory.
+     */
     private void normalizePaths() {
         this.projectListPath = FileHelper.normalizePath(this.projectListPath);
         this.projectDir = FileHelper.normalizePath(this.projectDir);
     }
 
+    /**
+     * Clones a list of projects into the {@link #projectDir}.
+     * @return 0, if successful.
+     * @throws IOException Thrown if the project list does not exist.
+     */
     @Override
     public Integer call() throws IOException {
         this.normalizePaths();

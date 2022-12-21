@@ -8,6 +8,11 @@ import picocli.CommandLine.Parameters;
 
 import java.util.concurrent.Callable;
 
+/**
+ * Subcommand to clone one single project.
+ * The project will be cloned to the specified option {@link #projectDir} into the directory specified by the parameter
+ * {@link #name}. The parameter {@link #url} is the url of the remote of the repo.
+ */
 @Command(name = "clone-project")
 public class CloneProject implements Callable<Integer> {
 
@@ -27,6 +32,10 @@ public class CloneProject implements Callable<Integer> {
     )
     String projectDir = ".";
 
+    /**
+     * Clones the project by its remote url supplied by the command line.
+     * @return Will always return 0.
+     */
     @Override
     public Integer call() {
         try {

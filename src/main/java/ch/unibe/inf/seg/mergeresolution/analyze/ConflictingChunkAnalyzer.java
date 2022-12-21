@@ -23,7 +23,7 @@ public class ConflictingChunkAnalyzer extends Analyzer<ConflictingChunk, Boolean
      */
     @Override
     public Boolean analyze(ConflictingChunk conflictingChunk) {
-        printAnalyzing();
+        printAnalyzing("chunk", 4);
         boolean correct = false;
 
         if (conflictingChunk.isFirstConflictingRangeInResolutionFile(this.resolutionFile)) {
@@ -32,11 +32,7 @@ public class ConflictingChunkAnalyzer extends Analyzer<ConflictingChunk, Boolean
             correct = true;
         }
 
-        System.out.format("\t\t\tConflicting Chunk: %5s: %b\n", "OK", correct);
+        printComplete("Conflicting Chunk", 4, ResultState.OK, correct);
         return correct;
-    }
-
-    private static void printAnalyzing() {
-        System.out.println("\t\t\tAnalyzing chunk");
     }
 }

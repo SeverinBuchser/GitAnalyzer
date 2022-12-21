@@ -45,6 +45,12 @@ public class AnalyzeConflicts implements Callable<Integer> {
             description = "The suffix for the output JSON file. Default is no suffix."
     )
     String outSuffix = "";
+    @Option(
+            names = {"-vb", "--verbose"},
+            description = "Verbose mode. Additional information will be displayed."
+    )
+    boolean verbose = false;
+
     private File resultFile;
 
     private void normalizePaths() {
@@ -72,6 +78,8 @@ public class AnalyzeConflicts implements Callable<Integer> {
     public Integer call() throws Exception {
         this.normalizePaths();
         this.createResultFile();
+
+        Analyzer.verbose = this.verbose;
 
         ProjectsInfoListReader reader = ProjectsInfoListReader.read(new File(this.projectListPath));
         ProjectInfoListAnalyzer subAnalyzer = new ProjectInfoListAnalyzer(this.projectDir);

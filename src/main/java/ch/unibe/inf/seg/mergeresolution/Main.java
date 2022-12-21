@@ -24,6 +24,18 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.concurrent.Callable;
 
+/**
+ * The main command.
+ * Can run multiple subcommands:
+ *  - CloneProject
+ *  - CloneProjects
+ *  - AnalyzeConflicts
+ * The subcommands are explained in their respective classes.
+ * This command can also be called with a configuration JSON file, which is explained in the json-schema for the config.
+ * The subcommands and the config file are mutually exclusive, meaning that only one of these options can be run at
+ * once. Regardless, the command can parse the config and run the subcommands in the config file with the appropriate
+ * normalization of the paths provided by the config.
+ */
 @Command(
         name = "mcr",
         version = "1.0.0",
@@ -45,6 +57,10 @@ public class Main implements Callable<Integer> {
     )
     String configPath;
 
+    /**
+     * Runs the command.
+     * @return The exit code of the command.
+     */
     @Override
     public Integer call() throws IOException {
         if (this.configPath != null) {
@@ -69,6 +85,11 @@ public class Main implements Callable<Integer> {
         return 0;
     }
 
+    /**
+     * Validates the config.
+     * @param config The configuration provided.
+     * @return True if the config is valid and false otherwise.
+     */
     private boolean validate(JSONObject config) throws IOException {
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config.schema.json")){
             assert inputStream != null;
@@ -91,6 +112,11 @@ public class Main implements Callable<Integer> {
         }
     }
 
+    /**
+     * Runs the subcommands provided by the configuration. If one of the subcommands fails, this method will abort.
+     * @param config The configuration provided.
+     * @return The exit code of the subcommands.
+     */
     private Integer runConfig(JSONObject config) {
         if (config.getBoolean("cloneProjects")) {
             int exitCode = this.runCloneProjects(config);
@@ -105,6 +131,12 @@ public class Main implements Callable<Integer> {
         return 0;
     }
 
+    /**
+     * Runs the clone-projects subcommand for every project list provided in the config file. If the subcommand fails
+     * once, this method aborts.
+     * @param config The configuration provided.
+     * @return The exit code of the subcommands.
+     */
     private Integer runCloneProjects(JSONObject config) {
         JSONArray projectListInfos = config.getJSONArray("projectListInfos");
 
@@ -116,6 +148,9 @@ public class Main implements Callable<Integer> {
             projectList = relativizePathToConfigPath(projectList);
             projectDir = relativizePathToConfigPath(projectDir);
 
+            boolean skip = projectListInfo.optBoolean("skip");
+            if (skip) continue;
+
             int exitCode = new CommandLine(new CloneProjects()).execute(
                     "--project-dir=" + projectDir,
                     projectList
@@ -126,20 +161,31 @@ public class Main implements Callable<Integer> {
         return 0;
     }
 
+    /**
+     * Runs the analyze-conflicts subcommand for every project list provided in the config file. If the subcommand fails
+     * once, this method aborts.
+     * @param config The configuration provided.
+     * @return The exit code of the subcommands.
+     */
     private Integer runAnalyzeConflicts(JSONObject config) {
         JSONArray projectListInfos = config.getJSONArray("projectListInfos");
         String outDir = relativizePathToConfigPath(config.getString("outDir"));
+        boolean verbose = config.getBoolean("verbose");
 
         for (int i = 0 ; i < projectListInfos.length() ; i++) {
             JSONObject projectListInfo = projectListInfos.getJSONObject(i);
             String outSuffix = projectListInfo.getString("outSuffix");
             String projectList = relativizePathToConfigPath(projectListInfo.getString("projectList"));
             String projectDir = relativizePathToConfigPath(projectListInfo.getString("projectDir"));
+            boolean skip = projectListInfo.optBoolean("skip");
+
+            if (skip) continue;
 
             int exitCode = new CommandLine(new AnalyzeConflicts()).execute(
                     "--project-dir=" + projectDir,
                     "--out-dir=" + outDir,
                     "--out-suffix=" + outSuffix,
+                    "--verbose=" + verbose,
                     projectList
             );
             if (exitCode != 0) return exitCode;
@@ -147,6 +193,11 @@ public class Main implements Callable<Integer> {
         return 0;
     }
 
+    /**
+     * Relativizes a path to be relative to the path of the config file path.
+     * @param path The path to relativize.
+     * @return The relativized path.
+     */
     private String relativizePathToConfigPath(String path) {
         if (!(new File(path).isAbsolute())) {
             return Paths.get(

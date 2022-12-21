@@ -1,5 +1,6 @@
 package ch.unibe.inf.seg.mergeresolution.analyze;
 
+import ch.unibe.inf.seg.mergeresolution.conflict.ConflictingFile;
 import ch.unibe.inf.seg.mergeresolution.conflict.ConflictingMerge;
 import ch.unibe.inf.seg.mergeresolution.error.NotComparableMergesException;
 import ch.unibe.inf.seg.mergeresolution.resolution.ResolutionMerge;
@@ -19,6 +20,8 @@ public class ConflictingMergeAnalyzer extends Analyzer<ConflictingMerge, JSONObj
 
     private static final int CONFLICT_LIMIT = 12;
 
+    private final ConflictingFilesAnalyzer subAnalyzer = new ConflictingFilesAnalyzer();
+
     /**
      * Analyzes a conflicting merge.
      * Each resolution of the conflicting merge is compared to the actual merge resolution. If one of the resolutions is
@@ -32,21 +35,17 @@ public class ConflictingMergeAnalyzer extends Analyzer<ConflictingMerge, JSONObj
     public JSONObject analyze(ConflictingMerge conflictingMerge) {
         JSONObject result = new JSONObject();
         result.put("commit_id", conflictingMerge.getCommitId());
-        result.put("conflict_count", conflictingMerge.getConflictCount());
-        result.put("parent_count", conflictingMerge.getParentCount());
+        result.put("all_conflicting_chunks_count", conflictingMerge.getConflictCount());
         boolean correct = false;
-        printAnalyzing(conflictingMerge);
+        printAnalyzing(conflictingMerge.getCommitIdShort(), 2);
 
         try {
-            if (skipConflictingMerge(conflictingMerge)) {
+            if (checkConflictCount(conflictingMerge)) {
+                result.put("state", ResultState.SKIP);
+                result.put("reason", "Conflicting Merge contains binary files.");
+            } else if (checkConflictLimit(conflictingMerge)) {
                 result.put("state", ResultState.SKIP);
                 result.put("reason", getTooManyConflictsMessage(conflictingMerge));
-            } else if (conflictingMerge.getParentCount() > 2) {
-                result.put("state", ResultState.SKIP);
-                result.put("reason", String.format(
-                        "Octopus merges will be skipped, found %d parents.",
-                        conflictingMerge.getParentCount()
-                ));
             } else {
                 ResolutionMerge actualResolutionMerge = conflictingMerge.getActualResolution();
                 for (ResolutionMerge resolutionMerge: conflictingMerge) {
@@ -58,8 +57,7 @@ public class ConflictingMergeAnalyzer extends Analyzer<ConflictingMerge, JSONObj
                 result.put("state", ResultState.OK);
                 result.put("correct", correct);
 
-                ConflictingFilesAnalyzer conflictingFilesAnalyzer = new ConflictingFilesAnalyzer();
-                ArrayList<JSONObject> files = conflictingFilesAnalyzer.analyze(conflictingMerge.getConflictingFiles());
+                ArrayList<JSONObject> files = this.subAnalyzer.analyze(conflictingMerge.getConflictingFiles());
                 result.put("conflicting_files", files);
                 result.put("conflicting_files_count", files.size());
                 putCount(result, files, "conflicting_files_correct_count");
@@ -77,20 +75,24 @@ public class ConflictingMergeAnalyzer extends Analyzer<ConflictingMerge, JSONObj
             } else throw e;
         }
 
-        System.out.format("\tConflicting Merge: %5s: %b\n", result.get("state"), correct);
+        printComplete("Conflicting Merge", 2, result);
         return result;
     }
 
+    private static boolean checkConflictCount(ConflictingMerge conflictingMerge) {
+        if (conflictingMerge.getConflictCount() == 0) return true;
+        for (ConflictingFile conflictingFile: conflictingMerge.getConflictingFiles()) {
+            if (conflictingFile.getConflictCount() == 0) return true;
+        }
+        return  false;
+    }
 
-    private static boolean skipConflictingMerge(ConflictingMerge conflictingMerge) {
+    private static boolean checkConflictLimit(ConflictingMerge conflictingMerge) {
         return conflictingMerge.getConflictCount() > CONFLICT_LIMIT;
     }
 
     private static String getTooManyConflictsMessage(ConflictingMerge conflictingMerge) {
         return String.format("Too many conflicts. Found %.0f, max is %d", conflictingMerge.getConflictCount(), CONFLICT_LIMIT);
     }
-
-    private static void printAnalyzing(ConflictingMerge conflictingMerge) {
-        System.out.format("\tAnalyzing %s:\n", conflictingMerge.getCommitIdShort());
-    }
 }
+

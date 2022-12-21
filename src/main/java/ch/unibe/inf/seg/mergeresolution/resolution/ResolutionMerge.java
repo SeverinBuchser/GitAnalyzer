@@ -7,16 +7,36 @@ import org.eclipse.jgit.diff.EditList;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * A resolution merge represents a resolved conflicting merge.
+ * The resolution merge contains a path of resolution files or can be built by gradually adding new resolution files.
+ * The resolution merge can be compared to other resolution merges by calling the compare method on each individual file.
+ * If the two resolutions to not have the same files, the resolutions are considered to be incomparable.
+ */
 public class ResolutionMerge extends Path<ResolutionFile> implements Comparable<ResolutionMerge> {
 
+    /**
+     * Initiates an empty resolution merge.
+     */
     public ResolutionMerge() {
         super();
     }
 
+    /**
+     * Initiates a resolution merge from a path of resolution files.
+     * @param path The path of resolution files.
+     */
     public ResolutionMerge(Path<ResolutionFile> path) {
         super(path);
     }
 
+    /**
+     * Creates a list of edit lists. Each edit list belongs to one resolution file.
+     * @param resolutionMerge1 The first resolution merge.
+     * @param resolutionMerge2 The second resolution merge.
+     * @return A list of edit lists.
+     * @throws NotComparableMergesException The resolution merges do not contain the same resolution files.
+     */
     public static ArrayList<EditList> diff(
             ResolutionMerge resolutionMerge1,
             ResolutionMerge resolutionMerge2
@@ -37,6 +57,12 @@ public class ResolutionMerge extends Path<ResolutionFile> implements Comparable<
         return edits;
     }
 
+    /**
+     * Compares two resolution merges.
+     * If the merges do not contain the same resolution files a runtime exception will be thrown.
+     * @param otherResolutionMerge The resolution merge to compare.
+     * @return The resolutions do not contain the same resolution files.
+     */
     @Override
     public int compareTo(ResolutionMerge otherResolutionMerge) {
         try {

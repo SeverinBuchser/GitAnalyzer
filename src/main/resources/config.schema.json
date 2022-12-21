@@ -5,6 +5,11 @@
   "description": "A config for the MergeConflictResolution project.",
   "type": "object",
   "properties": {
+    "verbose": {
+      "description": "Verbose mode. Additional helpful information will be displayed. Verbose mode only has an effect on the analysis.",
+      "type": "boolean",
+      "default": false
+    },
     "analyzeConflicts": {
       "description": "This defines if and how the 'analyze-conflicts' subcommand will be run.",
       "type": "boolean",
@@ -34,6 +39,11 @@
             "description": "The directory where all projects in the project list are located.",
             "type": "string",
             "default": "."
+          },
+          "skip": {
+            "description": "Do not clone or analyze this project list.",
+            "type": "boolean",
+            "default": false
           }
         },
         "required": ["projectList"]
