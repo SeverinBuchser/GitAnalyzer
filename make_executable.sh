@@ -29,4 +29,4 @@ java -jar $jar \$@
 EOF
 
 # make the executable actually executable
-chmod +x mcr
+chmod +x git-analyzer
