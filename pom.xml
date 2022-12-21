@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ch.unibe.inf.seg.mergeresolution</groupId>
-    <artifactId>MergeConflictResolution</artifactId>
+    <groupId>ch.unibe.inf.seg.gitanalyzer</groupId>
+    <artifactId>GitAnalyzer</artifactId>
     <version>1.0</version>
 
     <repositories>
@@ -161,7 +161,7 @@
                             <goal>java</goal>
                         </goals>
                         <configuration>
-                            <mainClass>ch.unibe.inf.seg.mergeresolution.Main</mainClass>
+                            <mainClass>${path.to.main}</mainClass>
                             <arguments>
                                 <argument>--config=./configs/config.random-asc.json</argument>
                             </arguments>
@@ -173,7 +173,7 @@
                             <goal>java</goal>
                         </goals>
                         <configuration>
-                            <mainClass>ch.unibe.inf.seg.mergeresolution.Main</mainClass>
+                            <mainClass>${path.to.main}</mainClass>
                             <arguments>
                                 <argument>--config=./configs/config.random-desc.json</argument>
                             </arguments>
@@ -185,7 +185,7 @@
                             <goal>java</goal>
                         </goals>
                         <configuration>
-                            <mainClass>ch.unibe.inf.seg.mergeresolution.Main</mainClass>
+                            <mainClass>${path.to.main}</mainClass>
                             <arguments>
                                 <argument>--config=./configs/config.cpp.json</argument>
                             </arguments>
@@ -197,7 +197,7 @@
                             <goal>java</goal>
                         </goals>
                         <configuration>
-                            <mainClass>ch.unibe.inf.seg.mergeresolution.Main</mainClass>
+                            <mainClass>${path.to.main}</mainClass>
                             <arguments>
                                 <argument>--config=./configs/config.go.json</argument>
                             </arguments>
@@ -209,7 +209,7 @@
                             <goal>java</goal>
                         </goals>
                         <configuration>
-                            <mainClass>ch.unibe.inf.seg.mergeresolution.Main</mainClass>
+                            <mainClass>${path.to.main}</mainClass>
                             <arguments>
                                 <argument>--config=./configs/config.java.json</argument>
                             </arguments>
@@ -221,7 +221,7 @@
                             <goal>java</goal>
                         </goals>
                         <configuration>
-                            <mainClass>ch.unibe.inf.seg.mergeresolution.Main</mainClass>
+                            <mainClass>${path.to.main}</mainClass>
                             <arguments>
                                 <argument>--config=./configs/config.java-original.json</argument>
                             </arguments>
@@ -233,7 +233,7 @@
                             <goal>java</goal>
                         </goals>
                         <configuration>
-                            <mainClass>ch.unibe.inf.seg.mergeresolution.Main</mainClass>
+                            <mainClass>${path.to.main}</mainClass>
                             <arguments>
                                 <argument>--config=./configs/config.javascript.json</argument>
                             </arguments>
@@ -245,7 +245,7 @@
                             <goal>java</goal>
                         </goals>
                         <configuration>
-                            <mainClass>ch.unibe.inf.seg.mergeresolution.Main</mainClass>
+                            <mainClass>${path.to.main}</mainClass>
                             <arguments>
                                 <argument>--config=./configs/config.python.json</argument>
                             </arguments>
@@ -257,7 +257,7 @@
                             <goal>java</goal>
                         </goals>
                         <configuration>
-                            <mainClass>ch.unibe.inf.seg.mergeresolution.Main</mainClass>
+                            <mainClass>${path.to.main}</mainClass>
                             <arguments>
                                 <argument>--config=./configs/config.typescript.json</argument>
                             </arguments>
@@ -265,7 +265,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>ch.unibe.inf.seg.mergeresolution.Main</mainClass>
+                    <mainClass>${path.to.main}</mainClass>
                     <arguments>
                         <argument>--config=./configs/config.json</argument>
                     </arguments>

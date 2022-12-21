@@ -23,7 +23,7 @@ done
 jar+="/$artifactId/$version/$artifactId-$version-jar-with-dependencies.jar"
 
 # create executable which runs "java -jar $jar" with the appropriate parameters
-cat <<EOF >mcr
+cat <<EOF >git-analyzer
 #!/bin/bash
 java -jar $jar \$@
 EOF

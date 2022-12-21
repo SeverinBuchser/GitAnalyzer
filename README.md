@@ -1,6 +1,6 @@
 [![Stargazers][stars-shield]][stars-url][![Issues][issues-shield]][issues-url][![MIT License][license-shield]][license-url]
 
-# Merge Conflict Resolution
+# Git Analyzer
 
 This project is part of a bachelor-thesis in the [Software Engineering Group](https://seg.inf.unibe.ch/) at the [University of Bern](https://www.unibe.ch/). The project is used for the data-collection and data-analyzing process of the thesis. The thesis focuses on the human intervention in merge conflicts: How often are the used merge resolutions not reproducible by a computer?
 
@@ -23,7 +23,7 @@ You will need to install [Apache Maven](https://maven.apache.org/) to build the 
 
 1. Clone the repo
    ```shell
-   git clone https://github.com/SeverinBuchser/MergeConflictResolution.git
+   git clone https://github.com/SeverinBuchser/GitAnalyzer.git
    ```
 
 2. Install Dependencies
@@ -31,7 +31,7 @@ You will need to install [Apache Maven](https://maven.apache.org/) to build the 
    mvn clean validate
    ```
 
-3. <a name="make-executable"></a>The intended way of creating an executable is by running the following command, which creates an executable script called "mcr":
+3. <a name="make-executable"></a>The intended way of creating an executable is by running the following command, which creates an executable script called "git-analyzer":
 
    ```shell
    ./make_executable.sh
@@ -57,18 +57,18 @@ You will need to install [Apache Maven](https://maven.apache.org/) to build the 
 
 ## Execution
 
-The intended way to execute the tool is to run the "mcr" executable, see [above](#make-executable). If you would choose to create an executable jar yourself, or download the jar, usually with name "MergeConflictResolution-1.0-jar-with-dependencies.jar", the jar file can be executed:
+The intended way to execute the tool is to run the "git-analyzer" executable, see [above](#make-executable). If you would choose to create an executable jar yourself, or download the jar, usually with name "GitAnalyzer-1.0-jar-with-dependencies.jar", the jar file can be executed:
 
 ```shell
-java -jar path/to/jar/directory/MergeConflictResolution-1.0-jar-with-dependencies.jar [..options]
+java -jar path/to/jar/directory/GitAnalyzer-1.0-jar-with-dependencies.jar [..options]
 ```
 
-Here, the main command `mcr` must not be executed again but rather the [options](#basic-usage) must be supplied. The last way to execute the tool (only predefined executions, intended for development purposes) is described [here](#predefined-executions).
+Here, the main command `git-analyzer` must not be executed again but rather the [options](#basic-usage) must be supplied. The last way to execute the tool (only predefined executions, intended for development purposes) is described [here](#predefined-executions).
 
 ### Basic Usage
 
 ```shell
-Usage: mcr [-hV] [-c=<configPath>] [COMMAND]
+Usage: git-analyzer [-hV] [-c=<configPath>] [COMMAND]
 Study merge conflict resolution behaviour of Git projects.
   -c, --config=<configPath>
                   Use either this option or use a sub-command. Path to the
@@ -81,14 +81,14 @@ Commands:
   analyze-conflicts
 ```
 
-There is an option to use a JSON config file for the main application. The schema is located at [config.schema.json](https://github.com/SeverinBuchser/MergeConflictResolution/blob/master/src/main/resources/config.schema.json) and there are some example configurations [here](https://github.com/SeverinBuchser/MergeConflictResolution/tree/master/configs). The config file can be specified by using the option `-c=<configPath>` without any subcommands.
+There is an option to use a JSON config file for the main application. The schema is located at [config.schema.json](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/src/main/resources/config.schema.json) and there are some example configurations [here](https://github.com/SeverinBuchser/GitAnalyzer/tree/master/configs). The config file can be specified by using the option `-c=<configPath>` without any subcommands.
 
 #### Cloning Projects
 
 <a name="clone-project"></a>
 
 ```shell
-Usage: mcr clone-project [-pd=<projectDir>] <name> <url>
+Usage: git-analyzer clone-project [-pd=<projectDir>] <name> <url>
       <name>   The name of the project. The project will be cloned into a
                  directory with this name.
       <url>    The url from which the project can be cloned from.
@@ -97,12 +97,12 @@ Usage: mcr clone-project [-pd=<projectDir>] <name> <url>
                  working directory.
 ```
 
-To clone one project, use the `clone-project` subcommand, which takes the name and URL of the project. The name can be anything, just remember the name for later usage. The intended way of the name would be `user_name/repo_name`. The URL is for example: https://github.com/SeverinBuchser/MergeConflictResolution.
+To clone one project, use the `clone-project` subcommand, which takes the name and URL of the project. The name can be anything, just remember the name for later usage. The intended way of the name would be `user_name/repo_name`. The URL is for example: https://github.com/SeverinBuchser/GitAnalyzer.
 
 <a name="clone-projects"></a>
 
 ```shell
-Usage: mcr clone-projects [-pd=<projectDir>] <projectListPath>
+Usage: git-analyzer clone-projects [-pd=<projectDir>] <projectListPath>
       <projectListPath>
       -pd, --project-dir=<projectDir>
                           The directory where the projects will be cloned to.
@@ -124,7 +124,7 @@ The option `project-dir`, used in both clone-subcommands, defaults to the curren
 #### Analyze Conflicts
 
 ```shell
-Usage: mcr analyze-conflicts [-od=<outDir>] [-os=<outSuffix>]
+Usage: git-analyzer analyze-conflicts [-od=<outDir>] [-os=<outSuffix>]
                              [-pd=<projectDir>] <projectListPath>
       <projectListPath>   The path to the project list CSV file.
       -od, --out-dir=<outDir>
@@ -151,12 +151,12 @@ The `outDir` is the directory for the output files, default is `./`. The `outSuf
 
 ### Predefined Executions
 
-Predefined executables are already provided in the maven configuration, [pom.xml](https://github.com/SeverinBuchser/MergeConflictResolution/blob/master/pom.xml). Those executions use the [exec-maven-plugin](https://www.mojohaus.org/exec-maven-plugin/) to run Java executions. Each execution is based on a configuration file, located in the [configs directory of the repo](https://github.com/SeverinBuchser/MergeConflictResolution/tree/master/configs). Each config file, except one, is based on the schema mentioned above and concern one project list. To run these configurations do:
+Predefined executables are already provided in the maven configuration, [pom.xml](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/pom.xml). Those executions use the [exec-maven-plugin](https://www.mojohaus.org/exec-maven-plugin/) to run Java executions. Each execution is based on a configuration file, located in the [configs directory of the repo](https://github.com/SeverinBuchser/GitAnalyzer/tree/master/configs). Each config file, except one, is based on the schema mentioned above and concern one project list. To run these configurations do:
 
 ```shell
 mvn exec:java@{execution_id}
 ```
-where the `execution_id` is the name of the execution, which can be one of the following: "random-asc", "random-desc", "cpp", "go", "java", "java-original", "javascript", "python" or "typescript". There is also one configuration, [the default configuration](https://github.com/SeverinBuchser/MergeConflictResolution/blob/master/configs/config.json), which runs the analysis on every project list (in series). If you would like to run the default configuration with every project list, do
+where the `execution_id` is the name of the execution, which can be one of the following: "random-asc", "random-desc", "cpp", "go", "java", "java-original", "javascript", "python" or "typescript". There is also one configuration, [the default configuration](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/configs/config.json), which runs the analysis on every project list (in series). If you would like to run the default configuration with every project list, do
 
 ```shell
 mvn exec:java
@@ -182,11 +182,11 @@ Don't forget to give the project a star! Thanks again!
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See [`LICENSE.txt`](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/LICENSE.txt) for more information.
 
-[stars-shield]: https://img.shields.io/github/stars/SeverinBuchser/MergeConflictResolution.svg?style=for-the-badge
-[stars-url]: https://github.com/SeverinBuchser/MergeConflictResolution/stargazers
-[issues-shield]: https://img.shields.io/github/issues/SeverinBuchser/MergeConflictResolution.svg?style=for-the-badge
-[issues-url]: https://github.com/SeverinBuchser/MergeConflictResolution/issues
-[license-shield]: https://img.shields.io/github/license/SeverinBuchser/MergeConflictResolution.svg?style=for-the-badge
-[license-url]: https://github.com/SeverinBuchser/MergeConflictResolution/blob/master/LICENSE.txt
+[stars-shield]: https://img.shields.io/github/stars/SeverinBuchser/GitAnalyzer.svg?style=for-the-badge
+[stars-url]: https://github.com/SeverinBuchser/GitAnalyzer/stargazers
+[issues-shield]: https://img.shields.io/github/issues/SeverinBuchser/GitAnalyzer.svg?style=for-the-badge
+[issues-url]: https://github.com/SeverinBuchser/GitAnalyzer/issues
+[license-shield]: https://img.shields.io/github/license/SeverinBuchser/GitAnalyzer.svg?style=for-the-badge
+[license-url]: https://github.com/SeverinBuchser/GitAnalyzer/blob/master/LICENSE.txt

@@ -7,36 +7,61 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Document analyzers">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/progress/Progressbar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Rename groupId and artifactId">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflicts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflicts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/Analyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/Analyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingChunkAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingChunkAnalyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingFileAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingFileAnalyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingMergeAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingMergeAnalyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ProjectAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ProjectAnalyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ProjectInfoListAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ProjectInfoListAnalyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ProjectsAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ProjectsAnalyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProjects.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingChunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingMerge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingMerge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/error/NotComparableMergesException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/error/NotComparableMergesException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectIterable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectsInfoListReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectsInfoListReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/DynamicResolutionFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/DynamicResolutionFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionChunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionMerge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionMerge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/StaticResolutionFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/StaticResolutionFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/Path.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/Path.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.schema.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/make_executable.sh" beforeDir="false" afterPath="$PROJECT_DIR$/make_executable.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflicts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/AnalyzeConflicts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/Analyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/Analyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingChunkAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ConflictingChunkAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingChunksAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ConflictingChunksAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingFileAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ConflictingFileAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingFilesAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ConflictingFilesAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingMergeAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ConflictingMergeAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ConflictingMergesAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ConflictingMergesAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ProjectAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ProjectAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ProjectInfoListAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ProjectInfoListAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ProjectsAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ProjectsAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/analyze/ResultState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ResultState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/clone/CloneProject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/clone/CloneProjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/clone/CloneProjects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/conflict/ConflictingChunk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/conflict/ConflictingFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/conflict/ConflictingMerge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/conflict/ConflictingMerge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/error/NotComparableMergesException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/error/NotComparableMergesException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/project/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/project/ProjectInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/project/ProjectsInfoListReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/project/ProjectsInfoListReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/DynamicResolutionFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/resolution/DynamicResolutionFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/resolution/ResolutionChunk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/resolution/ResolutionFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/ResolutionMerge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/resolution/ResolutionMerge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/resolution/StaticResolutionFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/resolution/StaticResolutionFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/csv/CSVFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/csv/CSVFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/file/FileHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/file/FileHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/ConnectableIntersection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/path/ConnectableIntersection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/IConnectableIntersection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/path/IConnectableIntersection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/IIntersection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/path/IIntersection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/Intersection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/path/Intersection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/IntersectionChange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/path/IntersectionChange.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/Intersections.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/path/Intersections.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/IntersectionsIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/path/IntersectionsIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/Path.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/path/Path.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/path/SizeableIterable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/path/SizeableIterable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/mergeresolution/util/progress/Progressbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/progress/Progressbar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/MainTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/analyze/AnalyzeConflictsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/analyze/AnalyzeConflictsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/helper/EmptyParameterExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/helper/EmptyParameterExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectInfoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/project/ProjectInfoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/project/ProjectTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/project/ProjectsInfoListReaderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/project/ProjectsInfoListReaderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/IntersectionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/util/path/IntersectionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/IntersectionsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/util/path/IntersectionsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/LinkablePointerClockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/util/path/LinkablePointerClockTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/mergeresolution/util/path/PathTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/util/path/PathTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +110,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
     "database.data.extractors.current.id": "Comma-separated (CSV)_id",
-    "last_opened_file_path": "/home/severin/gitrepo/Severin/UniBe/MergeConflictResolution/configs",
+    "last_opened_file_path": "/home/severin/gitrepo/Severin/UniBe/GitAnalyzer",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -140,10 +165,10 @@
       <recent name="org.severin.ba.merge" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TypeScript">
+  <component name="RunManager" selected="JUnit.Tests">
     <configuration name="All Lists" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.gitanalyzer.Main" />
+      <module name="GitAnalyzer" />
       <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.json" />
       <extension name="coverage">
         <pattern>
@@ -156,8 +181,8 @@
       </method>
     </configuration>
     <configuration name="C++" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.gitanalyzer.Main" />
+      <module name="GitAnalyzer" />
       <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.cpp.json" />
       <extension name="coverage">
         <pattern>
@@ -170,8 +195,8 @@
       </method>
     </configuration>
     <configuration name="Go" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.gitanalyzer.Main" />
+      <module name="GitAnalyzer" />
       <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.go.json" />
       <extension name="coverage">
         <pattern>
@@ -184,8 +209,8 @@
       </method>
     </configuration>
     <configuration name="Java Original" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.gitanalyzer.Main" />
+      <module name="GitAnalyzer" />
       <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.java-original.json" />
       <extension name="coverage">
         <pattern>
@@ -198,8 +223,8 @@
       </method>
     </configuration>
     <configuration name="Java" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.gitanalyzer.Main" />
+      <module name="GitAnalyzer" />
       <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.java.json" />
       <extension name="coverage">
         <pattern>
@@ -212,8 +237,8 @@
       </method>
     </configuration>
     <configuration name="JavaScript" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.gitanalyzer.Main" />
+      <module name="GitAnalyzer" />
       <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.javascript.json" />
       <extension name="coverage">
         <pattern>
@@ -226,8 +251,8 @@
       </method>
     </configuration>
     <configuration name="Python" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.gitanalyzer.Main" />
+      <module name="GitAnalyzer" />
       <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.python.json" />
       <extension name="coverage">
         <pattern>
@@ -240,8 +265,8 @@
       </method>
     </configuration>
     <configuration name="Random  Desc" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.gitanalyzer.Main" />
+      <module name="GitAnalyzer" />
       <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.random-desc.json" />
       <extension name="coverage">
         <pattern>
@@ -254,8 +279,8 @@
       </method>
     </configuration>
     <configuration name="Random Asc" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.gitanalyzer.Main" />
+      <module name="GitAnalyzer" />
       <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.random-asc.json" />
       <extension name="coverage">
         <pattern>
@@ -268,8 +293,8 @@
       </method>
     </configuration>
     <configuration name="Test" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.gitanalyzer.Main" />
+      <module name="GitAnalyzer" />
       <option name="PROGRAM_PARAMETERS" value="--config=./configs/test.json" />
       <extension name="coverage">
         <pattern>
@@ -282,8 +307,8 @@
       </method>
     </configuration>
     <configuration name="TypeScript" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.mergeresolution.Main" />
-      <module name="MergeConflictResolution" />
+      <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.gitanalyzer.Main" />
+      <module name="GitAnalyzer" />
       <option name="PROGRAM_PARAMETERS" value="--config=./configs/config.typescript.json" />
       <extension name="coverage">
         <pattern>
@@ -296,11 +321,24 @@
       </method>
     </configuration>
     <configuration name="Tests" type="JUnit" factoryName="JUnit">
-      <module name="MergeConflictResolution" />
+      <module name="GitAnalyzer" />
       <option name="PACKAGE_NAME" value="ch.unibe.inf.seg" />
       <option name="MAIN_CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="GitAnalyzer" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="GitAnalyzer" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -392,7 +430,9 @@
       <workItem from="1671207362410" duration="3157000" />
       <workItem from="1671299906777" duration="19749000" />
       <workItem from="1671348921339" duration="21872000" />
-      <workItem from="1671489145476" duration="16777000" />
+      <workItem from="1671489145476" duration="18871000" />
+      <workItem from="1671602999525" duration="2513000" />
+      <workItem from="1671605599832" duration="363000" />
     </task>
     <task id="LOCAL-00001" summary="Inital Commit">
       <created>1663769460948</created>
@@ -527,7 +567,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671337975430</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Documentation completed">
+      <created>1671600862328</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1671600862328</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2863,7 +2910,9 @@
     <MESSAGE value="Add missing analyzers to spread out analysis and remove second sample project" />
     <MESSAGE value="Optimize test resources" />
     <MESSAGE value="Document analyzers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Document analyzers" />
+    <MESSAGE value="Documentation completed" />
+    <MESSAGE value="Rename groupId and artifactId" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rename groupId and artifactId" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
