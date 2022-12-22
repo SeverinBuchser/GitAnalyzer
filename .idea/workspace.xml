@@ -7,10 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Update version to 1.0.0 and update README and executable generation to print usable output">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-    </list>
+    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Add logo" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -358,7 +355,7 @@
       <workItem from="1671652246192" duration="4195000" />
       <workItem from="1671656679699" duration="29000" />
       <workItem from="1671662274457" duration="117000" />
-      <workItem from="1671720664213" duration="432000" />
+      <workItem from="1671720664213" duration="1106000" />
     </task>
     <task id="LOCAL-00001" summary="Inital Commit">
       <created>1663769460948</created>
@@ -514,7 +511,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671655569512</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Add logo">
+      <created>1671722588904</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1671722588904</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2853,7 +2857,8 @@
     <MESSAGE value="Documentation completed" />
     <MESSAGE value="Rename groupId and artifactId" />
     <MESSAGE value="Update version to 1.0.0 and update README and executable generation to print usable output" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update version to 1.0.0 and update README and executable generation to print usable output" />
+    <MESSAGE value="Add logo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add logo" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
