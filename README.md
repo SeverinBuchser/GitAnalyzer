@@ -1,19 +1,17 @@
 [![Stargazers][stars-shield]][stars-url][![Issues][issues-shield]][issues-url][![MIT License][license-shield]][license-url][![Latest release][latest-release-shield]][latest-release-url]
 
 
+<p align="center">
+    	<img src="https://raw.githubusercontent.com/SeverinBuchser/GitAnalyzer/master/git-analyzer-logo.svg" alt="git-analyzer-logo" width="20%"/> 
+</p>
+<h1 align="center">
+	Git Analyzer
+</h1>
+<p><sub align"center" size="0.5">
+	<img src="https://mirrors.creativecommons.org/presskit/icons/cc.xlarge.png" alt="cc-logo" width="20" background="white"/> 
+	Git Analyzer Logo by <a href="https://github.com/SeverinBuchser/">Severin Buchser</a> is licensed under the <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+</sub></p>
 
-<div>
-    <div width="100%" style="display: flex; flex-direction: column; justify-content: center; align-items: center">
-    	<img https://raw.githubusercontent.com/SeverinBuchser/GitAnalyzer/master/git-analyzer-logo.svg" alt="git-analyzer-logo" width="20%"/> 
-        <h1>
-         	  Git Analyzer
-        </h1>
-    	<p style="font-size: 0.6em">
-    		<img src="https://raw.githubusercontent.com/creativecommons/cc-assets/main/icons/cc-logo.svg" alt="cc-logo" width="30"/> 
-        	Git Analyzer Logo by <a href="https://github.com/SeverinBuchser/">Severin Buchser</a> is licensed under the <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
-		</p>
-	</div>
-</div>
 
 This project is part of a bachelor-thesis in the [Software Engineering Group](https://seg.inf.unibe.ch/) at the [University of Bern](https://www.unibe.ch/). The project is used for the data-collection and data-analyzing process of the thesis. The thesis focuses on the human intervention in merge conflicts: How often are the used merge resolutions not reproducible by a computer?
 
