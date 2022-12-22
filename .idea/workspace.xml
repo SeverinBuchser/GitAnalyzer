@@ -8,12 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Update version to 1.0.0 and update README and executable generation to print usable output">
-      <change afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/helper/TestingPrintStream.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/make_executable.sh" beforeDir="false" afterPath="$PROJECT_DIR$/make_executable.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/analyze/AnalyzeConflictsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/analyze/AnalyzeConflictsTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -359,7 +355,10 @@
       <workItem from="1671605599832" duration="1700000" />
       <workItem from="1671614164617" duration="1235000" />
       <workItem from="1671620119313" duration="92000" />
-      <workItem from="1671652246192" duration="3311000" />
+      <workItem from="1671652246192" duration="4195000" />
+      <workItem from="1671656679699" duration="29000" />
+      <workItem from="1671662274457" duration="117000" />
+      <workItem from="1671720664213" duration="432000" />
     </task>
     <task id="LOCAL-00001" summary="Inital Commit">
       <created>1663769460948</created>
@@ -508,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671606073736</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Update version to 1.0.0 and update README and executable generation to print usable output">
+      <created>1671655569512</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1671655569512</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

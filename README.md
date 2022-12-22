@@ -1,6 +1,25 @@
 [![Stargazers][stars-shield]][stars-url][![Issues][issues-shield]][issues-url][![MIT License][license-shield]][license-url][![Latest release][latest-release-shield]][latest-release-url]
 
+
+
+<div>
+    <img src="https://raw.githubusercontent.com/SeverinBuchser/GitAnalyzer/master/git-analyzer-logo.svg" alt="git-analyzer-logo"/> 
+    <p style="font-size: 0.8em">
+    	<img src="https://raw.githubusercontent.com/creativecommons/cc-assets/main/logos/cc/logomark.svg" alt="cc-logomark" width="70"/> 
+        Git Analyzer Logo by <a href="https://github.com/SeverinBuchser/">Severin Buchser</a> is licensed under the <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+	</p>
+</div>
+
+
+
+
+
 # Git Analyzer
+
+<p style="font-size: 0.8em">
+    <img src="https://raw.githubusercontent.com/creativecommons/cc-assets/main/logos/cc/logomark.svg" alt="cc-logomark" width="70"/> 
+    Git Analyzer Logo by <a href="https://github.com/SeverinBuchser/">Severin Buchser</a> is licensed under the <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+</p>
 
 This project is part of a bachelor-thesis in the [Software Engineering Group](https://seg.inf.unibe.ch/) at the [University of Bern](https://www.unibe.ch/). The project is used for the data-collection and data-analyzing process of the thesis. The thesis focuses on the human intervention in merge conflicts: How often are the used merge resolutions not reproducible by a computer?
 
@@ -192,3 +211,4 @@ Distributed under the MIT License. See [`LICENSE.txt`](https://github.com/Severi
 [license-url]: https://github.com/SeverinBuchser/GitAnalyzer/blob/master/LICENSE.txt
 [latest-release-shield]: https://img.shields.io/github/v/release/SeverinBuchser/GitAnalyzer.svg?display_name=tag&style=for-the-badge
 [latest-release-url]: https://github.com/SeverinBuchser/GitAnalyzer/releases/latest
+[cc-logomark]: https://github.com/creativecommons/cc-assets/blob/main/logos/cc/logomark.svg
