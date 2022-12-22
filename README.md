@@ -9,7 +9,7 @@
 </h1>
 <p><sub align"center" size="0.5">
 	<img src="https://mirrors.creativecommons.org/presskit/icons/cc.xlarge.png" alt="cc-logo" width="20" background="white"/> 
-	Git Analyzer Logo by <a href="https://github.com/SeverinBuchser/">Severin Buchser</a> is licensed under the <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+	Git Analyzer Logo by <a href="https://github.com/SeverinBuchser/">Severin Buchser</a> is licensed under the <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a> / <a href="https://git-scm.com/downloads/logos">The original Git-Logo</a> is remixed into the git-analyzer-logo.
 </sub></p>
 
 
