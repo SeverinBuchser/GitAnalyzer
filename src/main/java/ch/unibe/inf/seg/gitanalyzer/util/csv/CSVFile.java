@@ -8,9 +8,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -18,17 +18,9 @@ import java.util.List;
  * directly to a {@link File}. There is also the possibility to create an empty CSV file. Adding records to the CSV file
  * is also a possibility.
  */
-public class CSVFile {
+public class CSVFile implements Iterable<JSONObject> {
     private final JSONArray jsonRecords = new JSONArray();
     private final CSVFormat writeFormat;
-
-    /**
-     * The CSV records are stored in {@link JSONObject} format. These records can be obtained with this method.
-     * @return The CSV records in form of a {@link JSONArray}.
-     */
-    protected JSONArray getJsonRecords() {
-        return jsonRecords;
-    }
 
     /**
      * Creates a CSV file from a {@link CSVParser}. The parser can be obtained from an existing CSV file.
@@ -81,19 +73,6 @@ public class CSVFile {
     }
 
     /**
-     * Writes the CSV file directly to a {@link File}.
-     * @param file The {@link File} to write to.
-     * @throws IOException If the writing does not work.
-     */
-    public void write(File file) throws IOException {
-        file.getParentFile().mkdirs();
-        file.createNewFile();
-        FileWriter writer = new FileWriter(file);
-        this.write(writer);
-        writer.close();
-    }
-
-    /**
      * Appends a CSV record.
      * @param values The values of the CSV record.
      */
@@ -105,4 +84,18 @@ public class CSVFile {
         this.jsonRecords.put(jsonRecord);
     }
 
+    @Override
+    public Iterator<JSONObject> iterator() {
+        return new Iterator<>() {
+            private final Iterator<Object> iterator = jsonRecords.iterator();
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext();
+            }
+            @Override
+            public JSONObject next() {
+                return (JSONObject) iterator.next();
+            }
+        };
+    }
 }

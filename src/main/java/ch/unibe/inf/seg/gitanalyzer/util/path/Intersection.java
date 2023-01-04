@@ -1,6 +1,5 @@
 package ch.unibe.inf.seg.gitanalyzer.util.path;
 
-import java.util.Collection;
 import java.util.Iterator;
 
 /**
@@ -17,27 +16,13 @@ public class Intersection<T> implements IIntersection<T> {
     private final Path<T> path;
     private final Iterable<T> iterable;
     private Iterator<T> iterator;
-    private final double size;
 
     private T tick;
 
-    Intersection(Collection<T> collection) {
-        this(new Path<>(), collection);
-    }
-
-    Intersection(Path<T> path, Collection<T> collection) {
-        this(path, collection, collection.size());
-    }
-
-    Intersection(Path<T> path, SizeableIterable<T> iterable) {
-        this(path, iterable, iterable.size());
-    }
-
-    private Intersection(Path<T> path, Iterable<T> iterable, double size) {
+    public Intersection(Path<T> path, Iterable<T> iterable) {
         this.path = path;
         this.iterable = iterable;
         this.iterator = this.iterable.iterator();
-        this.size = size;
         this.changeDirection();
     }
 
@@ -65,13 +50,5 @@ public class Intersection<T> implements IIntersection<T> {
             }
             return IntersectionChange.RESET;
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double size() {
-        return this.size;
     }
 }

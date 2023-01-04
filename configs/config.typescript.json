@@ -1,11 +1,9 @@
 {
-  "cloneProjects": true,
-  "analyzeConflicts": true,
-  "projectListInfos": [
-    {
-      "projectList": "../project-lists/projects_typescript_desc-stars-100.csv",
-      "projectDir": "../../ba_project-dirs/projects_typescript_desc-stars-100"
-    }
-  ],
-  "outDir": "../out"
+    "clone": true,
+    "analyze": true,
+    "projectLists": [{
+        "list": "../project-lists/projects_typescript_desc-stars-100.csv",
+        "dir": "../../ba_project-dirs/projects_typescript_desc-stars-100"
+    }],
+    "out": "../out"
 }

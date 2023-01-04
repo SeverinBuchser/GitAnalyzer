@@ -1,9 +1,9 @@
 {
-  "cloneProjects": true,
-  "projectListInfos": [
+  "clone": true,
+  "projectLists": [
     {
-      "projectList": "./project-list.csv"
+      "list": "./project-list.csv"
     }
   ],
-  "outDir": "./out"
+  "out": "./out"
 }

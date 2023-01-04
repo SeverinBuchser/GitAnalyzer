@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "config",
+  "title": "Config",
+  "description": "A config for the GitAnalyzer project.",
+  "type": "object",
+  "properties": {
+    "clone": {
+      "description": "Clones the projects of the lists of projects.",
+      "type": "boolean",
+      "default": true
+    },
+    "analyze": {
+      "description": "Analyzes the projects of the lists of projects.",
+      "type": "boolean",
+      "default": true
+    },
+    "projectLists": {
+      "$ref": "projectLists.json"
+    },
+    "out": {
+      "description": "The directory of the output files.",
+      "type": "string",
+      "default": "."
+    },
+    "verbose": {
+      "description": "Verbose mode. Additional helpful information will be displayed. Verbose mode only has an effect on the analysis.",
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,4 +1,4 @@
-name,url
+name,remoteURL
 4pr0n/ripme,https://github.com/4pr0n/ripme
 aaberg/sql2o,https://github.com/aaberg/sql2o
 ActiveJpa/activejpa,https://github.com/ActiveJpa/activejpa
@@ -408,7 +408,7 @@ Spoutcraft/LegacyLauncher,https://github.com/Spoutcraft/LegacyLauncher
 Spoutcraft/Spoutcraft,https://github.com/Spoutcraft/Spoutcraft
 SpoutDev/Spout,https://github.com/SpoutDev/Spout
 SpoutDev/Vanilla,https://github.com/SpoutDev/Vanilla
-spring-cloud/spring-cloud-config,https://github.com/spring-cloud/spring-cloud-config
+spring-cloud/spring-cloud-configCommand,https://github.com/spring-cloud/spring-cloud-configCommand
 spring-cloud/spring-cloud-consul,https://github.com/spring-cloud/spring-cloud-consul
 spring-projects/spring-petclinic,https://github.com/spring-projects/spring-petclinic
 spring-projects/spring-security-oauth,https://github.com/spring-projects/spring-security-oauth

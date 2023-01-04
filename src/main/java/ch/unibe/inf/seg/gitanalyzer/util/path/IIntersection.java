@@ -20,10 +20,4 @@ public interface IIntersection<T> {
      * changed or {@link IntersectionChange#RESET} if the direction has reset to the first direction.
      */
     IntersectionChange changeDirection();
-
-    /**
-     * The number of directions of the intersection.
-     * @return The number of directions.
-     */
-    double size();
 }

@@ -5,7 +5,6 @@ import ch.unibe.inf.seg.gitanalyzer.resolution.ResolutionMerge;
 import ch.unibe.inf.seg.gitanalyzer.util.path.ConnectableIntersection;
 import ch.unibe.inf.seg.gitanalyzer.util.path.Intersections;
 import ch.unibe.inf.seg.gitanalyzer.util.path.IntersectionsIterator;
-import ch.unibe.inf.seg.gitanalyzer.util.path.SizeableIterable;
 import org.eclipse.jgit.diff.Sequence;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.merge.MergeResult;
@@ -20,7 +19,7 @@ import java.util.Map;
  * Class representing a conflicting merge.
  * The conflicting files will automatically be searched and will be available by iterating.
  */
-public class ConflictingMerge implements SizeableIterable<ResolutionMerge> {
+public class ConflictingMerge implements Iterable<ResolutionMerge> {
     /**
      * The repository to which this conflicting merge belongs to.
      */
@@ -106,20 +105,6 @@ public class ConflictingMerge implements SizeableIterable<ResolutionMerge> {
     }
 
     /**
-     * Builds the actual merge resolution for this conflicting merge.
-     * For each conflicting file the actual resolution file will be retrieved and added to the resolution merge.
-     * @return The actual merge resolution for this conflicting merge.
-     * @throws IOException If one of the conflicting files is not found.
-     */
-    public ResolutionMerge getActualResolution() throws IOException {
-        ResolutionMerge resolutionMerge = new ResolutionMerge();
-        for (ConflictingFile conflictingFile: this.conflictingFiles) {
-            resolutionMerge.add(conflictingFile.getActualResolutionFile());
-        }
-        return resolutionMerge;
-    }
-
-    /**
      * Gets the commit id for this conflicting merge.
      * @return The commit id of this conflicting merge.
      */
@@ -159,28 +144,11 @@ public class ConflictingMerge implements SizeableIterable<ResolutionMerge> {
     }
 
     /**
-     * The size for this conflicting merge.
-     * @return The size of this conflicting merge, which is 0 if there are no conflicts or the multiplication of the
-     * sizes of the conflicting files.
-     */
-    @Override
-    public double size() {
-        if (this.conflictingFiles.size() == 0) return 0;
-        double size = 1;
-
-        for (ConflictingFile conflictingFile : this.conflictingFiles) {
-            size *= conflictingFile.size();
-        }
-        return size;
-    }
-
-    /**
      * The number of conflicts for this conflicting merge.
      * @return The number of conflicts for this conflicting merge.
      */
     public double getConflictCount() {
-        return this.conflictingFiles.stream().reduce((double) 0, (conflictCount, conflictingFile) -> {
-            return conflictCount + conflictingFile.getConflictCount();
-        }, Double::sum);
+        return this.conflictingFiles.stream().reduce((double) 0, (conflictCount, conflictingFile) ->
+                conflictCount + conflictingFile.getConflictCount(), Double::sum);
     }
 }

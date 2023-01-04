@@ -1,11 +1,9 @@
 {
-  "cloneProjects": true,
-  "analyzeConflicts": true,
-  "projectListInfos": [
-    {
-      "projectList": "../project-lists/projects_name_asc-stars-10.csv",
-      "projectDir": "../../ba_project-dirs/projects_name_asc-stars-10"
-    }
-  ],
-  "outDir": "../out"
+    "clone": true,
+    "analyze": true,
+    "projectLists": [{
+        "list": "../project-lists/projects_name_asc-stars-10.csv",
+        "dir": "../../ba_project-dirs/projects_name_asc-stars-10"
+    }],
+    "out": "../out"
 }

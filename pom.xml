@@ -18,7 +18,7 @@
 
     <properties>
         <java.version>18</java.version>
-        <path.to.main>${project.groupId}.Main</path.to.main>
+        <path.to.main>${project.groupId}.cli.GitAnalyzer</path.to.main>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,17 +29,17 @@
         <dependency>
             <groupId>org.eclipse.jgit</groupId>
             <artifactId>org.eclipse.jgit</artifactId>
-            <version>6.3.0.202209071007-r</version>
+            <version>6.4.0.202211300538-r</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.3</version>
+            <version>2.0.5</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>2.0.3</version>
+            <version>2.0.5</version>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
@@ -59,12 +59,12 @@
         <dependency>
             <groupId>info.picocli</groupId>
             <artifactId>picocli</artifactId>
-            <version>4.6.3</version>
+            <version>4.7.0</version>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>4.8.0</version>
+            <version>4.10.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -163,7 +163,9 @@
                         <configuration>
                             <mainClass>${path.to.main}</mainClass>
                             <arguments>
-                                <argument>--config=./configs/config.random-asc.json</argument>
+                                <argument>config</argument>
+                                <argument>run</argument>
+                                <argument>./configs/config.random-asc.json</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -175,7 +177,9 @@
                         <configuration>
                             <mainClass>${path.to.main}</mainClass>
                             <arguments>
-                                <argument>--config=./configs/config.random-desc.json</argument>
+                                <argument>config</argument>
+                                <argument>run</argument>
+                                <argument>./configs/config.random-desc.json</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -187,7 +191,9 @@
                         <configuration>
                             <mainClass>${path.to.main}</mainClass>
                             <arguments>
-                                <argument>--config=./configs/config.cpp.json</argument>
+                                <argument>config</argument>
+                                <argument>run</argument>
+                                <argument>./configs/config.cpp.json</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -199,7 +205,9 @@
                         <configuration>
                             <mainClass>${path.to.main}</mainClass>
                             <arguments>
-                                <argument>--config=./configs/config.go.json</argument>
+                                <argument>config</argument>
+                                <argument>run</argument>
+                                <argument>./configs/config.go.json</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -211,7 +219,9 @@
                         <configuration>
                             <mainClass>${path.to.main}</mainClass>
                             <arguments>
-                                <argument>--config=./configs/config.java.json</argument>
+                                <argument>config</argument>
+                                <argument>run</argument>
+                                <argument>./configs/config.java.json</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -223,7 +233,9 @@
                         <configuration>
                             <mainClass>${path.to.main}</mainClass>
                             <arguments>
-                                <argument>--config=./configs/config.java-original.json</argument>
+                                <argument>config</argument>
+                                <argument>run</argument>
+                                <argument>./configs/config.java-original.json</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -235,7 +247,9 @@
                         <configuration>
                             <mainClass>${path.to.main}</mainClass>
                             <arguments>
-                                <argument>--config=./configs/config.javascript.json</argument>
+                                <argument>config</argument>
+                                <argument>run</argument>
+                                <argument>./configs/config.javascript.json</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -247,7 +261,9 @@
                         <configuration>
                             <mainClass>${path.to.main}</mainClass>
                             <arguments>
-                                <argument>--config=./configs/config.python.json</argument>
+                                <argument>config</argument>
+                                <argument>run</argument>
+                                <argument>./configs/config.python.json</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -259,7 +275,9 @@
                         <configuration>
                             <mainClass>${path.to.main}</mainClass>
                             <arguments>
-                                <argument>--config=./configs/config.typescript.json</argument>
+                                <argument>config</argument>
+                                <argument>run</argument>
+                                <argument>./configs/config.typescript.json</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -267,7 +285,9 @@
                 <configuration>
                     <mainClass>${path.to.main}</mainClass>
                     <arguments>
-                        <argument>--config=./configs/config.json</argument>
+                        <argument>config</argument>
+                        <argument>run</argument>
+                        <argument>./configs/config.json</argument>
                     </arguments>
                 </configuration>
             </plugin>

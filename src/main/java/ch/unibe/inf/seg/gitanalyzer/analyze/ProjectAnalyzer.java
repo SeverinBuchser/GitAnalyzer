@@ -1,66 +1,36 @@
 package ch.unibe.inf.seg.gitanalyzer.analyze;
 
+import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingMerge;
 import ch.unibe.inf.seg.gitanalyzer.project.Project;
-import org.json.JSONObject;
+import ch.unibe.inf.seg.gitanalyzer.report.ProjectReport;
 
-import java.util.ArrayList;
+public class ProjectAnalyzer implements Analyzer<Project, ProjectReport> {
+    private final ConflictingMergeAnalyzer subAnalyzer = new ConflictingMergeAnalyzer();
 
-/**
- * Analyzer for a {@link Project}.
- * For each conflicting merge of the project, the {@link ConflictingMergesAnalyzer} is run. For each project some
- * additional data will be stored and returned.
- */
-public class ProjectAnalyzer extends Analyzer<Project, JSONObject> {
-    private final ConflictingMergesAnalyzer subAnalyzer = new ConflictingMergesAnalyzer();
-
-    /**
-     * Analyzes a {@link Project}.
-     * For each conflicting merge of the project, the {@link ConflictingMergesAnalyzer} is run. Each result will be
-     * added to an array which will be returned under the key "conflicting_merges". For each project additional data is
-     * returned.
-     * @param project The project to be analyzed.
-     * @return The results of the analyzed project.
-     */
     @Override
-    public JSONObject analyze(Project project) {
-        JSONObject result = new JSONObject();
-        result.put("project_name", project.name);
-        boolean correct;
-        printAnalyzing(project.name, 1);
+    public ProjectReport analyze(Project project) {
+        ProjectReport report = new ProjectReport(project.getName());
+        System.out.println(report.toString(1));
 
         try {
-            ArrayList<JSONObject> merges = this.subAnalyzer.analyze(project);
+            for (ConflictingMerge conflictingMerge: project) {
+                report.addMergeReport(this.subAnalyzer.analyze(conflictingMerge));
+            }
 
-            result.put("state", ResultState.OK);
-
-            result.put("conflicting_merges", merges);
-            result.put("conflicting_merges_count", merges.size());
-            putCount(result, merges, "conflicting_merges_correct_count");
-
-            putSum(result, merges, "conflicting_files_count");
-            putSum(result, merges, "conflicting_files_correct_count");
-
-            putSum(result, merges, "conflicting_chunks_count");
-            putSum(result, merges, "conflicting_chunks_correct_count");
-
-            correct = result.getInt("conflicting_merges_correct_count") == result.getInt("conflicting_merges_count")
-                    && result.getInt("conflicting_merges_correct_count") != 0;
-            result.put("correct", correct);
-            result.put("all_conflicting_chunks_count", merges.stream().map(x -> x.getInt("all_conflicting_chunks_count")).reduce(0, Integer::sum));
+            report.ok();
 
             // metadata
             Integer[] counts = project.getCommitsMergesOctopusMergesCount();
-            result.put("commits_count", counts[0]);
-            result.put("merges_count", counts[1]);
-            result.put("octopus_merges_count", counts[2]);
-            result.put("tags_count", project.getTagsCount());
-            result.put("contributors_count", counts[0] > 0 ? project.getContributorsCount() : 0);
+            report.setCommitCount(counts[0]);
+            report.setMergeCount(counts[1]);
+            report.setOctopusMergeCount(counts[2]);
+            report.setTagCount(project.getTagsCount());
+            report.setContributorCount(counts[0] > 0 ? project.getContributorsCount() : 0);
         } catch (Exception e) {
-            result.put("state", ResultState.FAIL);
-            result.put("reason", e.getMessage());
+            report.fail(e.getMessage());
         }
 
-        printComplete("Project", 1, result);
-        return result;
+        System.out.println(report.toString(1));
+        return report;
     }
 }

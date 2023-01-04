@@ -60,8 +60,6 @@ class IntersectionTest {
         assertEquals(item2, pathIterator.next());
         assertEquals(item3, pathIterator.next());
         assertEquals(item4, pathIterator.next());
-
-        assertEquals(3, intersection.size());
     }
 
     @Test
@@ -76,7 +74,7 @@ class IntersectionTest {
         list.add(item2);
         list.add(item3);
 
-        Intersection<String> intersection = new Intersection<>(list);
+        Intersection<String> intersection = new Intersection<>(new Path<>(), list);
 
         Iterator<String> pathIterator = intersection.getPath().iterator();
         assertEquals(item1, pathIterator.next());
@@ -92,8 +90,6 @@ class IntersectionTest {
         assertEquals(IntersectionChange.RESET, intersection.changeDirection());
         pathIterator = intersection.getPath().iterator();
         assertEquals(item1, pathIterator.next());
-
-        assertEquals(3, intersection.size());
     }
 
     @Test
@@ -102,7 +98,7 @@ class IntersectionTest {
         String item = "item";
         list.add(item);
 
-        Intersection<String> intersection = new Intersection<>(list);
+        Intersection<String> intersection = new Intersection<>(new Path<>(), list);
         Iterator<String> pathIterator = intersection.getPath().iterator();
         assertEquals(item, pathIterator.next());
         assertFalse(pathIterator.hasNext());
@@ -111,8 +107,6 @@ class IntersectionTest {
         pathIterator = intersection.getPath().iterator();
         assertEquals(item, pathIterator.next());
         assertFalse(pathIterator.hasNext());
-
-        assertEquals(1, intersection.size());
     }
 
     @Test

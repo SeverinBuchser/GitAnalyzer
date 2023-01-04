@@ -28,7 +28,7 @@ import java.util.List;
  * retrieved from this class. Important to mention is that the resolution files can only be obtained iteratively to
  * reduce memory usage.
  */
-public class ConflictingFile implements SizeableIterable<ResolutionFile> {
+public class ConflictingFile implements Iterable<ResolutionFile> {
     /**
      * The repository this conflicting file belongs to.
      */
@@ -226,14 +226,5 @@ public class ConflictingFile implements SizeableIterable<ResolutionFile> {
                 else return null;
             }
         };
-    }
-
-    /**
-     * Calculates the size of the conflicting files.
-     * @return The number of paths, which is two to the power of the number of conflicting chunks.
-     */
-    @Override
-    public double size() {
-        return Math.pow(2, this.conflictingChunks.size());
     }
 }

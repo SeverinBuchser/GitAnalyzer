@@ -8,7 +8,7 @@ class ProjectInfoTest {
     @Test
     void simpleProjectInfoTest() {
         ProjectInfo info = new ProjectInfo("projectName", "projectUri");
-        assertEquals("projectName", info.name);
-        assertEquals("projectUri", info.url);
+        assertEquals("projectName", info.getName());
+        assertEquals("projectUri", info.getRemoteURL());
     }
 }

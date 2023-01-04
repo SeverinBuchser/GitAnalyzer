@@ -15,11 +15,7 @@ import java.util.Collection;
 public class ConnectableIntersection<T> extends Intersection<T> implements IConnectableIntersection<T> {
     private IConnectableIntersection<T> nextIntersection;
 
-    ConnectableIntersection(Collection<T> collection) {
-        super(new Path<>(), collection);
-    }
-
-    public ConnectableIntersection(SizeableIterable<T> iterable) {
+    public ConnectableIntersection(Iterable<T> iterable) {
         super(new Path<>(), iterable);
     }
 

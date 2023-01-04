@@ -199,7 +199,7 @@ public class Progressbar extends Thread {
      * message  is displayed.
      * @throws IOException The write process to the output stream failed.
      */
-    private void writeInternal() throws IOException, InterruptedException {
+    private void writeInternal() throws IOException {
         this.spinnerStep = this.spinnerStep + 1 < SPINNER.length ? this.spinnerStep + 1 : 0;
         this.writeExternal();
     }

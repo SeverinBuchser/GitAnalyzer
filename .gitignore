@@ -45,3 +45,4 @@ doc/
 samplemergeconflictproject/
 secondsamplemergeconflictproject/
 git-analyzer
+/cli-layout.txt

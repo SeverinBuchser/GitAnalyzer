@@ -9,14 +9,10 @@ import org.eclipse.jgit.merge.MergeStrategy;
 import org.eclipse.jgit.merge.RecursiveMerger;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.filter.RevFilter;
-import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,13 +24,15 @@ import java.util.List;
  * conflicting merge the project has.
  */
 public class Project extends Git implements Iterable<ConflictingMerge> {
-    /**
-     * The name of the project.
-     */
-    public final String name;
+
+    private final String name;
+
+    public String getName() {
+        return name;
+    }
 
     /**
-     * Initiates a new project.
+     * Constructor.
      * @param repo The repository of the project.
      * @param name The name of the project.
      */
@@ -44,42 +42,13 @@ public class Project extends Git implements Iterable<ConflictingMerge> {
     }
 
     /**
-     * Clones a project from an url to a path.
-     * @param url The url to the remote repository.
-     * @param path The path to clone the project to.
+     * Constructor.
+     * @param git The {@link Git} object of the project.
      * @param name The name of the project.
-     * @return The project which was cloned to the path.
-     * @throws GitAPIException If the clone command is unsuccessful.
      */
-    public static Project cloneFromUri(String url, String path, String name) throws GitAPIException {
-        Git git = Git.cloneRepository()
-                .setURI(url)
-                .setDirectory(new File(path))
-                .call();
-        return new Project(git.getRepository(), name);
-    }
-
-    /**
-     * Loads a project from a path pointing to the Git project.
-     * @param path The path to the local git project without the ".git" extension.
-     * @param name The name of the project.
-     * @return The project located at the path.
-     * @throws IOException If the path does not point to a valid location or the directory is not a git directory.
-     */
-    public static Project buildFromPath(Path path, String name) throws IOException {
-        Repository repo = new FileRepositoryBuilder()
-                .setGitDir(Project.buildGitPath(path).toFile())
-                .build();
-        return new Project(repo, name);
-    }
-
-    /**
-     * Appends the ".git" extension to a path.
-     * @param path The path to extend.
-     * @return The extended path.
-     */
-    private static Path buildGitPath(Path path) {
-        return Paths.get(path.toString(), ".git");
+    public Project(Git git, String name) {
+        super(git.getRepository());
+        this.name = name;
     }
 
     /**

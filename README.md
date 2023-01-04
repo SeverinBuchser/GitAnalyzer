@@ -7,7 +7,7 @@
 <h1 align="center">
 	Git Analyzer
 </h1>
-<p><sub align"center" size="0.5">
+<p><sub align="center" size="0.5">
 	<img src="https://mirrors.creativecommons.org/presskit/icons/cc.xlarge.png" alt="cc-logo" width="20" background="white"/> 
 	Git Analyzer Logo by <a href="https://github.com/SeverinBuchser/">Severin Buchser</a> is licensed under the <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a> / <a href="https://git-scm.com/downloads/logos">The original Git-Logo</a> is remixed into the git-analyzer-logo.
 </sub></p>
@@ -79,9 +79,9 @@ Here, the main command `git-analyzer` must not be executed again but rather the 
 ```shell
 Usage: git-analyzer [-hV] [-c=<configPath>] [COMMAND]
 Study merge conflict resolution behaviour of Git projects.
-  -c, --config=<configPath>
+  -c, config run <configPath>
                   Use either this option or use a sub-command. Path to the
-                    config file.
+                    configCommand file.
   -h, --help      Show this help message and exit.
   -V, --version   Print version information and exit.
 Commands:
@@ -90,7 +90,7 @@ Commands:
   analyze-conflicts
 ```
 
-There is an option to use a JSON config file for the main application. The schema is located at [config.schema.json](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/src/main/resources/config.schema.json) and there are some example configurations [here](https://github.com/SeverinBuchser/GitAnalyzer/tree/master/configs). The config file can be specified by using the option `-c=<configPath>` without any subcommands.
+There is an option to use a JSON configCommand file for the main application. The schema is located at [configCommand.schema.json](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/src/main/resources/configCommand.schema.json) and there are some example configurations [here](https://github.com/SeverinBuchser/GitAnalyzer/tree/master/configs). The configCommand file can be specified by using the option `-c=<configPath>` without any subcommands.
 
 #### Cloning Projects
 
@@ -160,12 +160,12 @@ The `outDir` is the directory for the output files, default is `./`. The `outSuf
 
 ### Predefined Executions
 
-Predefined executables are already provided in the maven configuration, [pom.xml](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/pom.xml). Those executions use the [exec-maven-plugin](https://www.mojohaus.org/exec-maven-plugin/) to run Java executions. Each execution is based on a configuration file, located in the [configs directory of the repo](https://github.com/SeverinBuchser/GitAnalyzer/tree/master/configs). Each config file, except one, is based on the schema mentioned above and concern one project list. To run these configurations do:
+Predefined executables are already provided in the maven configuration, [pom.xml](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/pom.xml). Those executions use the [exec-maven-plugin](https://www.mojohaus.org/exec-maven-plugin/) to run Java executions. Each execution is based on a configuration file, located in the [configs directory of the repo](https://github.com/SeverinBuchser/GitAnalyzer/tree/master/configs). Each configCommand file, except one, is based on the schema mentioned above and concern one project list. To run these configurations do:
 
 ```shell
 mvn exec:java@{execution_id}
 ```
-where the `execution_id` is the name of the execution, which can be one of the following: "random-asc", "random-desc", "cpp", "go", "java", "java-original", "javascript", "python" or "typescript". There is also one configuration, [the default configuration](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/configs/config.json), which runs the analysis on every project list (in series). If you would like to run the default configuration with every project list, do
+where the `execution_id` is the name of the execution, which can be one of the following: "random-asc", "random-desc", "cpp", "go", "java", "java-original", "javascript", "python" or "typescript". There is also one configuration, [the default configuration](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/configs/configCommand.json), which runs the analysis on every project list (in series). If you would like to run the default configuration with every project list, do
 
 ```shell
 mvn exec:java

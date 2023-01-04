@@ -1,0 +1,12 @@
+{
+    "analyze": true,
+    "clone": false,
+    "projectLists": [{
+        "skip": false,
+        "list": "../project-lists/test.csv",
+        "dir": ".",
+        "suffix": ""
+    }],
+    "out": "../out",
+    "verbose": false
+}

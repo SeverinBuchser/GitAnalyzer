@@ -76,8 +76,6 @@ class IntersectionsTest {
         assertEquals(item23, pathIterator.next());
 
         assertFalse(iterator.hasNext());
-
-        assertEquals(9, intersections.size());
     }
 
     @Test
@@ -350,8 +348,5 @@ class IntersectionsTest {
 
         assertFalse(intersectionIterator.hasNext());
         assertFalse(iterator.hasNext());
-
-        assertEquals(16, intersections.size());
-
     }
 }

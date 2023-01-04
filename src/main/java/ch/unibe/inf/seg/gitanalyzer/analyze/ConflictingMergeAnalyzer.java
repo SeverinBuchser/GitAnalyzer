@@ -3,80 +3,54 @@ package ch.unibe.inf.seg.gitanalyzer.analyze;
 import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingFile;
 import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingMerge;
 import ch.unibe.inf.seg.gitanalyzer.error.NotComparableMergesException;
-import ch.unibe.inf.seg.gitanalyzer.resolution.ResolutionMerge;
-import org.json.JSONObject;
+import ch.unibe.inf.seg.gitanalyzer.report.ConflictingFileReport;
+import ch.unibe.inf.seg.gitanalyzer.report.ConflictingMergeReport;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-/**
- * Analyzer for a {@link ConflictingMerge}.
- * The analyzer analyzes the conflicting merge by comparing its resolutions against the actual resolution. It also
- * analyzes the conflicting files of the conflicting merge by running the {@link ConflictingFilesAnalyzer} on the
- * conflicting files of the conflicting merge.
- */
-
-public class ConflictingMergeAnalyzer extends Analyzer<ConflictingMerge, JSONObject> {
+public class ConflictingMergeAnalyzer implements Analyzer<ConflictingMerge, ConflictingMergeReport> {
 
     private static final int CONFLICT_LIMIT = 12;
 
-    private final ConflictingFilesAnalyzer subAnalyzer = new ConflictingFilesAnalyzer();
+    private final ConflictingFileAnalyzer subAnalyzer = new ConflictingFileAnalyzer();
 
-    /**
-     * Analyzes a conflicting merge.
-     * Each resolution of the conflicting merge is compared to the actual merge resolution. If one of the resolutions is
-     * equal to the actual merge resolution, the result will be marked as correct. If none of the resolutions matches
-     * the actual one, the result will be marked as incorrect. Each conflicting file of the conflicting merge will also
-     * be analyzed by running the {@link ConflictingFilesAnalyzer} on the conflicting merge. The results of the files
-     * analyzer will be added to the result under the key "conflicting_files".
-     * @param conflictingMerge The conflicting merge to be analyzed.
-     * @return The result of the analysis.
-     */
-    public JSONObject analyze(ConflictingMerge conflictingMerge) {
-        JSONObject result = new JSONObject();
-        result.put("commit_id", conflictingMerge.getCommitId());
-        result.put("all_conflicting_chunks_count", conflictingMerge.getConflictCount());
-        boolean correct = false;
-        printAnalyzing(conflictingMerge.getCommitIdShort(), 2);
+    public ConflictingMergeReport analyze(ConflictingMerge conflictingMerge) {
+        ConflictingMergeReport report = new ConflictingMergeReport(conflictingMerge.getCommitId());
+        System.out.println(report.toString(2));
 
         try {
             if (checkConflictCount(conflictingMerge)) {
-                result.put("state", ResultState.SKIP);
-                result.put("reason", "Conflicting Merge contains binary files.");
+                report.skip("Binary Files");
             } else if (checkConflictLimit(conflictingMerge)) {
-                result.put("state", ResultState.SKIP);
-                result.put("reason", getTooManyConflictsMessage(conflictingMerge));
+                report.skip(getTooManyConflictsMessage(conflictingMerge));
             } else {
-                ResolutionMerge actualResolutionMerge = conflictingMerge.getActualResolution();
-                for (ResolutionMerge resolutionMerge: conflictingMerge) {
-                    if (actualResolutionMerge.compareTo(resolutionMerge) == 0) {
-                        correct = true;
-                        break;
-                    }
-                }
-                result.put("state", ResultState.OK);
-                result.put("correct", correct);
+                int conflictingFileCorrectCount = 0;
+                int conflictingFileCount = 0;
 
-                ArrayList<JSONObject> files = this.subAnalyzer.analyze(conflictingMerge.getConflictingFiles());
-                result.put("conflicting_files", files);
-                result.put("conflicting_files_count", files.size());
-                putCount(result, files, "conflicting_files_correct_count");
-                putSum(result, files, "conflicting_chunks_count");
-                putSum(result, files, "conflicting_chunks_correct_count");
+                for (ConflictingFile conflictingFile: conflictingMerge.getConflictingFiles()) {
+                    ConflictingFileReport fileReport = this.subAnalyzer.analyze(conflictingFile);
+                    if (fileReport.isFail() || fileReport.isSkip()) {
+                        throw new IOException("Unwanted exception");
+                    }
+
+                    if (fileReport.isMarked()) conflictingFileCorrectCount++;
+                    conflictingFileCount++;
+                    report.addFileReport(fileReport);
+                }
+
+                report.ok(conflictingFileCorrectCount == conflictingFileCount);
             }
         } catch (IOException e) {
-            result.put("state", ResultState.FAIL);
-            result.put("reason", e.getMessage());
+            report.fail(e.getMessage());
         } catch (RuntimeException e) {
             Throwable cause = e.getCause();
             if (cause instanceof NotComparableMergesException) {
-                result.put("state", ResultState.FAIL);
-                result.put("reason", cause.getMessage());
+                report.fail(e.getMessage());
             } else throw e;
         }
 
-        printComplete("Conflicting Merge", 2, result);
-        return result;
+        System.out.println(report.toString(2));
+        return report;
     }
 
     private static boolean checkConflictCount(ConflictingMerge conflictingMerge) {
@@ -92,7 +66,7 @@ public class ConflictingMergeAnalyzer extends Analyzer<ConflictingMerge, JSONObj
     }
 
     private static String getTooManyConflictsMessage(ConflictingMerge conflictingMerge) {
-        return String.format("Too many conflicts. Found %.0f, max is %d", conflictingMerge.getConflictCount(), CONFLICT_LIMIT);
+        return String.format("Conflicts: %.0f, Max: %d", conflictingMerge.getConflictCount(), CONFLICT_LIMIT);
     }
 }
 
