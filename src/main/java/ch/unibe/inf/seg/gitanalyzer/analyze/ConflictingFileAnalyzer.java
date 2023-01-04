@@ -4,15 +4,29 @@ import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingChunk;
 import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingFile;
 import ch.unibe.inf.seg.gitanalyzer.report.ConflictingFileReport;
 import ch.unibe.inf.seg.gitanalyzer.resolution.ResolutionFile;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.AnalyzerLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.SimpleAnalyzerLogger;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class ConflictingFileAnalyzer implements Analyzer<ConflictingFile, ConflictingFileReport> {
+
+    private AnalyzerLogger logger = new SimpleAnalyzerLogger(System.out, 3);
+    private final ConflictingChunkAnalyzer subAnalyzer;
+
+    public ConflictingFileAnalyzer() {
+        this.subAnalyzer = new ConflictingChunkAnalyzer(this.logger);
+    }
+
+    public ConflictingFileAnalyzer(AnalyzerLogger logger) {
+        this.logger = logger;
+        this.subAnalyzer = new ConflictingChunkAnalyzer(this.logger);
+    }
+
     @Override
     public ConflictingFileReport analyze(ConflictingFile conflictingFile) {
         ConflictingFileReport report = new ConflictingFileReport(conflictingFile.getFileName());
-        System.out.println(report.toString(3));
+        this.logger.println(report, 3);
 
         try {
             boolean correct = false;
@@ -25,20 +39,18 @@ public class ConflictingFileAnalyzer implements Analyzer<ConflictingFile, Confli
                 }
             }
 
-            ConflictingChunkAnalyzer subAnalyzer = new ConflictingChunkAnalyzer(actualResolutionFile);
-            ArrayList<Boolean> chunks = new ArrayList<>();
+            this.subAnalyzer.setResolutionFile(actualResolutionFile);
 
             for (ConflictingChunk conflictingChunk : conflictingFile.getConflictingChunks()) {
-                chunks.add(subAnalyzer.analyze(conflictingChunk));
+                report.addChunkReport(this.subAnalyzer.analyze(conflictingChunk));
             }
 
             report.ok(correct);
-            report.addChunkReports(chunks);
 
         } catch (IOException e) {
             report.fail(e.getMessage());
         }
-        System.out.println(report.toString(3));
+        this.logger.println(report, 3);
         return report;
     }
 }

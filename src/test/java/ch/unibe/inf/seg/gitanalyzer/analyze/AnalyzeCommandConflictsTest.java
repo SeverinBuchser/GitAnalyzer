@@ -79,7 +79,7 @@ class AnalyzeCommandTest {
 
 
         // check conflicting merges
-        JSONArray cms = project.getJSONArray("cm");
+        JSONArray cms = project.getJSONArray("cms");
         assertEquals(4, cms.length());
 
         JSONObject cm1 = cms.getJSONObject(0);
@@ -108,9 +108,9 @@ class AnalyzeCommandTest {
 
 
         // check conflicting files
-        assertFalse(cm1.has("cf"));
+        assertFalse(cm1.has("cfs"));
 
-        JSONArray cfs2 = cm2.getJSONArray("cf");
+        JSONArray cfs2 = cm2.getJSONArray("cfs");
         assertEquals(1, cfs2.length());
 
         JSONObject cf2 = cfs2.getJSONObject(0);
@@ -119,7 +119,7 @@ class AnalyzeCommandTest {
         assertEquals("src/main/Main.java", cf2.getString("file_name"));
         assertFalse(cm4.getBoolean("mark"));
 
-        JSONArray cfs3 = cm3.getJSONArray("cf");
+        JSONArray cfs3 = cm3.getJSONArray("cfs");
         assertEquals(1, cfs3.length());
 
         JSONObject cf3 = cfs3.getJSONObject(0);
@@ -128,7 +128,7 @@ class AnalyzeCommandTest {
         assertEquals("src/main/Main.java", cf3.getString("file_name"));
         assertFalse(cf3.getBoolean("mark"));
 
-        JSONArray cfs4 = cm4.getJSONArray("cf");
+        JSONArray cfs4 = cm4.getJSONArray("cfs");
         assertEquals(1, cfs3.length());
 
         JSONObject cf4 = cfs4.getJSONObject(0);
@@ -140,20 +140,44 @@ class AnalyzeCommandTest {
 
 
         // check conflicting chunks
-        JSONArray ccs2 = cf2.getJSONArray("cc");
+        JSONArray ccs2 = cf2.getJSONArray("ccs");
         assertEquals(2, ccs2.length());
-        assertTrue(ccs2.getBoolean(0));
-        assertFalse(ccs2.getBoolean(1));
 
-        JSONArray ccs3 = cf3.getJSONArray("cc");
+        JSONObject cc20 = ccs2.getJSONObject(0);
+        assertEquals("cc", cc20.getString("id"));
+        assertEquals("OK", cc20.getString("state"));
+        assertTrue(cc20.getBoolean("mark"));
+
+        JSONObject cc21 = ccs2.getJSONObject(1);
+        assertEquals("cc", cc21.getString("id"));
+        assertEquals("OK", cc21.getString("state"));
+        assertFalse(cc21.getBoolean("mark"));
+
+        JSONArray ccs3 = cf3.getJSONArray("ccs");
         assertEquals(2, ccs3.length());
-        assertTrue(ccs3.getBoolean(0));
-        assertTrue(ccs3.getBoolean(1));
 
-        JSONArray ccs4 = cf4.getJSONArray("cc");
+        JSONObject cc30 = ccs3.getJSONObject(0);
+        assertEquals("cc", cc30.getString("id"));
+        assertEquals("OK", cc30.getString("state"));
+        assertTrue(cc30.getBoolean("mark"));
+
+        JSONObject cc31 = ccs3.getJSONObject(1);
+        assertEquals("cc", cc31.getString("id"));
+        assertEquals("OK", cc31.getString("state"));
+        assertTrue(cc31.getBoolean("mark"));
+
+        JSONArray ccs4 = cf4.getJSONArray("ccs");
         assertEquals(2, ccs4.length());
-        assertTrue(ccs4.getBoolean(0));
-        assertFalse(ccs4.getBoolean(1));
+
+        JSONObject cc40 = ccs4.getJSONObject(0);
+        assertEquals("cc", cc40.getString("id"));
+        assertEquals("OK", cc40.getString("state"));
+        assertTrue(cc40.getBoolean("mark"));
+
+        JSONObject cc41 = ccs4.getJSONObject(1);
+        assertEquals("cc", cc41.getString("id"));
+        assertEquals("OK", cc41.getString("state"));
+        assertFalse(cc41.getBoolean("mark"));
 
         assertTrue(outputFile.delete());
     }

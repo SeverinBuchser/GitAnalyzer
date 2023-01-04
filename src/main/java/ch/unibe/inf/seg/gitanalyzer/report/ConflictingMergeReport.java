@@ -20,7 +20,7 @@ public class ConflictingMergeReport extends MarkableReport {
     public JSONObject report() {
         JSONObject reportObject = super.report();
         reportObject.put("commit_id", this.commitId);
-        if (this.isOk()) reportObject.put("cf", this.fileReports.report());
+        if (this.isOk()) reportObject.put("cfs", this.fileReports.report());
         return reportObject;
     }
 

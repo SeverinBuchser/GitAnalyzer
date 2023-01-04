@@ -5,11 +5,24 @@ import ch.unibe.inf.seg.gitanalyzer.project.Project;
 import ch.unibe.inf.seg.gitanalyzer.project.ProjectInfos;
 import ch.unibe.inf.seg.gitanalyzer.project.ProjectIterator;
 import ch.unibe.inf.seg.gitanalyzer.report.ProjectListReport;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.AnalyzerLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.SimpleAnalyzerLogger;
 
 import java.io.IOException;
 
 public class ProjectListAnalyzer implements Analyzer<ProjectList, ProjectListReport> {
-    private final ProjectAnalyzer subAnalyzer = new ProjectAnalyzer();
+
+    private AnalyzerLogger logger = new SimpleAnalyzerLogger(System.out, 0);
+    private final ProjectAnalyzer subAnalyzer;
+
+    public ProjectListAnalyzer() {
+        this.subAnalyzer = new ProjectAnalyzer(this.logger);
+    }
+
+    public ProjectListAnalyzer(AnalyzerLogger logger) {
+        this.logger = logger;
+        this.subAnalyzer = new ProjectAnalyzer(this.logger);
+    }
 
     @Override
     public ProjectListReport analyze(ProjectList projectList) throws IOException {
@@ -17,7 +30,7 @@ public class ProjectListAnalyzer implements Analyzer<ProjectList, ProjectListRep
         report.startTimer();
 
         // TODO: add other id than project_list
-        System.out.println(report.toString(0));
+        this.logger.println(report, 0);
 
         ProjectInfos projectInfos = projectList.toProjectInfos();
 
@@ -32,7 +45,7 @@ public class ProjectListAnalyzer implements Analyzer<ProjectList, ProjectListRep
         report.ok();
         report.endTimer();
 
-        System.out.println(report.toString(0));
+        this.logger.println(report, 0);
         return report;
     }
 }

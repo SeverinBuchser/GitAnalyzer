@@ -1,6 +1,6 @@
 {
     "analyze": true,
-    "clone": false,
+    "clone": true,
     "projectLists": [{
         "skip": false,
         "list": "../project-lists/test.csv",

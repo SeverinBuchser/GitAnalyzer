@@ -10,7 +10,6 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.merge.MergeResult;
 import org.eclipse.jgit.revwalk.RevCommit;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -110,14 +109,6 @@ public class ConflictingMerge implements Iterable<ResolutionMerge> {
      */
     public String getCommitId() {
         return this.commit.getName();
-    }
-
-    /**
-     * Gets a short version of the commit id of this conflicting merge.
-     * @return The short version of the commit id of this conflicting merge.
-     */
-    public String getCommitIdShort() {
-        return this.getCommitId().substring(0, 7);
     }
 
     /**

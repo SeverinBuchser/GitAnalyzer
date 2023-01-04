@@ -60,18 +60,6 @@ public class ConflictingFile implements Iterable<ResolutionFile> {
     }
 
     /**
-     * Formats the filename to a specific length. If the filename is too short empty spaces will be added. If it is too
-     * long, the file name will be shortened.
-     * @return A shortened filename.
-     */
-    public String getFileNameShort() {
-        String shortFileName = this.fileName.substring(Math.max(0, this.fileName.length() - 20));
-        if (this.fileName.length() > 20) {
-            return "..." + shortFileName;
-        } else return String.format("%23s", shortFileName);
-    }
-
-    /**
      * Size of the {@link #conflictingChunks}.
      * @return The number of conflicting chunks.
      */

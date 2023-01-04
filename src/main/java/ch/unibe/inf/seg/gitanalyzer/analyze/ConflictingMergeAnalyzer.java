@@ -5,6 +5,8 @@ import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingMerge;
 import ch.unibe.inf.seg.gitanalyzer.error.NotComparableMergesException;
 import ch.unibe.inf.seg.gitanalyzer.report.ConflictingFileReport;
 import ch.unibe.inf.seg.gitanalyzer.report.ConflictingMergeReport;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.AnalyzerLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.SimpleAnalyzerLogger;
 
 import java.io.IOException;
 
@@ -12,11 +14,22 @@ public class ConflictingMergeAnalyzer implements Analyzer<ConflictingMerge, Conf
 
     private static final int CONFLICT_LIMIT = 12;
 
-    private final ConflictingFileAnalyzer subAnalyzer = new ConflictingFileAnalyzer();
+    private AnalyzerLogger logger = new SimpleAnalyzerLogger(System.out, 2);
+
+    private final ConflictingFileAnalyzer subAnalyzer;
+
+    public ConflictingMergeAnalyzer() {
+        this.subAnalyzer = new ConflictingFileAnalyzer(this.logger);
+    }
+
+    public ConflictingMergeAnalyzer(AnalyzerLogger logger) {
+        this.logger = logger;
+        this.subAnalyzer = new ConflictingFileAnalyzer(this.logger);
+    }
 
     public ConflictingMergeReport analyze(ConflictingMerge conflictingMerge) {
         ConflictingMergeReport report = new ConflictingMergeReport(conflictingMerge.getCommitId());
-        System.out.println(report.toString(2));
+        this.logger.println(report, 2);
 
         try {
             if (checkConflictCount(conflictingMerge)) {
@@ -49,7 +62,7 @@ public class ConflictingMergeAnalyzer implements Analyzer<ConflictingMerge, Conf
             } else throw e;
         }
 
-        System.out.println(report.toString(2));
+        this.logger.println(report, 2);
         return report;
     }
 

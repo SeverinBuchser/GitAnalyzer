@@ -1,18 +1,31 @@
 package ch.unibe.inf.seg.gitanalyzer.analyze;
 
 import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingChunk;
+import ch.unibe.inf.seg.gitanalyzer.report.ConflictingChunkReport;
 import ch.unibe.inf.seg.gitanalyzer.resolution.ResolutionFile;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.AnalyzerLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.SimpleAnalyzerLogger;
 
-public class ConflictingChunkAnalyzer implements Analyzer<ConflictingChunk, Boolean> {
-    private final ResolutionFile resolutionFile;
+public class ConflictingChunkAnalyzer implements Analyzer<ConflictingChunk, ConflictingChunkReport> {
+    private ResolutionFile resolutionFile;
 
-    public ConflictingChunkAnalyzer(ResolutionFile resolutionFile) {
+    private AnalyzerLogger logger = new SimpleAnalyzerLogger(System.out, 4);
+
+    public ConflictingChunkAnalyzer() {}
+
+    public ConflictingChunkAnalyzer(AnalyzerLogger logger) {
+        this.logger = logger;
+    }
+
+    public void setResolutionFile(ResolutionFile resolutionFile) {
         this.resolutionFile = resolutionFile;
     }
 
     @Override
-    public Boolean analyze(ConflictingChunk conflictingChunk) {
-        System.out.format("\t\t\t\tIn Progress: %s\n", "cc");
+    public ConflictingChunkReport analyze(ConflictingChunk conflictingChunk) {
+        if (this.resolutionFile == null) throw new IllegalStateException("The resolution file has not been set yet.");
+        ConflictingChunkReport report = new ConflictingChunkReport();
+        this.logger.println(report, 4);
         boolean correct = false;
 
         if (conflictingChunk.isFirstConflictingRangeInResolutionFile(this.resolutionFile)) {
@@ -20,8 +33,9 @@ public class ConflictingChunkAnalyzer implements Analyzer<ConflictingChunk, Bool
         } else if (conflictingChunk.isNextConflictingRangeInResolutionFile(this.resolutionFile)) {
             correct = true;
         }
+        report.ok(correct);
 
-        System.out.format("\t\t\t\t%s: %b\n", "cc", correct);
-        return correct;
+        this.logger.println(report, 4);
+        return report;
     }
 }

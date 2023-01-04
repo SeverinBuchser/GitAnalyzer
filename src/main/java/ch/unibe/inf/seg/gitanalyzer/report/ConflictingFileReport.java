@@ -2,11 +2,9 @@ package ch.unibe.inf.seg.gitanalyzer.report;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 public class ConflictingFileReport extends MarkableReport {
 
-    private final ArrayList<Boolean> chunkReports = new ArrayList<>();
+    private final SubReports chunkReports = new SubReports();
     private final String filename;
 
     public ConflictingFileReport(String filename) {
@@ -14,15 +12,15 @@ public class ConflictingFileReport extends MarkableReport {
         this.filename = filename;
     }
 
-    public void addChunkReports(ArrayList<Boolean> chunkReports) {
-        this.chunkReports.addAll(chunkReports);
+    public void addChunkReport(ConflictingChunkReport chunkReport) {
+        this.chunkReports.add(chunkReport);
     }
 
     @Override
     public JSONObject report() {
         JSONObject reportObject = super.report();
         reportObject.put("file_name", this.filename);
-        if (this.isOk()) reportObject.put("cc", this.chunkReports);
+        if (this.isOk()) reportObject.put("ccs", this.chunkReports.report());
         return reportObject;
     }
 

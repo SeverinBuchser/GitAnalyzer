@@ -46,7 +46,7 @@ public class ProjectReport extends Report {
         JSONObject reportObject = super.report();
         reportObject.put("project_name", this.projectName);
         if (this.isOk()) {
-            reportObject.put("cm", this.mergeReports.report());
+            reportObject.put("cms", this.mergeReports.report());
             reportObject.put("commit_count", this.commitCount);
             reportObject.put("merge_count", this.mergeCount);
             reportObject.put("octopus_merge_count", this.octopusMergeCount);

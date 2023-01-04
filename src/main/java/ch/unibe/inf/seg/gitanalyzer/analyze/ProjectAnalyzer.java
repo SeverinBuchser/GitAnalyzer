@@ -3,14 +3,27 @@ package ch.unibe.inf.seg.gitanalyzer.analyze;
 import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingMerge;
 import ch.unibe.inf.seg.gitanalyzer.project.Project;
 import ch.unibe.inf.seg.gitanalyzer.report.ProjectReport;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.AnalyzerLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.SimpleAnalyzerLogger;
 
 public class ProjectAnalyzer implements Analyzer<Project, ProjectReport> {
-    private final ConflictingMergeAnalyzer subAnalyzer = new ConflictingMergeAnalyzer();
+
+    private AnalyzerLogger logger = new SimpleAnalyzerLogger(System.out, 1);
+    private final ConflictingMergeAnalyzer subAnalyzer;
+
+    public ProjectAnalyzer() {
+        this.subAnalyzer = new ConflictingMergeAnalyzer(this.logger);
+    }
+
+    public ProjectAnalyzer(AnalyzerLogger logger) {
+        this.logger = logger;
+        this.subAnalyzer = new ConflictingMergeAnalyzer(this.logger);
+    }
 
     @Override
     public ProjectReport analyze(Project project) {
         ProjectReport report = new ProjectReport(project.getName());
-        System.out.println(report.toString(1));
+        this.logger.println(report, 1);
 
         try {
             for (ConflictingMerge conflictingMerge: project) {
@@ -30,7 +43,7 @@ public class ProjectAnalyzer implements Analyzer<Project, ProjectReport> {
             report.fail(e.getMessage());
         }
 
-        System.out.println(report.toString(1));
+        this.logger.println(report, 1);
         return report;
     }
 }
