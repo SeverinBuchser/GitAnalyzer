@@ -88,7 +88,7 @@ public class Config {
     public Path getOutPathAbsolute() {
         Path normalized = FileHelper.normalize(this.getOut());
         if (normalized.isAbsolute()) return normalized;
-        if (this.hasConfigPath()) return FileHelper.toAbsolutePath(this.getOut(), this.getConfigPathAbsolute());
+        if (this.hasConfigPath()) return FileHelper.toAbsolutePath(normalized, this.getConfigPathAbsolute());
         return FileHelper.toAbsolutePath(normalized);
     }
 
@@ -189,11 +189,6 @@ public class Config {
     public void setAndSave(Path configPath) throws IOException {
         this.setConfigPath(configPath);
         this.save();
-    }
-
-    public Path toRelativePath(Path path) {
-        this.preconditionHasConfigPath();
-        return FileHelper.toAbsolutePath(path, this.getConfigPathAbsolute());
     }
 
     @Override

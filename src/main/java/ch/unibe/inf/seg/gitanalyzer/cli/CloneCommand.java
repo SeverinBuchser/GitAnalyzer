@@ -15,7 +15,7 @@ import java.io.IOException;
 )
 public class CloneCommand implements Runnable {
 
-    private final ProjectList projectList = new ProjectList();
+    private final ProjectList projectList = new ProjectList("");
 
     @CommandLine.Option(
             names = {"-d", "--dir"},

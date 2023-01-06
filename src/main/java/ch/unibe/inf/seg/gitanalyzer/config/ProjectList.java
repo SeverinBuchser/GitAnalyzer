@@ -29,7 +29,8 @@ public class ProjectList {
     }
 
     public ProjectLists getProjectLists() {
-        this.preconditionBelongsToProjectLists();
+        if (!this.hasProjectLists()) throw new IllegalStateException("The project list does not belong to a " +
+                "ProjectLists object.");
         return this.projectLists;
     }
 
@@ -50,16 +51,10 @@ public class ProjectList {
         return Path.of(this.jsonObject.getString("list"));
     }
     public Path getListPath() {
-        this.preconditionHasList();
         return FileHelper.normalize(this.getList());
     }
     public Path getListPathAbsolute() {
-        this.preconditionHasList();
-        if (this.belongsToProjectLists() && this.projectLists.belongsToConfig()) {
-            return this.getProjectLists().getConfig().toRelativePath(this.getList());
-        } else {
-            return FileHelper.toAbsolutePath(this.getList());
-        }
+        return this.toAbsolutePath(this.getList());
     }
 
     public void setDir(String dir) {
@@ -79,7 +74,6 @@ public class ProjectList {
      * @return An absolute path, representing the project directory.
      */
     public Path getDirPath() {
-        this.preconditionHasList();
         return FileHelper.normalize(this.getDir());
     }
 
@@ -93,19 +87,13 @@ public class ProjectList {
      * @return An absolute path, representing the project directory.
      */
     public Path getDirPathAbsolute() {
-        this.preconditionHasList();
-        if (this.belongsToProjectLists() && this.projectLists.belongsToConfig()) {
-            return this.getProjectLists().getConfig().toRelativePath(this.getDir());
-        } else {
-            return FileHelper.toAbsolutePath(this.getDir());
-        }
+        return this.toAbsolutePath(this.getDir());
     }
 
     public void setSuffix(String suffix) {
         this.jsonObject.put("suffix", suffix);
     }
     public String getSuffix() {
-        this.preconditionHasList();
         return this.jsonObject.getString("suffix");
     }
 
@@ -113,32 +101,21 @@ public class ProjectList {
         this.jsonObject.put("skip", skip);
     }
     public boolean getSkip() {
-        this.preconditionHasList();
         return this.jsonObject.getBoolean("skip");
     }
 
     public Path getOutFilename() {
-        this.preconditionHasList();
         String listBaseName = FilenameUtils.getBaseName(this.getList().toString());
         return Path.of(listBaseName + (this.getSuffix().equals("") ? "" : "-") + this.getSuffix() + ".json");
     }
 
-    public ProjectList() {
-        this.preconditionSchema();
-    }
-
-    public ProjectList(ProjectLists projectLists) {
-        this();
+    public ProjectList(String list, ProjectLists projectLists) {
+        this(list);
         this.projectLists = projectLists;
     }
 
-    public ProjectList(String projectList, ProjectLists projectLists) {
-        this(projectList);
-        this.projectLists = projectLists;
-    }
-
-    public ProjectList(String projectList) {
-        this.setList(projectList);
+    public ProjectList(String list) {
+        this.setList(list);
         this.preconditionSchema();
     }
 
@@ -153,20 +130,20 @@ public class ProjectList {
     }
 
     public ProjectList(
-            String projectList,
-            String projectDir,
-            String outSuffix,
+            String list,
+            String dir,
+            String suffix,
             boolean skip,
             ProjectLists projectLists
     ) {
-        this(projectList, projectDir, outSuffix, skip);
+        this(list, dir, suffix, skip);
         this.projectLists = projectLists;
     }
 
-    public ProjectList(String projectList, String projectDir, String outSuffix, boolean skip) {
-        this.setList(projectList);
-        this.setDir(projectDir);
-        this.setSuffix(outSuffix);
+    public ProjectList(String list, String dir, String suffix, boolean skip) {
+        this.setList(list);
+        this.setDir(dir);
+        this.setSuffix(suffix);
         this.setSkip(skip);
         this.preconditionSchema();
     }
@@ -176,34 +153,21 @@ public class ProjectList {
      * If the validation fails, a {@link ValidationException} is thrown.
      */
     private void preconditionSchema() {
-        if (this.hasList()) {
-            JSONValidator.validate(this.jsonObject, "projectList.json");
-        }
+        JSONValidator.validate(this.jsonObject, "projectList.json");
     }
 
-    /**
-     * Precondition method, checking if the list has been set yet.
-     * @throws IllegalStateException the list has not been set yet.
-     */
-    private void preconditionHasList() {
-        if (!this.hasList()) throw new IllegalStateException("ProjectListInfo does not have a list.");
-    }
-
-    /**
-     * Precondition method, checking if the project list belong to a {@link ProjectLists} object.
-     * @throws IllegalStateException the project list does not belong to a {@link ProjectLists} object.
-     */
-    private void preconditionBelongsToProjectLists() {
-        if (!this.belongsToProjectLists()) throw new IllegalStateException("The project list does not belong to a " +
-                "ProjectLists object.");
-    }
-
-    public boolean hasList() {
-        return this.jsonObject.has("list");
-    }
-
-    public boolean belongsToProjectLists() {
+    public boolean hasProjectLists() {
         return this.projectLists != null;
+    }
+
+    private Path toAbsolutePath(Path path) {
+        Path normalized = FileHelper.normalize(path);
+        if (normalized.isAbsolute()) return normalized;
+        if (this.hasProjectLists() && this.projectLists.belongsToConfig()) {
+            Config config = this.projectLists.getConfig();
+            if (config.hasConfigPath()) return FileHelper.toAbsolutePath(normalized, config.getConfigPathAbsolute());
+        }
+        return FileHelper.toAbsolutePath(normalized);
     }
 
     public ProjectInfos toProjectInfos() throws IOException {
@@ -218,7 +182,6 @@ public class ProjectList {
 
     @Override
     public String toString() {
-        this.preconditionHasList();
         return this.jsonObject.toString(4);
     }
 }

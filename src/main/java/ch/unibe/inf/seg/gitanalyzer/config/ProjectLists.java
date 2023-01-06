@@ -26,6 +26,10 @@ public class ProjectLists implements Iterable<ProjectList> {
 
     private final ArrayList<ProjectList> projectLists = new ArrayList<>();
 
+    public ProjectLists() {
+        this(new JSONArray());
+    }
+
     public ProjectLists(JSONArray jsonArray, Config config) {
         this(jsonArray);
         this.config = config;

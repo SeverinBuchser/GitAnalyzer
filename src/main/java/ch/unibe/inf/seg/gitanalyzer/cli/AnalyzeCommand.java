@@ -19,7 +19,7 @@ import java.nio.file.Path;
 )
 public class AnalyzeCommand implements Runnable {
 
-    private final ProjectList projectList = new ProjectList();
+    private final ProjectList projectList = new ProjectList("");
 
     @CommandLine.Option(
             names = {"-d", "--dir"},
