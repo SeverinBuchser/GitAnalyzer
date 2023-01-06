@@ -5,13 +5,13 @@ import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingFile;
 import ch.unibe.inf.seg.gitanalyzer.report.ConflictingFileReport;
 import ch.unibe.inf.seg.gitanalyzer.resolution.ResolutionFile;
 import ch.unibe.inf.seg.gitanalyzer.util.logger.AnalyzerLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.SimpleAnalyzerLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.OutputStreamLogger;
 
 import java.io.IOException;
 
 public class ConflictingFileAnalyzer implements Analyzer<ConflictingFile, ConflictingFileReport> {
 
-    private AnalyzerLogger logger = new SimpleAnalyzerLogger(System.out, 3);
+    private AnalyzerLogger logger = new OutputStreamLogger(System.out, 3);
     private final ConflictingChunkAnalyzer subAnalyzer;
 
     public ConflictingFileAnalyzer() {

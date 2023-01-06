@@ -6,7 +6,7 @@ import ch.unibe.inf.seg.gitanalyzer.error.NotComparableMergesException;
 import ch.unibe.inf.seg.gitanalyzer.report.ConflictingFileReport;
 import ch.unibe.inf.seg.gitanalyzer.report.ConflictingMergeReport;
 import ch.unibe.inf.seg.gitanalyzer.util.logger.AnalyzerLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.SimpleAnalyzerLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.OutputStreamLogger;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ public class ConflictingMergeAnalyzer implements Analyzer<ConflictingMerge, Conf
 
     private static final int CONFLICT_LIMIT = 12;
 
-    private AnalyzerLogger logger = new SimpleAnalyzerLogger(System.out, 2);
+    private AnalyzerLogger logger = new OutputStreamLogger(System.out, 2);
 
     private final ConflictingFileAnalyzer subAnalyzer;
 

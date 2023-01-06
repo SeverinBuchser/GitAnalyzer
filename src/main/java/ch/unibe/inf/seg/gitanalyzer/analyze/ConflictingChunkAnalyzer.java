@@ -4,12 +4,12 @@ import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingChunk;
 import ch.unibe.inf.seg.gitanalyzer.report.ConflictingChunkReport;
 import ch.unibe.inf.seg.gitanalyzer.resolution.ResolutionFile;
 import ch.unibe.inf.seg.gitanalyzer.util.logger.AnalyzerLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.SimpleAnalyzerLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.OutputStreamLogger;
 
 public class ConflictingChunkAnalyzer implements Analyzer<ConflictingChunk, ConflictingChunkReport> {
     private ResolutionFile resolutionFile;
 
-    private AnalyzerLogger logger = new SimpleAnalyzerLogger(System.out, 4);
+    private AnalyzerLogger logger = new OutputStreamLogger(System.out, 4);
 
     public ConflictingChunkAnalyzer() {}
 

@@ -4,11 +4,11 @@ import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingMerge;
 import ch.unibe.inf.seg.gitanalyzer.project.Project;
 import ch.unibe.inf.seg.gitanalyzer.report.ProjectReport;
 import ch.unibe.inf.seg.gitanalyzer.util.logger.AnalyzerLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.SimpleAnalyzerLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.OutputStreamLogger;
 
 public class ProjectAnalyzer implements Analyzer<Project, ProjectReport> {
 
-    private AnalyzerLogger logger = new SimpleAnalyzerLogger(System.out, 1);
+    private AnalyzerLogger logger = new OutputStreamLogger(System.out, 1);
     private final ConflictingMergeAnalyzer subAnalyzer;
 
     public ProjectAnalyzer() {

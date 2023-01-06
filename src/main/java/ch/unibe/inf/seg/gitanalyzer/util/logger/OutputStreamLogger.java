@@ -5,11 +5,11 @@ import ch.unibe.inf.seg.gitanalyzer.report.Report;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-public class SimpleAnalyzerLogger extends PrintStream implements AnalyzerLogger {
+public class OutputStreamLogger extends PrintStream implements AnalyzerLogger {
 
     private final int levelZero;
 
-    public SimpleAnalyzerLogger(OutputStream out, int levelZero) {
+    public OutputStreamLogger(OutputStream out, int levelZero) {
         super(out);
         this.levelZero = levelZero;
     }

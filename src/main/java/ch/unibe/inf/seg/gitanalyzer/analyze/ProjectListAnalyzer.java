@@ -6,13 +6,13 @@ import ch.unibe.inf.seg.gitanalyzer.project.ProjectInfos;
 import ch.unibe.inf.seg.gitanalyzer.project.ProjectIterator;
 import ch.unibe.inf.seg.gitanalyzer.report.ProjectListReport;
 import ch.unibe.inf.seg.gitanalyzer.util.logger.AnalyzerLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.SimpleAnalyzerLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.OutputStreamLogger;
 
 import java.io.IOException;
 
 public class ProjectListAnalyzer implements Analyzer<ProjectList, ProjectListReport> {
 
-    private AnalyzerLogger logger = new SimpleAnalyzerLogger(System.out, 0);
+    private AnalyzerLogger logger = new OutputStreamLogger(System.out, 0);
     private final ProjectAnalyzer subAnalyzer;
 
     public ProjectListAnalyzer() {
