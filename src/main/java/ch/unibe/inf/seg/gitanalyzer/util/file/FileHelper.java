@@ -3,7 +3,6 @@ package ch.unibe.inf.seg.gitanalyzer.util.file;
 import org.apache.commons.io.FilenameUtils;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Helper class for file operations.
@@ -16,7 +15,7 @@ public class FileHelper {
      * @return A normalized path.
      */
     public static Path normalize(String path) {
-        return normalize(Paths.get(path));
+        return normalize(Path.of(path));
     }
 
     /**
@@ -25,7 +24,7 @@ public class FileHelper {
      * @return A normalized path.
      */
     public static Path normalize(Path path) {
-        return Paths.get(FilenameUtils.separatorsToSystem(path.toString())).normalize();
+        return Path.of(FilenameUtils.separatorsToSystem(path.toString())).normalize();
     }
 
     /**
@@ -35,7 +34,7 @@ public class FileHelper {
      * @see #toAbsolutePath(Path, Path)
      */
     public static Path toAbsolutePath(String path) {
-        return toAbsolutePath(path, Paths.get("").toAbsolutePath().toString());
+        return toAbsolutePath(path, Path.of("").toAbsolutePath().toString());
     }
 
     /**
@@ -45,7 +44,7 @@ public class FileHelper {
      * @see #toAbsolutePath(Path, Path)
      */
     public static Path toAbsolutePath(Path path) {
-        return toAbsolutePath(path, Paths.get("").toAbsolutePath());
+        return toAbsolutePath(path, Path.of("").toAbsolutePath());
     }
 
     /**
@@ -56,7 +55,7 @@ public class FileHelper {
      * @see #toAbsolutePath(Path, Path)
      */
     public static Path toAbsolutePath(String path, String relativeTo) {
-        return toAbsolutePath(Paths.get(path), Paths.get(relativeTo));
+        return toAbsolutePath(Path.of(path), Path.of(relativeTo));
     }
 
     /**
@@ -67,7 +66,7 @@ public class FileHelper {
      * @see #toAbsolutePath(Path, Path)
      */
     public static Path toAbsolutePath(String path, Path relativeTo) {
-        return toAbsolutePath(Paths.get(path), relativeTo);
+        return toAbsolutePath(Path.of(path), relativeTo);
     }
 
     /**
@@ -78,7 +77,7 @@ public class FileHelper {
      * @see #toAbsolutePath(Path, Path)
      */
     public static Path toAbsolutePath(Path path, String relativeTo) {
-        return toAbsolutePath(path, Paths.get(relativeTo));
+        return toAbsolutePath(path, Path.of(relativeTo));
     }
 
     /**
@@ -103,7 +102,7 @@ public class FileHelper {
     public static Path toAbsolutePath(Path path, Path relativeTo) {
         path = normalize(path);
         if (path.isAbsolute()) {
-            return Paths.get(FilenameUtils.normalize(path.toString()));
+            return Path.of(FilenameUtils.normalize(path.toString()));
         }
         relativeTo = normalize(relativeTo);
 
@@ -111,8 +110,8 @@ public class FileHelper {
             relativeTo = toAbsolutePath(relativeTo);
         }
         if (!FilenameUtils.getExtension(relativeTo.toString()).equals("")) {
-            relativeTo = Paths.get(FilenameUtils.getPath(relativeTo.toString()));
+            relativeTo = Path.of(FilenameUtils.getPath(relativeTo.toString()));
         }
-        return Paths.get("/", FilenameUtils.normalize(relativeTo.resolve(path).toString()));
+        return Path.of("/", FilenameUtils.normalize(relativeTo.resolve(path).toString()));
     }
 }

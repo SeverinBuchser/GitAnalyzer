@@ -102,7 +102,7 @@ public class ConfigEditor extends JPanel implements Updatable, Updater, Subscrib
                     this.projectListInfosEditor.update();
                 } else {
                     JOptionPane.showMessageDialog(frame,
-                            String.format("Project list '%s' already exists.", projectListInfo.getList()));
+                            String.format("Project list '%s' already exists.", projectListInfo.getListPath().toString()));
                 }
             }
             frame.dispose();
@@ -129,7 +129,7 @@ public class ConfigEditor extends JPanel implements Updatable, Updater, Subscrib
         this.cloneProjectsToggle.setSelected(config.getClone());
         this.analyzeConflictsToggle.setSelected(config.getAnalyze());
         this.verboseToggle.setSelected(config.getVerbose());
-        this.outDirTextField.setText(config.getOutAbsolute().toString());
+        this.outDirTextField.setText(config.getOutPathAbsolute().toString());
     }
 
     @Override

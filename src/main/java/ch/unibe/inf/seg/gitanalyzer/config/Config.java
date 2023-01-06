@@ -11,7 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +28,13 @@ public class Config {
     }
 
     public void setConfigPath(String configPath) {
-        this.setConfigPath(Paths.get(configPath));
+        this.setConfigPath(Path.of(configPath));
     }
     public void setConfigPath(Path configPath) {
         this.configPath = configPath;
     }
 
-    public Path getConfigPathRelative() {
+    public Path getConfigPath() {
         this.preconditionHasConfigPath();
         return FileHelper.normalize(this.configPath);
     }
@@ -57,32 +56,44 @@ public class Config {
     public void setAnalyze(boolean analyze) {
         this.jsonObject.put("analyze", analyze);
     }
-    private String getOut() {
-        return this.jsonObject.getString("out");
+    private Path getOut() {
+        return Path.of(this.jsonObject.getString("out"));
     }
 
     /**
-     * Returns the normalized relative (not absolute) out path as found in the original config.
-     * The normalization is necessary in order to allow the config path to be set as any string, without changing the
-     * users input.
-     * @return The normalized relative out path.
+     * Returns a path, created from the out directory. The path will not be transformed to be absolute, which does not
+     * mean, that it cannot be absolute. The value of the path will be the normalized path, which was set to the out
+     * directory.
+     * @return The normalized out path.
      */
-    public Path getOutRelative() {
-        return FileHelper.normalize(Paths.get(this.getOut()));
+    public Path getOutPath() {
+        return FileHelper.normalize(this.getOut());
     }
 
     /**
-     * Returns the normalized absolute out path.
-     * The normalization is necessary in order to allow the config path to be set as any string, without changing the
-     * users input.
+     * Returns a path, created from the out directory. If the out directory is set to be relative, the following
+     * transformations will happen:
+     * - If out is absolute ({@code out = /other/absolute}):
+     *      -> returns {@code /other/absolute}
+     * - Else If the {@link #configPath} is set:
+     *      - {@code out = ../out}
+     *      - {@code configPath = /absolute/path/config.json}
+     *      -> returns {@code /absolute/out}
+     * - Else:
+     *      - {@code out = ../out}
+     *      - {@code cwd = /current/working/dir}
+     *      -> returns {@code /current/working/out}
      * @return The normalized absolute out path.
      */
-    public Path getOutAbsolute() {
-        return this.toRelativePath(this.getOut());
+    public Path getOutPathAbsolute() {
+        Path normalized = FileHelper.normalize(this.getOut());
+        if (normalized.isAbsolute()) return normalized;
+        if (this.hasConfigPath()) return FileHelper.toAbsolutePath(this.getOut(), this.getConfigPathAbsolute());
+        return FileHelper.toAbsolutePath(normalized);
     }
 
     public void setOut(String out) {
-        this.setOut(Paths.get(out));
+        this.setOut(Path.of(out));
     }
     public void setOut(Path out) {
         this.jsonObject.put("out", out.toString());
@@ -180,7 +191,7 @@ public class Config {
         this.save();
     }
 
-    public Path toRelativePath(String path) {
+    public Path toRelativePath(Path path) {
         this.preconditionHasConfigPath();
         return FileHelper.toAbsolutePath(path, this.getConfigPathAbsolute());
     }

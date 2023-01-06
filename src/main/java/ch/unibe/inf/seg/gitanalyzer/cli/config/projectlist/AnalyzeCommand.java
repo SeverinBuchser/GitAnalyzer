@@ -22,8 +22,8 @@ public class AnalyzeCommand implements Runnable {
     public ProjectListMixin mixin;
 
     private File getOutFile() {
-        Path out = this.mixin.getConfig().getOutAbsolute();
-        return out.resolve(Path.of(this.mixin.getProjectList().getOutFilename())).toFile();
+        Path out = this.mixin.getConfig().getOutPathAbsolute();
+        return out.resolve(this.mixin.getProjectList().getOutFilename()).toFile();
     }
 
     @Override

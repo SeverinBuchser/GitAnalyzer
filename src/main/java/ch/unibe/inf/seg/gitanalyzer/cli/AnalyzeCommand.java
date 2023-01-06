@@ -71,7 +71,7 @@ public class AnalyzeCommand implements Runnable {
             ProjectListAnalyzer analyzer = new ProjectListAnalyzer();
             ProjectListReport report = analyzer.analyze(this.projectList);
 
-            File outFile = this.out.resolve(Path.of(this.projectList.getOutFilename())).toFile();
+            File outFile = this.out.resolve(this.projectList.getOutFilename()).toFile();
             FileWriter writer = new FileWriter(outFile);
             writer.write(report.report().toString(4));
             writer.close();

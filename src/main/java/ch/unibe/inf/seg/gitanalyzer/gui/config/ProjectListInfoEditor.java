@@ -30,8 +30,8 @@ public class ProjectListInfoEditor extends JPanel implements Updater {
         this.projectList = projectList;
 
         this.setLayout(new GridBagLayout());
-        this.projectListText = this.addTextFiled("Project List:", projectList.getList(), 0);
-        this.projectDir = this.addTextFiled("Project Dir:", projectList.getDir(), 1);
+        this.projectListText = this.addTextFiled("Project List:", projectList.getListPath().toString(), 0);
+        this.projectDir = this.addTextFiled("Project Dir:", projectList.getDirPath().toString(), 1);
         this.outSuffix = this.addTextFiled("Out Suffix:", projectList.getSuffix(), 2);
         this.skip = this.addSkipCheckbox();
         this.removeButton = this.addRemoveButton();

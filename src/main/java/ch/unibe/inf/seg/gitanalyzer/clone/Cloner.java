@@ -31,7 +31,7 @@ public class Cloner {
 
     public void call() throws IOException {
         for (ProjectList projectList: this.projectLists) {
-            Path dir = projectList.getDirRelative();
+            Path dir = projectList.getDirPathAbsolute();
             ProjectInfos projectInfos = projectList.toProjectInfos();
             ArrayList<CloneCommand> cloneCommands = projectInfos.toCloneCommands(dir);
             for (CloneCommand cloneCommand: cloneCommands) {

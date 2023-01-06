@@ -10,7 +10,6 @@ import picocli.CommandLine;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
 
 @CommandLine.Command(
         name = "run",
@@ -56,7 +55,7 @@ public class RunCommand implements Runnable {
             try {
                 ProjectListReport report = analyzer.analyze(projectList);
 
-                File outFile = this.config.getOutAbsolute().resolve(Path.of(projectList.getOutFilename())).toFile();
+                File outFile = this.config.getOutPathAbsolute().resolve(projectList.getOutFilename()).toFile();
                 FileWriter writer = new FileWriter(outFile);
                 writer.write(report.report().toString(4));
                 writer.close();

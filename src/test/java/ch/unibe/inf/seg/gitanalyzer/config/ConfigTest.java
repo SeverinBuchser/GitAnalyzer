@@ -20,7 +20,7 @@ class ConfigTest {
         Config config = new Config();
         assertTrue(config.getClone());
         assertTrue(config.getAnalyze());
-        assertEquals("", config.getOutRelative().toString());
+        assertEquals("", config.getOutPath().toString());
         assertFalse(config.getVerbose());
         assertEquals(0, config.getProjectLists().size());
     }
@@ -33,7 +33,7 @@ class ConfigTest {
     private void testDefaultConfig(Config config) {
         assertTrue(config.getAnalyze());
         assertTrue(config.getClone());
-        assertEquals("", config.getOutRelative().toString());
+        assertEquals("", config.getOutPath().toString());
         assertFalse(config.getVerbose());
         assertEquals(0, config.getProjectLists().size());
         assertEquals("""
@@ -80,7 +80,7 @@ class ConfigTest {
         assertFalse(config.getAnalyze());
 
         config.setOut("someDir");
-        assertEquals("someDir", config.getOutRelative().toString());
+        assertEquals("someDir", config.getOutPath().toString());
 
         config.setVerbose(true);
         assertTrue(config.getVerbose());
@@ -95,62 +95,62 @@ class ConfigTest {
         config.setConfigPath(configPath);
 
         // set out with relative string path
-        assertEquals("", config.getOutRelative().toString());
-        assertEquals(outAbsolutePath.toString(), config.getOutAbsolute().toString());
+        assertEquals("", config.getOutPath().toString());
+        assertEquals(outAbsolutePath.toString(), config.getOutPathAbsolute().toString());
 
         config.setOut("./someDir/otherDir/anotherDir/../..");
-        assertEquals("someDir", config.getOutRelative().toString());
-        assertEquals(outAbsolutePath.resolve("someDir").toString(), config.getOutAbsolute().toString());
+        assertEquals("someDir", config.getOutPath().toString());
+        assertEquals(outAbsolutePath.resolve("someDir").toString(), config.getOutPathAbsolute().toString());
 
         config.setOut("./someDir/../anotherDir");
-        assertEquals("anotherDir", config.getOutRelative().toString());
-        assertEquals(outAbsolutePath.resolve("anotherDir").toString(), config.getOutAbsolute().toString());
+        assertEquals("anotherDir", config.getOutPath().toString());
+        assertEquals(outAbsolutePath.resolve("anotherDir").toString(), config.getOutPathAbsolute().toString());
 
 
         // set out with relative Path path
-        Path relativePath = Paths.get("../otherDir");
+        Path relativePath = Path.of("../otherDir");
         config.setOut(relativePath);
-        assertEquals(relativePath.toString(), config.getOutRelative().toString());
-        assertEquals(FileHelper.toAbsolutePath(relativePath).toString(), config.getOutAbsolute().toString());
+        assertEquals(relativePath.toString(), config.getOutPath().toString());
+        assertEquals(FileHelper.toAbsolutePath(relativePath).toString(), config.getOutPathAbsolute().toString());
 
 
         // set out with absolute path
         Path absolutePath = FileHelper.toAbsolutePath("../otherDir");
         config.setOut(absolutePath);
-        assertEquals(absolutePath.toString(), config.getOutRelative().toString());
-        assertEquals(absolutePath.toString(), config.getOutAbsolute().toString());
+        assertEquals(absolutePath.toString(), config.getOutPath().toString());
+        assertEquals(absolutePath.toString(), config.getOutPathAbsolute().toString());
     }
 
     @Test
     public void configPathTest() {
-        Path relativePath = Paths.get("someFile.json");
+        Path relativePath = Path.of("someFile.json");
         Path absolutePath = FileHelper.toAbsolutePath(relativePath);
         Config config = new Config();
 
 
         // set relative path
         config.setConfigPath(relativePath);
-        assertEquals(relativePath.toString(), config.getConfigPathRelative().toString());
+        assertEquals(relativePath.toString(), config.getConfigPath().toString());
         assertEquals(absolutePath.toString(), config.getConfigPathAbsolute().toString());
 
-        relativePath = Paths.get("./someFile.json");
+        relativePath = Path.of("./someFile.json");
         absolutePath = FileHelper.toAbsolutePath(relativePath);
 
         config.setConfigPath(relativePath);
-        assertEquals(FileHelper.normalize(relativePath).toString(), config.getConfigPathRelative().toString());
+        assertEquals(FileHelper.normalize(relativePath).toString(), config.getConfigPath().toString());
         assertEquals(absolutePath.toString(), config.getConfigPathAbsolute().toString());
 
-        relativePath = Paths.get("someDir/otherDir/anotherDir/../../someFile.json");
+        relativePath = Path.of("someDir/otherDir/anotherDir/../../someFile.json");
         absolutePath = FileHelper.toAbsolutePath(relativePath);
 
         config.setConfigPath(relativePath.toString());
-        assertEquals(FileHelper.normalize(relativePath).toString(), config.getConfigPathRelative().toString());
+        assertEquals(FileHelper.normalize(relativePath).toString(), config.getConfigPath().toString());
         assertEquals(absolutePath.toString(), config.getConfigPathAbsolute().toString());
 
 
         // set absolute path
         config.setConfigPath(absolutePath);
-        assertEquals(absolutePath.toString(), config.getConfigPathRelative().toString());
+        assertEquals(absolutePath.toString(), config.getConfigPath().toString());
         assertEquals(absolutePath.toString(), config.getConfigPathAbsolute().toString());
     }
 
@@ -199,7 +199,7 @@ class ConfigTest {
         assertFalse(config.getAnalyze());
 
         config.setOut("someDir");
-        assertEquals("someDir", config.getOutRelative().toString());
+        assertEquals("someDir", config.getOutPath().toString());
 
         config.setVerbose(true);
         assertTrue(config.getVerbose());
@@ -218,19 +218,19 @@ class ConfigTest {
             list.add(info);
         }
 
-        assertEquals("someFile", list.get(0).getList());
-        assertEquals("newFile", list.get(1).getList());
-        assertEquals("someOtherFile", list.get(2).getList());
+        assertEquals("someFile", list.get(0).getListPath().toString());
+        assertEquals("newFile", list.get(1).getListPath().toString());
+        assertEquals("someOtherFile", list.get(2).getListPath().toString());
         assertEquals(3, list.size());
     }
 
     @Test
     public void testHasConfigPathTest() {
-        Path path = Paths.get("someFile.json");
+        Path path = Path.of("someFile.json");
         Config config = new Config();
 
         assertFalse(config.hasConfigPath());
-        assertThrows(IllegalStateException.class, config::getConfigPathRelative);
+        assertThrows(IllegalStateException.class, config::getConfigPath);
         assertThrows(IllegalStateException.class, config::getConfigPathAbsolute);
 
         config.setConfigPath(path);
@@ -265,15 +265,15 @@ class ConfigTest {
     private void testTestConfig(Config config) {
         assertTrue(config.getAnalyze());
         assertTrue(config.getClone());
-        assertEquals("out", config.getOutRelative().toString());
+        assertEquals("out", config.getOutPath().toString());
         assertFalse(config.getVerbose());
         assertEquals(1, config.getProjectLists().size());
-        assertEquals("./project-list.csv", config.getProjectLists().get(0).getList());
+        assertEquals("project-list.csv", config.getProjectLists().get(0).getListPath().toString());
     }
 
     @Test
     public void loadNonExistingFileTest() {
-        Path path = Paths.get("not-existing.json");
+        Path path = Path.of("not-existing.json");
         assertThrows(IOException.class, () -> new Config(path));
 
         Config config1 = new Config();

@@ -26,7 +26,7 @@ public class ProjectListAnalyzer implements Analyzer<ProjectList, ProjectListRep
 
     @Override
     public ProjectListReport analyze(ProjectList projectList) throws IOException {
-        ProjectListReport report = new ProjectListReport(projectList.getList());
+        ProjectListReport report = new ProjectListReport(projectList.getListPath().toString());
         report.startTimer();
 
         // TODO: add other id than project_list
@@ -34,7 +34,7 @@ public class ProjectListAnalyzer implements Analyzer<ProjectList, ProjectListRep
 
         ProjectInfos projectInfos = projectList.toProjectInfos();
 
-        ProjectIterator projects = projectInfos.projectsIterator(projectList.getDirRelative());
+        ProjectIterator projects = projectInfos.projectsIterator(projectList.getDirPathAbsolute());
 
         while (projects.hasNext()) {
             Project project = projects.next();

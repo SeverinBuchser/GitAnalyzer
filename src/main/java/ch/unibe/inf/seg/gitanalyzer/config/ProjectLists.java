@@ -48,7 +48,7 @@ public class ProjectLists implements Iterable<ProjectList> {
 
         ArrayList<String> keys = new ArrayList<>();
         for (ProjectList projectList : this.projectLists) {
-            String key = projectList.getList();
+            String key = projectList.getListPath().toString();
             if (keys.contains(key)) {
                 throw new NotUniqueProjectListException(key);
             } else keys.add(key);
@@ -72,13 +72,13 @@ public class ProjectLists implements Iterable<ProjectList> {
     }
 
     public int indexOf(ProjectList projectList) {
-        return this.indexOf(projectList.getList());
+        return this.indexOf(projectList.getListPath().toString());
     }
 
     public int indexOf(String list) {
         int index = 0;
         for (ProjectList projectList : this.projectLists) {
-            if (projectList.getList().equals(list)) {
+            if (projectList.getListPath().toString().equals(list)) {
                 return index;
             }
             index++;
@@ -87,7 +87,7 @@ public class ProjectLists implements Iterable<ProjectList> {
     }
 
     public ProjectList get(ProjectList projectList) {
-        return this.get(projectList.getList());
+        return this.get(projectList.getListPath().toString());
     }
 
     public ProjectList get(String list) {
@@ -101,12 +101,12 @@ public class ProjectLists implements Iterable<ProjectList> {
     }
 
     public boolean has(ProjectList projectList) {
-        return this.has(projectList.getList());
+        return this.has(projectList.getListPath().toString());
     }
 
     public boolean has(String projectList) {
         for (ProjectList projectListInfo: this.projectLists) {
-            if (projectListInfo.getList().equals(projectList)) {
+            if (projectListInfo.getListPath().toString().equals(projectList)) {
                 return true;
             }
         }
@@ -122,7 +122,7 @@ public class ProjectLists implements Iterable<ProjectList> {
     }
 
     public ProjectList remove(ProjectList projectList) {
-        return this.remove(projectList.getList());
+        return this.remove(projectList.getListPath().toString());
     }
 
     public ProjectList remove(String projectList) {

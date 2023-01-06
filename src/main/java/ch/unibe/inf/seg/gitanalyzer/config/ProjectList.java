@@ -41,11 +41,20 @@ public class ProjectList {
 
     public void setList(String list) {
         this.jsonObject.put("list", list);
+        this.preconditionSchema();
     }
-    public String getList() {
-        return this.jsonObject.getString("list");
+    public void setList(Path list) {
+        this.setList(list.toString());
     }
-    public Path getListRelative() {
+    private Path getList() {
+        return Path.of(this.jsonObject.getString("list"));
+    }
+    public Path getListPath() {
+        this.preconditionHasList();
+        return FileHelper.normalize(this.getList());
+    }
+    public Path getListPathAbsolute() {
+        this.preconditionHasList();
         if (this.belongsToProjectLists() && this.projectLists.belongsToConfig()) {
             return this.getProjectLists().getConfig().toRelativePath(this.getList());
         } else {
@@ -56,10 +65,35 @@ public class ProjectList {
     public void setDir(String dir) {
         this.jsonObject.put("dir", dir);
     }
-    public String getDir() {
-        return this.jsonObject.getString("dir");
+    public void setDir(Path dir) {
+        this.jsonObject.put("dir", dir.toString());
     }
-    public Path getDirRelative() {
+    private Path getDir() {
+        return Path.of(this.jsonObject.getString("dir"));
+    }
+
+    /**
+     * Creates a relative path representing the project directory.
+     * The actual value set to the project lists dir, will be returned here, this may be a relative or absolute path.
+     * The path will be normalized.
+     * @return An absolute path, representing the project directory.
+     */
+    public Path getDirPath() {
+        this.preconditionHasList();
+        return FileHelper.normalize(this.getDir());
+    }
+
+    /**
+     * Creates an absolute path representing the project directory.
+     * If the directory is already absolute, the absolute path will be returned. If the directory is relative, one of
+     * two things can happen: If the project list belongs to a {@link Config}, the directory will be relative to the
+     * directory of the config, but only if the config has a [configPath]{@link Config#getConfigPathAbsolute()}. If the
+     * latter is not the case or this project list does not belong to a config, the returned path will be relative to
+     * the current working directory.
+     * @return An absolute path, representing the project directory.
+     */
+    public Path getDirPathAbsolute() {
+        this.preconditionHasList();
         if (this.belongsToProjectLists() && this.projectLists.belongsToConfig()) {
             return this.getProjectLists().getConfig().toRelativePath(this.getDir());
         } else {
@@ -71,6 +105,7 @@ public class ProjectList {
         this.jsonObject.put("suffix", suffix);
     }
     public String getSuffix() {
+        this.preconditionHasList();
         return this.jsonObject.getString("suffix");
     }
 
@@ -78,12 +113,14 @@ public class ProjectList {
         this.jsonObject.put("skip", skip);
     }
     public boolean getSkip() {
+        this.preconditionHasList();
         return this.jsonObject.getBoolean("skip");
     }
 
-    public String getOutFilename() {
-        String listBaseName = FilenameUtils.getBaseName(this.getList());
-        return listBaseName + (this.getSuffix().equals("") ? "" : "-") + this.getSuffix() + ".json";
+    public Path getOutFilename() {
+        this.preconditionHasList();
+        String listBaseName = FilenameUtils.getBaseName(this.getList().toString());
+        return Path.of(listBaseName + (this.getSuffix().equals("") ? "" : "-") + this.getSuffix() + ".json");
     }
 
     public ProjectList() {
@@ -170,7 +207,7 @@ public class ProjectList {
     }
 
     public ProjectInfos toProjectInfos() throws IOException {
-        FileReader reader = new FileReader(this.getListRelative().toFile());
+        FileReader reader = new FileReader(this.getListPathAbsolute().toFile());
         CSVParser csvParser = new CSVParser(reader, READ_FORMAT);
         CSVFile csvFile = new CSVFile(csvParser);
         ProjectInfos projectInfos = new ProjectInfos(csvFile);
