@@ -5,5 +5,5 @@
       "list": "./project-list.csv"
     }
   ],
-  "out": "./out"
+  "out": "out"
 }

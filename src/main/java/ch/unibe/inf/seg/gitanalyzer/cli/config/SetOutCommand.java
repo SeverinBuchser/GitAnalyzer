@@ -19,7 +19,7 @@ public class SetOutCommand implements Runnable {
     @CommandLine.Parameters(
             paramLabel = "<out>",
             description = "",
-            defaultValue = ".",
+            defaultValue = "",
             index = "1"
 
     )

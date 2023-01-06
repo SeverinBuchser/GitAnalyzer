@@ -12,7 +12,7 @@
     "dir": {
       "description": "The location of the projects in the list.",
       "type": "string",
-      "default": "."
+      "default": ""
     },
     "suffix": {
       "description": "The suffix, appended to the output file.",

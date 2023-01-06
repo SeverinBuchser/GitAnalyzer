@@ -7,6 +7,7 @@ import picocli.CommandLine;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 @CommandLine.Command(
@@ -21,9 +22,10 @@ public class GuiCommand implements Runnable {
             names = {"-c", "--config"},
             description = "The config file to open in the gui."
     )
-    public void setConfig(String config) {
+    public void setConfig(File config) {
         try {
-            this.config = new Config(config);
+            System.out.println(config.exists());
+            this.config = new Config(config.toPath());
         } catch (IOException e) {
             // TODO: Logger log error
         }

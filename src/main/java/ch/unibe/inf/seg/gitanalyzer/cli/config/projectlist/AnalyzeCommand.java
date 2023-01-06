@@ -22,7 +22,7 @@ public class AnalyzeCommand implements Runnable {
     public ProjectListMixin mixin;
 
     private File getOutFile() {
-        Path out = this.mixin.getConfig().getOutRelative();
+        Path out = this.mixin.getConfig().getOutAbsolute();
         return out.resolve(Path.of(this.mixin.getProjectList().getOutFilename())).toFile();
     }
 

@@ -129,7 +129,7 @@ public class ConfigEditor extends JPanel implements Updatable, Updater, Subscrib
         this.cloneProjectsToggle.setSelected(config.getClone());
         this.analyzeConflictsToggle.setSelected(config.getAnalyze());
         this.verboseToggle.setSelected(config.getVerbose());
-        this.outDirTextField.setText(config.getOut());
+        this.outDirTextField.setText(config.getOutAbsolute().toString());
     }
 
     @Override

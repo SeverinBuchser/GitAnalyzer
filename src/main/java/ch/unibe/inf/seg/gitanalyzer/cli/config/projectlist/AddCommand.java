@@ -19,7 +19,7 @@ public class AddCommand implements Runnable {
     @CommandLine.Option(
             names = {"-d", "--dir"},
             description = "",
-            defaultValue = "."
+            defaultValue = ""
     )
     public void setDir(String dir) {
         this.mixin.getProjectList().setDir(dir);

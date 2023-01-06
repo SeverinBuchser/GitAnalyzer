@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.nio.file.Path;
 
 public class ConfigPanel extends JPanel implements Updatable, Subscribable<Config>, Subscriber<Config> {
 
@@ -25,8 +26,8 @@ public class ConfigPanel extends JPanel implements Updatable, Subscribable<Confi
     private final JButton openRawButton = new JButton("Open Raw Config");
     private final JButton saveFileButton = new JButton("Save Config");
     private final JButton saveAsFileButton = new JButton("Save Config As");
-    private final JFileChooser loadFileChooser = new JFileChooser(".");
-    private final JFileChooser saveFileChooser = new JFileChooser(".");
+    private final JFileChooser loadFileChooser = new JFileChooser("");
+    private final JFileChooser saveFileChooser = new JFileChooser("");
 
     private boolean rawOpen = false;
 
@@ -62,7 +63,7 @@ public class ConfigPanel extends JPanel implements Updatable, Subscribable<Confi
         JFrame frame = new JFrame();
         int state = this.loadFileChooser.showOpenDialog(frame);
         if (state == JFileChooser.APPROVE_OPTION) {
-            String configPath = this.loadFileChooser.getSelectedFile().toPath().toString();
+            Path configPath = this.loadFileChooser.getSelectedFile().toPath();
             try {
                 Config config = new Config(configPath);
                 this.next(config);
@@ -123,7 +124,7 @@ public class ConfigPanel extends JPanel implements Updatable, Subscribable<Confi
         JFrame frame = new JFrame();
         int state = this.saveFileChooser.showSaveDialog(frame);
         if (state == JFileChooser.APPROVE_OPTION) {
-            String configPath = this.saveFileChooser.getSelectedFile().toPath().toString();
+            Path configPath = this.saveFileChooser.getSelectedFile().toPath();
             try {
                 this.config.setAndSave(configPath);
             } catch (Exception e) {

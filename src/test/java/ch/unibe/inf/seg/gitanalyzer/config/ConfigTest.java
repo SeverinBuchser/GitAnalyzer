@@ -20,9 +20,30 @@ class ConfigTest {
         Config config = new Config();
         assertTrue(config.getClone());
         assertTrue(config.getAnalyze());
-        assertEquals(".", config.getOut());
+        assertEquals("", config.getOutRelative().toString());
         assertFalse(config.getVerbose());
         assertEquals(0, config.getProjectLists().size());
+    }
+
+    @Test
+    public void defaultConfigTest() {
+        this.testDefaultConfig(new Config());
+    }
+
+    private void testDefaultConfig(Config config) {
+        assertTrue(config.getAnalyze());
+        assertTrue(config.getClone());
+        assertEquals("", config.getOutRelative().toString());
+        assertFalse(config.getVerbose());
+        assertEquals(0, config.getProjectLists().size());
+        assertEquals("""
+                {
+                    "analyze": true,
+                    "clone": true,
+                    "projectLists": [],
+                    "out": "",
+                    "verbose": false
+                }""", config.toString());
     }
 
     @Test
@@ -35,18 +56,17 @@ class ConfigTest {
         JSONArray projectListInfos = new JSONArray();
         projectListInfos.put(projectListInfo);
         configObject.put("projectLists", projectListInfos);
-        try {
-            Config config = new Config(configObject);
-        } catch (ValidationException e) {
-            assertEquals("#: 3 schema violations found", e.getMessage());
-            List<String> validationMessages = Config.extractValidationMessages(e);
 
-            assertEquals("#: 3 schema violations found", e.getMessage());
-            assertEquals("#: extraneous key [invalid] is not permitted", validationMessages.get(0));
-            assertEquals("#/projectLists: #: only 1 subschema matches out of 2", e.getCausingExceptions().get(1).getMessage());
-            assertEquals("#/projectLists/0: extraneous key [invalid] is not permitted", validationMessages.get(1));
-            assertEquals("#/projectLists/0/list: expected type: String, found: Boolean", validationMessages.get(2));
-        }
+        ValidationException e = assertThrows(ValidationException.class, () -> new Config(configObject));
+
+        assertEquals("#: 3 schema violations found", e.getMessage());
+        List<String> validationMessages = Config.extractValidationMessages(e);
+
+        assertEquals("#: 3 schema violations found", e.getMessage());
+        assertEquals("#: extraneous key [invalid] is not permitted", validationMessages.get(0));
+        assertEquals("#/projectLists: #: only 1 subschema matches out of 2", e.getCausingExceptions().get(1).getMessage());
+        assertEquals("#/projectLists/0: extraneous key [invalid] is not permitted", validationMessages.get(1));
+        assertEquals("#/projectLists/0/list: expected type: String, found: Boolean", validationMessages.get(2));
     }
 
     @Test
@@ -60,11 +80,83 @@ class ConfigTest {
         assertFalse(config.getAnalyze());
 
         config.setOut("someDir");
-        assertEquals("someDir", config.getOut());
+        assertEquals("someDir", config.getOutRelative().toString());
 
         config.setVerbose(true);
         assertTrue(config.getVerbose());
+    }
 
+    @Test
+    public void outTest() {
+        Path configPath = FileHelper.toAbsolutePath("someFile.json");
+        Path outAbsolutePath = FileHelper.toAbsolutePath("");
+
+        Config config = new Config();
+        config.setConfigPath(configPath);
+
+        // set out with relative string path
+        assertEquals("", config.getOutRelative().toString());
+        assertEquals(outAbsolutePath.toString(), config.getOutAbsolute().toString());
+
+        config.setOut("./someDir/otherDir/anotherDir/../..");
+        assertEquals("someDir", config.getOutRelative().toString());
+        assertEquals(outAbsolutePath.resolve("someDir").toString(), config.getOutAbsolute().toString());
+
+        config.setOut("./someDir/../anotherDir");
+        assertEquals("anotherDir", config.getOutRelative().toString());
+        assertEquals(outAbsolutePath.resolve("anotherDir").toString(), config.getOutAbsolute().toString());
+
+
+        // set out with relative Path path
+        Path relativePath = Paths.get("../otherDir");
+        config.setOut(relativePath);
+        assertEquals(relativePath.toString(), config.getOutRelative().toString());
+        assertEquals(FileHelper.toAbsolutePath(relativePath).toString(), config.getOutAbsolute().toString());
+
+
+        // set out with absolute path
+        Path absolutePath = FileHelper.toAbsolutePath("../otherDir");
+        config.setOut(absolutePath);
+        assertEquals(absolutePath.toString(), config.getOutRelative().toString());
+        assertEquals(absolutePath.toString(), config.getOutAbsolute().toString());
+    }
+
+    @Test
+    public void configPathTest() {
+        Path relativePath = Paths.get("someFile.json");
+        Path absolutePath = FileHelper.toAbsolutePath(relativePath);
+        Config config = new Config();
+
+
+        // set relative path
+        config.setConfigPath(relativePath);
+        assertEquals(relativePath.toString(), config.getConfigPathRelative().toString());
+        assertEquals(absolutePath.toString(), config.getConfigPathAbsolute().toString());
+
+        relativePath = Paths.get("./someFile.json");
+        absolutePath = FileHelper.toAbsolutePath(relativePath);
+
+        config.setConfigPath(relativePath);
+        assertEquals(FileHelper.normalize(relativePath).toString(), config.getConfigPathRelative().toString());
+        assertEquals(absolutePath.toString(), config.getConfigPathAbsolute().toString());
+
+        relativePath = Paths.get("someDir/otherDir/anotherDir/../../someFile.json");
+        absolutePath = FileHelper.toAbsolutePath(relativePath);
+
+        config.setConfigPath(relativePath.toString());
+        assertEquals(FileHelper.normalize(relativePath).toString(), config.getConfigPathRelative().toString());
+        assertEquals(absolutePath.toString(), config.getConfigPathAbsolute().toString());
+
+
+        // set absolute path
+        config.setConfigPath(absolutePath);
+        assertEquals(absolutePath.toString(), config.getConfigPathRelative().toString());
+        assertEquals(absolutePath.toString(), config.getConfigPathAbsolute().toString());
+    }
+
+    @Test
+    public void addProjectListsTest() {
+        Config config = new Config();
         ProjectList info1 = new ProjectList("someFile");
         ProjectList info2 = new ProjectList("newFile", "dir", "suffix", true);
         ProjectLists projectLists = config.getProjectLists();
@@ -107,7 +199,7 @@ class ConfigTest {
         assertFalse(config.getAnalyze());
 
         config.setOut("someDir");
-        assertEquals("someDir", config.getOut());
+        assertEquals("someDir", config.getOutRelative().toString());
 
         config.setVerbose(true);
         assertTrue(config.getVerbose());
@@ -132,41 +224,88 @@ class ConfigTest {
         assertEquals(3, list.size());
     }
 
+    @Test
+    public void testHasConfigPathTest() {
+        Path path = Paths.get("someFile.json");
+        Config config = new Config();
+
+        assertFalse(config.hasConfigPath());
+        assertThrows(IllegalStateException.class, config::getConfigPathRelative);
+        assertThrows(IllegalStateException.class, config::getConfigPathAbsolute);
+
+        config.setConfigPath(path);
+        assertTrue(config.hasConfigPath());
+    }
 
     @Test
-    public void loadSuccessTest() throws IOException {
+    public void loadInConstructorTest() throws IOException {
         Path path = Paths.get("src","test","resources", "test.config.json");
-        Config config = new Config(path.toString());
+        Config config = new Config(path);
+        this.testTestConfig(config);
+    }
 
+    @Test
+    public void setAndLoadTest() throws IOException {
+        Path path = Paths.get("src","test","resources", "test.config.json");
+        Config config = new Config();
+        config.setAndLoad(path);
+        this.testTestConfig(config);
+    }
+
+
+    @Test
+    public void loadTest() throws IOException {
+        Path path = Paths.get("src","test","resources", "test.config.json");
+        Config config = new Config();
+        config.setConfigPath(path);
+        config.load();
+        this.testTestConfig(config);
+    }
+
+    private void testTestConfig(Config config) {
         assertTrue(config.getAnalyze());
         assertTrue(config.getClone());
-        assertEquals("./out", config.getOut());
+        assertEquals("out", config.getOutRelative().toString());
         assertFalse(config.getVerbose());
         assertEquals(1, config.getProjectLists().size());
         assertEquals("./project-list.csv", config.getProjectLists().get(0).getList());
     }
 
-
     @Test
-    public void loadNonExistingFile() {
+    public void loadNonExistingFileTest() {
         Path path = Paths.get("not-existing.json");
-        // TODO: new Config(path) == default config
+        assertThrows(IOException.class, () -> new Config(path));
+
+        Config config1 = new Config();
+        assertThrows(IOException.class, () -> config1.setAndLoad(path));
+
+        Config config2 = new Config();
+        config2.setConfigPath(path);
+        assertThrows(IOException.class, config2::load);
     }
 
     @Test
     public void saveTest() throws IOException {
         Path path = Paths.get("src","test","resources", "test.config.save.json");
         Config config = new Config();
-        config.setAndSave(path.toString());
-        config = new Config(path.toString());
-        assertEquals("""
-                {
-                    "analyze": true,
-                    "clone": true,
-                    "projectLists": [],
-                    "out": ".",
-                    "verbose": false
-                }""", config.toString());
+        config.setConfigPath(path);
+        config.save();
+        // load the saved config
+        config = new Config(path);
+        this.testDefaultConfig(config);
+        // delete the saved config again
+        assertTrue(FileHelper.toAbsolutePath(path).toFile().delete());
+    }
+
+    @Test
+    public void setAndSaveTest() throws IOException {
+        Path path = Paths.get("src","test","resources", "test.config.save.json");
+        Config config = new Config();
+        config.setAndSave(path);
+        // load the saved config
+        config = new Config(path);
+        this.testDefaultConfig(config);
+        // delete the saved config again
         assertTrue(FileHelper.toAbsolutePath(path).toFile().delete());
     }
 
@@ -178,7 +317,7 @@ class ConfigTest {
                     "analyze": true,
                     "clone": true,
                     "projectLists": [],
-                    "out": ".",
+                    "out": "",
                     "verbose": false
                 }""", config.toString());
 
@@ -191,10 +330,10 @@ class ConfigTest {
                     "projectLists": [{
                         "skip": false,
                         "list": "someFile",
-                        "dir": ".",
+                        "dir": "",
                         "suffix": ""
                     }],
-                    "out": ".",
+                    "out": "",
                     "verbose": false
                 }""", config.toString());
     }

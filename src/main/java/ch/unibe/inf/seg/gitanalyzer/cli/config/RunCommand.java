@@ -56,7 +56,7 @@ public class RunCommand implements Runnable {
             try {
                 ProjectListReport report = analyzer.analyze(projectList);
 
-                File outFile = this.config.getOutRelative().resolve(Path.of(projectList.getOutFilename())).toFile();
+                File outFile = this.config.getOutAbsolute().resolve(Path.of(projectList.getOutFilename())).toFile();
                 FileWriter writer = new FileWriter(outFile);
                 writer.write(report.report().toString(4));
                 writer.close();

@@ -24,7 +24,7 @@ public class AnalyzeCommand implements Runnable {
     @CommandLine.Option(
             names = {"-d", "--dir"},
             description = "The location of the projects in the list of projects <list>.",
-            defaultValue = "."
+            defaultValue = ""
     )
     public void setDir(String dir) {
         this.projectList.setDir(dir);
@@ -43,7 +43,7 @@ public class AnalyzeCommand implements Runnable {
     @CommandLine.Option(
             names = {"-o", "--out"},
             description = "The directory of the output file.",
-            defaultValue = "."
+            defaultValue = ""
     )
     public void setOut(String out) {
         this.out = FileHelper.toAbsolutePath(out);

@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,19 +23,26 @@ public class Config {
      * The {@link JSONObject} object, representing the config.
      */
     private JSONObject jsonObject;
-
     private ProjectLists projectLists;
     public ProjectLists getProjectLists() {
         return this.projectLists;
     }
 
     public void setConfigPath(String configPath) {
-        this.configPath = FileHelper.toAbsolutePath(configPath);
+        this.setConfigPath(Paths.get(configPath));
+    }
+    public void setConfigPath(Path configPath) {
+        this.configPath = configPath;
     }
 
-    public Path getConfigPath() {
+    public Path getConfigPathRelative() {
         this.preconditionHasConfigPath();
-        return this.configPath;
+        return FileHelper.normalize(this.configPath);
+    }
+
+    public Path getConfigPathAbsolute() {
+        this.preconditionHasConfigPath();
+        return FileHelper.toAbsolutePath(this.configPath);
     }
 
     public boolean getClone() {
@@ -49,11 +57,35 @@ public class Config {
     public void setAnalyze(boolean analyze) {
         this.jsonObject.put("analyze", analyze);
     }
-    public String getOut() {
+    private String getOut() {
         return this.jsonObject.getString("out");
     }
+
+    /**
+     * Returns the normalized relative (not absolute) out path as found in the original config.
+     * The normalization is necessary in order to allow the config path to be set as any string, without changing the
+     * users input.
+     * @return The normalized relative out path.
+     */
+    public Path getOutRelative() {
+        return FileHelper.normalize(Paths.get(this.getOut()));
+    }
+
+    /**
+     * Returns the normalized absolute out path.
+     * The normalization is necessary in order to allow the config path to be set as any string, without changing the
+     * users input.
+     * @return The normalized absolute out path.
+     */
+    public Path getOutAbsolute() {
+        return this.toRelativePath(this.getOut());
+    }
+
     public void setOut(String out) {
-        this.jsonObject.put("out", out);
+        this.setOut(Paths.get(out));
+    }
+    public void setOut(Path out) {
+        this.jsonObject.put("out", out.toString());
     }
     public boolean getVerbose() {
         return this.jsonObject.getBoolean("verbose");
@@ -71,7 +103,7 @@ public class Config {
         this.preconditionSchema();
     }
 
-    public Config(String configPath) throws IOException {
+    public Config(Path configPath) throws IOException {
         this.setAndLoad(configPath);
     }
 
@@ -110,8 +142,7 @@ public class Config {
      */
     public void load() throws IOException {
         this.preconditionHasConfigPath();
-        Path configPath = FileHelper.toAbsolutePath(this.configPath);
-        String jsonString = Files.readString(configPath);
+        String jsonString = Files.readString(this.getConfigPathAbsolute());
         this.jsonObject = new JSONObject(jsonString);
         this.preconditionSchema();
     }
@@ -120,7 +151,7 @@ public class Config {
      * Loads a new config from a path pointing to a JSON file.
      * @see #load()
      */
-    public void setAndLoad(String configPath) throws IOException {
+    public void setAndLoad(Path configPath) throws IOException {
         this.setConfigPath(configPath);
         this.load();
     }
@@ -135,7 +166,7 @@ public class Config {
      */
     public void save() throws IOException {
         this.preconditionHasConfigPath();
-        FileWriter writer = new FileWriter(this.configPath.toFile());
+        FileWriter writer = new FileWriter(this.getConfigPathAbsolute().toFile());
         writer.write(this.toString());
         writer.close();
     }
@@ -144,18 +175,14 @@ public class Config {
      * Creates a JSON file from the current {@link Config}.
      * @see #save()
      */
-    public void setAndSave(String configPath) throws IOException {
+    public void setAndSave(Path configPath) throws IOException {
         this.setConfigPath(configPath);
         this.save();
     }
 
     public Path toRelativePath(String path) {
         this.preconditionHasConfigPath();
-        return FileHelper.toAbsolutePath(path, this.configPath);
-    }
-
-    public Path getOutRelative() {
-        return this.toRelativePath(this.getOut());
+        return FileHelper.toAbsolutePath(path, this.getConfigPathAbsolute());
     }
 
     @Override

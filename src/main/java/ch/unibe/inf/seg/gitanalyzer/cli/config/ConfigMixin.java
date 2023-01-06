@@ -3,6 +3,7 @@ package ch.unibe.inf.seg.gitanalyzer.cli.config;
 import ch.unibe.inf.seg.gitanalyzer.config.Config;
 import picocli.CommandLine;
 
+import java.io.File;
 import java.io.IOException;
 
 public class ConfigMixin extends Config {
@@ -22,10 +23,9 @@ public class ConfigMixin extends Config {
             description = "The path of the config.",
             index = "0"
     )
-    @Override
-    public void setAndLoad(String configPath) {
+    public void setAndLoad(File configFile) {
         try {
-            super.setAndLoad(configPath);
+            super.setAndLoad(configFile.toPath());
         } catch (IOException e) {
             this.loadException = e;
         }

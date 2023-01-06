@@ -38,7 +38,7 @@ public class CreateCommand implements Runnable {
     @CommandLine.Option(
             names = {"-o", "--out"},
             description = "",
-            defaultValue = "."
+            defaultValue = ""
     )
     public void setOut(String out) {
         this.config.setOut(out);

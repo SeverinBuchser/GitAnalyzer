@@ -20,7 +20,7 @@ public class CloneCommand implements Runnable {
     @CommandLine.Option(
             names = {"-d", "--dir"},
             description = "The directory the projects will be cloned to.",
-            defaultValue = "."
+            defaultValue = ""
     )
     public void setDir(String dir) {
         this.projectList.setDir(dir);
