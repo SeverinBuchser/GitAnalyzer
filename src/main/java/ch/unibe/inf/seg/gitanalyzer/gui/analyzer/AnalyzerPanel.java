@@ -7,6 +7,7 @@ import ch.unibe.inf.seg.gitanalyzer.config.Config;
 import ch.unibe.inf.seg.gitanalyzer.config.ProjectList;
 import ch.unibe.inf.seg.gitanalyzer.report.ProjectListReport;
 import ch.unibe.inf.seg.gitanalyzer.util.logger.GuiLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.PrintStreamLogger;
 import ch.unibe.inf.seg.gitanalyzer.util.subscription.Subscriber;
 
 import javax.swing.*;
@@ -46,7 +47,7 @@ public class AnalyzerPanel extends JPanel implements Subscriber<Config> {
             this.maxThreads = (int) this.maxThreadCounter.getValue();
             this.loggerPanel.removeAll();
             this.config.getProjectLists().forEach(pl -> this.loggerPanel.add(new GuiLogger()));
-            ProjectListsCloner cloner = new ProjectListsCloner();
+            ProjectListsCloner cloner = new ProjectListsCloner(new PrintStreamLogger(System.out));
             cloner.call(this.config.getProjectLists());
             this.analyzeNextProjectList();
         }

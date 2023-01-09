@@ -4,6 +4,7 @@ import ch.unibe.inf.seg.gitanalyzer.analyze.ProjectListAnalyzer;
 import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
 import ch.unibe.inf.seg.gitanalyzer.clone.ProjectListCloner;
 import ch.unibe.inf.seg.gitanalyzer.report.ProjectListReport;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.CliLogger;
 import picocli.CommandLine;
 
 import java.io.File;
@@ -18,6 +19,9 @@ import java.nio.file.Path;
         versionProvider = VersionProvider.class
 )
 public class RunCommand implements Runnable {
+
+    @CommandLine.Mixin
+    public CliLogger logger;
 
     @CommandLine.Mixin
     public ProjectListMixin mixin;
@@ -44,7 +48,7 @@ public class RunCommand implements Runnable {
     }
 
     private void runClone() {
-        ProjectListCloner cloner = new ProjectListCloner();
+        ProjectListCloner cloner = new ProjectListCloner(this.logger);
         cloner.call(this.mixin.getProjectList());
     }
 

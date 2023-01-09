@@ -2,6 +2,7 @@ package ch.unibe.inf.seg.gitanalyzer.cli;
 
 import ch.unibe.inf.seg.gitanalyzer.clone.ProjectListCloner;
 import ch.unibe.inf.seg.gitanalyzer.config.ProjectList;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.CliLogger;
 import picocli.CommandLine;
 
 @CommandLine.Command(
@@ -12,6 +13,9 @@ import picocli.CommandLine;
         versionProvider = VersionProvider.class
 )
 public class CloneCommand implements Runnable {
+
+    @CommandLine.Mixin
+    public CliLogger logger;
 
     private final ProjectList projectList = new ProjectList("");
 
@@ -33,7 +37,8 @@ public class CloneCommand implements Runnable {
 
     @Override
     public void run() {
-        ProjectListCloner cloner = new ProjectListCloner();
+        this.logger.info("Running Clone Command");
+        ProjectListCloner cloner = new ProjectListCloner(this.logger);
         cloner.call(this.projectList);
     }
 }

@@ -4,21 +4,23 @@ import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingChunk;
 import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingFile;
 import ch.unibe.inf.seg.gitanalyzer.report.ConflictingFileReport;
 import ch.unibe.inf.seg.gitanalyzer.resolution.ResolutionFile;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.AnalyzerLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.OutputStreamLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.PrintStreamLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.ReportLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.PrintStreamReportLogger;
 
 import java.io.IOException;
 
 public class ConflictingFileAnalyzer implements Analyzer<ConflictingFile, ConflictingFileReport> {
 
-    private AnalyzerLogger logger = new OutputStreamLogger(System.out, 3);
+    private ReportLogger logger = new PrintStreamReportLogger(new PrintStreamLogger(System.out), 3);
+
     private final ConflictingChunkAnalyzer subAnalyzer;
 
     public ConflictingFileAnalyzer() {
         this.subAnalyzer = new ConflictingChunkAnalyzer(this.logger);
     }
 
-    public ConflictingFileAnalyzer(AnalyzerLogger logger) {
+    public ConflictingFileAnalyzer(ReportLogger logger) {
         this.logger = logger;
         this.subAnalyzer = new ConflictingChunkAnalyzer(this.logger);
     }
@@ -26,7 +28,7 @@ public class ConflictingFileAnalyzer implements Analyzer<ConflictingFile, Confli
     @Override
     public ConflictingFileReport call(ConflictingFile conflictingFile) {
         ConflictingFileReport report = new ConflictingFileReport(conflictingFile.getFileName());
-        this.logger.println(report, 3);
+        this.logger.report(report, 3);
 
         try {
             boolean correct = false;
@@ -50,7 +52,7 @@ public class ConflictingFileAnalyzer implements Analyzer<ConflictingFile, Confli
         } catch (IOException e) {
             report.fail(e.getMessage());
         }
-        this.logger.println(report, 3);
+        this.logger.report(report, 3);
         return report;
     }
 }

@@ -14,10 +14,6 @@ public class ProjectListMixin {
         return this.notFoundException != null;
     }
 
-    public ProjectListNotFoundException getNotFoundException() {
-        return this.notFoundException;
-    }
-
     @CommandLine.Mixin
     public ConfigMixin mixin;
 
@@ -30,7 +26,7 @@ public class ProjectListMixin {
     )
     public void setProjectList(String list) {
         if (this.mixin.hasLoadException()) {
-            // TODO: logger and exit
+            return;
         }
         this.projectList = this.mixin.getProjectLists().get(list);
         if (this.projectList == null) {

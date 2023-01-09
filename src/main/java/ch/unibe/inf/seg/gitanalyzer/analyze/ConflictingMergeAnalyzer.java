@@ -5,8 +5,9 @@ import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingMerge;
 import ch.unibe.inf.seg.gitanalyzer.error.NotComparableMergesException;
 import ch.unibe.inf.seg.gitanalyzer.report.ConflictingFileReport;
 import ch.unibe.inf.seg.gitanalyzer.report.ConflictingMergeReport;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.AnalyzerLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.OutputStreamLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.PrintStreamLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.ReportLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.PrintStreamReportLogger;
 
 import java.io.IOException;
 
@@ -14,7 +15,8 @@ public class ConflictingMergeAnalyzer implements Analyzer<ConflictingMerge, Conf
 
     private static final int CONFLICT_LIMIT = 12;
 
-    private AnalyzerLogger logger = new OutputStreamLogger(System.out, 2);
+    private ReportLogger logger = new PrintStreamReportLogger(new PrintStreamLogger(System.out), 2);
+
 
     private final ConflictingFileAnalyzer subAnalyzer;
 
@@ -22,14 +24,14 @@ public class ConflictingMergeAnalyzer implements Analyzer<ConflictingMerge, Conf
         this.subAnalyzer = new ConflictingFileAnalyzer(this.logger);
     }
 
-    public ConflictingMergeAnalyzer(AnalyzerLogger logger) {
+    public ConflictingMergeAnalyzer(ReportLogger logger) {
         this.logger = logger;
         this.subAnalyzer = new ConflictingFileAnalyzer(this.logger);
     }
 
     public ConflictingMergeReport call(ConflictingMerge conflictingMerge) {
         ConflictingMergeReport report = new ConflictingMergeReport(conflictingMerge.getCommitId());
-        this.logger.println(report, 2);
+        this.logger.report(report, 2);
 
         try {
             if (checkConflictCount(conflictingMerge)) {
@@ -62,7 +64,7 @@ public class ConflictingMergeAnalyzer implements Analyzer<ConflictingMerge, Conf
             } else throw e;
         }
 
-        this.logger.println(report, 2);
+        this.logger.report(report, 2);
         return report;
     }
 
