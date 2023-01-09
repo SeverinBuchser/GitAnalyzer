@@ -27,7 +27,7 @@ public class ConflictingMergeAnalyzer implements Analyzer<ConflictingMerge, Conf
         this.subAnalyzer = new ConflictingFileAnalyzer(this.logger);
     }
 
-    public ConflictingMergeReport analyze(ConflictingMerge conflictingMerge) {
+    public ConflictingMergeReport call(ConflictingMerge conflictingMerge) {
         ConflictingMergeReport report = new ConflictingMergeReport(conflictingMerge.getCommitId());
         this.logger.println(report, 2);
 
@@ -41,7 +41,7 @@ public class ConflictingMergeAnalyzer implements Analyzer<ConflictingMerge, Conf
                 int conflictingFileCount = 0;
 
                 for (ConflictingFile conflictingFile: conflictingMerge.getConflictingFiles()) {
-                    ConflictingFileReport fileReport = this.subAnalyzer.analyze(conflictingFile);
+                    ConflictingFileReport fileReport = this.subAnalyzer.call(conflictingFile);
                     if (fileReport.isFail() || fileReport.isSkip()) {
                         throw new IOException("Unwanted exception");
                     }

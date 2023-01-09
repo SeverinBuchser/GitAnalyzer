@@ -24,7 +24,6 @@ public class GuiCommand implements Runnable {
     )
     public void setConfig(File config) {
         try {
-            System.out.println(config.exists());
             this.config = new Config(config.toPath());
         } catch (IOException e) {
             // TODO: Logger log error

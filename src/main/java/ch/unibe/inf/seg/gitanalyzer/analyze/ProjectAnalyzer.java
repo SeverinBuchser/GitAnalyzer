@@ -21,13 +21,13 @@ public class ProjectAnalyzer implements Analyzer<Project, ProjectReport> {
     }
 
     @Override
-    public ProjectReport analyze(Project project) {
+    public ProjectReport call(Project project) {
         ProjectReport report = new ProjectReport(project.getName());
         this.logger.println(report, 1);
 
         try {
             for (ConflictingMerge conflictingMerge: project) {
-                report.addMergeReport(this.subAnalyzer.analyze(conflictingMerge));
+                report.addMergeReport(this.subAnalyzer.call(conflictingMerge));
             }
 
             report.ok();

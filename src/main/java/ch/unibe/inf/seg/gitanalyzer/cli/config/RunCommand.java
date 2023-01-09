@@ -2,7 +2,7 @@ package ch.unibe.inf.seg.gitanalyzer.cli.config;
 
 import ch.unibe.inf.seg.gitanalyzer.analyze.ProjectListAnalyzer;
 import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
-import ch.unibe.inf.seg.gitanalyzer.clone.Cloner;
+import ch.unibe.inf.seg.gitanalyzer.clone.ProjectListsCloner;
 import ch.unibe.inf.seg.gitanalyzer.config.ProjectList;
 import ch.unibe.inf.seg.gitanalyzer.report.ProjectListReport;
 import picocli.CommandLine;
@@ -39,13 +39,8 @@ public class RunCommand implements Runnable {
     }
 
     private void runClone() {
-        try {
-            Cloner cloner = new Cloner().addProjectLists(this.config.getProjectLists());
-            cloner.call();
-            // TODO logger
-        } catch (IOException e) {
-            // TODO: logger
-        }
+        ProjectListsCloner cloner = new ProjectListsCloner();
+        cloner.call(this.config.getProjectLists());
     }
 
     private void runAnalyze() {
@@ -53,7 +48,7 @@ public class RunCommand implements Runnable {
 
         for (ProjectList projectList : config.getProjectLists()) {
             try {
-                ProjectListReport report = analyzer.analyze(projectList);
+                ProjectListReport report = analyzer.call(projectList);
 
                 File outFile = this.config.getOutPathAbsolute().resolve(projectList.getOutFilename()).toFile();
                 FileWriter writer = new FileWriter(outFile);

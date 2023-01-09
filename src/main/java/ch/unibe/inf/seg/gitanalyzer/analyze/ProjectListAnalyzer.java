@@ -10,7 +10,7 @@ import ch.unibe.inf.seg.gitanalyzer.util.logger.OutputStreamLogger;
 
 import java.io.IOException;
 
-public class ProjectListAnalyzer implements Analyzer<ProjectList, ProjectListReport> {
+public class ProjectListAnalyzer extends Thread implements Analyzer<ProjectList, ProjectListReport> {
 
     private AnalyzerLogger logger = new OutputStreamLogger(System.out, 0);
     private final ProjectAnalyzer subAnalyzer;
@@ -25,26 +25,30 @@ public class ProjectListAnalyzer implements Analyzer<ProjectList, ProjectListRep
     }
 
     @Override
-    public ProjectListReport analyze(ProjectList projectList) throws IOException {
+    public ProjectListReport call(ProjectList projectList) {
         ProjectListReport report = new ProjectListReport(projectList.getListPath().toString());
         report.startTimer();
 
         // TODO: add other id than project_list
         this.logger.println(report, 0);
 
-        ProjectInfos projectInfos = projectList.toProjectInfos();
+        try {
+            ProjectInfos projectInfos = projectList.toProjectInfos();
 
-        ProjectIterator projects = projectInfos.projectsIterator(projectList.getDirPathAbsolute());
+            ProjectIterator projects = projectInfos.projectsIterator(projectList.getDirPathAbsolute());
 
-        while (projects.hasNext()) {
-            Project project = projects.next();
-            report.addProjectReport(this.subAnalyzer.analyze(project));
-            project.close();
+            while (projects.hasNext()) {
+                Project project = projects.next();
+                report.addProjectReport(this.subAnalyzer.call(project));
+                project.close();
+            }
+
+            report.ok();
+        } catch (IOException e) {
+            report.fail(e.getMessage());
         }
 
-        report.ok();
         report.endTimer();
-
         this.logger.println(report, 0);
         return report;
     }

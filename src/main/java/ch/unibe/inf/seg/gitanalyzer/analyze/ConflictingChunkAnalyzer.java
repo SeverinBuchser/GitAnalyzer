@@ -22,7 +22,7 @@ public class ConflictingChunkAnalyzer implements Analyzer<ConflictingChunk, Conf
     }
 
     @Override
-    public ConflictingChunkReport analyze(ConflictingChunk conflictingChunk) {
+    public ConflictingChunkReport call(ConflictingChunk conflictingChunk) {
         if (this.resolutionFile == null) throw new IllegalStateException("The resolution file has not been set yet.");
         ConflictingChunkReport report = new ConflictingChunkReport();
         this.logger.println(report, 4);

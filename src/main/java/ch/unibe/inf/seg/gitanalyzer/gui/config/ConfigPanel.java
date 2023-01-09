@@ -22,12 +22,14 @@ public class ConfigPanel extends JPanel implements Updatable, Subscribable<Confi
     private Config config;
     private final ConfigEditor configEditor;
 
+    private final static String CWD = Path.of("").toAbsolutePath().toString();
+
     private final JButton loadFileButton = new JButton("Load Config");
     private final JButton openRawButton = new JButton("Open Raw Config");
     private final JButton saveFileButton = new JButton("Save Config");
     private final JButton saveAsFileButton = new JButton("Save Config As");
-    private final JFileChooser loadFileChooser = new JFileChooser("");
-    private final JFileChooser saveFileChooser = new JFileChooser("");
+    private final JFileChooser loadFileChooser = new JFileChooser(CWD);
+    private final JFileChooser saveFileChooser = new JFileChooser(CWD);
 
     private boolean rawOpen = false;
 

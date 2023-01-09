@@ -2,7 +2,7 @@ package ch.unibe.inf.seg.gitanalyzer.cli.config.projectlist;
 
 import ch.unibe.inf.seg.gitanalyzer.analyze.ProjectListAnalyzer;
 import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
-import ch.unibe.inf.seg.gitanalyzer.clone.Cloner;
+import ch.unibe.inf.seg.gitanalyzer.clone.ProjectListCloner;
 import ch.unibe.inf.seg.gitanalyzer.report.ProjectListReport;
 import picocli.CommandLine;
 
@@ -44,19 +44,14 @@ public class RunCommand implements Runnable {
     }
 
     private void runClone() {
-        try {
-            Cloner cloner = new Cloner(this.mixin.getProjectList());
-            cloner.call();
-            // TODO: logger
-        } catch (IOException e) {
-            // TODO: logger
-        }
+        ProjectListCloner cloner = new ProjectListCloner();
+        cloner.call(this.mixin.getProjectList());
     }
 
     private void runAnalyze() {
         try {
             ProjectListAnalyzer analyzer = new ProjectListAnalyzer();
-            ProjectListReport report = analyzer.analyze(this.mixin.getProjectList());
+            ProjectListReport report = analyzer.call(this.mixin.getProjectList());
 
             File outFile = this.getOutFile();
             FileWriter writer = new FileWriter(outFile);

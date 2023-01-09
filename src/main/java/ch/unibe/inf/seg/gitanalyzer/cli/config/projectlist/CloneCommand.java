@@ -1,10 +1,8 @@
 package ch.unibe.inf.seg.gitanalyzer.cli.config.projectlist;
 
 import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
-import ch.unibe.inf.seg.gitanalyzer.clone.Cloner;
+import ch.unibe.inf.seg.gitanalyzer.clone.ProjectListCloner;
 import picocli.CommandLine;
-
-import java.io.IOException;
 
 @CommandLine.Command(
         name = "clone",
@@ -23,12 +21,7 @@ public class CloneCommand implements Runnable {
             // TODO: logger
             return;
         }
-        try {
-            Cloner cloner = new Cloner(this.mixin.getProjectList());
-            cloner.call();
-            // TODO: logger
-        } catch (IOException e) {
-            // TODO: logger
-        }
+        ProjectListCloner cloner = new ProjectListCloner();
+        cloner.call(this.mixin.getProjectList());
     }
 }

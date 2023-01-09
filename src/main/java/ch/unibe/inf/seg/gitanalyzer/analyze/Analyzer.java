@@ -1,7 +1,5 @@
 package ch.unibe.inf.seg.gitanalyzer.analyze;
 
-import java.io.IOException;
-
 /**
  * Abstract implementation of an analyzer, providing some widely used functionality for summation or counting of
  * elements.
@@ -15,5 +13,5 @@ public interface Analyzer<T, R> {
      * @param toAnalyze The element to be analyzed.
      * @return The result of the analysis.
      */
-    R analyze(T toAnalyze) throws IOException;
+    R call(T toAnalyze);
 }

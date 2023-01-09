@@ -32,7 +32,7 @@ public class AnalyzeCommand implements Runnable {
 
         for (ProjectList projectList : config.getProjectLists()) {
             try {
-                ProjectListReport report = analyzer.analyze(projectList);
+                ProjectListReport report = analyzer.call(projectList);
 
                 File outFile = this.config.getOutPathAbsolute().resolve(projectList.getOutFilename()).toFile();
                 FileWriter writer = new FileWriter(outFile);

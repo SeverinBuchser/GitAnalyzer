@@ -24,7 +24,7 @@ public class ConflictingFileAnalyzer implements Analyzer<ConflictingFile, Confli
     }
 
     @Override
-    public ConflictingFileReport analyze(ConflictingFile conflictingFile) {
+    public ConflictingFileReport call(ConflictingFile conflictingFile) {
         ConflictingFileReport report = new ConflictingFileReport(conflictingFile.getFileName());
         this.logger.println(report, 3);
 
@@ -42,7 +42,7 @@ public class ConflictingFileAnalyzer implements Analyzer<ConflictingFile, Confli
             this.subAnalyzer.setResolutionFile(actualResolutionFile);
 
             for (ConflictingChunk conflictingChunk : conflictingFile.getConflictingChunks()) {
-                report.addChunkReport(this.subAnalyzer.analyze(conflictingChunk));
+                report.addChunkReport(this.subAnalyzer.call(conflictingChunk));
             }
 
             report.ok(correct);

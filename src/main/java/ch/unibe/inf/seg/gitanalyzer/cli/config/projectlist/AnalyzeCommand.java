@@ -34,7 +34,7 @@ public class AnalyzeCommand implements Runnable {
         }
         try {
             ProjectListAnalyzer analyzer = new ProjectListAnalyzer();
-            ProjectListReport report = analyzer.analyze(this.mixin.getProjectList());
+            ProjectListReport report = analyzer.call(this.mixin.getProjectList());
 
             File outFile = this.getOutFile();
             FileWriter writer = new FileWriter(outFile);

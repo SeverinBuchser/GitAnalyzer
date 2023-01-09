@@ -69,7 +69,7 @@ public class AnalyzeCommand implements Runnable {
     public void run() {
         try {
             ProjectListAnalyzer analyzer = new ProjectListAnalyzer();
-            ProjectListReport report = analyzer.analyze(this.projectList);
+            ProjectListReport report = analyzer.call(this.projectList);
 
             File outFile = this.out.resolve(this.projectList.getOutFilename()).toFile();
             FileWriter writer = new FileWriter(outFile);
