@@ -10,7 +10,7 @@ public class ProjectListMixin {
 
     private ProjectListNotFoundException notFoundException;
 
-    public boolean hasNotFoundException() {
+    public boolean hasLoadException() {
         return this.notFoundException != null;
     }
 

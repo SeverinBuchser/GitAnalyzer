@@ -34,7 +34,7 @@ public class MarkableReport extends Report {
     @Override
     public String toString() {
         if (this.isComplete() && this.isOk()) {
-            return String.format("%s: %5s: %b", this.id, this.state, this.isMarked());
+            return String.format("Complete: %s: %5s: %b", this.id, this.state, this.isMarked());
         }
         return super.toString();
     }

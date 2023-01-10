@@ -1,21 +1,20 @@
 package ch.unibe.inf.seg.gitanalyzer.cli;
 
-import ch.unibe.inf.seg.gitanalyzer.clone.ProjectListCloner;
 import ch.unibe.inf.seg.gitanalyzer.config.ProjectList;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.CliLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
 import picocli.CommandLine;
 
 @CommandLine.Command(
         name = "clone",
         description = "Clones a list of projects to one directory. Each project will have its own sub-directory " +
-                "which are named after the projects name, which is stored inside the list of projects.",
+                "which is named after the projects name, which is stored inside the list of projects.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )
-public class CloneCommand implements Runnable {
+public class CloneCommand extends AbstractCloneCommand {
 
     @CommandLine.Mixin
-    public CliLogger logger;
+    public GlobalLogger logger;
 
     private final ProjectList projectList = new ProjectList("");
 
@@ -38,7 +37,6 @@ public class CloneCommand implements Runnable {
     @Override
     public void run() {
         this.logger.info("Running Clone Command");
-        ProjectListCloner cloner = new ProjectListCloner(this.logger);
-        cloner.call(this.projectList);
+        this.cloneProjectList(projectList);
     }
 }

@@ -7,30 +7,61 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Add logger and implement logging in cloning commands">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/CliLogger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/LogType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/Logger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/PrintStreamLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Add logger for project list commands and implement global logger provider">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/AbstractAnalyzer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/AbstractAnalyzeCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/AbstractCloneCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/CommandHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/analyzer/ProjectListAnalyzerPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/LoggerProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/OutputStreamDuplicator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/StringBuilderOutputStream.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/gui.test.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/configs/gui.test.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/Analyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/Analyzer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ConflictingChunkAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ConflictingChunkAnalyzer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ConflictingFileAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ConflictingFileAnalyzer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ConflictingMergeAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ConflictingMergeAnalyzer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ProjectAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ProjectAnalyzer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ProjectListAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/analyze/ProjectListAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/AnalyzeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/AnalyzeCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/CloneCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/CloneCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/ConfigCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/ConfigCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/GuiCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/GuiCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/VersionProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/VersionProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/AnalyzeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/AnalyzeCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/CloneCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/CloneCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/CreateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/CreateCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/RunCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/RunCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/SetVerboseCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/AddCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/AnalyzeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/AnalyzeCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/CloneCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/CloneCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/ProjectListMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/ProjectListMixin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/RemoveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/RemoveCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/RunCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/RunCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/clone/ProjectListCloner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/clone/ProjectListCloner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/clone/ProjectListsCloner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/clone/ProjectListsCloner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetDirCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetDirCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetListCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetListCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetSkipCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetSkipCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetSuffixCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetSuffixCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/ShowCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/config/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/config/Config.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/analyzer/AnalyzerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/analyzer/AnalyzerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/AnalyzerLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/ReportLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/ConfigEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/ConfigEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/ConfigPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/ConfigPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/report/ConflictingFileReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/report/ConflictingFileReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/report/ConflictingMergeReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/report/ConflictingMergeReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/report/MarkableReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/report/MarkableReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/report/ProjectListReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/report/ProjectListReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/report/ProjectReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/report/ProjectReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/report/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/report/Report.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/CliLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/GlobalLogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/GuiLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/GuiLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/OutputStreamLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/PrintStreamReportLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/PrintStreamLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/PrintStreamLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/PrintStreamReportLogger.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/ReportLogger.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/schemas/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schemas/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/config/ConfigTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ch/unibe/inf/seg/gitanalyzer/config/ConfigTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,20 +75,15 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
-  </component>
-  <component name="JavaAutoRunManager">
-    <enabled-run-configurations>
-      <run-configuration type="JUnit" name="Rerun Failed Tests" />
-    </enabled-run-configurations>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -140,14 +166,14 @@
       <recent name="ch.unibe.inf.seg.mergeresolution.analyze" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ch.unibe.inf.seg.gitanalyzer.cli" />
+      <recent name="ch.unibe.inf.seg.gitanalyzer.util.logger" />
       <recent name="ch.unibe.inf.seg.gitanalyzer.cli.config.projectlist" />
       <recent name="ch.unibe.inf.seg.gitanalyzer.cli.config" />
       <recent name="ch.unibe.inf.seg.gitanalyzer.reporter" />
-      <recent name="ch.unibe.inf.seg.gitanalyzer.cli" />
-      <recent name="ch.unibe.inf.seg.gitanalyzer.util.updater" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Test">
+  <component name="RunManager" selected="JUnit.Tests">
     <configuration name="All Lists" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.gitanalyzer.cli.GitAnalyzer" />
       <module name="GitAnalyzer" />
@@ -291,7 +317,7 @@
     <configuration name="Test" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.gitanalyzer.cli.GitAnalyzer" />
       <module name="GitAnalyzer" />
-      <option name="PROGRAM_PARAMETERS" value="config project-list clone ./configs/gui.test.config.json ../project-lists/test.csv -v" />
+      <option name="PROGRAM_PARAMETERS" value="config project-list set-suffix ./configs/gui.test.config.json ../project-lists/test.csv true" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="ch.unibe.inf.seg.result.*" />
@@ -438,7 +464,8 @@
       <workItem from="1672995874776" duration="14719000" />
       <workItem from="1673221021628" duration="2419000" />
       <workItem from="1673272999853" duration="4244000" />
-      <workItem from="1673279723177" duration="7723000" />
+      <workItem from="1673279723177" duration="16251000" />
+      <workItem from="1673353495742" duration="9268000" />
     </task>
     <task id="LOCAL-00001" summary="Inital Commit">
       <created>1663769460948</created>
@@ -650,7 +677,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673277079283</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Add logger and implement logging in cloning commands">
+      <created>1673287471493</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1673287471493</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2967,7 +3001,6 @@
       <path value="$PROJECT_DIR$/src/test/resources/secondsamplemergeconflictproject" />
       <path value="$PROJECT_DIR$/src/test/resources/samplemergeconflictproject" />
     </ignored-roots>
-    <MESSAGE value="Add tests for project package" />
     <MESSAGE value="Improve conduction of study by removing try catch blocks" />
     <MESSAGE value="Fix analyze study bug and add two project lists" />
     <MESSAGE value="Restructure project and create single file application" />
@@ -2992,7 +3025,8 @@
     <MESSAGE value="Add basic gui analyzer implementation" />
     <MESSAGE value="Implement analysis with multi threading" />
     <MESSAGE value="Add logger and implement logging in cloning commands" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add logger and implement logging in cloning commands" />
+    <MESSAGE value="Add logger for project list commands and implement global logger provider" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add logger for project list commands and implement global logger provider" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

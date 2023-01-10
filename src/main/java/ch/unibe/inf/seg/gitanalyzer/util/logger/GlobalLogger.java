@@ -2,8 +2,7 @@ package ch.unibe.inf.seg.gitanalyzer.util.logger;
 
 import picocli.CommandLine;
 
-public class CliLogger extends PrintStreamLogger {
-
+public class GlobalLogger extends PrintStreamLogger {
     @CommandLine.Option(
             names = {"-v", "--verbose"},
             description = "Increase verbosity. Specify multiple times to increase (-vvv)."
@@ -13,7 +12,8 @@ public class CliLogger extends PrintStreamLogger {
         this.verbosityLevel = verbosity.length;
     }
 
-    public CliLogger() {
+    public GlobalLogger() {
         super(System.out);
+        LoggerProvider.setLogger(this);
     }
 }

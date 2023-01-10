@@ -6,17 +6,13 @@ import ch.unibe.inf.seg.gitanalyzer.cli.config.CreateCommand;
 import ch.unibe.inf.seg.gitanalyzer.cli.config.SetCloneCommand;
 import ch.unibe.inf.seg.gitanalyzer.cli.config.SetAnalyzeCommand;
 import ch.unibe.inf.seg.gitanalyzer.cli.config.SetOutCommand;
-import ch.unibe.inf.seg.gitanalyzer.cli.config.SetVerboseCommand;
 import ch.unibe.inf.seg.gitanalyzer.cli.config.RunCommand;
 import ch.unibe.inf.seg.gitanalyzer.cli.config.CloneCommand;
 import ch.unibe.inf.seg.gitanalyzer.cli.config.ProjectListCommand;
 import picocli.CommandLine;
 
 @CommandLine.Command(name = "config",
-        description = "Command to manipulate configuration files. This command checks if a file at the <configPath> " +
-                "location already exists. If so, the file will be loaded and specified changes will be applied. If " +
-                "there are no changes, the config will just be printed. If the file does not exist, it will be " +
-                "created.",
+        description = "Command to manipulate configuration files.",
         subcommands = {
                 RunCommand.class,
                 AnalyzeCommand.class,
@@ -26,7 +22,6 @@ import picocli.CommandLine;
                 SetCloneCommand.class,
                 SetAnalyzeCommand.class,
                 SetOutCommand.class,
-                SetVerboseCommand.class,
                 ProjectListCommand.class
         },
         mixinStandardHelpOptions = true,

@@ -20,14 +20,16 @@ public class ConfigPanel extends JPanel implements Updatable, Subscribable<Confi
     private final SubscriptionManager<Config> subscriptionManager = new SubscriptionManager<>();
 
     private Config config;
+
+    private final JButton newButton = new JButton("New");
+    private final JButton loadFileButton = new JButton("Load");
+    private final JButton openRawButton = new JButton("Open Raw");
+    private final JButton saveFileButton = new JButton("Save");
+    private final JButton saveAsFileButton = new JButton("Save As");
+    private final JButton runConfigButton = new JButton("Run");
     private final ConfigEditor configEditor;
 
     private final static String CWD = Path.of("").toAbsolutePath().toString();
-
-    private final JButton loadFileButton = new JButton("Load Config");
-    private final JButton openRawButton = new JButton("Open Raw Config");
-    private final JButton saveFileButton = new JButton("Save Config");
-    private final JButton saveAsFileButton = new JButton("Save Config As");
     private final JFileChooser loadFileChooser = new JFileChooser(CWD);
     private final JFileChooser saveFileChooser = new JFileChooser(CWD);
 
@@ -37,10 +39,12 @@ public class ConfigPanel extends JPanel implements Updatable, Subscribable<Confi
         this.configEditor = new ConfigEditor();
 
         JPanel ioPanel = new JPanel();
+        ioPanel.add(this.newButton);
         ioPanel.add(this.loadFileButton);
         ioPanel.add(this.openRawButton);
         ioPanel.add(this.saveFileButton);
         ioPanel.add(this.saveAsFileButton);
+        ioPanel.add(this.runConfigButton);
 
         this.initActionListeners();
         this.initSubscriptions();
@@ -51,14 +55,20 @@ public class ConfigPanel extends JPanel implements Updatable, Subscribable<Confi
     }
 
     private void initActionListeners() {
+        this.newButton.addActionListener(a -> this.newConfig());
         this.loadFileButton.addActionListener(a -> this.loadConfig());
         this.openRawButton.addActionListener(a -> this.openRawConfig());
         this.saveFileButton.addActionListener(a -> this.saveConfig());
         this.saveAsFileButton.addActionListener(a -> this.saveConfigAs());
+        this.runConfigButton.addActionListener(a -> this.runConfig());
     }
 
     private void initSubscriptions() {
         this.subscribe(this.configEditor);
+    }
+
+    private void newConfig() {
+        this.next(new Config());
     }
 
     private void loadConfig() {
@@ -134,6 +144,10 @@ public class ConfigPanel extends JPanel implements Updatable, Subscribable<Confi
             }
         }
         frame.dispose();
+    }
+
+    private void runConfig() {
+        ((JTabbedPane) this.getParent()).setSelectedIndex(1);
     }
 
     @Override

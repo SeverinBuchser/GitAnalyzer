@@ -24,7 +24,6 @@ public class ConfigEditor extends JPanel implements Updatable, Updater, Subscrib
 
     private final JCheckBox cloneProjectsToggle = new JCheckBox("Clone Projects", false);
     private final JCheckBox analyzeConflictsToggle = new JCheckBox("Analyze Conflicts", false);
-    private final JCheckBox verboseToggle = new JCheckBox("Verbose", false);
 
     private final JTextField outDirTextField = new JTextField();
     private final ProjectListInfosEditor projectListInfosEditor;
@@ -38,10 +37,9 @@ public class ConfigEditor extends JPanel implements Updatable, Updater, Subscrib
         JPanel outDirPanel = new JPanel();
 
         // toggle panel
-        togglePanel.setLayout(new GridLayout(3, 1));
+        togglePanel.setLayout(new GridLayout(2, 1));
         togglePanel.add(this.cloneProjectsToggle);
         togglePanel.add(this.analyzeConflictsToggle);
-        togglePanel.add(this.verboseToggle);
 
         // out dir
         this.outDirTextField.setColumns(20);
@@ -79,10 +77,6 @@ public class ConfigEditor extends JPanel implements Updatable, Updater, Subscrib
         });
         this.analyzeConflictsToggle.addItemListener(evt -> {
             this.config.setAnalyze(evt.getStateChange() == ItemEvent.SELECTED);
-            this.updateSubscriptionManager.updateAll();
-        });
-        this.verboseToggle.addItemListener(evt -> {
-            this.config.setVerbose(evt.getStateChange() == ItemEvent.SELECTED);
             this.updateSubscriptionManager.updateAll();
         });
         this.outDirTextField.getDocument().addDocumentListener((SimpleDocumentListener) e -> {
@@ -128,8 +122,7 @@ public class ConfigEditor extends JPanel implements Updatable, Updater, Subscrib
         this.subscriptionManager.nextAll(config);
         this.cloneProjectsToggle.setSelected(config.getClone());
         this.analyzeConflictsToggle.setSelected(config.getAnalyze());
-        this.verboseToggle.setSelected(config.getVerbose());
-        this.outDirTextField.setText(config.getOutPathAbsolute().toString());
+        this.outDirTextField.setText(config.getOutPath().toString());
     }
 
     @Override

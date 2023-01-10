@@ -21,7 +21,6 @@ class ConfigTest {
         assertTrue(config.getClone());
         assertTrue(config.getAnalyze());
         assertEquals("", config.getOutPath().toString());
-        assertFalse(config.getVerbose());
         assertEquals(0, config.getProjectLists().size());
     }
 
@@ -34,15 +33,13 @@ class ConfigTest {
         assertTrue(config.getAnalyze());
         assertTrue(config.getClone());
         assertEquals("", config.getOutPath().toString());
-        assertFalse(config.getVerbose());
         assertEquals(0, config.getProjectLists().size());
         assertEquals("""
                 {
                     "analyze": true,
                     "clone": true,
                     "projectLists": [],
-                    "out": "",
-                    "verbose": false
+                    "out": ""
                 }""", config.toString());
     }
 
@@ -81,9 +78,6 @@ class ConfigTest {
 
         config.setOut("someDir");
         assertEquals("someDir", config.getOutPath().toString());
-
-        config.setVerbose(true);
-        assertTrue(config.getVerbose());
     }
 
     @Test
@@ -201,9 +195,6 @@ class ConfigTest {
         config.setOut("someDir");
         assertEquals("someDir", config.getOutPath().toString());
 
-        config.setVerbose(true);
-        assertTrue(config.getVerbose());
-
         ProjectList info1 = new ProjectList("someFile");
         ProjectList info2 = new ProjectList("newFile", "dir", "no-suffix", true);
         ProjectList info3 = new ProjectList("someOtherFile");
@@ -266,7 +257,6 @@ class ConfigTest {
         assertTrue(config.getAnalyze());
         assertTrue(config.getClone());
         assertEquals("out", config.getOutPath().toString());
-        assertFalse(config.getVerbose());
         assertEquals(1, config.getProjectLists().size());
         assertEquals("project-list.csv", config.getProjectLists().get(0).getListPath().toString());
     }
@@ -317,8 +307,7 @@ class ConfigTest {
                     "analyze": true,
                     "clone": true,
                     "projectLists": [],
-                    "out": "",
-                    "verbose": false
+                    "out": ""
                 }""", config.toString());
 
         config.getProjectLists().add(new ProjectList("someFile"));
@@ -333,8 +322,7 @@ class ConfigTest {
                         "dir": "",
                         "suffix": ""
                     }],
-                    "out": "",
-                    "verbose": false
+                    "out": ""
                 }""", config.toString());
     }
 }

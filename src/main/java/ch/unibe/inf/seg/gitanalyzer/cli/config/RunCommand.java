@@ -5,7 +5,7 @@ import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
 import ch.unibe.inf.seg.gitanalyzer.clone.ProjectListsCloner;
 import ch.unibe.inf.seg.gitanalyzer.config.ProjectList;
 import ch.unibe.inf.seg.gitanalyzer.report.ProjectListReport;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.CliLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
 import picocli.CommandLine;
 
 import java.io.File;
@@ -21,7 +21,7 @@ import java.io.IOException;
 public class RunCommand implements Runnable {
 
     @CommandLine.Mixin
-    public CliLogger logger;
+    public GlobalLogger logger;
 
     @CommandLine.Mixin
     public ConfigMixin config;
@@ -48,7 +48,7 @@ public class RunCommand implements Runnable {
     }
 
     private void runAnalyze() {
-        ProjectListAnalyzer analyzer = new ProjectListAnalyzer();
+        ProjectListAnalyzer analyzer = new ProjectListAnalyzer(this.logger);
 
         for (ProjectList projectList : config.getProjectLists()) {
             try {

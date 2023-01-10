@@ -7,7 +7,6 @@ package ch.unibe.inf.seg.gitanalyzer.analyze;
  * @param <R> The return type of the analysis.
  */
 public interface Analyzer<T, R> {
-
     /**
      * Analyzes a given element and returns the result of the analysis.
      * @param toAnalyze The element to be analyzed.

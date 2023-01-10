@@ -3,28 +3,25 @@ package ch.unibe.inf.seg.gitanalyzer.analyze;
 import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingMerge;
 import ch.unibe.inf.seg.gitanalyzer.project.Project;
 import ch.unibe.inf.seg.gitanalyzer.report.ProjectReport;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.PrintStreamLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.ReportLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.PrintStreamReportLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.Logger;
 
-public class ProjectAnalyzer implements Analyzer<Project, ProjectReport> {
-    private ReportLogger logger = new PrintStreamReportLogger(new PrintStreamLogger(System.out), 1);
+public class ProjectAnalyzer extends AbstractAnalyzer<Project, ProjectReport> {
 
     private final ConflictingMergeAnalyzer subAnalyzer;
 
-    public ProjectAnalyzer() {
-        this.subAnalyzer = new ConflictingMergeAnalyzer(this.logger);
+    public ProjectAnalyzer(Logger logger) {
+        this(logger, 0);
     }
 
-    public ProjectAnalyzer(ReportLogger logger) {
-        this.logger = logger;
-        this.subAnalyzer = new ConflictingMergeAnalyzer(this.logger);
+    public ProjectAnalyzer(Logger logger, int level) {
+        super(logger, level);
+        this.subAnalyzer = new ConflictingMergeAnalyzer(logger, level + 1);
     }
 
     @Override
     public ProjectReport call(Project project) {
         ProjectReport report = new ProjectReport(project.getName());
-        this.logger.report(report, 1);
+        this.logReport(report);
 
         try {
             for (ConflictingMerge conflictingMerge: project) {
@@ -44,7 +41,7 @@ public class ProjectAnalyzer implements Analyzer<Project, ProjectReport> {
             report.fail(e.getMessage());
         }
 
-        this.logger.report(report, 1);
+        this.logReport(report);
         return report;
     }
 }

@@ -1,6 +1,8 @@
 package ch.unibe.inf.seg.gitanalyzer.cli.config.projectlist;
 
+import ch.unibe.inf.seg.gitanalyzer.cli.CommandHelper;
 import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
 import picocli.CommandLine;
 
 import java.io.IOException;
@@ -14,6 +16,9 @@ import java.io.IOException;
 public class SetSuffixCommand implements Runnable {
 
     @CommandLine.Mixin
+    public GlobalLogger logger;
+
+    @CommandLine.Mixin
     public ProjectListMixin mixin;
 
     @CommandLine.Parameters(
@@ -23,20 +28,31 @@ public class SetSuffixCommand implements Runnable {
 
     )
     public void setSuffix(String suffix) {
-        if (this.mixin.hasNotFoundException()) {
-            // TODO: logger
-            return;
-        }
+        if (this.mixin.getConfig().hasLoadException()) return;
+        if (this.mixin.hasLoadException()) return;
         this.mixin.getProjectList().setSuffix(suffix);
     }
 
     @Override
     public void run() {
+        this.logger.info("Running Set Suffix Command");
+        if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
+        if (CommandHelper.projectListLoadFailed(this.mixin)) return;
+        this.logger.info(String.format(
+                "Setting Suffix to Project List '%s' of Config '%s'",
+                this.mixin.getProjectList().getListPath(),
+                this.mixin.getConfig().getConfigPath()
+        ));
         try {
             this.mixin.getConfig().save();
-            // TODO: logger
+            this.logger.success(String.format(
+                    "Set Suffix '%s' to Project List '%s' of Config '%s'",
+                    this.mixin.getProjectList().getSuffix(),
+                    this.mixin.getProjectList().getListPath(),
+                    this.mixin.getConfig().getConfigPath()
+            ));
         } catch (IOException e) {
-            // TODO: logger
+            this.logger.fail(e.getMessage());
         }
     }
 }

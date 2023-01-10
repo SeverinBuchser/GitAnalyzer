@@ -4,31 +4,26 @@ import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingChunk;
 import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingFile;
 import ch.unibe.inf.seg.gitanalyzer.report.ConflictingFileReport;
 import ch.unibe.inf.seg.gitanalyzer.resolution.ResolutionFile;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.PrintStreamLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.ReportLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.PrintStreamReportLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.Logger;
 
 import java.io.IOException;
 
-public class ConflictingFileAnalyzer implements Analyzer<ConflictingFile, ConflictingFileReport> {
-
-    private ReportLogger logger = new PrintStreamReportLogger(new PrintStreamLogger(System.out), 3);
-
+public class ConflictingFileAnalyzer extends AbstractAnalyzer<ConflictingFile, ConflictingFileReport> {
     private final ConflictingChunkAnalyzer subAnalyzer;
 
-    public ConflictingFileAnalyzer() {
-        this.subAnalyzer = new ConflictingChunkAnalyzer(this.logger);
+    public ConflictingFileAnalyzer(Logger logger) {
+        this(logger, 0);
     }
 
-    public ConflictingFileAnalyzer(ReportLogger logger) {
-        this.logger = logger;
-        this.subAnalyzer = new ConflictingChunkAnalyzer(this.logger);
+    public ConflictingFileAnalyzer(Logger logger, int level) {
+        super(logger, level);
+        this.subAnalyzer = new ConflictingChunkAnalyzer(logger, level + 1);
     }
 
     @Override
     public ConflictingFileReport call(ConflictingFile conflictingFile) {
         ConflictingFileReport report = new ConflictingFileReport(conflictingFile.getFileName());
-        this.logger.report(report, 3);
+        this.logReport(report);
 
         try {
             boolean correct = false;
@@ -52,7 +47,7 @@ public class ConflictingFileAnalyzer implements Analyzer<ConflictingFile, Confli
         } catch (IOException e) {
             report.fail(e.getMessage());
         }
-        this.logger.report(report, 3);
+        this.logReport(report);
         return report;
     }
 }

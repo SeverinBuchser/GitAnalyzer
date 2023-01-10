@@ -22,11 +22,6 @@
       "description": "The directory of the output files.",
       "type": "string",
       "default": ""
-    },
-    "verbose": {
-      "description": "Verbose mode. Additional helpful information will be displayed. Verbose mode only has an effect on the analysis.",
-      "type": "boolean",
-      "default": false
     }
   },
   "additionalProperties": false

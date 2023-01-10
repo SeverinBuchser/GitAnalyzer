@@ -5,33 +5,28 @@ import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingMerge;
 import ch.unibe.inf.seg.gitanalyzer.error.NotComparableMergesException;
 import ch.unibe.inf.seg.gitanalyzer.report.ConflictingFileReport;
 import ch.unibe.inf.seg.gitanalyzer.report.ConflictingMergeReport;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.PrintStreamLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.ReportLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.PrintStreamReportLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.Logger;
 
 import java.io.IOException;
 
-public class ConflictingMergeAnalyzer implements Analyzer<ConflictingMerge, ConflictingMergeReport> {
+public class ConflictingMergeAnalyzer extends AbstractAnalyzer<ConflictingMerge, ConflictingMergeReport> {
 
     private static final int CONFLICT_LIMIT = 12;
 
-    private ReportLogger logger = new PrintStreamReportLogger(new PrintStreamLogger(System.out), 2);
-
-
     private final ConflictingFileAnalyzer subAnalyzer;
 
-    public ConflictingMergeAnalyzer() {
-        this.subAnalyzer = new ConflictingFileAnalyzer(this.logger);
+    public ConflictingMergeAnalyzer(Logger logger) {
+        this(logger, 0);
     }
 
-    public ConflictingMergeAnalyzer(ReportLogger logger) {
-        this.logger = logger;
-        this.subAnalyzer = new ConflictingFileAnalyzer(this.logger);
+    public ConflictingMergeAnalyzer(Logger logger, int level) {
+        super(logger, level);
+        this.subAnalyzer = new ConflictingFileAnalyzer(logger, level + 1);
     }
 
     public ConflictingMergeReport call(ConflictingMerge conflictingMerge) {
         ConflictingMergeReport report = new ConflictingMergeReport(conflictingMerge.getCommitId());
-        this.logger.report(report, 2);
+        this.logReport(report);
 
         try {
             if (checkConflictCount(conflictingMerge)) {
@@ -64,7 +59,7 @@ public class ConflictingMergeAnalyzer implements Analyzer<ConflictingMerge, Conf
             } else throw e;
         }
 
-        this.logger.report(report, 2);
+        this.logReport(report);
         return report;
     }
 

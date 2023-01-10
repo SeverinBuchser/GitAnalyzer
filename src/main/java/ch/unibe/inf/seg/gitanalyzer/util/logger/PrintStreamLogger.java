@@ -7,12 +7,16 @@ import java.time.format.FormatStyle;
 
 public class PrintStreamLogger implements Logger {
 
-    private final PrintStream out;
+    private static final int LOG_TYPE_LENGTH = 9;
+
+    protected PrintStream out;
     protected int verbosityLevel = 0;
 
     public void setVerbosityLevel(boolean[] verbosity) {
         this.verbosityLevel = verbosity.length;
     }
+
+    protected PrintStreamLogger() {}
 
     public PrintStreamLogger(PrintStream out) {
         this.out = out;
@@ -55,11 +59,17 @@ public class PrintStreamLogger implements Logger {
 
     private void log(int verbosityLevel, LogType logType, String text) {
         if (verbosityLevel > this.verbosityLevel) return;
-        String prefix = logType + addTime();
-        this.out.println(prefix + text);
+        for (String line: text.split("\n")) {
+            String prefix = addLogType(logType) + addTime();
+            this.out.println(prefix + line);
+        }
     }
 
-    private String addTime() {
+    private static String addLogType(LogType logType) {
+        return logType.toString() + " ".repeat(LOG_TYPE_LENGTH - logType.toString().length());
+    }
+
+    private static String addTime() {
         return " " + DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).format(LocalTime.now()) + "\t";
     }
 }

@@ -3,19 +3,13 @@ package ch.unibe.inf.seg.gitanalyzer.analyze;
 import ch.unibe.inf.seg.gitanalyzer.conflict.ConflictingChunk;
 import ch.unibe.inf.seg.gitanalyzer.report.ConflictingChunkReport;
 import ch.unibe.inf.seg.gitanalyzer.resolution.ResolutionFile;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.PrintStreamLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.ReportLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.PrintStreamReportLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.Logger;
 
-public class ConflictingChunkAnalyzer implements Analyzer<ConflictingChunk, ConflictingChunkReport> {
+public class ConflictingChunkAnalyzer extends AbstractAnalyzer<ConflictingChunk, ConflictingChunkReport> {
     private ResolutionFile resolutionFile;
 
-    private ReportLogger logger = new PrintStreamReportLogger(new PrintStreamLogger(System.out), 4);
-
-    public ConflictingChunkAnalyzer() {}
-
-    public ConflictingChunkAnalyzer(ReportLogger logger) {
-        this.logger = logger;
+    public ConflictingChunkAnalyzer(Logger logger, int level) {
+        super(logger, level);
     }
 
     public void setResolutionFile(ResolutionFile resolutionFile) {
@@ -26,7 +20,7 @@ public class ConflictingChunkAnalyzer implements Analyzer<ConflictingChunk, Conf
     public ConflictingChunkReport call(ConflictingChunk conflictingChunk) {
         if (this.resolutionFile == null) throw new IllegalStateException("The resolution file has not been set yet.");
         ConflictingChunkReport report = new ConflictingChunkReport();
-        this.logger.report(report, 4);
+        this.logReport(report);
         boolean correct = false;
 
         if (conflictingChunk.isFirstConflictingRangeInResolutionFile(this.resolutionFile)) {
@@ -36,7 +30,7 @@ public class ConflictingChunkAnalyzer implements Analyzer<ConflictingChunk, Conf
         }
         report.ok(correct);
 
-        this.logger.report(report, 4);
+        this.logReport(report);
         return report;
     }
 }

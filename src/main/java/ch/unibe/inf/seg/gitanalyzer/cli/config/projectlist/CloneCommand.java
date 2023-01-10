@@ -1,8 +1,9 @@
 package ch.unibe.inf.seg.gitanalyzer.cli.config.projectlist;
 
+import ch.unibe.inf.seg.gitanalyzer.cli.AbstractCloneCommand;
+import ch.unibe.inf.seg.gitanalyzer.cli.CommandHelper;
 import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
-import ch.unibe.inf.seg.gitanalyzer.clone.ProjectListCloner;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.CliLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
 import picocli.CommandLine;
 
 @CommandLine.Command(
@@ -11,10 +12,10 @@ import picocli.CommandLine;
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )
-public class CloneCommand implements Runnable {
+public class CloneCommand extends AbstractCloneCommand {
 
     @CommandLine.Mixin
-    public CliLogger logger;
+    public GlobalLogger logger;
 
     @CommandLine.Mixin
     public ProjectListMixin mixin;
@@ -22,17 +23,9 @@ public class CloneCommand implements Runnable {
     @Override
     public void run() {
         this.logger.info("Running Clone Command");
-        if (this.mixin.getConfig().hasLoadException()) {
-            this.logger.fail(String.format("Config at '%s' could not be loaded!",
-                    this.mixin.getConfig().getConfigPathAbsolute()));
-            return;
-        }
-        if (this.mixin.hasNotFoundException()) {
-            this.logger.fail(String.format("Project List at '%s' could not be loaded!",
-                    this.mixin.getProjectList().getListPath()));
-            return;
-        }
-        ProjectListCloner cloner = new ProjectListCloner(logger);
-        cloner.call(this.mixin.getProjectList());
+        if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
+        if (CommandHelper.projectListLoadFailed(this.mixin)) return;
+
+        this.cloneProjectList(this.mixin.getProjectList());
     }
 }

@@ -3,6 +3,7 @@ package ch.unibe.inf.seg.gitanalyzer.cli;
 import ch.unibe.inf.seg.gitanalyzer.config.Config;
 import ch.unibe.inf.seg.gitanalyzer.gui.analyzer.AnalyzerPanel;
 import ch.unibe.inf.seg.gitanalyzer.gui.config.ConfigPanel;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
 import picocli.CommandLine;
 
 import javax.swing.*;
@@ -18,6 +19,9 @@ import java.io.IOException;
 )
 public class GuiCommand implements Runnable {
 
+    @CommandLine.Mixin
+    public GlobalLogger logger;
+
     @CommandLine.Option(
             names = {"-c", "--config"},
             description = "The config file to open in the gui."
@@ -26,7 +30,7 @@ public class GuiCommand implements Runnable {
         try {
             this.config = new Config(config.toPath());
         } catch (IOException e) {
-            // TODO: Logger log error
+            this.logger.fail(e.getMessage());
         }
     }
 
@@ -38,6 +42,7 @@ public class GuiCommand implements Runnable {
 
     @Override
     public void run() {
+        this.logger.info("Starting GUI");
         ConfigPanel configPanel = new ConfigPanel();
         AnalyzerPanel analyzerPanel = new AnalyzerPanel();
         configPanel.subscribe(analyzerPanel);

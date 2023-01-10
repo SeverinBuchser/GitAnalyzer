@@ -1,6 +1,7 @@
 package ch.unibe.inf.seg.gitanalyzer.cli.config;
 
 import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
 import picocli.CommandLine;
 
 import java.io.IOException;
@@ -12,6 +13,9 @@ import java.io.IOException;
         versionProvider = VersionProvider.class
 )
 public class CreateCommand implements Runnable {
+
+    @CommandLine.Mixin
+    public GlobalLogger logger;
 
     @CommandLine.Mixin
     public ConfigMixin config;
@@ -42,16 +46,6 @@ public class CreateCommand implements Runnable {
     )
     public void setOut(String out) {
         this.config.setOut(out);
-    }
-
-
-    @CommandLine.Option(
-            names = {"-v", "--verbose"},
-            description = "",
-            defaultValue = "false"
-    )
-    public void setVerbose(boolean verbose) {
-        this.config.setVerbose(verbose);
     }
 
     @Override

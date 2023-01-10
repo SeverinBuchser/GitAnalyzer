@@ -1,6 +1,8 @@
 package ch.unibe.inf.seg.gitanalyzer.cli.config.projectlist;
 
+import ch.unibe.inf.seg.gitanalyzer.cli.CommandHelper;
 import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
 import picocli.CommandLine;
 
 import java.io.IOException;
@@ -12,6 +14,9 @@ import java.io.IOException;
         versionProvider = VersionProvider.class
 )
 public class AddCommand implements Runnable {
+
+    @CommandLine.Mixin
+    public GlobalLogger logger;
 
     @CommandLine.Mixin
     public ProjectListMixin mixin;
@@ -47,16 +52,31 @@ public class AddCommand implements Runnable {
 
     @Override
     public void run() {
-        if (!this.mixin.hasNotFoundException()) {
-            // TODO: logger already exists
+        this.logger.info("Running Add Project List Command");
+        if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
+        this.logger.info(String.format(
+                "Adding Project List '%s' to Config '%s'",
+                this.mixin.getProjectList().getListPath(),
+                this.mixin.getConfig().getConfigPath()
+        ));
+        if (!this.mixin.hasLoadException()) {
+            this.logger.success(String.format(
+                    "Project List '%s' already exists in Config '%s'",
+                    this.mixin.getProjectList().getListPath(),
+                    this.mixin.getConfig().getConfigPath()
+            ));
             return;
         }
         try {
             this.mixin.getConfig().getProjectLists().add(this.mixin.getProjectList());
             this.mixin.getConfig().save();
-            // TODO: logger
+            this.logger.success(String.format(
+                    "Added Project List '%s' to Config '%s'",
+                    this.mixin.getProjectList().getListPath(),
+                    this.mixin.getConfig().getConfigPath()
+            ));
         } catch (IOException e) {
-            // TODO: Logger log error
+            this.logger.fail(e.getMessage());
         }
     }
 }

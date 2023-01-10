@@ -1,12 +1,15 @@
 package ch.unibe.inf.seg.gitanalyzer.util.logger;
 
-import ch.unibe.inf.seg.gitanalyzer.report.Report;
+import java.io.PrintStream;
 
-import javax.swing.*;
+public class GuiLogger extends PrintStreamLogger {
+    private final StringBuilderOutputStream outputStream = new OutputStreamDuplicator(System.out);
 
-public class GuiLogger extends JTextPane implements ReportLogger {
-    @Override
-    public void report(Report report, int level) {
-        this.setText(report.toString(level));
+    public StringBuilderOutputStream getOutputStream() {
+        return this.outputStream;
+    }
+
+    public GuiLogger() {
+        this.out = new PrintStream(this.outputStream);
     }
 }

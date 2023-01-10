@@ -26,7 +26,7 @@ public class ConflictingMergeReport extends MarkableReport {
 
     @Override
     public String toString() {
-        if (!this.isComplete()) return String.format("In Progress: %s, %s", this.id, this.commitId);
+        if (!this.isComplete()) return String.format("Ongoing:  %s, %s", this.id, this.commitId);
         return super.toString();
     }
 }

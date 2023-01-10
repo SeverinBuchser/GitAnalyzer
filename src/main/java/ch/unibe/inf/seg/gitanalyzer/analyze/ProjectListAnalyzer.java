@@ -5,25 +5,21 @@ import ch.unibe.inf.seg.gitanalyzer.project.Project;
 import ch.unibe.inf.seg.gitanalyzer.project.ProjectInfos;
 import ch.unibe.inf.seg.gitanalyzer.project.ProjectIterator;
 import ch.unibe.inf.seg.gitanalyzer.report.ProjectListReport;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.PrintStreamLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.ReportLogger;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.PrintStreamReportLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.Logger;
 
 import java.io.IOException;
 
-public class ProjectListAnalyzer extends Thread implements Analyzer<ProjectList, ProjectListReport> {
-
-    private ReportLogger logger = new PrintStreamReportLogger(new PrintStreamLogger(System.out), 0);
+public class ProjectListAnalyzer extends AbstractAnalyzer<ProjectList, ProjectListReport> {
 
     private final ProjectAnalyzer subAnalyzer;
 
-    public ProjectListAnalyzer() {
-        this.subAnalyzer = new ProjectAnalyzer(this.logger);
+    public ProjectListAnalyzer(Logger logger) {
+        this(logger, 0);
     }
 
-    public ProjectListAnalyzer(ReportLogger logger) {
-        this.logger = logger;
-        this.subAnalyzer = new ProjectAnalyzer(this.logger);
+    public ProjectListAnalyzer(Logger logger, int level) {
+        super(logger, level);
+        this.subAnalyzer = new ProjectAnalyzer(logger, level + 1);
     }
 
     @Override
@@ -32,7 +28,7 @@ public class ProjectListAnalyzer extends Thread implements Analyzer<ProjectList,
         report.startTimer();
 
         // TODO: add other id than project_list
-        this.logger.report(report, 0);
+        this.logReport(report);
 
         try {
             ProjectInfos projectInfos = projectList.toProjectInfos();
@@ -51,7 +47,7 @@ public class ProjectListAnalyzer extends Thread implements Analyzer<ProjectList,
         }
 
         report.endTimer();
-        this.logger.report(report, 0);
+        this.logReport(report);
         return report;
     }
 }

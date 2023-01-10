@@ -98,12 +98,6 @@ public class Config {
     public void setOut(Path out) {
         this.jsonObject.put("out", out.toString());
     }
-    public boolean getVerbose() {
-        return this.jsonObject.getBoolean("verbose");
-    }
-    public void setVerbose(boolean verbose) {
-        this.jsonObject.put("verbose", verbose);
-    }
 
     public Config() {
         this(new JSONObject());

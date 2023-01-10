@@ -3,8 +3,10 @@
     "clone": true,
     "projectLists": [
         {
+            "skip": false,
             "list": "../project-lists/projects_name_asc-stars-10.csv",
-            "dir": "../../ba_project-dirs/projects_name_asc-stars-10"
+            "dir": "../../ba_project-dirs/projects_name_asc-stars-10",
+            "suffix": ""
         },
         {
             "skip": false,
@@ -13,6 +15,5 @@
             "suffix": ""
         }
     ],
-    "out": "../out",
-    "verbose": false
+    "out": "../out"
 }

@@ -58,7 +58,7 @@ public class ProjectReport extends Report {
 
     @Override
     public String toString() {
-        if (!this.isComplete()) return String.format("In Progress: %s, %s", this.id, this.projectName);
+        if (!this.isComplete()) return String.format("Ongoing:  %s, %s", this.id, this.projectName);
         return super.toString();
     }
 }

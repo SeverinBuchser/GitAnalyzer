@@ -1,14 +1,13 @@
 package ch.unibe.inf.seg.gitanalyzer.cli.config;
 
-import ch.unibe.inf.seg.gitanalyzer.analyze.ProjectListAnalyzer;
+import ch.unibe.inf.seg.gitanalyzer.cli.AbstractAnalyzeCommand;
+import ch.unibe.inf.seg.gitanalyzer.cli.CommandHelper;
 import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
 import ch.unibe.inf.seg.gitanalyzer.config.ProjectList;
-import ch.unibe.inf.seg.gitanalyzer.report.ProjectListReport;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
 import picocli.CommandLine;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 @CommandLine.Command(
         name = "analyze",
@@ -16,31 +15,27 @@ import java.io.IOException;
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )
-public class AnalyzeCommand implements Runnable {
+public class AnalyzeCommand extends AbstractAnalyzeCommand {
+
+    @CommandLine.Mixin
+    public GlobalLogger logger;
 
     @CommandLine.Mixin
     public ConfigMixin config;
 
     @Override
-    public void run() {
-        if (this.config.hasLoadException()) {
-            // TODO: logger
-            return;
-        }
+    protected File getOutFile(ProjectList projectList) {
+        return this.config.getOutPathAbsolute().resolve(projectList.getOutFilename()).toFile();
+    }
 
-        ProjectListAnalyzer analyzer = new ProjectListAnalyzer();
+    @Override
+    public void run() {
+        this.logger.info("Running Analyze Command");
+        this.logger.info(String.format("Analyzing Config '%s'", this.config.getConfigPath()));
+        if (CommandHelper.configLoadFailed(this.config)) return;
 
         for (ProjectList projectList : config.getProjectLists()) {
-            try {
-                ProjectListReport report = analyzer.call(projectList);
-
-                File outFile = this.config.getOutPathAbsolute().resolve(projectList.getOutFilename()).toFile();
-                FileWriter writer = new FileWriter(outFile);
-                writer.write(report.report().toString(4));
-                writer.close();
-            } catch (IOException e) {
-
-            }
+            this.analyzeProjectList(projectList);
         }
     }
 }

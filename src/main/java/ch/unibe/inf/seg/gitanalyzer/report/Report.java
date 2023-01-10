@@ -68,14 +68,10 @@ public class Report implements Reportable {
     @Override
     public String toString() {
         if (this.isComplete()) {
-            if (this.isOk()) return String.format("%s: %5s", this.id, this.state);
-            return String.format("%s: %5s, %s", this.id, this.state, this.reason);
+            if (this.isOk()) return String.format("Complete: %s: %5s", this.id, this.state);
+            return String.format("Complete: %s: %5s, %s", this.id, this.state, this.reason);
         }
-        return String.format("In Progress: %s", this.id);
-    }
-
-    public String toString(int indent) {
-        return "\t".repeat(indent) + this;
+        return String.format("Ongoing:  %s", this.id);
     }
 
     protected enum ReportState {
