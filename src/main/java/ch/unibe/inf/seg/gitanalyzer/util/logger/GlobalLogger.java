@@ -10,10 +10,10 @@ public class GlobalLogger extends PrintStreamLogger {
     @Override
     public void setVerbosityLevel(boolean[] verbosity) {
         this.verbosityLevel = verbosity.length;
+        LoggerProvider.setLogger(this);
     }
 
     public GlobalLogger() {
         super(System.out);
-        LoggerProvider.setLogger(this);
     }
 }

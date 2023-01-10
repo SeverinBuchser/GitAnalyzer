@@ -23,7 +23,7 @@ public class ProjectListCloner implements Cloner<ProjectList> {
     @Override
     public void call(ProjectList projectList) {
         try {
-            this.logger.info("Cloning Project List: " + projectList.getListPath());
+            this.logger.info(String.format("Cloning Project List '%s'.", projectList.getListPath()));
             Path dir = projectList.getDirPathAbsolute();
             ProjectInfos projectInfos = projectList.toProjectInfos();
             ArrayList<CloneCommand> cloneCommands = projectInfos.toCloneCommands(dir);
@@ -31,9 +31,9 @@ public class ProjectListCloner implements Cloner<ProjectList> {
             for (CloneCommand cloneCommand: cloneCommands) {
                 try {
                     ProjectInfo projectInfo = projectInfos.get(index);
-                    this.logger.info(1, "Cloning Project: " + projectInfo);
+                    this.logger.info(1, String.format("Cloning Project %s.", projectInfo));
                     cloneCommand.call().close();
-                    this.logger.success(1, "Cloned Project: " + projectInfo);
+                    this.logger.success(1, String.format("Cloned Project %s.", projectInfo));
                 } catch (JGitInternalException e) {
                     this.logger.info(1, e.getMessage());
                 } catch (GitAPIException e) {
@@ -41,9 +41,9 @@ public class ProjectListCloner implements Cloner<ProjectList> {
                 }
                 index++;
             }
-            this.logger.success("Cloned Project List: " + projectList.getListPath());
         } catch (IOException e) {
             this.logger.fail(e.getMessage());
         }
+        this.logger.success(String.format("Cloned Project List '%s'.", projectList.getListPath()));
     }
 }

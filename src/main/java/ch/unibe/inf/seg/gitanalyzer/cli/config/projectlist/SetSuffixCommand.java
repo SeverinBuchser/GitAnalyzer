@@ -35,7 +35,7 @@ public class SetSuffixCommand implements Runnable {
 
     @Override
     public void run() {
-        this.logger.info("Running Set Suffix Command");
+        this.logger.info("Executing Set Suffix Command...");
         if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
         if (CommandHelper.projectListLoadFailed(this.mixin)) return;
         this.logger.info(String.format(
@@ -54,5 +54,6 @@ public class SetSuffixCommand implements Runnable {
         } catch (IOException e) {
             this.logger.fail(e.getMessage());
         }
+        this.logger.success("Set Suffix Command Complete.");
     }
 }

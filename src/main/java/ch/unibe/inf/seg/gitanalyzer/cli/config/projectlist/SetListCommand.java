@@ -5,6 +5,7 @@ import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
 import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
 import picocli.CommandLine;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -30,16 +31,16 @@ public class SetListCommand implements Runnable {
             index = "2"
 
     )
-    public void setList(String list) {
+    public void setList(File list) {
         if (this.mixin.getConfig().hasLoadException()) return;
         if (this.mixin.hasLoadException()) return;
         this.oldListPath = this.mixin.getProjectList().getListPath();
-        this.mixin.getProjectList().setList(list);
+        this.mixin.getProjectList().setList(list.toPath());
     }
 
     @Override
     public void run() {
-        this.logger.info("Running Set List Command");
+        this.logger.info("Executing Set List Command...");
         if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
         if (CommandHelper.projectListLoadFailed(this.mixin)) return;
         this.logger.info(String.format(
@@ -58,5 +59,6 @@ public class SetListCommand implements Runnable {
         } catch (IOException e) {
             this.logger.fail(e.getMessage());
         }
+        this.logger.success("Set List Command Complete.");
     }
 }

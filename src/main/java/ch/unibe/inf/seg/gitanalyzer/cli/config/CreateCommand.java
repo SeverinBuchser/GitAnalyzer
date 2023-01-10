@@ -50,15 +50,21 @@ public class CreateCommand implements Runnable {
 
     @Override
     public void run() {
+        this.logger.info("Executing Create Command...");
         if (!this.config.hasLoadException()) {
-            // TODO: logger already exists
+            this.logger.fail(String.format(
+                    "Config '%s' already exists.",
+                    this.config.getConfigPath()
+            ));
             return;
         }
+        this.logger.info(String.format("Creating Config '%s'.", this.config.getConfigPath()));
         try {
             this.config.save();
-            // TODO: logger
+            this.logger.success(String.format("Created Config '%s'.", this.config.getConfigPath()));
         } catch (IOException e) {
-            // TODO: Logger log error
+            this.logger.fail(e.getMessage());
         }
+        this.logger.success("Create Command Complete.");
     }
 }

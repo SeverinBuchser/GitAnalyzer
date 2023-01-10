@@ -5,6 +5,7 @@ import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
 import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
 import picocli.CommandLine;
 
+import java.io.File;
 import java.io.IOException;
 
 @CommandLine.Command(
@@ -27,15 +28,15 @@ public class SetDirCommand implements Runnable {
             index = "2"
 
     )
-    public void setDir(String dir) {
+    public void setDir(File dir) {
         if (this.mixin.getConfig().hasLoadException()) return;
         if (this.mixin.hasLoadException()) return;
-        this.mixin.getProjectList().setDir(dir);
+        this.mixin.getProjectList().setDir(dir.toPath());
     }
 
     @Override
     public void run() {
-        this.logger.info("Running Set Dir Command");
+        this.logger.info("Executing Set Dir Command...");
         if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
         if (CommandHelper.projectListLoadFailed(this.mixin)) return;
         this.logger.info(String.format(
@@ -54,5 +55,6 @@ public class SetDirCommand implements Runnable {
         } catch (IOException e) {
             this.logger.fail(e.getMessage());
         }
+        this.logger.success("Set Dir Command Complete.");
     }
 }

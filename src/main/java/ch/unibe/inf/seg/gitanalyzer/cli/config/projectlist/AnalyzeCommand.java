@@ -31,15 +31,11 @@ public class AnalyzeCommand extends AbstractAnalyzeCommand implements Runnable {
 
     @Override
     public void run() {
-        this.logger.info("Running Analyze Command");
-        this.logger.info(String.format(
-                "Analyzing Project List '%s' of Config '%s'",
-                this.mixin.getProjectList().getListPath(),
-                this.mixin.getConfig().getConfigPath()
-        ));
+        this.logger.info("Executing Analyze Command...");
         if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
         if (CommandHelper.projectListLoadFailed(this.mixin)) return;
 
         this.analyzeProjectList(this.mixin.getProjectList());
+        this.logger.success("Analyze Command Complete.");
     }
 }

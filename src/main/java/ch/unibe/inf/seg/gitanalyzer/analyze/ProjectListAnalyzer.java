@@ -25,10 +25,8 @@ public class ProjectListAnalyzer extends AbstractAnalyzer<ProjectList, ProjectLi
     @Override
     public ProjectListReport call(ProjectList projectList) {
         ProjectListReport report = new ProjectListReport(projectList.getListPath().toString());
-        report.startTimer();
-
-        // TODO: add other id than project_list
         this.logReport(report);
+        report.startTimer();
 
         try {
             ProjectInfos projectInfos = projectList.toProjectInfos();

@@ -22,10 +22,11 @@ public class CloneCommand extends AbstractCloneCommand {
 
     @Override
     public void run() {
-        this.logger.info("Running Clone Command");
+        this.logger.info("Executing Clone Command...");
         if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
         if (CommandHelper.projectListLoadFailed(this.mixin)) return;
 
         this.cloneProjectList(this.mixin.getProjectList());
+        this.logger.success("Clone Command Complete.");
     }
 }

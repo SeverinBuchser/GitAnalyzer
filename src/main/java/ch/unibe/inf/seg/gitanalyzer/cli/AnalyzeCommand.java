@@ -63,8 +63,8 @@ public class AnalyzeCommand extends AbstractAnalyzeCommand {
 
     @Override
     public void run() {
-        this.logger.info("Running Analyze Command");
-        this.logger.info(String.format("Analyzing Project list '%s'", this.projectList.getListPath()));
+        this.logger.info("Executing Analyze Command...");
         this.analyzeProjectList(this.projectList);
+        this.logger.success("Analyze Command Complete.");
     }
 }

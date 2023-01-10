@@ -25,10 +25,10 @@ public abstract class AbstractAnalyzer<T, R> implements Analyzer<T, R> {
         if (this.level > 0) indent = "|\t".repeat(this.level);
         else indent = " \t".repeat(this.level);
         if (report.isComplete()) {
-            if (report.isOk()) this.logger.success(indent + report);
-            else this.logger.error(indent + report);
+            if (report.isOk()) this.logger.success(1, indent + report);
+            else this.logger.fail(1, indent + report);
         } else {
-            this.logger.info(indent + report);
+            this.logger.info(1, indent + report);
         }
     }
 }

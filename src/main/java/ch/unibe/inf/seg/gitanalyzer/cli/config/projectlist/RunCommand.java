@@ -6,6 +6,7 @@ import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
 import ch.unibe.inf.seg.gitanalyzer.clone.ProjectListCloner;
 import ch.unibe.inf.seg.gitanalyzer.config.ProjectList;
 import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.LoggerProvider;
 import picocli.CommandLine;
 
 import java.io.File;
@@ -33,26 +34,22 @@ public class RunCommand extends AbstractAnalyzeCommand {
 
     @Override
     public void run() {
-        this.logger.info("Running Run Project List Command");
+        this.logger.info("Executing Run Command...");
         if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
         if (CommandHelper.projectListLoadFailed(this.mixin)) return;
-        this.logger.info(String.format(
-                "Running Project List '%s' of Config '%s'",
-                this.mixin.getProjectList().getListPath(),
-                this.mixin.getConfig().getConfigPath()
-        ));
+        this.logger.info(String.format("Running Project List '%s'.", this.mixin.getProjectList().getListPath()));
         
         if (this.mixin.getConfig().getClone()) {
-            ProjectListCloner cloner = new ProjectListCloner(this.logger);
+            this.logger.info("Cloning...");
+            ProjectListCloner cloner = new ProjectListCloner(LoggerProvider.getLogger());
             cloner.call(this.mixin.getProjectList());
+            this.logger.success("Cloning Complete.");
         }
         if (this.mixin.getConfig().getAnalyze()) {
-            this.logger.info(String.format(
-                    "Analyzing Project List '%s' of Config '%s'",
-                    this.mixin.getProjectList().getListPath(),
-                    this.mixin.getConfig().getConfigPath()
-            ));
+            this.logger.info("Analyzing...");
             this.analyzeProjectList(this.mixin.getProjectList());
+            this.logger.success("Analysis Complete.");
         }
+        this.logger.success("Run Command Complete.");
     }
 }

@@ -52,31 +52,24 @@ public class AddCommand implements Runnable {
 
     @Override
     public void run() {
-        this.logger.info("Running Add Project List Command");
+        this.logger.info("Executing Add Command...");
         if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
-        this.logger.info(String.format(
-                "Adding Project List '%s' to Config '%s'",
-                this.mixin.getProjectList().getListPath(),
-                this.mixin.getConfig().getConfigPath()
-        ));
         if (!this.mixin.hasLoadException()) {
-            this.logger.success(String.format(
-                    "Project List '%s' already exists in Config '%s'",
-                    this.mixin.getProjectList().getListPath(),
-                    this.mixin.getConfig().getConfigPath()
+            this.logger.fail(String.format(
+                    "Project List '%s' already exists.",
+                    this.mixin.getProjectList().getListPath()
             ));
             return;
         }
+
         try {
+            this.logger.info(String.format("Adding Project List '%s'.", this.mixin.getProjectList().getListPath()));
             this.mixin.getConfig().getProjectLists().add(this.mixin.getProjectList());
             this.mixin.getConfig().save();
-            this.logger.success(String.format(
-                    "Added Project List '%s' to Config '%s'",
-                    this.mixin.getProjectList().getListPath(),
-                    this.mixin.getConfig().getConfigPath()
-            ));
+            this.logger.success(String.format("Added Project List '%s'.", this.mixin.getProjectList().getListPath()));
         } catch (IOException e) {
             this.logger.fail(e.getMessage());
         }
+        this.logger.success("Add Command Complete.");
     }
 }

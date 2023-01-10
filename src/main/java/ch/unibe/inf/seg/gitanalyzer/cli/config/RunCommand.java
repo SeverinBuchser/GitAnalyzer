@@ -1,16 +1,15 @@
 package ch.unibe.inf.seg.gitanalyzer.cli.config;
 
-import ch.unibe.inf.seg.gitanalyzer.analyze.ProjectListAnalyzer;
+import ch.unibe.inf.seg.gitanalyzer.cli.AbstractAnalyzeCommand;
+import ch.unibe.inf.seg.gitanalyzer.cli.CommandHelper;
 import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
-import ch.unibe.inf.seg.gitanalyzer.clone.ProjectListsCloner;
+import ch.unibe.inf.seg.gitanalyzer.clone.ProjectListCloner;
 import ch.unibe.inf.seg.gitanalyzer.config.ProjectList;
-import ch.unibe.inf.seg.gitanalyzer.report.ProjectListReport;
 import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.LoggerProvider;
 import picocli.CommandLine;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 @CommandLine.Command(
         name = "run",
@@ -18,7 +17,7 @@ import java.io.IOException;
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )
-public class RunCommand implements Runnable {
+public class RunCommand extends AbstractAnalyzeCommand {
 
     @CommandLine.Mixin
     public GlobalLogger logger;
@@ -27,41 +26,32 @@ public class RunCommand implements Runnable {
     public ConfigMixin config;
 
     @Override
+    protected File getOutFile(ProjectList projectList) {
+        return this.config.getOutPathAbsolute().resolve(projectList.getOutFilename()).toFile();
+    }
+
+    @Override
     public void run() {
-        if (this.config.hasLoadException()) {
-            // TODO: logger
-            return;
-        }
+        this.logger.info("Executing Run Command...");
+        if (CommandHelper.configLoadFailed(this.config)) return;
+        this.logger.info(String.format("Running Config '%s'.", this.config.getConfigPath()));
 
         if (this.config.getClone()) {
-            this.runClone();
+            this.logger.info("Cloning...");
+            ProjectListCloner cloner = new ProjectListCloner(LoggerProvider.getLogger());
+            for (ProjectList projectList: this.config.getProjectLists()) {
+                cloner.call(projectList);
+            }
+            this.logger.success("Cloning Complete.");
         }
 
         if (this.config.getAnalyze()) {
-            this.runAnalyze();
-        }
-    }
-
-    private void runClone() {
-        ProjectListsCloner cloner = new ProjectListsCloner(this.logger);
-        cloner.call(this.config.getProjectLists());
-    }
-
-    private void runAnalyze() {
-        ProjectListAnalyzer analyzer = new ProjectListAnalyzer(this.logger);
-
-        for (ProjectList projectList : config.getProjectLists()) {
-            try {
-                ProjectListReport report = analyzer.call(projectList);
-
-                File outFile = this.config.getOutPathAbsolute().resolve(projectList.getOutFilename()).toFile();
-                FileWriter writer = new FileWriter(outFile);
-                writer.write(report.report().toString(4));
-                writer.close();
-            } catch (IOException e) {
-                // TODO: logger
+            this.logger.info("Analyzing...");
+            for (ProjectList projectList : config.getProjectLists()) {
+                this.analyzeProjectList(projectList);
             }
+            this.logger.success("Analysis Complete.");
         }
-        // TODO: logger
+        this.logger.success("Run Command Complete.");
     }
 }

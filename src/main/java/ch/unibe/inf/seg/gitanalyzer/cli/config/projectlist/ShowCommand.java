@@ -21,9 +21,10 @@ public class ShowCommand implements Runnable {
 
     @Override
     public void run() {
-        this.logger.info("Running Show Project List Command");
+        this.logger.info("Executing Show Command...");
         if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
         if (CommandHelper.projectListLoadFailed(this.mixin)) return;
         this.logger.info(this.mixin.getProjectList().toString());
+        this.logger.success("Show Command Complete.");
     }
 }

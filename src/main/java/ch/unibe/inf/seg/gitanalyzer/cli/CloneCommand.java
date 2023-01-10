@@ -36,7 +36,8 @@ public class CloneCommand extends AbstractCloneCommand {
 
     @Override
     public void run() {
-        this.logger.info("Running Clone Command");
+        this.logger.info("Executing Clone Command...");
         this.cloneProjectList(projectList);
+        this.logger.success("Clone Command Complete.");
     }
 }
