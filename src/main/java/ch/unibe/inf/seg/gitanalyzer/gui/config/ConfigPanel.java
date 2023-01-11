@@ -1,6 +1,8 @@
 package ch.unibe.inf.seg.gitanalyzer.gui.config;
 
 import ch.unibe.inf.seg.gitanalyzer.config.Config;
+import ch.unibe.inf.seg.gitanalyzer.gui.config.editor.ConfigEditor;
+import ch.unibe.inf.seg.gitanalyzer.gui.config.viewer.ConfigViewerFrame;
 import ch.unibe.inf.seg.gitanalyzer.util.subscription.Subscribable;
 import ch.unibe.inf.seg.gitanalyzer.util.subscription.Subscriber;
 import ch.unibe.inf.seg.gitanalyzer.util.subscription.Subscription;
@@ -12,142 +14,42 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.nio.file.Path;
 
 public class ConfigPanel extends JPanel implements Updatable, Subscribable<Config>, Subscriber<Config> {
-
     private final SubscriptionManager<Config> subscriptionManager = new SubscriptionManager<>();
-
     private Config config;
-
-    private final JButton newButton = new JButton("New");
-    private final JButton loadFileButton = new JButton("Load");
-    private final JButton openRawButton = new JButton("Open Raw");
-    private final JButton saveFileButton = new JButton("Save");
-    private final JButton saveAsFileButton = new JButton("Save As");
-    private final JButton runConfigButton = new JButton("Run");
-    private final ConfigEditor configEditor;
-
-    private final static String CWD = Path.of("").toAbsolutePath().toString();
-    private final JFileChooser loadFileChooser = new JFileChooser(CWD);
-    private final JFileChooser saveFileChooser = new JFileChooser(CWD);
-
+    private final ConfigEditor configEditor = new ConfigEditor();
     private boolean rawOpen = false;
 
     public ConfigPanel() {
-        this.configEditor = new ConfigEditor();
+        ConfigControlPanel controlPanel = new ConfigControlPanel(this);
+        controlPanel.subscribe(this);
+        this.subscribe(controlPanel);
 
-        JPanel ioPanel = new JPanel();
-        ioPanel.add(this.newButton);
-        ioPanel.add(this.loadFileButton);
-        ioPanel.add(this.openRawButton);
-        ioPanel.add(this.saveFileButton);
-        ioPanel.add(this.saveAsFileButton);
-        ioPanel.add(this.runConfigButton);
-
-        this.initActionListeners();
-        this.initSubscriptions();
+        controlPanel.addActionListener("raw", a -> this.openRawConfig());
+        this.subscribe(this.configEditor);
 
         this.setLayout(new BorderLayout());
-        this.add(ioPanel, BorderLayout.PAGE_START);
+        this.add(controlPanel, BorderLayout.PAGE_START);
         this.add(this.configEditor, BorderLayout.CENTER);
-    }
-
-    private void initActionListeners() {
-        this.newButton.addActionListener(a -> this.newConfig());
-        this.loadFileButton.addActionListener(a -> this.loadConfig());
-        this.openRawButton.addActionListener(a -> this.openRawConfig());
-        this.saveFileButton.addActionListener(a -> this.saveConfig());
-        this.saveAsFileButton.addActionListener(a -> this.saveConfigAs());
-        this.runConfigButton.addActionListener(a -> this.runConfig());
-    }
-
-    private void initSubscriptions() {
-        this.subscribe(this.configEditor);
-    }
-
-    private void newConfig() {
-        this.next(new Config());
-    }
-
-    private void loadConfig() {
-        JFrame frame = new JFrame();
-        int state = this.loadFileChooser.showOpenDialog(frame);
-        if (state == JFileChooser.APPROVE_OPTION) {
-            Path configPath = this.loadFileChooser.getSelectedFile().toPath();
-            try {
-                Config config = new Config(configPath);
-                this.next(config);
-            } catch (Exception e) {
-                System.err.println("Failed");
-            }
-        }
-        frame.dispose();
     }
 
     private void openRawConfig() {
         if (this.rawOpen) return;
         this.rawOpen = true;
-        ConfigViewer configViewer = new ConfigViewer();
-        Subscription<Config> configSub = this.subscribe(configViewer);
-        UpdateSubscription updateSub = this.configEditor.getUpdates(configViewer);
-        configViewer.next(this.config);
+        ConfigViewerFrame configViewerFrame = new ConfigViewerFrame((JFrame) SwingUtilities.getRoot(this));
+        Subscription<Config> configSub = this.subscribe(configViewerFrame);
+        UpdateSubscription updateSub = this.configEditor.getUpdates(configViewerFrame);
+        configViewerFrame.next(this.config);
 
-        JFrame frame = new JFrame();
-        Dimension minSize = new Dimension(600, 500);
-        frame.setSize(minSize);
-        frame.setMinimumSize(minSize);
-
-        JFrame root = (JFrame) SwingUtilities.getRoot(this);
-        WindowListener rootListener = new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-            }
-        };
-        root.addWindowListener(rootListener);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.addWindowListener(new WindowAdapter() {
+        configViewerFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 configSub.quit();
                 updateSub.quit();
-                root.removeWindowListener(rootListener);
                 rawOpen = false;
             }
         });
-        frame.setLocation(root.getX() + root.getWidth(), root.getY());
-        frame.add(configViewer);
-        frame.setVisible(true);
-    }
-
-    private void saveConfig() {
-        try {
-            if (this.config.hasConfigPath()) {
-                this.config.save();
-            }
-        } catch (Exception e) {
-            System.err.println("Failed");
-        }
-    }
-
-    private void saveConfigAs() {
-        JFrame frame = new JFrame();
-        int state = this.saveFileChooser.showSaveDialog(frame);
-        if (state == JFileChooser.APPROVE_OPTION) {
-            Path configPath = this.saveFileChooser.getSelectedFile().toPath();
-            try {
-                this.config.setAndSave(configPath);
-            } catch (Exception e) {
-                System.err.println("Failed");
-            }
-        }
-        frame.dispose();
-    }
-
-    private void runConfig() {
-        ((JTabbedPane) this.getParent()).setSelectedIndex(1);
     }
 
     @Override

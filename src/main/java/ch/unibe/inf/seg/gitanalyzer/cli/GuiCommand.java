@@ -3,7 +3,7 @@ package ch.unibe.inf.seg.gitanalyzer.cli;
 import ch.unibe.inf.seg.gitanalyzer.config.Config;
 import ch.unibe.inf.seg.gitanalyzer.gui.analyzer.AnalyzerPanel;
 import ch.unibe.inf.seg.gitanalyzer.gui.config.ConfigPanel;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.LoggerProvider;
 import picocli.CommandLine;
 
 import javax.swing.*;
@@ -20,7 +20,7 @@ import java.io.IOException;
 public class GuiCommand implements Runnable {
 
     @CommandLine.Mixin
-    public GlobalLogger logger;
+    public LoggerProvider logger;
 
     @CommandLine.Option(
             names = {"-c", "--config"},

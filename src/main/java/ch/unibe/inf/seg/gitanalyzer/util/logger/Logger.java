@@ -8,4 +8,7 @@ public interface Logger {
     void fail(String text);
     void fail(int verbosityLevel, String text);
     void error(String text);
+    void separator();
+    void separator(int verbosityLevel);
+    void setVerbosityLevel(int verbosityLevel);
 }

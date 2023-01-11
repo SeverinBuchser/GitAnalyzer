@@ -19,8 +19,10 @@ public abstract class AbstractAnalyzeCommand implements Runnable {
                     "Analyzing Project List '%s'.",
                     projectList.getListPath()
             ));
+            LoggerProvider.getLogger().separator(1);
             ProjectListAnalyzer analyzer = new ProjectListAnalyzer(LoggerProvider.getLogger());
             ProjectListReport report = analyzer.call(projectList);
+            LoggerProvider.getLogger().separator(1);
             LoggerProvider.getLogger().success(String.format(
                     "Analyzed Project List '%s'.",
                     projectList.getListPath()
@@ -34,6 +36,7 @@ public abstract class AbstractAnalyzeCommand implements Runnable {
             writer.write(report.report().toString(4));
             writer.close();
             LoggerProvider.getLogger().success(String.format("Saved Analysis Report to '%s'.", outFile));
+            LoggerProvider.getLogger().separator(1);
         } catch (IOException e) {
             LoggerProvider.getLogger().fail(e.getMessage());
         }

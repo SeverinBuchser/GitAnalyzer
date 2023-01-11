@@ -1,4 +1,4 @@
-package ch.unibe.inf.seg.gitanalyzer.gui.config;
+package ch.unibe.inf.seg.gitanalyzer.gui.config.viewer;
 
 import ch.unibe.inf.seg.gitanalyzer.config.Config;
 import ch.unibe.inf.seg.gitanalyzer.util.subscription.Subscriber;
@@ -40,7 +40,7 @@ public class ConfigViewer extends JScrollPane implements Updatable, Subscriber<C
     }
 
     private void formatValues() {
-        Pattern pattern = Pattern.compile("(:\\s)(?!\\[).*?(\\,?)\\n", Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile("(:\\s)(?!\\[).*?(,?)\\n", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(this.textPane.getText());
 
         while (matcher.find()) {

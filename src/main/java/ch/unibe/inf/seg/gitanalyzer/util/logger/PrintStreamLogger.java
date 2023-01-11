@@ -1,5 +1,6 @@
 package ch.unibe.inf.seg.gitanalyzer.util.logger;
 
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -10,13 +11,20 @@ public class PrintStreamLogger implements Logger {
     private static final int LOG_TYPE_LENGTH = 9;
 
     protected PrintStream out;
-    protected int verbosityLevel = 0;
 
-    public void setVerbosityLevel(boolean[] verbosity) {
-        this.verbosityLevel = verbosity.length;
+    public PrintStream getOut() {
+        return out;
     }
 
-    protected PrintStreamLogger() {}
+    protected int verbosityLevel = 0;
+
+    public void setVerbosityLevel(int verbosityLevel) {
+        this.verbosityLevel = verbosityLevel;
+    }
+
+    public PrintStreamLogger(OutputStream out) {
+        this(new PrintStream(out));
+    }
 
     public PrintStreamLogger(PrintStream out) {
         this.out = out;
@@ -55,6 +63,16 @@ public class PrintStreamLogger implements Logger {
     @Override
     public void error(String text) {
         this.log(0, LogType.ERROR, text);
+    }
+
+    @Override
+    public void separator() {
+        this.info(LoggerConstants.SEPARATOR.toString());
+    }
+
+    @Override
+    public void separator(int verbosityLevel) {
+        this.info(verbosityLevel, LoggerConstants.SEPARATOR.toString());
     }
 
     private void log(int verbosityLevel, LogType logType, String text) {

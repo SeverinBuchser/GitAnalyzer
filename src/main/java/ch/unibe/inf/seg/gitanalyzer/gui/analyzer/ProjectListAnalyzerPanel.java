@@ -14,8 +14,9 @@ public class ProjectListAnalyzerPanel extends JScrollPane implements Subscriber<
         return logger;
     }
 
-    public ProjectListAnalyzerPanel() {
-        this.logger.getOutputStream().subscribe(this);
+    public ProjectListAnalyzerPanel(int verbosityLevel) {
+        this.logger.setVerbosityLevel(verbosityLevel);
+        this.logger.getOut().subscribe(this);
         this.textArea.setEditable(false);
         this.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         this.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);

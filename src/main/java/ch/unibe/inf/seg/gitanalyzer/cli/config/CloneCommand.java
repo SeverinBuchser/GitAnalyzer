@@ -4,7 +4,7 @@ import ch.unibe.inf.seg.gitanalyzer.cli.AbstractCloneCommand;
 import ch.unibe.inf.seg.gitanalyzer.cli.CommandHelper;
 import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
 import ch.unibe.inf.seg.gitanalyzer.config.ProjectList;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.LoggerProvider;
 import picocli.CommandLine;
 
 @CommandLine.Command(
@@ -16,7 +16,7 @@ import picocli.CommandLine;
 public class CloneCommand extends AbstractCloneCommand {
 
     @CommandLine.Mixin
-    public GlobalLogger logger;
+    public LoggerProvider logger;
 
     @CommandLine.Mixin
     public ConfigMixin config;

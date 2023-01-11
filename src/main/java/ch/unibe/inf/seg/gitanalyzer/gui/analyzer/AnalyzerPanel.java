@@ -8,48 +8,43 @@ import ch.unibe.inf.seg.gitanalyzer.config.Config;
 import ch.unibe.inf.seg.gitanalyzer.config.ProjectList;
 import ch.unibe.inf.seg.gitanalyzer.report.ProjectListReport;
 import ch.unibe.inf.seg.gitanalyzer.util.logger.GuiLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.LoggerProvider;
 import ch.unibe.inf.seg.gitanalyzer.util.subscription.Subscriber;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 public class AnalyzerPanel extends JPanel implements Subscriber<Config> {
     private final JPanel loggerPanel = new JPanel();
-    private final JSpinner maxThreadCounter = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
+    private final AnalyzerControlPanel analyzerControlPanel;
     private int maxThreads = 1;
     private int runningThreads = 0;
     private Config config;
     private int currentProjectListIndex = -1;
 
     public AnalyzerPanel() {
-        JButton runConfigButton = new JButton("Run Config");
-        runConfigButton.addActionListener(a -> {
-            try {
-                this.runConfig();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        });
 
-        this.add(runConfigButton);
+        this.analyzerControlPanel = new AnalyzerControlPanel();
+        this.analyzerControlPanel.addActionListener("run", a -> this.runConfig());
+
+        this.setLayout(new BorderLayout());
+        this.add(this.analyzerControlPanel, BorderLayout.PAGE_START);
         this.add(this.loggerPanel);
-        this.add(maxThreadCounter);
     }
 
-    private void init() {
-
-    }
-
-    private void runConfig() throws InterruptedException {
+    private void runConfig() {
         if (this.currentProjectListIndex >= 0) return;
         if (this.config == null) {
             ((JTabbedPane) this.getParent()).setSelectedIndex(0);
         } else {
-            this.maxThreads = (int) this.maxThreadCounter.getValue();
             this.loggerPanel.removeAll();
-            this.config.getProjectLists().forEach(pl -> this.loggerPanel.add(new ProjectListAnalyzerPanel()));
+            this.maxThreads = this.analyzerControlPanel.getMaxThreadCount();
+            int verbosityLevel = this.analyzerControlPanel.getVerbosityLevel();
+            this.config.getProjectLists().forEach(pl -> this.loggerPanel.add(new ProjectListAnalyzerPanel(verbosityLevel)));
+            LoggerProvider.getLogger().info(String.format("Running Config '%s'.", this.config.getConfigPath()));
             this.cloneNextProjectList();
         }
     }

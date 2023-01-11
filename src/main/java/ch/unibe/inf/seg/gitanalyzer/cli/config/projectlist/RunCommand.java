@@ -5,7 +5,6 @@ import ch.unibe.inf.seg.gitanalyzer.cli.CommandHelper;
 import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
 import ch.unibe.inf.seg.gitanalyzer.clone.ProjectListCloner;
 import ch.unibe.inf.seg.gitanalyzer.config.ProjectList;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
 import ch.unibe.inf.seg.gitanalyzer.util.logger.LoggerProvider;
 import picocli.CommandLine;
 
@@ -21,7 +20,7 @@ import java.nio.file.Path;
 public class RunCommand extends AbstractAnalyzeCommand {
 
     @CommandLine.Mixin
-    public GlobalLogger logger;
+    public LoggerProvider logger;
 
     @CommandLine.Mixin
     public ProjectListMixin mixin;
@@ -38,17 +37,22 @@ public class RunCommand extends AbstractAnalyzeCommand {
         if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
         if (CommandHelper.projectListLoadFailed(this.mixin)) return;
         this.logger.info(String.format("Running Project List '%s'.", this.mixin.getProjectList().getListPath()));
-        
+        if (this.mixin.getConfig().getClone() || this.mixin.getConfig().getAnalyze()) {
+            this.logger.separator();
+        }
+
         if (this.mixin.getConfig().getClone()) {
             this.logger.info("Cloning...");
-            ProjectListCloner cloner = new ProjectListCloner(LoggerProvider.getLogger());
+            ProjectListCloner cloner = new ProjectListCloner(this.logger);
             cloner.call(this.mixin.getProjectList());
             this.logger.success("Cloning Complete.");
+            this.logger.separator();
         }
         if (this.mixin.getConfig().getAnalyze()) {
             this.logger.info("Analyzing...");
             this.analyzeProjectList(this.mixin.getProjectList());
             this.logger.success("Analysis Complete.");
+            this.logger.separator();
         }
         this.logger.success("Run Command Complete.");
     }

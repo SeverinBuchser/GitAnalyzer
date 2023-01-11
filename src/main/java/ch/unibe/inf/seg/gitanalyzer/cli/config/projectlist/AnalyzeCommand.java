@@ -4,7 +4,7 @@ import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
 import ch.unibe.inf.seg.gitanalyzer.cli.AbstractAnalyzeCommand;
 import ch.unibe.inf.seg.gitanalyzer.cli.CommandHelper;
 import ch.unibe.inf.seg.gitanalyzer.config.ProjectList;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.LoggerProvider;
 import picocli.CommandLine;
 
 import java.io.File;
@@ -19,7 +19,7 @@ import java.nio.file.Path;
 public class AnalyzeCommand extends AbstractAnalyzeCommand implements Runnable {
 
     @CommandLine.Mixin
-    public GlobalLogger logger;
+    public LoggerProvider logger;
 
     @CommandLine.Mixin
     public ProjectListMixin mixin;

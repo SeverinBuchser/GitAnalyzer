@@ -1,4 +1,4 @@
-package ch.unibe.inf.seg.gitanalyzer.gui.config;
+package ch.unibe.inf.seg.gitanalyzer.gui.config.editor;
 
 import ch.unibe.inf.seg.gitanalyzer.config.Config;
 import ch.unibe.inf.seg.gitanalyzer.config.ProjectList;

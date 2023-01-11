@@ -2,7 +2,7 @@ package ch.unibe.inf.seg.gitanalyzer.cli.config;
 
 import ch.unibe.inf.seg.gitanalyzer.cli.CommandHelper;
 import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.LoggerProvider;
 import picocli.CommandLine;
 
 import java.io.IOException;
@@ -16,7 +16,7 @@ import java.io.IOException;
 public class SetCloneCommand implements Runnable {
 
     @CommandLine.Mixin
-    public GlobalLogger logger;
+    public LoggerProvider logger;
 
     @CommandLine.Mixin
     public ConfigMixin config;

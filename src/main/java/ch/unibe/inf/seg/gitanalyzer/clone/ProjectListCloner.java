@@ -23,7 +23,6 @@ public class ProjectListCloner implements Cloner<ProjectList> {
     @Override
     public void call(ProjectList projectList) {
         try {
-            this.logger.info(String.format("Cloning Project List '%s'.", projectList.getListPath()));
             Path dir = projectList.getDirPathAbsolute();
             ProjectInfos projectInfos = projectList.toProjectInfos();
             ArrayList<CloneCommand> cloneCommands = projectInfos.toCloneCommands(dir);
@@ -44,6 +43,5 @@ public class ProjectListCloner implements Cloner<ProjectList> {
         } catch (IOException e) {
             this.logger.fail(e.getMessage());
         }
-        this.logger.success(String.format("Cloned Project List '%s'.", projectList.getListPath()));
     }
 }

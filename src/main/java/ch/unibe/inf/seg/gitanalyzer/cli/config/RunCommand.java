@@ -5,7 +5,6 @@ import ch.unibe.inf.seg.gitanalyzer.cli.CommandHelper;
 import ch.unibe.inf.seg.gitanalyzer.cli.VersionProvider;
 import ch.unibe.inf.seg.gitanalyzer.clone.ProjectListCloner;
 import ch.unibe.inf.seg.gitanalyzer.config.ProjectList;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
 import ch.unibe.inf.seg.gitanalyzer.util.logger.LoggerProvider;
 import picocli.CommandLine;
 
@@ -20,7 +19,7 @@ import java.io.File;
 public class RunCommand extends AbstractAnalyzeCommand {
 
     @CommandLine.Mixin
-    public GlobalLogger logger;
+    public LoggerProvider logger;
 
     @CommandLine.Mixin
     public ConfigMixin config;
@@ -35,14 +34,18 @@ public class RunCommand extends AbstractAnalyzeCommand {
         this.logger.info("Executing Run Command...");
         if (CommandHelper.configLoadFailed(this.config)) return;
         this.logger.info(String.format("Running Config '%s'.", this.config.getConfigPath()));
+        if (this.config.getClone() || this.config.getAnalyze()) {
+            this.logger.separator();
+        }
 
         if (this.config.getClone()) {
             this.logger.info("Cloning...");
-            ProjectListCloner cloner = new ProjectListCloner(LoggerProvider.getLogger());
+            ProjectListCloner cloner = new ProjectListCloner(this.logger);
             for (ProjectList projectList: this.config.getProjectLists()) {
                 cloner.call(projectList);
             }
             this.logger.success("Cloning Complete.");
+            this.logger.separator(1);
         }
 
         if (this.config.getAnalyze()) {
@@ -51,6 +54,7 @@ public class RunCommand extends AbstractAnalyzeCommand {
                 this.analyzeProjectList(projectList);
             }
             this.logger.success("Analysis Complete.");
+            this.logger.separator(1);
         }
         this.logger.success("Run Command Complete.");
     }

@@ -2,7 +2,7 @@ package ch.unibe.inf.seg.gitanalyzer.cli;
 
 import ch.unibe.inf.seg.gitanalyzer.config.ProjectList;
 import ch.unibe.inf.seg.gitanalyzer.util.file.FileHelper;
-import ch.unibe.inf.seg.gitanalyzer.util.logger.GlobalLogger;
+import ch.unibe.inf.seg.gitanalyzer.util.logger.LoggerProvider;
 import picocli.CommandLine;
 
 import java.io.File;
@@ -17,7 +17,7 @@ import java.nio.file.Path;
 public class AnalyzeCommand extends AbstractAnalyzeCommand {
 
     @CommandLine.Mixin
-    public GlobalLogger logger;
+    public LoggerProvider logger;
 
     private final ProjectList projectList = new ProjectList("");
 
