@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @CommandLine.Command(
         name = "set-dir",
-        description = "",
+        description = "Sets the project directory (dir) property of the project list.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )

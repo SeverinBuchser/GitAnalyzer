@@ -12,7 +12,9 @@ import java.io.File;
 
 @CommandLine.Command(
         name = "run",
-        description = "",
+        description = "Runs the config. If the clone property is set to true in the config, all project lists will be" +
+                " cloned. If the analyze property is set to true in the config, all project lists will be analyzed." +
+                " The cloning will happen first.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )
@@ -42,11 +44,18 @@ public class RunCommand extends AbstractAnalyzeCommand {
             this.logger.info("Cloning...");
             ProjectListCloner cloner = new ProjectListCloner(this.logger);
             for (ProjectList projectList: this.config.getProjectLists()) {
-                this.logger.info(String.format("Cloning Project List %s.", projectList.getListPath()));
-                this.logger.separator(1);
-                cloner.call(projectList);
-                this.logger.separator(1);
-                this.logger.success(String.format("Cloned Project List %s.", projectList.getListPath()));
+                if (projectList.getSkip()) {
+                    this.logger.info(String.format(
+                            "Project List %s skipped.",
+                            projectList.getListPath()
+                    ));
+                } else {
+                    this.logger.info(String.format("Cloning Project List %s.", projectList.getListPath()));
+                    this.logger.separator(1);
+                    cloner.call(projectList);
+                    this.logger.separator(1);
+                    this.logger.success(String.format("Cloned Project List %s.", projectList.getListPath()));
+                }
             }
             this.logger.success("Cloning Complete.");
             this.logger.separator();

@@ -7,7 +7,7 @@ import picocli.CommandLine;
 
 @CommandLine.Command(
         name = "show",
-        description = "",
+        description = "Prints the config.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )

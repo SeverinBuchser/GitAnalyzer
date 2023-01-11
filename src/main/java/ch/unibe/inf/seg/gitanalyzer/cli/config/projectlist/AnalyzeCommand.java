@@ -12,7 +12,8 @@ import java.nio.file.Path;
 
 @CommandLine.Command(
         name = "analyze",
-        description = "",
+        description = "Analyzes a single project list of the config, disregarding the analyze property of the config." +
+                "The skip property of the project list is disregarded.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )

@@ -25,9 +25,7 @@ public class ProjectListMixin {
             index = "1"
     )
     public void setProjectList(String list) {
-        if (this.mixin.hasLoadException()) {
-            return;
-        }
+        if (this.mixin.hasLoadException()) return;
         this.projectList = this.mixin.getProjectLists().get(list);
         if (this.projectList == null) {
             this.projectList = new ProjectList(list);

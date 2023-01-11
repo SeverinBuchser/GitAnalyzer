@@ -15,28 +15,35 @@ public abstract class AbstractAnalyzeCommand implements Runnable {
 
     protected void analyzeProjectList(ProjectList projectList) {
         try {
-            LoggerProvider.getLogger().info(String.format(
-                    "Analyzing Project List %s.",
-                    projectList.getListPath()
-            ));
-            LoggerProvider.getLogger().separator(1);
-            ProjectListAnalyzer analyzer = new ProjectListAnalyzer(LoggerProvider.getLogger());
-            ProjectListReport report = analyzer.call(projectList);
-            LoggerProvider.getLogger().separator(1);
-            LoggerProvider.getLogger().success(String.format(
-                    "Analyzed Project List %s.",
-                    projectList.getListPath()
-            ));
-            LoggerProvider.getLogger().info(String.format(
-                    "Saving Analysis Report for Project List %s.",
-                    projectList.getListPath()
-            ));
-            File outFile = this.getOutFile(projectList);
-            FileWriter writer = new FileWriter(outFile);
-            writer.write(report.report().toString(4));
-            writer.close();
-            LoggerProvider.getLogger().success(String.format("Saved Analysis Report to %s.", outFile));
-            LoggerProvider.getLogger().separator(1);
+            if (projectList.getSkip()) {
+                LoggerProvider.getLogger().info(String.format(
+                        "Project List %s skipped.",
+                        projectList.getListPath()
+                ));
+            } else {
+                LoggerProvider.getLogger().info(String.format(
+                        "Analyzing Project List %s.",
+                        projectList.getListPath()
+                ));
+                LoggerProvider.getLogger().separator(1);
+                ProjectListAnalyzer analyzer = new ProjectListAnalyzer(LoggerProvider.getLogger());
+                ProjectListReport report = analyzer.call(projectList);
+                LoggerProvider.getLogger().separator(1);
+                LoggerProvider.getLogger().success(String.format(
+                        "Analyzed Project List %s.",
+                        projectList.getListPath()
+                ));
+                LoggerProvider.getLogger().info(String.format(
+                        "Saving Analysis Report for Project List %s.",
+                        projectList.getListPath()
+                ));
+                File outFile = this.getOutFile(projectList);
+                FileWriter writer = new FileWriter(outFile);
+                writer.write(report.report().toString(4));
+                writer.close();
+                LoggerProvider.getLogger().success(String.format("Saved Analysis Report to %s.", outFile));
+                LoggerProvider.getLogger().separator(1);
+            }
         } catch (IOException e) {
             LoggerProvider.getLogger().fail(e.getMessage());
         }

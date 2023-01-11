@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @CommandLine.Command(
         name = "add",
-        description = "",
+        description = "Adds a new project list to the config.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )
@@ -27,6 +27,8 @@ public class AddCommand implements Runnable {
             defaultValue = ""
     )
     public void setDir(String dir) {
+        if (this.mixin.getConfig().hasLoadException()) return;
+        if (this.mixin.hasLoadException()) return;
         this.mixin.getProjectList().setDir(dir);
     }
 
@@ -37,6 +39,8 @@ public class AddCommand implements Runnable {
             defaultValue = ""
     )
     public void setSuffix(String suffix) {
+        if (this.mixin.getConfig().hasLoadException()) return;
+        if (this.mixin.hasLoadException()) return;
         this.mixin.getProjectList().setSuffix(suffix);
     }
 
@@ -47,6 +51,8 @@ public class AddCommand implements Runnable {
             defaultValue = "false"
     )
     public void setSkip(boolean skip) {
+        if (this.mixin.getConfig().hasLoadException()) return;
+        if (this.mixin.hasLoadException()) return;
         this.mixin.getProjectList().setSkip(skip);
     }
 

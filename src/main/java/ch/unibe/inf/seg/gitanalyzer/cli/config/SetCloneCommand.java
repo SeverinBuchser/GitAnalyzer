@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @CommandLine.Command(
         name = "set-clone",
-        description = "",
+        description = "Sets the clone property of the config. If true, the config will be cloned if ran.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )

@@ -78,6 +78,15 @@ public class ProjectListRunPanel extends JPanel implements Updater, Runnable {
     @Override
     public void run() {
         this.state = State.RUNNING;
+        if (this.projectList.getSkip()) {
+            this.logger.info(String.format(
+                    "Project List %s skipped.",
+                    projectList.getListPath()
+            ));
+            this.state = State.DONE;
+            this.updateSubscriptionManager.updateAll();
+            return;
+        }
         this.logger.info(String.format("Running Project List %s.", this.projectList.getListPath()));
         this.logger.separator();
         if (this.projectList.getProjectLists().getConfig().getClone()) {

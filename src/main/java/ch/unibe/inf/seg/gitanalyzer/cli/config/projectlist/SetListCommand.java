@@ -11,7 +11,7 @@ import java.nio.file.Path;
 
 @CommandLine.Command(
         name = "set-list",
-        description = "",
+        description = "Sets the project list (list) property of the project list.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )

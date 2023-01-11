@@ -9,7 +9,7 @@ import picocli.CommandLine;
 
 @CommandLine.Command(
         name = "clone",
-        description = "",
+        description = "Clones the project lists of the config, disregarding the clone property of the config.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )

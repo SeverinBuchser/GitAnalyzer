@@ -27,6 +27,7 @@ public class ConfigViewerFrame extends JFrame implements Subscriber<Config>, Upd
         this.setMinimumSize(minSize);
         this.setLocation(root.getX() + root.getWidth(), root.getY());
         this.add(this.configViewer);
+        this.setTitle("Raw Viewer");
         this.setVisible(true);
     }
 

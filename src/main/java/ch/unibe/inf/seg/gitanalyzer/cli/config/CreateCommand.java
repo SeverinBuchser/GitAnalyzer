@@ -8,7 +8,7 @@ import java.io.IOException;
 
 @CommandLine.Command(
         name = "create",
-        description = "",
+        description = "Creates a new config and saves it.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )

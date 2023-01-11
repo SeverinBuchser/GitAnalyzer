@@ -11,7 +11,7 @@ import java.io.File;
 
 @CommandLine.Command(
         name = "analyze",
-        description = "",
+        description = "Analyzes the project lists of the config, disregarding the analyze property of the config.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )

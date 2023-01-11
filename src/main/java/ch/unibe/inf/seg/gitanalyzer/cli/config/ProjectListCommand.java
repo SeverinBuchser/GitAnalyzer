@@ -15,7 +15,7 @@ import picocli.CommandLine;
 
 @CommandLine.Command(
         name = "project-list",
-        description = "",
+        description = "Command to manipulate specific project lists within a config file.",
         subcommands = {
                 RunCommand.class,
                 CloneCommand.class,

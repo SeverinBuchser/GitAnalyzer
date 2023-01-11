@@ -9,7 +9,8 @@ import java.io.IOException;
 
 @CommandLine.Command(
         name = "set-skip",
-        description = "",
+        description = "Sets the skip property of the project list. If the whole config is cloned or analyzed, a " +
+                "project list with a true skip property will be skipped.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )

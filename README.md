@@ -17,18 +17,18 @@ This project is part of a bachelor-thesis in the [Software Engineering Group](ht
 
 This tool collects information about merges of git-projects. The information one can collect is how many conflicting merges, conflicting files and conflicting chunks are in a project as well as how many of the previously stated abstractions can be reproduced by a computer.
 
-## Getting Started
+# Getting Started
 
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
+## Prerequisites
 
 You will need to install [Apache Maven](https://maven.apache.org/) to build the project.
 
 * [Apache Maven Download](https://maven.apache.org/download.cgi)
 * [Apache Maven Installation Guide](https://maven.apache.org/install.html)
 
-### Installation
+## Installation
 
 1. Clone the repo
    ```shell
@@ -64,12 +64,38 @@ You will need to install [Apache Maven](https://maven.apache.org/) to build the 
 
 # Usage
 
+## Project Lists
+
+It is important to first understand project lists for the following sections. Project lists are CSV files, with the following structure:
+
+```
+# example project list CSV file
+name,remoteURL
+name_one,remoteURL_one
+name_two,remoteURL_two
+...
+```
+
+The `name` column denotes the name of a project and the `remoteURL` column is the remote repository url, from which the project can be cloned.
+
+## Cloning
+
+There are three clone-subcommands: [clone a project list](#clone), [clone all project lists within a config](#clone-config) and [clone a project list within a config](#clone-project-list). The first one takes single arguments and options and clones a stand-alone project list. The next one clones all project lists of a config and the last one clones one single project list within a config. The cloning of a project in all three commands is the same: There is always a `dir` property, which determines the directory into which the projects will be cloned. Then each project of the list will be cloned into a subdirectory within the `dir`. The subdirectory is named after the project's name, given in the project list.
+
+## Analyzing
+
+There are three analyze-subcommands: [analyze a project list](#analyze), [analyze all project lists within a config](#analyze-config) and [analyze a project list within a config](#analyze-project-list). The first one takes single arguments and options and analyzes a stand-alone project list. The next one analyzes all project lists of a config and the last one analyzes one single project list within a config. The analysis of a project list in all three commands is the same: The projects within a list will be analyzed and the ouput report. All commands have a `list`, an `out` and a `suffix` property. The `list` will provide the name, then the `out` will provide the directory of the output file and the suffix will be appended to the name of the output file with a hyphen. The output is in JSON format. 
+
+## Running
+
+There are two run-subcommands: [run a config](#run-config) and [run a project list within a config](#run-project-list). Both of those commands are based on a config file. The config file determines if the command clones and or analyzes a project list. To better understand how a config interacts with the commands, read the usage help of the individual commands as well as take a look at the JSON-schema of the config: [config.json](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/src/main/resources/config.json).
+
 ## Execution
 
-The intended way to execute the tool is to run the "git-analyzer" executable, see [above](#make-executable). If you would choose to create an executable jar yourself, or download the jar, usually with name "GitAnalyzer-1.0.0-jar-with-dependencies.jar", the jar file can be executed:
+The intended way to execute the tool is to run the "git-analyzer" executable, see [above](#make-executable). If you would choose to create an executable jar yourself, or download the jar, usually with name "GitAnalyzer-2.0.0-jar-with-dependencies.jar", the jar file can be executed:
 
 ```shell
-java -jar path/to/jar/directory/GitAnalyzer-1.0.0-jar-with-dependencies.jar [..options]
+java -jar path/to/jar/directory/GitAnalyzer-2.0.0-jar-with-dependencies.jar [..options]
 ```
 
 Here, the main command `git-analyzer` must not be executed again but rather the [options](#basic-usage) must be supplied. The last way to execute the tool (only predefined executions, intended for development purposes) is described [here](#predefined-executions).
@@ -77,95 +103,384 @@ Here, the main command `git-analyzer` must not be executed again but rather the 
 ### Basic Usage
 
 ```shell
-Usage: git-analyzer [-hV] [-c=<configPath>] [COMMAND]
+Usage: git-analyzer [-hV] [COMMAND]
 Study merge conflict resolution behaviour of Git projects.
-  -c, config run <configPath>
-                  Use either this option or use a sub-command. Path to the
-                    configCommand file.
   -h, --help      Show this help message and exit.
   -V, --version   Print version information and exit.
 Commands:
-  clone-project
-  clone-projects
-  analyze-conflicts
+  gui      Opens the gui.
+  analyze  Runs an analysis of a list of projects.
+  clone    Clones a list of projects to one directory. Each project will have
+             its own sub-directory which is named after the projects name,
+             which is stored inside the list of projects.
+  config   Command to manipulate configuration files.
 ```
 
-There is an option to use a JSON configCommand file for the main application. The schema is located at [configCommand.schema.json](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/src/main/resources/configCommand.schema.json) and there are some example configurations [here](https://github.com/SeverinBuchser/GitAnalyzer/tree/master/configs). The configCommand file can be specified by using the option `-c=<configPath>` without any subcommands.
+#### GUI
 
-#### Cloning Projects
-
-<a name="clone-project"></a>
+The GUI provides a self-explanatory interface for editing and running configs.
 
 ```shell
-Usage: git-analyzer clone-project [-pd=<projectDir>] <name> <url>
-      <name>   The name of the project. The project will be cloned into a
-                 directory with this name.
-      <url>    The url from which the project can be cloned from.
-      -pd, --project-dir=<projectDir>
-               The directory where the project will be cloned to. Defaults to
-                 working directory.
+Usage: git-analyzer gui [-hVv] [-c=<config>]
+Opens the gui.
+  -c, --config=<config>   The config file to open in the gui.
+  -h, --help              Show this help message and exit.
+  -v, --verbose           Increase verbosity. Specify multiple times to
+                            increase (-vvv).
+  -V, --version           Print version information and exit.
 ```
 
-To clone one project, use the `clone-project` subcommand, which takes the name and URL of the project. The name can be anything, just remember the name for later usage. The intended way of the name would be `user_name/repo_name`. The URL is for example: https://github.com/SeverinBuchser/GitAnalyzer.
-
-<a name="clone-projects"></a>
+#### Analyze
 
 ```shell
-Usage: git-analyzer clone-projects [-pd=<projectDir>] <projectListPath>
-      <projectListPath>
-      -pd, --project-dir=<projectDir>
-                          The directory where the projects will be cloned to.
-                            Defaults to working directory.
+Usage: git-analyzer analyze [-hVv] [-d=<dir>] [-o=<out>] [-s=<suffix>] <list>
+Runs an analysis of a list of projects.
+      <list>              The list of projects to analyze.
+  -d, --dir=<dir>         The location of the projects in the list of projects
+                            <list>.
+  -h, --help              Show this help message and exit.
+  -o, --out=<out>         The directory of the output file.
+  -s, --suffix=<suffix>   The suffix, appended to the output file.
+  -v, --verbose           Increase verbosity. Specify multiple times to
+                            increase (-vvv).
+  -V, --version           Print version information and exit.
 ```
 
-To clone multiple projects, use the `clone-projects` subcommand, which takes a path to a CSV file, in which the projects to be cloned are located. This file is called a project list and it is used later as well, **so if you plan to use this tool, make sure to create such a project list**:
-
-```
-# example project list CSV file
-name,url
-name_one,url_one
-name_two,url_two
-...
-```
-
-The option `project-dir`, used in both clone-subcommands, defaults to the current working directory. It denotes the location, to which the projects will be cloned to.
-
-#### Analyze Conflicts
+#### Clone
 
 ```shell
-Usage: git-analyzer analyze-conflicts [-od=<outDir>] [-os=<outSuffix>]
-                             [-pd=<projectDir>] <projectListPath>
-      <projectListPath>   The path to the project list CSV file.
-      -od, --out-dir=<outDir>
-                          The output directory, where the output JSON file
-                            goes. Defaults to working directory.
-      -os, --out-suffix=<outSuffix>
-                          The suffix for the output JSON file. Default is no
-                            suffix.
-      -pd, --project-dir=<projectDir>
-                          The directory where the cloned projects are located.
-                            Defaults to working directory.
+Usage: git-analyzer clone [-hVv] [-d=<dir>] <list>
+Clones a list of projects to one directory. Each project will have its own
+sub-directory which is named after the projects name, which is stored inside
+the list of projects.
+      <list>        The list of projects to clone.
+  -d, --dir=<dir>   The directory the projects will be cloned to.
+  -h, --help        Show this help message and exit.
+  -v, --verbose     Increase verbosity. Specify multiple times to increase
+                      (-vvv).
+  -V, --version     Print version information and exit.
 ```
 
-This command analyzes projects of a project list. The parameter `projectListPath`, as well as the option `project-dir` are the same as in the [clone-projects subcommand](#clone-projects). The option `out-dir` defaults to the current working directory. It is the directory to where the output file will be written to. The output file is named as follows: Assume you have the following execution:
+#### Config
 
-- `projectListPath`: "path/to/project_list/project_list_name.csv"
-- `out-dir`: "path/to/output_directory"
-- `out-suffix`: "some-suffix"
-- `project-dir`: "path/to/project_directory"
+There is an option to use a JSON config file for the application. The schema is located at [config.json](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/src/main/resources/config.json) and there are some example configurations [here](https://github.com/SeverinBuchser/GitAnalyzer/tree/master/configs).
 
-With these parameters and options, the output file will be created as: "path/to/output_directory/project_list_name-some-suffix.json".
+```shell
+Usage: git-analyzer config [-hV] [COMMAND]
+Command to manipulate configuration files.
+  -h, --help      Show this help message and exit.
+  -V, --version   Print version information and exit.
+Commands:
+  run           Runs the config. If the clone property is set to true in the
+                  config, all project lists will be cloned. If the analyze
+                  property is set to true in the config, all project lists will
+                  be analyzed. The cloning will happen first.
+  analyze       Analyzes the project lists of the config, disregarding the
+                  analyze property of the config.
+  clone         Clones the project lists of the config, disregarding the clone
+                  property of the config.
+  show          Prints the config.
+  create        Creates a new config and saves it.
+  set-clone     Sets the clone property of the config. If true, the config will
+                  be cloned if ran.
+  set-analyze   Sets the analyze property of the config. If true, the config
+                  will be analyzed when ran.
+  set-out       Sets the out directory of the config.
+  project-list  Command to manipulate specific project lists within a config
+                  file.
+```
 
-The `outDir` is the directory for the output files, default is `./`. The `outSuffix` is the part which is appended to the output files name. The output file will be a CSV file. The rest is the same as in the other commands. The only difference is the `projectDir` which is now the directory where the cloned projects are located.
+<a name="run-config"></a>
+
+##### Run
+
+```shell
+Usage: git-analyzer config run [-hVv] <config>
+Runs the config. If the clone property is set to true in the config, all
+project lists will be cloned. If the analyze property is set to true in the
+config, all project lists will be analyzed. The cloning will happen first.
+      <config>    The path of the config.
+  -h, --help      Show this help message and exit.
+  -v, --verbose   Increase verbosity. Specify multiple times to increase (-vvv).
+  -V, --version   Print version information and exit.
+```
+
+<a name="analyze-config"></a>
+
+##### Analyze
+
+```shell
+Usage: git-analyzer config analyze [-hVv] <config>
+Analyzes the project lists of the config, disregarding the analyze property of
+the config.
+      <config>    The path of the config.
+  -h, --help      Show this help message and exit.
+  -v, --verbose   Increase verbosity. Specify multiple times to increase (-vvv).
+  -V, --version   Print version information and exit.
+```
+
+<a name="clone-config"></a>
+
+##### Clone
+
+```shell
+Usage: git-analyzer config clone [-hVv] <config>
+Clones the project lists of the config, disregarding the clone property of the
+config.
+      <config>    The path of the config.
+  -h, --help      Show this help message and exit.
+  -v, --verbose   Increase verbosity. Specify multiple times to increase (-vvv).
+  -V, --version   Print version information and exit.
+```
+
+##### Show
+
+```shell
+Usage: git-analyzer config show [-hVv] <config>
+Prints the config.
+      <config>    The path of the config.
+  -h, --help      Show this help message and exit.
+  -v, --verbose   Increase verbosity. Specify multiple times to increase (-vvv).
+  -V, --version   Print version information and exit.
+```
+
+##### Create
+
+```shell
+Usage: git-analyzer config create [-achVv] [-o=<out>] <config>
+Creates a new config and saves it.
+      <config>      The path of the config.
+  -a, --analyze
+  -c, --clone
+  -h, --help        Show this help message and exit.
+  -o, --out=<out>
+  -v, --verbose     Increase verbosity. Specify multiple times to increase
+                      (-vvv).
+  -V, --version     Print version information and exit.
+```
+
+##### Set-Clone
+
+```shell
+Usage: git-analyzer config set-clone [-hVv] <config> <clone>
+Sets the clone property of the config. If true, the config will be cloned if
+ran.
+      <config>    The path of the config.
+      <clone>
+  -h, --help      Show this help message and exit.
+  -v, --verbose   Increase verbosity. Specify multiple times to increase (-vvv).
+  -V, --version   Print version information and exit.
+```
+
+##### Set-Out
+
+```shell
+Usage: git-analyzer config set-out [-hVv] <config> <out>
+Sets the out directory of the config.
+      <config>    The path of the config.
+      <out>
+  -h, --help      Show this help message and exit.
+  -v, --verbose   Increase verbosity. Specify multiple times to increase (-vvv).
+  -V, --version   Print version information and exit.
+```
+
+##### Project-List
+
+```shell
+Usage: git-analyzer config project-list [-hV] [COMMAND]
+Command to manipulate specific project lists within a config file.
+  -h, --help      Show this help message and exit.
+  -V, --version   Print version information and exit.
+Commands:
+  run         Runs a single project list within a config. If the clone property
+                is set to true in the config, the project list will be cloned.
+                If the analyze property is set to true in the config, all the
+                project list will be analyzed. The cloning will happen first.
+                The skip property of the project list is disregarded.
+  clone       Clones a single project list of the config, disregarding the
+                clone property of the config. The skip property of the project
+                list is disregarded.
+  analyze     Analyzes a single project list of the config, disregarding the
+                analyze property of the config.The skip property of the project
+                list is disregarded.
+  show        Prints the project list.
+  add         Adds a new project list to the config.
+  remove      Removes a project list from the config.
+  set-list    Sets the project list (list) property of the project list.
+  set-dir     Sets the project directory (dir) property of the project list.
+  set-suffix  Sets the suffix property of the project list. The suffix is
+                appended with a hyphen to the output file.
+  set-skip    Sets the skip property of the project list. If the whole config
+                is cloned or analyzed, a project list with a true skip property
+                will be skipped.
+```
+
+<a name="run-project-list"></a>
+
+###### Run
+
+```shell
+Usage: git-analyzer config project-list run [-hVv] <config> <project-list>
+Runs a single project list within a config. If the clone property is set to
+true in the config, the project list will be cloned. If the analyze property is
+set to true in the config, all the project list will be analyzed. The cloning
+will happen first. The skip property of the project list is disregarded.
+      <config>         The path of the config.
+      <project-list>   The name of the project list.
+  -h, --help           Show this help message and exit.
+  -v, --verbose        Increase verbosity. Specify multiple times to increase
+                         (-vvv).
+  -V, --version        Print version information and exit.
+```
+
+<a name="clone-project-list"></a>
+
+###### Clone
+
+```shell
+Usage: git-analyzer config project-list clone [-hVv] <config> <project-list>
+Clones a single project list of the config, disregarding the clone property of
+the config. The skip property of the project list is disregarded.
+      <config>         The path of the config.
+      <project-list>   The name of the project list.
+  -h, --help           Show this help message and exit.
+  -v, --verbose        Increase verbosity. Specify multiple times to increase
+                         (-vvv).
+  -V, --version        Print version information and exit.
+```
+
+<a name="analyze-project-list"></a>
+
+###### Analyze
+
+```shell
+Usage: git-analyzer config project-list analyze [-hVv] <config> <project-list>
+Analyzes a single project list of the config, disregarding the analyze property
+of the config.The skip property of the project list is disregarded.
+      <config>         The path of the config.
+      <project-list>   The name of the project list.
+  -h, --help           Show this help message and exit.
+  -v, --verbose        Increase verbosity. Specify multiple times to increase
+                         (-vvv).
+  -V, --version        Print version information and exit.
+```
+
+###### Show
+
+```shell
+Usage: git-analyzer config project-list show [-hVv] <config> <project-list>
+Prints the project list.
+      <config>         The path of the config.
+      <project-list>   The name of the project list.
+  -h, --help           Show this help message and exit.
+  -v, --verbose        Increase verbosity. Specify multiple times to increase
+                         (-vvv).
+  -V, --version        Print version information and exit.
+```
+
+###### Add
+
+```shell
+Usage: git-analyzer config project-list add [-hsVv] [-d=<dir>] [-sx=<suffix>]
+       <config> <project-list>
+Adds a new project list to the config.
+      <config>         The path of the config.
+      <project-list>   The name of the project list.
+  -d, --dir=<dir>
+  -h, --help           Show this help message and exit.
+  -s, --skip
+      -sx, --suffix=<suffix>
+
+  -v, --verbose        Increase verbosity. Specify multiple times to increase
+                         (-vvv).
+  -V, --version        Print version information and exit.
+```
+
+###### Remove
+
+```shell
+Usage: git-analyzer config project-list remove [-hVv] <config> <project-list>
+Removes a project list from the config.
+      <config>         The path of the config.
+      <project-list>   The name of the project list.
+  -h, --help           Show this help message and exit.
+  -v, --verbose        Increase verbosity. Specify multiple times to increase
+                         (-vvv).
+  -V, --version        Print version information and exit.
+```
+
+###### Set-List
+
+```shell
+Usage: git-analyzer config project-list set-list [-hVv] <config> <project-list>
+       <list>
+Sets the project list (list) property of the project list.
+      <config>         The path of the config.
+      <project-list>   The name of the project list.
+      <list>
+  -h, --help           Show this help message and exit.
+  -v, --verbose        Increase verbosity. Specify multiple times to increase
+                         (-vvv).
+  -V, --version        Print version information and exit.
+```
+
+###### Set-Dir
+
+```shell
+Usage: git-analyzer config project-list set-dir [-hVv] <config> <project-list>
+       <dir>
+Sets the project directory (dir) property of the project list.
+      <config>         The path of the config.
+      <project-list>   The name of the project list.
+      <dir>
+  -h, --help           Show this help message and exit.
+  -v, --verbose        Increase verbosity. Specify multiple times to increase
+                         (-vvv).
+  -V, --version        Print version information and exit.
+```
+
+###### Set-Suffix
+
+```shell
+Usage: git-analyzer config project-list set-suffix [-hVv] <config>
+       <project-list> <suffix>
+Sets the suffix property of the project list. The suffix is appended with a
+hyphen to the output file.
+      <config>         The path of the config.
+      <project-list>   The name of the project list.
+      <suffix>
+  -h, --help           Show this help message and exit.
+  -v, --verbose        Increase verbosity. Specify multiple times to increase
+                         (-vvv).
+  -V, --version        Print version information and exit.
+```
+
+###### Set-Skip
+
+```shell
+Usage: git-analyzer config project-list set-skip [-hVv] <config> <project-list>
+       <skip>
+Sets the skip property of the project list. If the whole config is cloned or
+analyzed, a project list with a true skip property will be skipped.
+      <config>         The path of the config.
+      <project-list>   The name of the project list.
+      <skip>
+  -h, --help           Show this help message and exit.
+  -v, --verbose        Increase verbosity. Specify multiple times to increase
+                         (-vvv).
+  -V, --version        Print version information and exit.
+```
 
 ### Predefined Executions
 
-Predefined executables are already provided in the maven configuration, [pom.xml](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/pom.xml). Those executions use the [exec-maven-plugin](https://www.mojohaus.org/exec-maven-plugin/) to run Java executions. Each execution is based on a configuration file, located in the [configs directory of the repo](https://github.com/SeverinBuchser/GitAnalyzer/tree/master/configs). Each configCommand file, except one, is based on the schema mentioned above and concern one project list. To run these configurations do:
+Predefined executables are already provided in the maven configuration, [pom.xml](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/pom.xml). Those executions use the [exec-maven-plugin](https://www.mojohaus.org/exec-maven-plugin/) to run Java executions. Each execution is based on a configuration file, located in the [configs directory of the repo](https://github.com/SeverinBuchser/GitAnalyzer/tree/master/configs). Each config file, except one, is based on the schema mentioned above and concerns one project list.
+
+To execute the predefined executions do
 
 ```shell
 mvn exec:java@{execution_id}
 ```
-where the `execution_id` is the name of the execution, which can be one of the following: "random-asc", "random-desc", "cpp", "go", "java", "java-original", "javascript", "python" or "typescript". There is also one configuration, [the default configuration](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/configs/configCommand.json), which runs the analysis on every project list (in series). If you would like to run the default configuration with every project list, do
+where the `execution_id` is the name of the execution, which can be one of the following: "random-asc", "random-desc", "cpp", "go", "java", "java-original", "javascript", "python", "typescript", "simple" or "gui". The latter, "gui", will execute the `git-analyzer gui -c=<config>` command. The predefined executions for the config files run the command `git-analyzer config run <config>`. There is also one configuration, [the default configuration](https://github.com/SeverinBuchser/GitAnalyzer/blob/master/configs/config.json), which runs the analysis on every project list (in series). If you would like to run the default configuration with every project list, do
 
 ```shell
 mvn exec:java

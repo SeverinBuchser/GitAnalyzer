@@ -9,7 +9,8 @@ import java.io.IOException;
 
 @CommandLine.Command(
         name = "set-suffix",
-        description = "",
+        description = "Sets the suffix property of the project list. The suffix is appended with a hyphen to the " +
+                "output file.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )

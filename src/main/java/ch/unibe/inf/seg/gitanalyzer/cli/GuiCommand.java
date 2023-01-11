@@ -59,6 +59,7 @@ public class GuiCommand implements Runnable {
         Dimension size = new Dimension(500, 500);
         frame.setMinimumSize(size);
         frame.setSize(size);
+        frame.setTitle("Git Analyzer");
         frame.setVisible(true);
     }
 }

@@ -2,6 +2,8 @@ package ch.unibe.inf.seg.gitanalyzer.cli;
 
 import picocli.CommandLine;
 
+import java.util.Arrays;
+
 /**
  * The root-command and main executable.
  * This command does nothing if called without any subcommand:
@@ -34,10 +36,8 @@ public class GitAnalyzer implements Runnable {
 
     public static void main(String[] args) {
         CommandLine cmd = new CommandLine(new GitAnalyzer());
-        CommandLine.ParseResult parseResult = cmd.parseArgs(args);
-        String guiName = new CommandLine(new GuiCommand()).getCommandName();
-        int exitCode = new CommandLine(new GitAnalyzer()).execute(args);
-        if (!parseResult.subcommand().commandSpec().name().equals(guiName)) {
+        int exitCode = cmd.execute(args);
+        if (exitCode != 0 || !Arrays.stream(args).toList().contains("gui")) {
             System.exit(exitCode);
         }
     }

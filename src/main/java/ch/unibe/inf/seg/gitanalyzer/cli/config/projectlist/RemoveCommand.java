@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @CommandLine.Command(
         name = "remove",
-        description = "",
+        description = "Removes a project list from the config.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )

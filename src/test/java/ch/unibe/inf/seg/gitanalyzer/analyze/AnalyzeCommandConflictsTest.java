@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AnalyzeCommandTest {
     @Test
     public void missingParameterTest() {
+        System.setOut(new TestingPrintStream());
         CommandLine cmd = AnalyzeCommandTest.getAnalyzer();
 
         int exitCode = cmd.execute(

@@ -13,7 +13,10 @@ import java.nio.file.Path;
 
 @CommandLine.Command(
         name = "run",
-        description = "",
+        description = "Runs a single project list within a config. If the clone property is set to true in the " +
+                "config, the project list will be cloned. If the analyze property is set to true in the config, all " +
+                "the project list will be analyzed. The cloning will happen first. The skip property of the project " +
+                "list is disregarded.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )

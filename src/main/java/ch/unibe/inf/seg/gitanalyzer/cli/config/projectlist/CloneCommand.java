@@ -8,7 +8,8 @@ import picocli.CommandLine;
 
 @CommandLine.Command(
         name = "clone",
-        description = "",
+        description = "Clones a single project list of the config, disregarding the clone property of the config. " +
+                "The skip property of the project list is disregarded.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )

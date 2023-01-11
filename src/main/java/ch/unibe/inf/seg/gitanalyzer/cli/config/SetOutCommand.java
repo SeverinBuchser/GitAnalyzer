@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @CommandLine.Command(
         name = "set-out",
-        description = "",
+        description = "Sets the out directory of the config.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )

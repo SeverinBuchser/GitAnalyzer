@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @CommandLine.Command(
         name = "set-analyze",
-        description = "",
+        description = "Sets the analyze property of the config. If true, the config will be analyzed when ran.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class
 )
