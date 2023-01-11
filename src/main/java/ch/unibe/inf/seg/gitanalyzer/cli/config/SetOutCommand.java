@@ -38,11 +38,11 @@ public class SetOutCommand implements Runnable {
     public void run() {
         this.logger.info("Executing Set Out Command...");
         if (CommandHelper.configLoadFailed(this.config)) return;
-        this.logger.info(String.format("Setting Out to Config '%s'.", this.config.getConfigPath()));
+        this.logger.info(String.format("Setting Out to Config %s.", this.config.getConfigPath()));
         try {
             this.config.save();
             this.logger.success(String.format(
-                    "Set Out '%s' to Config '%s'.",
+                    "Set Out %s to Config %s.",
                     this.config.getOutPath(),
                     this.config.getConfigPath()
             ));

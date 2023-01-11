@@ -56,17 +56,17 @@ public class AddCommand implements Runnable {
         if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
         if (!this.mixin.hasLoadException()) {
             this.logger.fail(String.format(
-                    "Project List '%s' already exists.",
+                    "Project List %s already exists.",
                     this.mixin.getProjectList().getListPath()
             ));
             return;
         }
 
         try {
-            this.logger.info(String.format("Adding Project List '%s'.", this.mixin.getProjectList().getListPath()));
+            this.logger.info(String.format("Adding Project List %s.", this.mixin.getProjectList().getListPath()));
             this.mixin.getConfig().getProjectLists().add(this.mixin.getProjectList());
             this.mixin.getConfig().save();
-            this.logger.success(String.format("Added Project List '%s'.", this.mixin.getProjectList().getListPath()));
+            this.logger.success(String.format("Added Project List %s.", this.mixin.getProjectList().getListPath()));
         } catch (IOException e) {
             this.logger.fail(e.getMessage());
         }

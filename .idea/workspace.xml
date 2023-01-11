@@ -7,18 +7,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Improve gui logging">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/analyzer/AnalyzerControlPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/ConfigControlPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/viewer/ConfigViewerFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/gui/ControlPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/LoggerConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/LoggerDuplicator.java" afterDir="false" />
+    <list default="true" id="49fe0c5d-41b5-4c2f-a25e-3fbf79d04c9b" name="Changes" comment="Improve gui analyzer logging and add save mechanism to gui analyzer">
+      <change afterPath="$PROJECT_DIR$/project-lists/test-two.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/run/ProjectListRunPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/run/RunPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/gui.test.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/configs/config.test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-lists/test.csv" beforeDir="false" afterPath="$PROJECT_DIR$/project-lists/test-one.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/AbstractAnalyzeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/AbstractAnalyzeCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/AbstractCloneCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/AbstractCloneCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/AnalyzeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/AnalyzeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/CloneCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/CloneCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/CommandHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/CommandHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/GuiCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/GuiCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/AnalyzeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/AnalyzeCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/CloneCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/CloneCommand.java" afterDir="false" />
@@ -27,32 +25,20 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/SetAnalyzeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/SetAnalyzeCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/SetCloneCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/SetCloneCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/SetOutCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/SetOutCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/ShowCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/AddCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/AnalyzeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/AnalyzeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/CloneCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/CloneCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/ProjectListMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/ProjectListMixin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/RemoveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/RemoveCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/RunCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/RunCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetDirCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetDirCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetListCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetListCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetSkipCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetSkipCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetSuffixCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/SetSuffixCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config/projectlist/ShowCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/clone/ProjectListCloner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/clone/ProjectListCloner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/analyzer/AnalyzerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/analyzer/AnalyzerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/analyzer/ProjectListAnalyzerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/analyzer/ProjectListAnalyzerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/ConfigEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/editor/ConfigEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/ConfigPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/ConfigPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/ConfigViewer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/viewer/ConfigViewer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/ProjectListInfoEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/editor/ProjectListInfoEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/ProjectListInfosEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/editor/ProjectListInfosEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/GlobalLogger.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/GuiLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/GuiLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/Logger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/LoggerProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/LoggerProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/OutputStreamDuplicator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/error/NotUniqueProjectListException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/error/NotUniqueProjectListException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/analyzer/AnalyzerControlPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/run/RunControlPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/analyzer/AnalyzerPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/analyzer/ProjectListAnalyzerPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/editor/ConfigEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/gui/config/editor/ConfigEditor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/PrintStreamLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/PrintStreamLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/StringBuilderOutputStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/util/logger/SubscribableByteArrayOutputStream.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,41 +81,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/severin/gitrepo/Severin/UniBe/GitAnalyzer/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;b36811f71372f717c7be8a36cfdd8aac&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TODO_SCOPE": "All Places",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
+    "last_opened_file_path": "/home/severin/gitrepo/Severin/UniBe/GitAnalyzer/project-lists",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "spring.configuration.checksum": "b36811f71372f717c7be8a36cfdd8aac",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="ch.unibe.inf.seg.mergeresolution.analyze" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/project-lists" />
+      <recent name="$PROJECT_DIR$/configs" />
       <recent name="$PROJECT_DIR$/src/main/java/ch/unibe/inf/seg/gitanalyzer/cli/config" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
-      <recent name="$PROJECT_DIR$/configs" />
       <recent name="$PROJECT_DIR$/out" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -148,6 +134,9 @@
       <recent name="ch.unibe.inf.seg.mergeresolution" />
       <recent name="org.severin.ba.util.log" />
       <recent name="org.severin.ba.util.tree" />
+    </key>
+    <key name="MoveInnerDialog.RECENTS_KEY">
+      <recent name="ch.unibe.inf.seg.gitanalyzer.gui.analyzer" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="ch.unibe.inf.seg.gitanalyzer.cli" />
@@ -196,7 +185,7 @@
     <configuration name="GUI" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.gitanalyzer.cli.GitAnalyzer" />
       <module name="GitAnalyzer" />
-      <option name="PROGRAM_PARAMETERS" value="gui -c=./configs/gui.test.config.json" />
+      <option name="PROGRAM_PARAMETERS" value="gui -c=./configs/config.test.json -v" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="ch.unibe.inf.seg.result.*" />
@@ -294,7 +283,7 @@
     <configuration name="Random Asc" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ch.unibe.inf.seg.gitanalyzer.cli.GitAnalyzer" />
       <module name="GitAnalyzer" />
-      <option name="PROGRAM_PARAMETERS" value="config run ./configs/config.random-asc.json " />
+      <option name="PROGRAM_PARAMETERS" value="config run ./configs/config.random-asc.json -v" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="ch.unibe.inf.seg.result.*" />
@@ -456,7 +445,8 @@
       <workItem from="1673221021628" duration="2419000" />
       <workItem from="1673272999853" duration="4244000" />
       <workItem from="1673279723177" duration="16251000" />
-      <workItem from="1673353495742" duration="33691000" />
+      <workItem from="1673353495742" duration="34309000" />
+      <workItem from="1673438883851" duration="13382000" />
     </task>
     <task id="LOCAL-00001" summary="Inital Commit">
       <created>1663769460948</created>
@@ -689,7 +679,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673383776138</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Improve gui logging">
+      <created>1673402488604</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1673402488604</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -3006,7 +3003,6 @@
       <path value="$PROJECT_DIR$/src/test/resources/secondsamplemergeconflictproject" />
       <path value="$PROJECT_DIR$/src/test/resources/samplemergeconflictproject" />
     </ignored-roots>
-    <MESSAGE value="Restructure project and create single file application" />
     <MESSAGE value="Add potential path builder and iterator" />
     <MESSAGE value="Allow usage of config.json file for ease of use for multiple project lists" />
     <MESSAGE value="Restructure directories and update gitignore" />
@@ -3031,7 +3027,8 @@
     <MESSAGE value="Add logger for project list commands and implement global logger provider" />
     <MESSAGE value="Add logging to every cli command" />
     <MESSAGE value="Improve gui logging" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improve gui logging" />
+    <MESSAGE value="Improve gui analyzer logging and add save mechanism to gui analyzer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improve gui analyzer logging and add save mechanism to gui analyzer" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

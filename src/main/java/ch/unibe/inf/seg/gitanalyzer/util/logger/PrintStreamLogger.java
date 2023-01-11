@@ -22,6 +22,10 @@ public class PrintStreamLogger implements Logger {
         this.verbosityLevel = verbosityLevel;
     }
 
+    public int getVerbosityLevel() {
+        return this.verbosityLevel;
+    }
+
     public PrintStreamLogger(OutputStream out) {
         this(new PrintStream(out));
     }

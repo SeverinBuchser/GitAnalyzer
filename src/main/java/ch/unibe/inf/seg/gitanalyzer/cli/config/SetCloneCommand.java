@@ -37,11 +37,11 @@ public class SetCloneCommand implements Runnable {
     public void run() {
         this.logger.info("Executing Set Clone Command...");
         if (CommandHelper.configLoadFailed(this.config)) return;
-        this.logger.info(String.format("Setting Clone to Config '%s'.", this.config.getConfigPath()));
+        this.logger.info(String.format("Setting Clone to Config %s.", this.config.getConfigPath()));
         try {
             this.config.save();
             this.logger.success(String.format(
-                    "Set Clone '%s' to Config '%s'.",
+                    "Set Clone %s to Config %s.",
                     this.config.getClone(),
                     this.config.getConfigPath()
             ));

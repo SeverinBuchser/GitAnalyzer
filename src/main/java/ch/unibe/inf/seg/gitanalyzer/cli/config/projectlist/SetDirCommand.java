@@ -40,14 +40,14 @@ public class SetDirCommand implements Runnable {
         if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
         if (CommandHelper.projectListLoadFailed(this.mixin)) return;
         this.logger.info(String.format(
-                "Setting Dir to Project List '%s' of Config '%s'",
+                "Setting Dir to Project List %s of Config %s",
                 this.mixin.getProjectList().getListPath(),
                 this.mixin.getConfig().getConfigPath()
         ));
         try {
             this.mixin.getConfig().save();
             this.logger.success(String.format(
-                    "Set Dir '%s' to Project List '%s' of Config '%s'",
+                    "Set Dir %s to Project List %s of Config %s",
                     this.mixin.getProjectList().getDirPath(),
                     this.mixin.getProjectList().getListPath(),
                     this.mixin.getConfig().getConfigPath()

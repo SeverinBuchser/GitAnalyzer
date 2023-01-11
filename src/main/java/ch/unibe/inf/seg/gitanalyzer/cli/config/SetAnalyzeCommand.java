@@ -37,11 +37,11 @@ public class SetAnalyzeCommand implements Runnable {
     public void run() {
         this.logger.info("Executing Set Analyze Command...");
         if (CommandHelper.configLoadFailed(this.config)) return;
-        this.logger.info(String.format("Setting Analyze to Config '%s'.", this.config.getConfigPath()));
+        this.logger.info(String.format("Setting Analyze to Config %s.", this.config.getConfigPath()));
         try {
             this.config.save();
             this.logger.success(String.format(
-                    "Set Analyze '%s' to Config '%s'.",
+                    "Set Analyze %s to Config %s.",
                     this.config.getAnalyze(),
                     this.config.getConfigPath()
             ));

@@ -33,7 +33,7 @@ public class RunCommand extends AbstractAnalyzeCommand {
     public void run() {
         this.logger.info("Executing Run Command...");
         if (CommandHelper.configLoadFailed(this.config)) return;
-        this.logger.info(String.format("Running Config '%s'.", this.config.getConfigPath()));
+        this.logger.info(String.format("Running Config %s.", this.config.getConfigPath()));
         if (this.config.getClone() || this.config.getAnalyze()) {
             this.logger.separator();
         }
@@ -42,10 +42,14 @@ public class RunCommand extends AbstractAnalyzeCommand {
             this.logger.info("Cloning...");
             ProjectListCloner cloner = new ProjectListCloner(this.logger);
             for (ProjectList projectList: this.config.getProjectLists()) {
+                this.logger.info(String.format("Cloning Project List %s.", projectList.getListPath()));
+                this.logger.separator(1);
                 cloner.call(projectList);
+                this.logger.separator(1);
+                this.logger.success(String.format("Cloned Project List %s.", projectList.getListPath()));
             }
             this.logger.success("Cloning Complete.");
-            this.logger.separator(1);
+            this.logger.separator();
         }
 
         if (this.config.getAnalyze()) {
@@ -54,7 +58,7 @@ public class RunCommand extends AbstractAnalyzeCommand {
                 this.analyzeProjectList(projectList);
             }
             this.logger.success("Analysis Complete.");
-            this.logger.separator(1);
+            this.logger.separator();
         }
         this.logger.success("Run Command Complete.");
     }

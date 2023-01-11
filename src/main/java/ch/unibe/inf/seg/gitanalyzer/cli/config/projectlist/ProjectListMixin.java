@@ -45,7 +45,7 @@ public class ProjectListMixin {
 
     public static class ProjectListNotFoundException extends IOException {
         public ProjectListNotFoundException(String list) {
-            super(String.format("List info '%s' was not found in the config.", list));
+            super(String.format("List info %s was not found in the config.", list));
         }
     }
 }

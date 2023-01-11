@@ -1,7 +1,7 @@
 package ch.unibe.inf.seg.gitanalyzer.cli;
 
 import ch.unibe.inf.seg.gitanalyzer.config.Config;
-import ch.unibe.inf.seg.gitanalyzer.gui.analyzer.AnalyzerPanel;
+import ch.unibe.inf.seg.gitanalyzer.gui.run.RunPanel;
 import ch.unibe.inf.seg.gitanalyzer.gui.config.ConfigPanel;
 import ch.unibe.inf.seg.gitanalyzer.util.logger.LoggerProvider;
 import picocli.CommandLine;
@@ -44,12 +44,12 @@ public class GuiCommand implements Runnable {
     public void run() {
         this.logger.info("Starting GUI");
         ConfigPanel configPanel = new ConfigPanel();
-        AnalyzerPanel analyzerPanel = new AnalyzerPanel();
-        configPanel.subscribe(analyzerPanel);
+        RunPanel runPanel = new RunPanel();
+        configPanel.subscribe(runPanel);
 
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Config Panel", configPanel);
-        tabbedPane.addTab("Analyzer Panel", analyzerPanel);
+        tabbedPane.addTab("Run Panel", runPanel);
 
         if (this.hasConfig()) configPanel.next(this.config);
 
@@ -57,7 +57,7 @@ public class GuiCommand implements Runnable {
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.add(tabbedPane);
         Dimension size = new Dimension(500, 500);
-        frame.setMaximumSize(size);
+        frame.setMinimumSize(size);
         frame.setSize(size);
         frame.setVisible(true);
     }

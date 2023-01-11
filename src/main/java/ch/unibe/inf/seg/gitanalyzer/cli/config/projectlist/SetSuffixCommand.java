@@ -39,14 +39,14 @@ public class SetSuffixCommand implements Runnable {
         if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
         if (CommandHelper.projectListLoadFailed(this.mixin)) return;
         this.logger.info(String.format(
-                "Setting Suffix to Project List '%s' of Config '%s'",
+                "Setting Suffix to Project List %s of Config %s",
                 this.mixin.getProjectList().getListPath(),
                 this.mixin.getConfig().getConfigPath()
         ));
         try {
             this.mixin.getConfig().save();
             this.logger.success(String.format(
-                    "Set Suffix '%s' to Project List '%s' of Config '%s'",
+                    "Set Suffix %s to Project List %s of Config %s",
                     this.mixin.getProjectList().getSuffix(),
                     this.mixin.getProjectList().getListPath(),
                     this.mixin.getConfig().getConfigPath()

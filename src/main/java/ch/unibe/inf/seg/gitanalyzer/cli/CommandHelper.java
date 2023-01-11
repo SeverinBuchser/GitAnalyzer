@@ -8,7 +8,7 @@ public class CommandHelper {
     public static boolean configLoadFailed(ConfigMixin config) {
         if (config.hasLoadException()) {
             LoggerProvider.getLogger().fail(
-                    String.format("Config at '%s' could not be loaded!", config.getConfigPathAbsolute())
+                    String.format("Config at %s could not be loaded!", config.getConfigPathAbsolute())
             );
             return true;
         }
@@ -18,7 +18,7 @@ public class CommandHelper {
     public static boolean projectListLoadFailed(ProjectListMixin mixin) {
         if (mixin.hasLoadException()) {
             LoggerProvider.getLogger().fail(String.format(
-                    "Project List at '%s' could not be loaded or was not found!",
+                    "Project List at %s could not be loaded or was not found!",
                     mixin.getProjectList().getListPath()
             ));
             return true;

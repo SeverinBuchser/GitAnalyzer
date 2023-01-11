@@ -31,13 +31,13 @@ public class AnalyzeCommand extends AbstractAnalyzeCommand {
     @Override
     public void run() {
         this.logger.info("Executing Analyze Command...");
-        this.logger.info(String.format("Analyzing Config '%s'", this.config.getConfigPath()));
+        this.logger.info(String.format("Analyzing Config %s", this.config.getConfigPath()));
         if (CommandHelper.configLoadFailed(this.config)) return;
 
         for (ProjectList projectList : config.getProjectLists()) {
             this.analyzeProjectList(projectList);
         }
-        this.logger.success(String.format("Analyzed Config '%s'", this.config.getConfigPath()));
+        this.logger.success(String.format("Analyzed Config %s", this.config.getConfigPath()));
         this.logger.success("Analyze Command Complete.");
     }
 }

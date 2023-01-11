@@ -36,7 +36,7 @@ public class RunCommand extends AbstractAnalyzeCommand {
         this.logger.info("Executing Run Command...");
         if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
         if (CommandHelper.projectListLoadFailed(this.mixin)) return;
-        this.logger.info(String.format("Running Project List '%s'.", this.mixin.getProjectList().getListPath()));
+        this.logger.info(String.format("Running Project List %s.", this.mixin.getProjectList().getListPath()));
         if (this.mixin.getConfig().getClone() || this.mixin.getConfig().getAnalyze()) {
             this.logger.separator();
         }

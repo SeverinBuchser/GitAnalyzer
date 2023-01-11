@@ -24,13 +24,13 @@ public class CloneCommand extends AbstractCloneCommand {
     @Override
     public void run() {
         this.logger.info("Running Clone Command");
-        this.logger.info(String.format("Cloning Config '%s'.", this.config.getConfigPath()));
+        this.logger.info(String.format("Cloning Config %s.", this.config.getConfigPath()));
         if (CommandHelper.configLoadFailed(this.config)) return;
 
         for (ProjectList projectList: this.config.getProjectLists()) {
             this.cloneProjectList(projectList);
         }
-        this.logger.success(String.format("Cloned Config '%s'.", this.config.getConfigPath()));
+        this.logger.success(String.format("Cloned Config %s.", this.config.getConfigPath()));
         this.logger.success("Clone Command Complete.");
     }
 }

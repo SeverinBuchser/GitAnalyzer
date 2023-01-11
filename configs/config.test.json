@@ -4,14 +4,14 @@
     "projectLists": [
         {
             "skip": false,
-            "list": "../project-lists/projects_name_asc-stars-10.csv",
-            "dir": "../../ba_project-dirs/projects_name_asc-stars-10",
+            "list": "../project-lists/test-one.csv",
+            "dir": "../../ba_project-dirs/test-one",
             "suffix": ""
         },
         {
             "skip": false,
-            "list": "../project-lists/test.csv",
-            "dir": "",
+            "list": "../project-lists/test-two.csv",
+            "dir": "../../ba_project-dirs/test-two",
             "suffix": ""
         }
     ],

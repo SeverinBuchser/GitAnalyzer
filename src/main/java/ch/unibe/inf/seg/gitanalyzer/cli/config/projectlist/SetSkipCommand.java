@@ -39,14 +39,14 @@ public class SetSkipCommand implements Runnable {
         if (CommandHelper.configLoadFailed(this.mixin.getConfig())) return;
         if (CommandHelper.projectListLoadFailed(this.mixin)) return;
         this.logger.info(String.format(
-                "Setting Skip to Project List '%s' of Config '%s'",
+                "Setting Skip to Project List %s of Config %s",
                 this.mixin.getProjectList().getListPath(),
                 this.mixin.getConfig().getConfigPath()
         ));
         try {
             this.mixin.getConfig().save();
             this.logger.success(String.format(
-                    "Set Skip '%s' to Project List '%s' of Config '%s'",
+                    "Set Skip %s to Project List %s of Config %s",
                     this.mixin.getProjectList().getSkip(),
                     this.mixin.getProjectList().getListPath(),
                     this.mixin.getConfig().getConfigPath()

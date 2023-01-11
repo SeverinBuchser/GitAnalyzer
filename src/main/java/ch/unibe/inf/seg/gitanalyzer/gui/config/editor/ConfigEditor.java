@@ -96,7 +96,7 @@ public class ConfigEditor extends JPanel implements Updatable, Updater, Subscrib
                     this.projectListInfosEditor.update();
                 } else {
                     JOptionPane.showMessageDialog(frame,
-                            String.format("Project list '%s' already exists.", projectListInfo.getListPath().toString()));
+                            String.format("Project list %s already exists.", projectListInfo.getListPath().toString()));
                 }
             }
             frame.dispose();

@@ -53,15 +53,15 @@ public class CreateCommand implements Runnable {
         this.logger.info("Executing Create Command...");
         if (!this.config.hasLoadException()) {
             this.logger.fail(String.format(
-                    "Config '%s' already exists.",
+                    "Config %s already exists.",
                     this.config.getConfigPath()
             ));
             return;
         }
-        this.logger.info(String.format("Creating Config '%s'.", this.config.getConfigPath()));
+        this.logger.info(String.format("Creating Config %s.", this.config.getConfigPath()));
         try {
             this.config.save();
-            this.logger.success(String.format("Created Config '%s'.", this.config.getConfigPath()));
+            this.logger.success(String.format("Created Config %s.", this.config.getConfigPath()));
         } catch (IOException e) {
             this.logger.fail(e.getMessage());
         }
